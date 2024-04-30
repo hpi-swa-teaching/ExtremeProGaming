@@ -1,0 +1,10 @@
+[
+	SquotTonelMapper {
+		#package : MCPackage {
+			#name : 'ExtremeProGaming'
+		},
+		#path : FSAbsolutePath [
+			'src'
+		]
+	}
+]
