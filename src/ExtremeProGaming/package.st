@@ -1,4 +1,4 @@
 Package {
-	#'squeak_changestamp' : true,
-	#name : #ExtremeProGaming
+	#name : #ExtremeProGaming,
+	#'squeak_changestamp' : true
 }
