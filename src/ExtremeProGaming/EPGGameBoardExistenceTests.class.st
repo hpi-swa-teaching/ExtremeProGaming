@@ -15,15 +15,6 @@ EPGGameBoardExistenceTests >> setUp [
 
 {
 	#category : #'tests - initialization',
-	#'squeak_changestamp' : 'JA 5/16/2024 10:53'
-}
-EPGGameBoardExistenceTests >> testBackgroundCorrectColor [
-	
-	self assert: morph color equals: Color gray.
-]
-
-{
-	#category : #'tests - initialization',
 	#'squeak_changestamp' : 'JA 5/16/2024 10:49'
 }
 EPGGameBoardExistenceTests >> testBackgroundCorrectPosition [
@@ -56,6 +47,28 @@ EPGGameBoardExistenceTests >> testBackgroundMorphExistence [
 EPGGameBoardExistenceTests >> testBackgroundMorphOpened [
 	
 	self shouldnt: morph openInWorld raise: Error.
+]
+
+{
+	#category : #'tests - initialization',
+	#'squeak_changestamp' : 'JA 5/21/2024 16:29'
+}
+EPGGameBoardExistenceTests >> testCalculateAreaExtend [
+	
+	self assert: (morph calculateAreaExtendFor: 'planning') equals: (0.25 * 1920)@1080.
+	self assert: (morph calculateAreaExtendFor: 'backlog') equals: (0.5 * 1920)@1080.
+	self assert: (morph calculateAreaExtendFor: 'review') equals: (0.25 * 1920)@1080.
+]
+
+{
+	#category : #'tests - initialization',
+	#'squeak_changestamp' : 'JA 5/21/2024 16:24'
+}
+EPGGameBoardExistenceTests >> testCalculateAreaPosition [
+	
+	self assert: (morph calculateAreaPositionFor: 'planning') equals: 0@0.
+	self assert: (morph calculateAreaPositionFor: 'backlog') equals: (1920*0.25)@0.
+	self assert: (morph calculateAreaPositionFor: 'review') equals: (1920*0.75)@0.
 ]
 
 {

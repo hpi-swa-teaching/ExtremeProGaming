@@ -11,11 +11,24 @@ Class {
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'JA 5/21/2024 16:00'
+	#'squeak_changestamp' : 'JA 5/21/2024 16:33'
 }
-EPGGameBoard class >> areaRatio [
+EPGGameBoard class >> areaExtentRatio [
 
 	^ Dictionary newFrom: {'planning' -> 0.25. 'backlog' -> 0.5. 'review' -> 0.25}.
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'JA 5/21/2024 16:37'
+}
+EPGGameBoard class >> areaPositionRatio [
+
+	| backlogPosition reviewPosition |
+	backlogPosition := self areaExtentRatio at: 'planning'.
+	reviewPosition := (self areaExtentRatio at: 'backlog') + backlogPosition.
+
+	^ Dictionary newFrom: {'planning' -> 0. 'backlog' -> backlogPosition. 'review' -> reviewPosition}.
 ]
 
 {
@@ -45,32 +58,34 @@ EPGGameBoard >> backlogArea: anObject [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JA 5/21/2024 15:42'
+	#'squeak_changestamp' : 'JA 5/21/2024 16:33'
 }
 EPGGameBoard >> calculateAreaExtendFor: aName [
 
-	^ (self extent x * self class areaRatio at: aName) @ self extent y.
+	^ (self extent x * self class areaExtentRatio at: aName) @ self extent y.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JA 5/21/2024 15:42'
+	#'squeak_changestamp' : 'JA 5/21/2024 16:34'
 }
 EPGGameBoard >> calculateAreaPositionFor: aName [
 
-	^ (self position x * self class areaRatio at: aName) @ self position y.
+	^ (self position x + ((self class areaPositionRatio at: aName) * self extent x)) @ self position y.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JA 5/21/2024 15:47'
+	#'squeak_changestamp' : 'JA 5/21/2024 16:30'
 }
 EPGGameBoard >> createSectionMorphFor: aName [
 
 	| sectionMorph |
 	sectionMorph := Morph new extent: (self calculateAreaExtendFor: aName);
 			position: (self calculateAreaPositionFor: aName);
-			color: Color darkGray.
+			color: Color darkGray;
+			borderWidth: 5;
+			borderColor: Color lightGray.
 
 	self addMorph: sectionMorph.
 	
