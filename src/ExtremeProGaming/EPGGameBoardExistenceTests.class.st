@@ -1,23 +1,23 @@
 Class {
-	#name : #GameBoardExistenceTest,
+	#name : #EPGGameBoardExistenceTests,
 	#superclass : #MorphTest,
 	#category : #ExtremeProGaming
 }
 
 {
 	#category : #'initialize-release',
-	#'squeak_changestamp' : 'JA 5/16/2024 10:14'
+	#'squeak_changestamp' : 'JA 5/16/2024 11:35'
 }
-GameBoardExistenceTest >> setUp [
+EPGGameBoardExistenceTests >> setUp [
 
-	morph := GameBoard new.
+	morph := EPGGameBoard new.
 ]
 
 {
 	#category : #'tests - initialization',
 	#'squeak_changestamp' : 'JA 5/16/2024 10:53'
 }
-GameBoardExistenceTest >> testBackgroundCorrectColor [
+EPGGameBoardExistenceTests >> testBackgroundCorrectColor [
 	
 	self assert: morph color equals: Color gray.
 ]
@@ -26,7 +26,7 @@ GameBoardExistenceTest >> testBackgroundCorrectColor [
 	#category : #'tests - initialization',
 	#'squeak_changestamp' : 'JA 5/16/2024 10:49'
 }
-GameBoardExistenceTest >> testBackgroundCorrectPosition [
+EPGGameBoardExistenceTests >> testBackgroundCorrectPosition [
 	
 	self assert: morph position equals: 0 @ 0.
 ]
@@ -35,7 +35,7 @@ GameBoardExistenceTest >> testBackgroundCorrectPosition [
 	#category : #'tests - initialization',
 	#'squeak_changestamp' : 'JA 5/16/2024 10:45'
 }
-GameBoardExistenceTest >> testBackgroundCorrectSize [
+EPGGameBoardExistenceTests >> testBackgroundCorrectSize [
 	
 	self assert: morph extent equals: 1920 @ 1080.
 ]
@@ -44,7 +44,7 @@ GameBoardExistenceTest >> testBackgroundCorrectSize [
 	#category : #'tests - initialization',
 	#'squeak_changestamp' : 'JA 5/16/2024 10:33'
 }
-GameBoardExistenceTest >> testBackgroundMorphExistence [
+EPGGameBoardExistenceTests >> testBackgroundMorphExistence [
 	
 	self assert: morph isMorph equals: true.
 ]
@@ -53,7 +53,7 @@ GameBoardExistenceTest >> testBackgroundMorphExistence [
 	#category : #'tests - initialization',
 	#'squeak_changestamp' : 'JA 5/16/2024 10:36'
 }
-GameBoardExistenceTest >> testBackgroundMorphOpened [
+EPGGameBoardExistenceTests >> testBackgroundMorphOpened [
 	
 	self shouldnt: morph openInWorld raise: Error.
 ]
@@ -62,7 +62,7 @@ GameBoardExistenceTest >> testBackgroundMorphOpened [
 	#category : #'tests - initialization',
 	#'squeak_changestamp' : 'JA 5/16/2024 11:22'
 }
-GameBoardExistenceTest >> testSectionMorphsExistence [
+EPGGameBoardExistenceTests >> testSectionMorphsExistence [
 	
 	self assert: morph planningArea isMorph equals: true;
 		assert: morph backlogArea isMorph equals: true;
