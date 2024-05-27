@@ -12,7 +12,7 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
+	#category : #areas,
 	#'squeak_changestamp' : 'HCH 5/27/2024 20:56'
 }
 EPGCard >> addColorBar: aColor [
@@ -55,7 +55,7 @@ EPGCard >> colorBar: aMorph [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #areas,
 	#'squeak_changestamp' : 'HCH 5/27/2024 20:57'
 }
 EPGCard >> colorBar: aColor withLayout: aLayoutSelector [
@@ -102,7 +102,7 @@ EPGCard >> header: aMorph [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #initialization,
 	#'squeak_changestamp' : 'HCH 5/27/2024 21:10'
 }
 EPGCard >> initialize [
@@ -116,7 +116,7 @@ EPGCard >> initialize [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #initialization,
 	#'squeak_changestamp' : 'HCH 5/27/2024 20:34'
 }
 EPGCard >> initializeHeader: aText [
@@ -131,7 +131,7 @@ EPGCard >> initializeHeader: aText [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 5/27/2024 20:29'
 }
 EPGCard >> subHeaderOrigin [

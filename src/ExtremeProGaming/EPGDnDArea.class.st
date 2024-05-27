@@ -4,13 +4,14 @@ Class {
 	#instVars : [
 		'area',
 		'borderVisible',
-		'dropped'
+		'dropped',
+		'highlightColor'
 	],
 	#category : #ExtremeProGaming
 }
 
 {
-	#category : #'as yet unclassified',
+	#category : #'dragging/dropping',
 	#'squeak_changestamp' : 'HCH 5/27/2024 18:27'
 }
 EPGDnDArea >> aboutToBeGrabbedBy: aHand [
@@ -23,7 +24,7 @@ EPGDnDArea >> aboutToBeGrabbedBy: aHand [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'dragging/dropping',
 	#'squeak_changestamp' : 'HCH 5/27/2024 17:55'
 }
 EPGDnDArea >> acceptDroppingMorph: aMorph event: evt [
@@ -36,7 +37,7 @@ EPGDnDArea >> acceptDroppingMorph: aMorph event: evt [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #border,
 	#'squeak_changestamp' : 'HCH 5/27/2024 17:16'
 }
 EPGDnDArea >> addBorder [
@@ -65,6 +66,15 @@ EPGDnDArea >> area: aMorph [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'JP 5/27/2024 22:34'
+}
+EPGDnDArea >> backgroundExtent [
+
+	^ self extent.
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 5/27/2024 17:15'
 }
 EPGDnDArea >> borderVisible [
@@ -82,7 +92,7 @@ EPGDnDArea >> borderVisible: aBoolean [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'dragging/dropping',
 	#'squeak_changestamp' : 'HCH 5/27/2024 13:35'
 }
 EPGDnDArea >> dropEnabled [
@@ -90,7 +100,7 @@ EPGDnDArea >> dropEnabled [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'dragging/dropping',
 	#'squeak_changestamp' : 'HCH 5/27/2024 18:33'
 }
 EPGDnDArea >> dropInMorph: aMorph [
@@ -119,7 +129,7 @@ EPGDnDArea >> dropped: aCollection [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'dragging/dropping',
 	#'squeak_changestamp' : 'HCH 5/27/2024 18:03'
 }
 EPGDnDArea >> handlesMouseOverDragging: anEvent [
@@ -130,31 +140,49 @@ EPGDnDArea >> handlesMouseOverDragging: anEvent [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'HCH 5/27/2024 21:10'
+	#category : #accessing,
+	#'squeak_changestamp' : 'JP 5/27/2024 22:28'
+}
+EPGDnDArea >> highlightColor [
+
+	^ highlightColor.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'JP 5/27/2024 22:48'
+}
+EPGDnDArea >> highlightColor: aColor [
+
+	highlightColor :=  aColor.
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'JP 5/27/2024 22:48'
 }
 EPGDnDArea >> initialize [
 
 	super initialize.
-	self
+	"self
 		color: Color transparent;
 		extent: 350@500;
 		initializeVisibleArea;
 		addMorph: self area;
 		borderVisible: false;
-		dropped: OrderedCollection new.
+		dropped: OrderedCollection new."
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'HCH 5/27/2024 21:11'
+	#category : #initialization,
+	#'squeak_changestamp' : 'JP 5/27/2024 22:49'
 }
 EPGDnDArea >> initializeVisibleArea [
 
 	self area: Morph new.
 	self area
 		color: Color gray lighter;
-		extent: 325@475;
+		extent: self backgroundExtent;
 		center: self center;
 		yourself.
 ]
@@ -169,7 +197,7 @@ EPGDnDArea >> isEPGDnDArea [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'dragging/dropping',
 	#'squeak_changestamp' : 'HCH 5/27/2024 17:44'
 }
 EPGDnDArea >> mouseEnterDragging: evt [
@@ -178,7 +206,7 @@ EPGDnDArea >> mouseEnterDragging: evt [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'dragging/dropping',
 	#'squeak_changestamp' : 'HCH 5/27/2024 17:44'
 }
 EPGDnDArea >> mouseLeaveDragging: evt [
@@ -187,7 +215,7 @@ EPGDnDArea >> mouseLeaveDragging: evt [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'dragging/dropping',
 	#'squeak_changestamp' : 'HCH 5/27/2024 18:33'
 }
 EPGDnDArea >> pickUpMorph: aMorph [
@@ -199,7 +227,7 @@ EPGDnDArea >> pickUpMorph: aMorph [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #border,
 	#'squeak_changestamp' : 'HCH 5/27/2024 17:16'
 }
 EPGDnDArea >> removeBorder [
@@ -209,7 +237,7 @@ EPGDnDArea >> removeBorder [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #border,
 	#'squeak_changestamp' : 'HCH 5/27/2024 17:14'
 }
 EPGDnDArea >> toggleBorder [
@@ -220,7 +248,7 @@ EPGDnDArea >> toggleBorder [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'dragging/dropping',
 	#'squeak_changestamp' : 'HCH 5/27/2024 13:38'
 }
 EPGDnDArea >> wantsDroppedMorph: aMorph event: evt [

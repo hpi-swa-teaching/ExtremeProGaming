@@ -94,14 +94,15 @@ EPGGameBoard >> createSectionMorphFor: aName [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JA 5/21/2024 16:00'
+	#'squeak_changestamp' : 'JP 5/27/2024 22:20'
 }
 EPGGameBoard >> initialize [
 	super initialize.
 	
 	self extent: self class boardExtent; 
 		color: Color gray;
-		initializeSectionMorphs.
+		initializeSectionMorphs;
+		initializeStorypointAreas.
 ]
 
 {
@@ -113,6 +114,26 @@ EPGGameBoard >> initializeSectionMorphs [
 	self planningArea: (self createSectionMorphFor: 'planning');
 		backlogArea: (self createSectionMorphFor: 'backlog');
 		reviewArea:  (self createSectionMorphFor: 'review').
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'JP 5/27/2024 22:40'
+}
+EPGGameBoard >> initializeStorypointAreas [
+
+	| areas |
+
+	areas := OrderedCollection new.
+	
+	3 timesRepeat: [areas add: EPGStorypointArea new].
+	
+	1 to: 3 do:  [:a | 
+		| area point|
+		area := areas at: a.
+		point := (10 + ((a - 1 )*  2) + ((a - 1)* area extent x)) @ 10.
+		area position: self planningArea position + point.
+		self addMorph: area].
 ]
 
 {
