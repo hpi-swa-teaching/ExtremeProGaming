@@ -131,14 +131,14 @@ EPGDnDArea >> handlesMouseOverDragging: anEvent [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'HCH 5/27/2024 18:18'
+	#'squeak_changestamp' : 'HCH 5/27/2024 21:10'
 }
 EPGDnDArea >> initialize [
 
 	super initialize.
 	self
 		color: Color transparent;
-		extent: 120@120;
+		extent: 350@500;
 		initializeVisibleArea;
 		addMorph: self area;
 		borderVisible: false;
@@ -147,14 +147,14 @@ EPGDnDArea >> initialize [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'HCH 5/27/2024 17:13'
+	#'squeak_changestamp' : 'HCH 5/27/2024 21:11'
 }
 EPGDnDArea >> initializeVisibleArea [
 
 	self area: Morph new.
 	self area
-		color: Color red;
-		extent: 100@100;
+		color: Color gray lighter;
+		extent: 325@475;
 		center: self center;
 		yourself.
 ]
