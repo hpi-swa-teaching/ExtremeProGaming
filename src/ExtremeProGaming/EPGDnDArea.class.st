@@ -38,11 +38,11 @@ EPGDnDArea >> acceptDroppingMorph: aMorph event: evt [
 
 {
 	#category : #border,
-	#'squeak_changestamp' : 'HCH 5/27/2024 17:16'
+	#'squeak_changestamp' : 'JP 5/27/2024 23:27'
 }
 EPGDnDArea >> addBorder [
 
-	self color: Color green.
+	self color: self highlightColor.
 	self borderVisible: true.
 ]
 
@@ -106,6 +106,17 @@ EPGDnDArea >> dropEnabled [
 EPGDnDArea >> dropInMorph: aMorph [
 
 	self addMorphFront: (aMorph center: self center).
+	self dropped addFirst: aMorph.
+	self removeBorder.
+]
+
+{
+	#category : #'dragging/dropping',
+	#'squeak_changestamp' : 'JP 5/27/2024 23:37'
+}
+EPGDnDArea >> dropInMorph: aMorph at: aPosition [
+
+	self addMorphFront: (aMorph position:  aPosition).
 	self dropped addFirst: aMorph.
 	self removeBorder.
 ]
@@ -175,14 +186,14 @@ EPGDnDArea >> initialize [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/27/2024 22:49'
+	#'squeak_changestamp' : 'JP 5/27/2024 23:28'
 }
 EPGDnDArea >> initializeVisibleArea [
 
 	self area: Morph new.
 	self area
 		color: Color gray lighter;
-		extent: self backgroundExtent;
+		extent: self backgroundExtent - (25 @ 25);
 		center: self center;
 		yourself.
 ]

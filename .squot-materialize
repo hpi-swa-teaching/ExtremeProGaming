@@ -1,4 +1,46 @@
 [
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'Goldbär Weiß (c) HARIBO_print.png'
+		],
+		#encoding : Class [ #PNGReadWriter ]
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'Goldbär Hellrot (c) HARIBO_print.png'
+		],
+		#encoding : @4
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'Goldbär Grün (c) HARIBO_print.png'
+		],
+		#encoding : @4
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'Goldbär Dunkelrot (c) HARIBO_print.png'
+		],
+		#encoding : @4
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'Goldbär Gelb (c) HARIBO_print.png'
+		],
+		#encoding : @4
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'Goldbär Orange (c) HARIBO_print.png'
+		],
+		#encoding : @4
+	},
 	SquotTonelMapper {
 		#package : MCPackage {
 			#name : 'ExtremeProGaming'

@@ -42,6 +42,16 @@ EPGGameBoard class >> boardExtent [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'JP 5/27/2024 23:44'
+}
+EPGGameBoard >> aboutToBeGrabbedBy: aHand [
+
+	self submorphs do: [:sub | (sub isEPGDnDArea and: [sub intersects: aHand bounds]) ifTrue: [^ sub aboutToBeGrabbedBy: aHand]].
+	^ super aboutToBeGrabbedBy: aHand.
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'JA 5/16/2024 11:46'
 }
 EPGGameBoard >> backlogArea [
@@ -94,7 +104,7 @@ EPGGameBoard >> createSectionMorphFor: aName [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/27/2024 22:20'
+	#'squeak_changestamp' : 'JP 5/27/2024 23:40'
 }
 EPGGameBoard >> initialize [
 	super initialize.
@@ -118,7 +128,7 @@ EPGGameBoard >> initializeSectionMorphs [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/27/2024 22:40'
+	#'squeak_changestamp' : 'JP 5/27/2024 22:52'
 }
 EPGGameBoard >> initializeStorypointAreas [
 
@@ -131,7 +141,7 @@ EPGGameBoard >> initializeStorypointAreas [
 	1 to: 3 do:  [:a | 
 		| area point|
 		area := areas at: a.
-		point := (10 + ((a - 1 )*  2) + ((a - 1)* area extent x)) @ 10.
+		point := (10 + ((a - 1 )*  4) + ((a - 1)* area extent x)) @ 10.
 		area position: self planningArea position + point.
 		self addMorph: area].
 ]

@@ -6,6 +6,15 @@ Class {
 
 {
 	#category : #'dragging/dropping',
+	#'squeak_changestamp' : 'JP 5/27/2024 23:11'
+}
+EPGDnDMorph >> initialize [
+
+	super initialize.
+]
+
+{
+	#category : #'dragging/dropping',
 	#'squeak_changestamp' : 'HCH 5/27/2024 18:05'
 }
 EPGDnDMorph >> isEPGDnDMorph [
