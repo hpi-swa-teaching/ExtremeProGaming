@@ -5,7 +5,7 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
+	#category : #initialization,
 	#'squeak_changestamp' : 'HCH 5/27/2024 20:51'
 }
 EPGBugCard >> initialize [

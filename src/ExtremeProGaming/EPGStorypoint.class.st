@@ -11,38 +11,42 @@ Class {
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 5/27/2024 23:15'
+	#'squeak_changestamp' : 'HCH 5/29/2024 01:08'
 }
 EPGStorypoint >> image [
-	^ image
+
+	^ image.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 5/27/2024 23:15'
+	#'squeak_changestamp' : 'HCH 5/29/2024 01:09'
 }
-EPGStorypoint >> image: anObject [
-	image := anObject
+EPGStorypoint >> image: anImageMorph [
+
+	image := anImageMorph.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 5/28/2024 11:17'
+	#'squeak_changestamp' : 'HCH 5/29/2024 01:09'
 }
 EPGStorypoint >> imageBag [
-	^ imageBag
+
+	^ imageBag.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 5/28/2024 11:17'
+	#'squeak_changestamp' : 'HCH 5/29/2024 01:09'
 }
-EPGStorypoint >> imageBag: anObject [
-	imageBag := anObject
+EPGStorypoint >> imageBag: aCollection [
+
+	imageBag := aCollection.
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #initialization,
 	#'squeak_changestamp' : 'JP 5/28/2024 11:17'
 }
 EPGStorypoint >> initialize [
@@ -59,7 +63,7 @@ EPGStorypoint >> initialize [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #initialization,
 	#'squeak_changestamp' : 'JP 5/28/2024 11:16'
 }
 EPGStorypoint >> initializeImageBag [
@@ -75,7 +79,7 @@ EPGStorypoint >> initializeImageBag [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #initialization,
 	#'squeak_changestamp' : 'JP 5/28/2024 12:05'
 }
 EPGStorypoint >> newStorypointMorph [

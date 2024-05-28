@@ -1,3 +1,6 @@
+"
+This provides a framework for concrete DnD Areas. It should not be instantiated.
+"
 Class {
 	#name : #EPGDnDArea,
 	#superclass : #Morph,
@@ -7,14 +10,17 @@ Class {
 		'dropped',
 		'highlightColor',
 		'dropEnabled',
-		'pickEnabled'
+		'accepts',
+		'backgroundMargin',
+		'draggable'
 	],
-	#category : #ExtremeProGaming
+	#category : #ExtremeProGaming,
+	#'squeak_changestamp' : 'HCH 5/29/2024 00:29'
 }
 
 {
 	#category : #'dragging/dropping',
-	#'squeak_changestamp' : 'HCH 5/27/2024 18:27'
+	#'squeak_changestamp' : 'HCH 5/29/2024 00:50'
 }
 EPGDnDArea >> aboutToBeGrabbedBy: aHand [
 
@@ -22,7 +28,8 @@ EPGDnDArea >> aboutToBeGrabbedBy: aHand [
 		[:sub | 
 			(sub intersects: aHand bounds)
 			 ifTrue: [^ self pickUpMorph: sub]].
-	^ super aboutToBeGrabbedBy: aHand.
+	self draggable ifTrue: [^ super aboutToBeGrabbedBy: aHand].
+	^ nil.
 ]
 
 {
@@ -36,6 +43,33 @@ EPGDnDArea >> acceptDroppingMorph: aMorph event: evt [
 	layout ifNil:[^self dropInMorph: aMorph].
 	self privateAddMorph: aMorph 
 		atIndex: (layout indexForInserting: aMorph at: evt position in: self).
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 5/29/2024 00:13'
+}
+EPGDnDArea >> accepts [
+
+	^ accepts.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 5/29/2024 00:14'
+}
+EPGDnDArea >> accepts: aCollection [
+
+	accepts := aCollection.
+]
+
+{
+	#category : #'dragging/dropping',
+	#'squeak_changestamp' : 'HCH 5/29/2024 00:22'
+}
+EPGDnDArea >> acceptsMorph: aMorph [
+
+	^ self accepts anySatisfy: [:selector | aMorph hasProperty: selector].
 ]
 
 {
@@ -77,6 +111,24 @@ EPGDnDArea >> backgroundExtent [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 5/29/2024 00:20'
+}
+EPGDnDArea >> backgroundMargin [
+
+	^ backgroundMargin.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 5/29/2024 00:21'
+}
+EPGDnDArea >> backgroundMargin: aPoint [
+
+	backgroundMargin := aPoint.
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 5/27/2024 17:15'
 }
 EPGDnDArea >> borderVisible [
@@ -91,6 +143,24 @@ EPGDnDArea >> borderVisible [
 EPGDnDArea >> borderVisible: aBoolean [
 
 	borderVisible := aBoolean.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 5/29/2024 00:49'
+}
+EPGDnDArea >> draggable [
+
+	^ draggable.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 5/29/2024 00:49'
+}
+EPGDnDArea >> draggable: aBoolean [
+
+	draggable := aBoolean.
 ]
 
 {
@@ -182,37 +252,36 @@ EPGDnDArea >> highlightColor: aColor [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/28/2024 11:48'
+	#'squeak_changestamp' : 'HCH 5/29/2024 01:07'
 }
 EPGDnDArea >> initialize [
 
 	super initialize.
 	
-	self dropEnabled: true;
-		pickEnabled: true.
-	
-	"self
+	self
+		dropEnabled: true;
+		draggable: true;
 		color: Color transparent;
-		highlightColor: Color green;
-		extent: 350@500;
-		initializeVisibleArea;
-		addMorph: self area;
 		borderVisible: false;
-		dropped: OrderedCollection new."
+		dropped: OrderedCollection new;
+		accepts: #();
+		backgroundMargin: 25@25.
+
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/27/2024 23:28'
+	#'squeak_changestamp' : 'HCH 5/29/2024 00:30'
 }
 EPGDnDArea >> initializeVisibleArea [
 
 	self area: Morph new.
 	self area
 		color: Color gray lighter;
-		extent: self backgroundExtent - (25 @ 25);
+		extent: self backgroundExtent - (self backgroundMargin);
 		center: self center;
 		yourself.
+	self addMorph: self area.
 ]
 
 {
@@ -243,31 +312,25 @@ EPGDnDArea >> mouseLeaveDragging: evt [
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'JP 5/28/2024 11:48'
+	#category : #'dragging/dropping',
+	#'squeak_changestamp' : 'HCH 5/29/2024 00:24'
 }
-EPGDnDArea >> pickEnabled [
-	^ pickEnabled
-]
+EPGDnDArea >> pickUpMorph: aMorph [
 
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'JP 5/28/2024 11:48'
-}
-EPGDnDArea >> pickEnabled: anObject [
-	pickEnabled := anObject
+	aMorph formerOwner: self.
+	aMorph formerPosition: aMorph position.
+	self dropped remove: aMorph.
+	^ aMorph.
 ]
 
 {
 	#category : #'dragging/dropping',
-	#'squeak_changestamp' : 'JP 5/28/2024 11:48'
+	#'squeak_changestamp' : 'HCH 5/29/2024 01:01'
 }
-EPGDnDArea >> pickUpMorph: aMorph [
+EPGDnDArea >> rejectMorph [
 
-	self pickEnabled ifTrue: [aMorph formerOwner: self.
-	aMorph formerPosition: aMorph position.
-	self dropped remove: aMorph.
-	^ aMorph.]
+	self removeBorder.
+	^ false.
 ]
 
 {
@@ -293,9 +356,13 @@ EPGDnDArea >> toggleBorder [
 
 {
 	#category : #'dragging/dropping',
-	#'squeak_changestamp' : 'HCH 5/27/2024 13:38'
+	#'squeak_changestamp' : 'HCH 5/29/2024 01:06'
 }
 EPGDnDArea >> wantsDroppedMorph: aMorph event: evt [
 
-	^ self dropEnabled and: [aMorph isEPGDnDMorph].
+	(self dropEnabled 
+		and: [aMorph isEPGDnDMorph] 
+		and: [self acceptsMorph: aMorph])
+		ifFalse: [^ self rejectMorph].
+	^ true.
 ]

@@ -6,7 +6,19 @@ Class {
 
 {
 	#category : #features,
-	#'squeak_changestamp' : 'JP 5/27/2024 23:48'
+	#'squeak_changestamp' : 'HCH 5/29/2024 00:45'
+}
+EPGStorypointArea >> addAcceptanceToDroppedMorphs [
+
+	self dropped do: [:morph | 
+			self accepts do: [:selector | morph setProperty: selector toValue: true]].
+
+	
+]
+
+{
+	#category : #features,
+	#'squeak_changestamp' : 'HCH 5/29/2024 00:43'
 }
 EPGStorypointArea >> addStorypoints: aNumber [
 
@@ -30,19 +42,17 @@ EPGStorypointArea >> dropInMorph: aMorph [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/28/2024 11:21'
+	#'squeak_changestamp' : 'HCH 5/29/2024 00:51'
 }
 EPGStorypointArea >> initialize [
 
 	super initialize.
+	
 	self
+		draggable: false;
 		highlightColor: Color green;
-		color: Color transparent;
 		extent: 150 @ 200;
-		initializeVisibleArea;
-		addMorph: self area;
-		borderVisible: false;
-		dropped: OrderedCollection new.
+		initializeVisibleArea.
 		
 	self addStorypoints: 3.
 ]

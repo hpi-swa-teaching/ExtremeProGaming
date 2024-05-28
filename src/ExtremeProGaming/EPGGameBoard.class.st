@@ -42,28 +42,33 @@ EPGGameBoard class >> boardExtent [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 5/27/2024 23:44'
+	#'squeak_changestamp' : 'HCH 5/29/2024 01:10'
 }
 EPGGameBoard >> aboutToBeGrabbedBy: aHand [
 
-	self submorphs do: [:sub | (sub isEPGDnDArea and: [sub intersects: aHand bounds]) ifTrue: [^ sub aboutToBeGrabbedBy: aHand]].
+	self submorphs do: 
+		[:sub | (sub isEPGDnDArea 
+				and: [sub intersects: aHand bounds]) 
+				ifTrue: [^ sub aboutToBeGrabbedBy: aHand]].
 	^ super aboutToBeGrabbedBy: aHand.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JA 5/16/2024 11:46'
+	#'squeak_changestamp' : 'HCH 5/29/2024 01:10'
 }
 EPGGameBoard >> backlogArea [
+
 	^ backlogArea.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JA 5/16/2024 11:46'
+	#'squeak_changestamp' : 'HCH 5/29/2024 01:10'
 }
-EPGGameBoard >> backlogArea: anObject [
-	backlogArea := anObject.
+EPGGameBoard >> backlogArea: aMorph [
+
+	backlogArea := aMorph.
 ]
 
 {
@@ -149,7 +154,7 @@ EPGGameBoard >> initializeSectionMorphs [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/28/2024 12:41'
+	#'squeak_changestamp' : 'HCH 5/29/2024 00:45'
 }
 EPGGameBoard >> initializeStorypointAreas [
 
@@ -164,38 +169,45 @@ EPGGameBoard >> initializeStorypointAreas [
 		area := areas at: a.
 		point := (10 + ((a - 1 )*  4) + ((a - 1)* area extent x)) @ 10.
 		area position: self planningArea position + point.
-		(a == 1) ifTrue: [area dropEnabled: false; pickEnabled: false.].
+		(a == 1) 
+			ifTrue: [area accepts: #(#temoraryUnavailable)]
+			ifFalse: [area accepts: #(#available)].
+		area addAcceptanceToDroppedMorphs.
 		self addMorph: area].
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JA 5/16/2024 11:46'
+	#'squeak_changestamp' : 'HCH 5/29/2024 01:10'
 }
 EPGGameBoard >> planningArea [
+
 	^ planningArea.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JA 5/16/2024 11:46'
+	#'squeak_changestamp' : 'HCH 5/29/2024 01:11'
 }
-EPGGameBoard >> planningArea: anObject [
-	planningArea := anObject.
+EPGGameBoard >> planningArea: aMorph [
+
+	planningArea := aMorph.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JA 5/16/2024 11:46'
+	#'squeak_changestamp' : 'HCH 5/29/2024 01:11'
 }
 EPGGameBoard >> reviewArea [
+
 	^ reviewArea.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JA 5/16/2024 11:46'
+	#'squeak_changestamp' : 'HCH 5/29/2024 01:11'
 }
-EPGGameBoard >> reviewArea: anObject [
-	reviewArea := anObject.
+EPGGameBoard >> reviewArea: aMorph [
+
+	reviewArea := aMorph.
 ]
