@@ -5,7 +5,9 @@ Class {
 		'area',
 		'borderVisible',
 		'dropped',
-		'highlightColor'
+		'highlightColor',
+		'dropEnabled',
+		'pickEnabled'
 	],
 	#category : #ExtremeProGaming
 }
@@ -93,10 +95,20 @@ EPGDnDArea >> borderVisible: aBoolean [
 
 {
 	#category : #'dragging/dropping',
-	#'squeak_changestamp' : 'HCH 5/27/2024 13:35'
+	#'squeak_changestamp' : 'JP 5/28/2024 11:43'
 }
 EPGDnDArea >> dropEnabled [
-	^ true.
+
+	^ dropEnabled.
+]
+
+{
+	#category : #'dragging/dropping',
+	#'squeak_changestamp' : 'JP 5/28/2024 11:34'
+}
+EPGDnDArea >> dropEnabled: aBool [
+
+	dropEnabled := aBool.
 ]
 
 {
@@ -170,13 +182,18 @@ EPGDnDArea >> highlightColor: aColor [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/27/2024 22:48'
+	#'squeak_changestamp' : 'JP 5/28/2024 11:48'
 }
 EPGDnDArea >> initialize [
 
 	super initialize.
+	
+	self dropEnabled: true;
+		pickEnabled: true.
+	
 	"self
 		color: Color transparent;
+		highlightColor: Color green;
 		extent: 350@500;
 		initializeVisibleArea;
 		addMorph: self area;
@@ -209,11 +226,11 @@ EPGDnDArea >> isEPGDnDArea [
 
 {
 	#category : #'dragging/dropping',
-	#'squeak_changestamp' : 'HCH 5/27/2024 17:44'
+	#'squeak_changestamp' : 'JP 5/28/2024 11:25'
 }
 EPGDnDArea >> mouseEnterDragging: evt [
 
-	self addBorder.
+	self dropEnabled ifTrue: [self addBorder].
 ]
 
 {
@@ -226,15 +243,31 @@ EPGDnDArea >> mouseLeaveDragging: evt [
 ]
 
 {
+	#category : #accessing,
+	#'squeak_changestamp' : 'JP 5/28/2024 11:48'
+}
+EPGDnDArea >> pickEnabled [
+	^ pickEnabled
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'JP 5/28/2024 11:48'
+}
+EPGDnDArea >> pickEnabled: anObject [
+	pickEnabled := anObject
+]
+
+{
 	#category : #'dragging/dropping',
-	#'squeak_changestamp' : 'HCH 5/27/2024 18:33'
+	#'squeak_changestamp' : 'JP 5/28/2024 11:48'
 }
 EPGDnDArea >> pickUpMorph: aMorph [
 
-	aMorph formerOwner: self.
+	self pickEnabled ifTrue: [aMorph formerOwner: self.
 	aMorph formerPosition: aMorph position.
 	self dropped remove: aMorph.
-	^ aMorph.
+	^ aMorph.]
 ]
 
 {

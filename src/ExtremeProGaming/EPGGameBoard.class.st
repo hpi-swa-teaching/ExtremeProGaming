@@ -128,7 +128,7 @@ EPGGameBoard >> initializeSectionMorphs [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/27/2024 22:52'
+	#'squeak_changestamp' : 'JP 5/28/2024 11:49'
 }
 EPGGameBoard >> initializeStorypointAreas [
 
@@ -143,6 +143,7 @@ EPGGameBoard >> initializeStorypointAreas [
 		area := areas at: a.
 		point := (10 + ((a - 1 )*  4) + ((a - 1)* area extent x)) @ 10.
 		area position: self planningArea position + point.
+		(a == 1) ifTrue: [area dropEnabled: false; pickEnabled: false.].
 		self addMorph: area].
 ]
 

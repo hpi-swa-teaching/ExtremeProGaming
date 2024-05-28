@@ -30,7 +30,7 @@ EPGStorypointArea >> dropInMorph: aMorph [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'JP 5/27/2024 23:34'
+	#'squeak_changestamp' : 'JP 5/28/2024 11:21'
 }
 EPGStorypointArea >> initialize [
 
@@ -38,7 +38,7 @@ EPGStorypointArea >> initialize [
 	self
 		highlightColor: Color green;
 		color: Color transparent;
-		extent: 150 @ 150;
+		extent: 150 @ 200;
 		initializeVisibleArea;
 		addMorph: self area;
 		borderVisible: false;
