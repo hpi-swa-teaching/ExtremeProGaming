@@ -1,20 +1,24 @@
 Class {
-	#name : #EPGTestArea,
+	#name : #EPGBacklogArea,
 	#superclass : #EPGDnDArea,
 	#category : #ExtremeProGaming
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'JP 5/28/2024 11:39'
+	#category : #initialization,
+	#'squeak_changestamp' : 'JP 5/28/2024 12:42'
 }
-EPGTestArea >> initialize [
+EPGBacklogArea >> initialize [
 
 	super initialize.
+	
+	self dropEnabled: false;
+		pickEnabled: true.
+	
 	self
 		color: Color transparent;
 		highlightColor: Color green;
-		extent: 350@500;
+		extent: 200@250;
 		initializeVisibleArea;
 		addMorph: self area;
 		borderVisible: false;

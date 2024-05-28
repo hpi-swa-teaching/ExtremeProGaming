@@ -5,7 +5,7 @@ Class {
 }
 
 {
-	#category : #nil,
+	#category : #features,
 	#'squeak_changestamp' : 'JP 5/27/2024 23:48'
 }
 EPGStorypointArea >> addStorypoints: aNumber [
@@ -16,7 +16,7 @@ EPGStorypointArea >> addStorypoints: aNumber [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #features,
 	#'squeak_changestamp' : 'JP 5/27/2024 23:50'
 }
 EPGStorypointArea >> dropInMorph: aMorph [
@@ -29,7 +29,7 @@ EPGStorypointArea >> dropInMorph: aMorph [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #initialization,
 	#'squeak_changestamp' : 'JP 5/28/2024 11:21'
 }
 EPGStorypointArea >> initialize [
