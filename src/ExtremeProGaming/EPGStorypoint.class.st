@@ -76,9 +76,9 @@ EPGStorypoint >> initializeImageBag [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'JP 5/28/2024 11:18'
+	#'squeak_changestamp' : 'JP 5/28/2024 12:05'
 }
 EPGStorypoint >> newStorypointMorph [
 
-	 ^ ImageMorph new image:(((GitAssetLoader for: 'ExtremeProGaming') loadAsset: (self imageBag at: ((1 to: 6) atRandom))) scaledToSize: 100 @ 100).
+	 ^ ImageMorph new image:(((GitAssetLoader for: 'ExtremeProGaming') loadAsset: (self imageBag at: ((1 to: 6) atRandom))) scaledToSize: 50 @ 50).
 ]
