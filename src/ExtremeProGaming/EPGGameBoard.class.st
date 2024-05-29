@@ -153,7 +153,7 @@ EPGGameBoard >> initializeSectionMorphs [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 5/29/2024 23:24'
+	#'squeak_changestamp' : 'jmetrikat 5/29/2024 23:28'
 }
 EPGGameBoard >> initializeStorypointAreas [
 
@@ -166,7 +166,7 @@ EPGGameBoard >> initializeStorypointAreas [
 		point := (10 + ((a - 1) *  4) + ((a - 1) * area extent x)) @ 10.
 		area position: self planningArea position + point.
 		(a == 1) 
-			ifTrue: [area accepts: #(#temoraryUnavailable)]
+			ifTrue: [area accepts: #(#temporaryUnavailable)]
 			ifFalse: [area accepts: #(#available)].
 		area addAcceptanceToDroppedMorphs.
 		self addMorph: area].
