@@ -6,15 +6,13 @@ Class {
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/29/2024 20:32'
+	#'squeak_changestamp' : 'JP 5/29/2024 21:55'
 }
 EPGBacklogArea >> initialize [
 
 	super initialize.
 	
 	self
-		highlightColor: Color green;
 		extent: 200@250;
-		backgroundMargin: 25@25;
 		initializeVisibleArea.
 ]

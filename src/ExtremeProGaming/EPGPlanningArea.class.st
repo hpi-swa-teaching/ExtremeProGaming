@@ -5,17 +5,24 @@ Class {
 }
 
 {
-	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/29/2024 21:31'
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'JP 5/29/2024 21:55'
 }
 EPGPlanningArea >> initialize [
 
 	super initialize.
 	
 	self
-		highlightColor: Color green;
 		extent: 200@250;
-		backgroundMargin: 25@25;
-		dropEnabled: false;
+		enableDrop: false;
 		initializeVisibleArea.
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'JP 5/29/2024 21:56'
+}
+EPGPlanningArea >> initializeCardStack [
+
+	"TODO"
 ]
