@@ -1,14 +1,14 @@
 Class {
-	#name : #EPGBacklogArea,
+	#name : #EPGDoneArea,
 	#superclass : #EPGDnDArea,
 	#category : #ExtremeProGaming
 }
 
 {
-	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/29/2024 20:32'
+	#category : #nil,
+	#'squeak_changestamp' : 'JP 5/29/2024 20:33'
 }
-EPGBacklogArea >> initialize [
+EPGDoneArea >> initialize [
 
 	super initialize.
 	

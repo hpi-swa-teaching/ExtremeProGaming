@@ -109,7 +109,7 @@ EPGGameBoard >> createSectionMorphFor: aName [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/28/2024 12:41'
+	#'squeak_changestamp' : 'JP 5/29/2024 20:57'
 }
 EPGGameBoard >> initialize [
 	super initialize.
@@ -118,25 +118,81 @@ EPGGameBoard >> initialize [
 		color: Color gray;
 		initializeSectionMorphs;
 		initializeStorypointAreas;
-		initializeBacklogAreas.
+		initializePlanningAreas;
+		initializeBacklogAreas;
+		initializeDebtAreas;
+		initializeDoneAreas.
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/28/2024 12:43'
+	#'squeak_changestamp' : 'JP 5/29/2024 20:20'
 }
 EPGGameBoard >> initializeBacklogAreas [
+
+	| areas |
+	
+	1 to: 3 do:  [:a | 
+		areas := OrderedCollection new.
+		3 timesRepeat: [areas add: EPGBacklogArea new].
+		1 to: 3 do: [:b | 
+			| area point|
+			area := areas at: b.
+			point :=  self backlogArea position x  + ((b-1) * area extent x) + (b * 20) + 140 @ (242 + ((a - 1 )*  20) + ((a - 1)* area extent y)) .
+			area position: self planningArea position + point.
+			self addMorph: area]].
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'JP 5/29/2024 20:54'
+}
+EPGGameBoard >> initializeDebtAreas [	
+	| area |
+	
+	area := EPGDebtArea new.
+	area position: self reviewArea position + (40 @ 242).
+	area area color: Color red.
+	self addMorph: area.
+	
+	area := EPGDebtArea new.
+	area position: self reviewArea position + (40 @ (242 + 20 + area extent y)).
+	area area color: Color blue.
+	self addMorph: area.
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'JP 5/29/2024 21:11'
+}
+EPGGameBoard >> initializeDoneAreas [	
+	| area |
+	
+	area := EPGDoneArea new.
+	area position: self reviewArea position + (40 @ (242 + (2*20) + (2*area extent y))).
+	self addMorph: area.
+	
+	area := EPGDoneArea new.
+	area position: self reviewArea position + (area extent x + 40 @ (242 + (2 * 20) +  (2 * area extent y))).
+	self addMorph: area.
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'JP 5/29/2024 21:39'
+}
+EPGGameBoard >> initializePlanningAreas [
 
 	| areas |
 
 	areas := OrderedCollection new.
 	
-	3 timesRepeat: [areas add: EPGBacklogArea new].
+	3 timesRepeat: [areas add: self newPlanningArea].
 	
 	1 to: 3 do:  [:a | 
 		| area point|
 		area := areas at: a.
-		point :=  self planningArea center x - (area extent x / 2) @ (260 + ((a - 1 )*  20) + ((a - 1)* area extent y)) .
+		point :=  self planningArea center x - (area extent x / 2) @ (242 + ((a - 1 )*  20) + ((a - 1)* area extent y)) .
 		area position: self planningArea position + point.
 		self addMorph: area].
 ]
@@ -154,7 +210,7 @@ EPGGameBoard >> initializeSectionMorphs [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'HCH 5/29/2024 19:53'
+	#'squeak_changestamp' : 'JP 5/29/2024 21:23'
 }
 EPGGameBoard >> initializeStorypointAreas [
 
@@ -170,10 +226,23 @@ EPGGameBoard >> initializeStorypointAreas [
 		point := (10 + ((a - 1 )*  4) + ((a - 1)* area extent x)) @ 10.
 		area position: self planningArea position + point.
 		(a == 1) 
-			ifTrue: [area accepts: #(#temporaryUnavailable)]
+			ifTrue: [area dropEnabled: false.]
 			ifFalse: [area accepts: #(#available)].
 		area addAcceptanceToDroppedMorphs.
 		self addMorph: area].
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'JP 5/29/2024 21:40'
+}
+EPGGameBoard >> newPlanningArea [
+	
+	^ EPGDnDArea new highlightColor: Color green;
+		extent: 200@250;
+		backgroundMargin: 25@25;
+		initializeVisibleArea.
+
 ]
 
 {

@@ -1,14 +1,14 @@
 Class {
-	#name : #EPGBacklogArea,
+	#name : #EPGPlanningArea,
 	#superclass : #EPGDnDArea,
 	#category : #ExtremeProGaming
 }
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/29/2024 20:32'
+	#'squeak_changestamp' : 'JP 5/29/2024 21:31'
 }
-EPGBacklogArea >> initialize [
+EPGPlanningArea >> initialize [
 
 	super initialize.
 	
@@ -16,5 +16,6 @@ EPGBacklogArea >> initialize [
 		highlightColor: Color green;
 		extent: 200@250;
 		backgroundMargin: 25@25;
+		dropEnabled: false;
 		initializeVisibleArea.
 ]
