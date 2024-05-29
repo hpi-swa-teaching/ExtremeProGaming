@@ -5,7 +5,7 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
+	#category : #initialization,
 	#'squeak_changestamp' : 'JP 5/29/2024 21:55'
 }
 EPGPlanningArea >> initialize [
@@ -19,7 +19,7 @@ EPGPlanningArea >> initialize [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #initialization,
 	#'squeak_changestamp' : 'JP 5/29/2024 21:56'
 }
 EPGPlanningArea >> initializeCardStack [

@@ -4,7 +4,9 @@ Class {
 	#instVars : [
 		'planningArea',
 		'backlogArea',
-		'reviewArea'
+		'reviewArea',
+		'frontendDebtArea',
+		'backendDebtArea'
 	],
 	#category : #ExtremeProGaming
 }
@@ -60,6 +62,22 @@ EPGGameBoard >> aboutToBeGrabbedBy: aHand [
 EPGGameBoard >> areaGap [
 
 	^ 20.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'JP 5/29/2024 22:50'
+}
+EPGGameBoard >> backendDebtArea [
+	^ backendDebtArea
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'JP 5/29/2024 22:50'
+}
+EPGGameBoard >> backendDebtArea: anObject [
+	backendDebtArea := anObject
 ]
 
 {
@@ -126,6 +144,22 @@ EPGGameBoard >> createSectionMorphFor: aName [
 ]
 
 {
+	#category : #accessing,
+	#'squeak_changestamp' : 'JP 5/29/2024 22:50'
+}
+EPGGameBoard >> frontendDebtArea [
+	^ frontendDebtArea
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'JP 5/29/2024 22:50'
+}
+EPGGameBoard >> frontendDebtArea: anObject [
+	frontendDebtArea := anObject
+]
+
+{
 	#category : #initialization,
 	#'squeak_changestamp' : 'JP 5/29/2024 20:57'
 }
@@ -163,20 +197,25 @@ EPGGameBoard >> initializeBacklogAreas [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/29/2024 22:12'
+	#'squeak_changestamp' : 'JP 5/29/2024 23:02'
 }
 EPGGameBoard >> initializeDebtAreas [	
-	| area |
 	
-	area := EPGDebtArea new.
-	area position: self reviewArea position + (self reviewAreaXOffset @ self yOffset).
-	area area color: Color red.
-	self addMorph: area.
+	self frontendDebtArea: EPGDebtArea new.
+	self frontendDebtArea position: self reviewArea position + ((self reviewAreaXOffset + 12) @ (self yOffset + 12));
+		color: Color gray;
+		type: #frontend.
+	self addMorph: frontendDebtArea.
 	
-	area := EPGDebtArea new.
-	area position: self reviewArea position + (self reviewAreaXOffset @ (self yOffset + self areaGap + area extent y)).
-	area area color: Color blue.
-	self addMorph: area.
+	self backendDebtArea: EPGDebtArea new.
+	self backendDebtArea position: self reviewArea position + ((self reviewAreaXOffset + 12) @ (self yOffset + (3 * self areaGap) + self backendDebtArea extent y));
+		color: Color gray;
+		type: #backend.
+	self addMorph: self backendDebtArea.
+	
+	self frontendDebtArea addTechnicalDebt.
+	self backendDebtArea addTechnicalDebt.
+	
 ]
 
 {
