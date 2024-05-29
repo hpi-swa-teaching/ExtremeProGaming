@@ -18,11 +18,12 @@ EPGStorypointArea >> addAcceptanceToDroppedMorphs [
 
 {
 	#category : #features,
-	#'squeak_changestamp' : 'HCH 5/29/2024 00:43'
+	#'squeak_changestamp' : 'jmetrikat 5/29/2024 23:16'
 }
 EPGStorypointArea >> addStorypoints: aNumber [
 
-	aNumber timesRepeat: [|newStorypoint|
+	| newStorypoint |
+	aNumber timesRepeat: [
 		newStorypoint := EPGStorypoint new.
 		self dropInMorph: newStorypoint]
 ]

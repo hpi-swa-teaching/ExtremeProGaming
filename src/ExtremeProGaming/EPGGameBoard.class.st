@@ -109,12 +109,13 @@ EPGGameBoard >> createSectionMorphFor: aName [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/28/2024 12:41'
+	#'squeak_changestamp' : 'jmetrikat 5/29/2024 23:18'
 }
 EPGGameBoard >> initialize [
 	super initialize.
 	
-	self extent: self class boardExtent; 
+	self
+		extent: self class boardExtent; 
 		color: Color gray;
 		initializeSectionMorphs;
 		initializeStorypointAreas;
@@ -123,51 +124,46 @@ EPGGameBoard >> initialize [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/28/2024 12:43'
+	#'squeak_changestamp' : 'jmetrikat 5/29/2024 23:24'
 }
 EPGGameBoard >> initializeBacklogAreas [
 
-	| areas |
-
+	| areas area point |
 	areas := OrderedCollection new.
-	
 	3 timesRepeat: [areas add: EPGBacklogArea new].
 	
 	1 to: 3 do:  [:a | 
-		| area point|
 		area := areas at: a.
-		point :=  self planningArea center x - (area extent x / 2) @ (260 + ((a - 1 )*  20) + ((a - 1)* area extent y)) .
+		point :=  self planningArea center x - (area extent x / 2) @ (260 + ((a - 1) *  20) + ((a - 1) * area extent y)) .
 		area position: self planningArea position + point.
 		self addMorph: area].
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JA 5/21/2024 15:55'
+	#'squeak_changestamp' : 'jmetrikat 5/29/2024 23:19'
 }
 EPGGameBoard >> initializeSectionMorphs [
 
-	self planningArea: (self createSectionMorphFor: 'planning');
+	self
+		planningArea: (self createSectionMorphFor: 'planning');
 		backlogArea: (self createSectionMorphFor: 'backlog');
 		reviewArea:  (self createSectionMorphFor: 'review').
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'HCH 5/29/2024 00:45'
+	#'squeak_changestamp' : 'jmetrikat 5/29/2024 23:24'
 }
 EPGGameBoard >> initializeStorypointAreas [
 
-	| areas |
-
+	| areas area point |
 	areas := OrderedCollection new.
-	
 	3 timesRepeat: [areas add: EPGStorypointArea new].
 	
 	1 to: 3 do:  [:a | 
-		| area point|
 		area := areas at: a.
-		point := (10 + ((a - 1 )*  4) + ((a - 1)* area extent x)) @ 10.
+		point := (10 + ((a - 1) *  4) + ((a - 1) * area extent x)) @ 10.
 		area position: self planningArea position + point.
 		(a == 1) 
 			ifTrue: [area accepts: #(#temoraryUnavailable)]
