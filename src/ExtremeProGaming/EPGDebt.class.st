@@ -70,14 +70,14 @@ EPGDebt >> mouseEnterDragging: evt [
 
 {
 	#category : #typesetting,
-	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:41'
+	#'squeak_changestamp' : 'jmetrikat 5/30/2024 23:02'
 }
 EPGDebt >> setType: aType [
 
 	| path |
 	(aType = #frontend or: [aType = #backend])
-		ifFalse: [self error: 'Non valid Debt Type'].
-	
+		ifFalse: [self error: 'Non valid debt type'].
+
 	path := (aType = #frontend)
 		ifTrue: ['/assets/TechnicalDebt_Frontend.png']
 		ifFalse: ['/assets/TechnicalDebt_Backend.png'].
@@ -85,7 +85,7 @@ EPGDebt >> setType: aType [
 	self
 		image: (ImageMorph new image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: path) scaledToSize: 75 @ 75));
 		addMorph: self image.
-	
+
 	self image center: self center.
 ]
 
