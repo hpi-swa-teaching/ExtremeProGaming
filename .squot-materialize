@@ -6,6 +6,13 @@
 		],
 		#encoding : Class [ #PNGReadWriter ]
 	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'Storypoint_Red.png'
+		],
+		#encoding : @4
+	},
 	SquotTonelMapper {
 		#package : MCPackage {
 			#name : 'ExtremeProGaming'
@@ -17,7 +24,7 @@
 	SquotImageMapper {
 		#path : FSAbsolutePath [
 			'assets',
-			'Storypoint_Red.png'
+			'TechnicalDebt_Backend.png'
 		],
 		#encoding : @4
 	},
@@ -25,6 +32,13 @@
 		#path : FSAbsolutePath [
 			'assets',
 			'Storypoint_Orange.png'
+		],
+		#encoding : @4
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'TechnicalDebt_Frontend.png'
 		],
 		#encoding : @4
 	},
