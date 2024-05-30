@@ -161,7 +161,7 @@ EPGGameBoard >> frontendDebtArea: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/30/2024 20:44'
+	#'squeak_changestamp' : 'JP 5/30/2024 21:28'
 }
 EPGGameBoard >> initialize [
 	super initialize.
@@ -174,8 +174,6 @@ EPGGameBoard >> initialize [
 		initializeBacklogAreas;
 		initializeDebtAreas;
 		initializeDoneAreas.
-		
-	self startNewRound.
 ]
 
 {
