@@ -86,3 +86,39 @@ EPGStorypoint >> newStorypointMorph [
 
 	 ^ ImageMorph new image:(((GitAssetLoader for: 'ExtremeProGaming') loadAsset: (self imageBag at: ((1 to: 6) atRandom))) scaledToSize: 50 @ 50).
 ]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'JP 5/30/2024 21:01'
+}
+EPGStorypoint >> timeToLive [
+	^ timeToLive
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'JP 5/30/2024 21:01'
+}
+EPGStorypoint >> timeToLive: anObject [
+	timeToLive := anObject
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'JP 5/30/2024 21:05'
+}
+EPGStorypoint >> update: anAspectSymbol with: aValueObject [
+
+	anAspectSymbol = #newRound
+		ifTrue: [self updateTimeToLife].
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'JP 5/30/2024 21:01'
+}
+EPGStorypoint >> updateTimeToLife [
+
+	self timeToLife: self timeToLife - 1.
+	(self timeToLife == 0) ifTrue: [self abandon].
+]

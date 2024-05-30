@@ -2,6 +2,7 @@ Class {
 	#name : #EPGDebtArea,
 	#superclass : #Morph,
 	#instVars : [
+		'gameBoard',
 		'type'
 	],
 	#category : #ExtremeProGaming
@@ -9,18 +10,34 @@ Class {
 
 {
 	#category : #features,
-	#'squeak_changestamp' : 'JP 5/29/2024 23:01'
+	#'squeak_changestamp' : 'JP 5/30/2024 20:37'
 }
 EPGDebtArea >> addTechnicalDebt [
 
 	| newDebt |
 	
-	
-	
 	newDebt := EPGDebt new.
 	newDebt setType: self type;
 		position: (self randomPositionFor: newDebt).
 	self addMorph: newDebt.
+	
+	self gameBoard addDependent: newDebt.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'JP 5/30/2024 20:22'
+}
+EPGDebtArea >> gameBoard [
+	^ gameBoard
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'JP 5/30/2024 20:22'
+}
+EPGDebtArea >> gameBoard: anObject [
+	gameBoard := anObject
 ]
 
 {

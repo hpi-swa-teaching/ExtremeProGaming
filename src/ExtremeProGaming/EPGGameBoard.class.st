@@ -161,7 +161,7 @@ EPGGameBoard >> frontendDebtArea: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/29/2024 20:57'
+	#'squeak_changestamp' : 'JP 5/30/2024 20:44'
 }
 EPGGameBoard >> initialize [
 	super initialize.
@@ -174,6 +174,8 @@ EPGGameBoard >> initialize [
 		initializeBacklogAreas;
 		initializeDebtAreas;
 		initializeDoneAreas.
+		
+	self startNewRound.
 ]
 
 {
@@ -197,20 +199,22 @@ EPGGameBoard >> initializeBacklogAreas [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/29/2024 23:02'
+	#'squeak_changestamp' : 'JP 5/30/2024 21:12'
 }
 EPGGameBoard >> initializeDebtAreas [	
 	
 	self frontendDebtArea: EPGDebtArea new.
 	self frontendDebtArea position: self reviewArea position + ((self reviewAreaXOffset + 12) @ (self yOffset + 12));
 		color: Color gray;
-		type: #frontend.
+		type: #frontend;
+		gameBoard: self.
 	self addMorph: frontendDebtArea.
 	
 	self backendDebtArea: EPGDebtArea new.
 	self backendDebtArea position: self reviewArea position + ((self reviewAreaXOffset + 12) @ (self yOffset + (3 * self areaGap) + self backendDebtArea extent y));
 		color: Color gray;
-		type: #backend.
+		type: #backend;
+		gameBoard: self.
 	self addMorph: self backendDebtArea.
 	
 	self frontendDebtArea addTechnicalDebt.
@@ -343,6 +347,16 @@ EPGGameBoard >> reviewArea: aMorph [
 EPGGameBoard >> reviewAreaXOffset [
 
 	^ 40.
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'JP 5/30/2024 20:55'
+}
+EPGGameBoard >> startNewRound [
+
+	self changed: #newRound with: nil.
+	
 ]
 
 {

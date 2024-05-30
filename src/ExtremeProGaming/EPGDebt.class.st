@@ -1,19 +1,33 @@
 Class {
 	#name : #EPGDebt,
 	#superclass : #EPGDnDArea,
+	#instVars : [
+		'timeToLife'
+	],
 	#category : #ExtremeProGaming
 }
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/29/2024 22:54'
+	#'squeak_changestamp' : 'JP 5/30/2024 21:10'
+}
+EPGDebt >> checkIfProcessed [
+
+	(self dropped size == 1) ifTrue: [self abandon].
+	(self dropped size > 1) ifTrue: [self error: 'To many Storypoints on one Technical Debt'].
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'JP 5/30/2024 21:13'
 }
 EPGDebt >> initialize [
 
 	super initialize.
 	
 	self
-		extent: 50 @ 50;
+		extent: 100 @ 100;
+		accepts: #(#EPGStorypoint);
 		initializeVisibleArea.
 ]
 
@@ -44,4 +58,14 @@ EPGDebt >> setTypeBackend [
 EPGDebt >> setTypeFrontend [
 
 	self area color: Color red darker darker.
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'JP 5/30/2024 21:02'
+}
+EPGDebt >> update: anAspectSymbol with: aValueObject [
+
+	anAspectSymbol = #newRound
+		ifTrue: [self checkIfProcessed].
 ]
