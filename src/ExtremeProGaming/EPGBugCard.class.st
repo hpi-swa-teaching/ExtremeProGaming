@@ -6,10 +6,11 @@ Class {
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'HCH 5/27/2024 20:51'
+	#'squeak_changestamp' : 'jmetrikat 5/29/2024 23:14'
 }
 EPGBugCard >> initialize [
 
 	super initialize.
+	
 	self colorBar: (Color fromString: '#5f4dfa') withLayout: #right.
 ]

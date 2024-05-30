@@ -258,11 +258,12 @@ EPGGameBoard >> initializePlanningAreas [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JA 5/21/2024 15:55'
+	#'squeak_changestamp' : 'jmetrikat 5/29/2024 23:19'
 }
 EPGGameBoard >> initializeSectionMorphs [
 
-	self planningArea: (self createSectionMorphFor: 'planning');
+	self
+		planningArea: (self createSectionMorphFor: 'planning');
 		backlogArea: (self createSectionMorphFor: 'backlog');
 		reviewArea:  (self createSectionMorphFor: 'review').
 ]

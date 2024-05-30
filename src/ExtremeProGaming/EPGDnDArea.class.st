@@ -273,7 +273,7 @@ EPGDnDArea >> initialize [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'HCH 5/29/2024 00:30'
+	#'squeak_changestamp' : 'jmetrikat 5/29/2024 23:11'
 }
 EPGDnDArea >> initializeVisibleArea [
 
@@ -281,8 +281,7 @@ EPGDnDArea >> initializeVisibleArea [
 	self area
 		color: Color gray lighter;
 		extent: self backgroundExtent - (self backgroundMargin);
-		center: self center;
-		yourself.
+		center: self center.
 	self addMorph: self area.
 ]
 

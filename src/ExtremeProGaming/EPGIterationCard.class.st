@@ -6,10 +6,11 @@ Class {
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'HCH 5/27/2024 20:50'
+	#'squeak_changestamp' : 'jmetrikat 5/29/2024 23:13'
 }
 EPGIterationCard >> initialize [
 
 	super initialize.
+	
 	self colorBar: (Color fromString: '#ffe1a1') withLayout: #full.
 ]

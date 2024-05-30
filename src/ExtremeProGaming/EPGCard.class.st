@@ -13,14 +13,14 @@ Class {
 
 {
 	#category : #areas,
-	#'squeak_changestamp' : 'HCH 5/27/2024 20:56'
+	#'squeak_changestamp' : 'jmetrikat 5/29/2024 23:14'
 }
 EPGCard >> addColorBar: aColor [
 
 	| bar |
 	bar := Morph new
 		color: aColor.
-	 (self colorBarSelector == #full)
+	(self colorBarSelector == #full)
 		ifTrue: [bar 
 					extent: self extent x @ 30;
 					position: self subHeaderOrigin.].
@@ -103,11 +103,12 @@ EPGCard >> header: aMorph [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'HCH 5/27/2024 21:10'
+	#'squeak_changestamp' : 'jmetrikat 5/29/2024 23:14'
 }
 EPGCard >> initialize [
 
 	super initialize.
+	
 	self 
 		color: Color white;
 		extent: 250 @ 417;
@@ -117,15 +118,15 @@ EPGCard >> initialize [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'HCH 5/27/2024 20:34'
+	#'squeak_changestamp' : 'jmetrikat 5/29/2024 23:14'
 }
 EPGCard >> initializeHeader: aText [
 
-	| header textMorph |
+	| header |
 	header := Morph new
 		extent: self extent x @ 30;
 		color: Color transparent;
-		position:  0@0.
+		position:  0 @ 0.
 	self addMorph: header.
 	self header: header.
 ]
