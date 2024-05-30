@@ -42,18 +42,33 @@ EPGGameBoard class >> boardExtent [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JA 5/16/2024 11:46'
+	#'squeak_changestamp' : 'HCH 5/29/2024 01:10'
+}
+EPGGameBoard >> aboutToBeGrabbedBy: aHand [
+
+	self submorphs do: 
+		[:sub | (sub isEPGDnDArea 
+				and: [sub intersects: aHand bounds]) 
+				ifTrue: [^ sub aboutToBeGrabbedBy: aHand]].
+	^ super aboutToBeGrabbedBy: aHand.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 5/29/2024 01:10'
 }
 EPGGameBoard >> backlogArea [
+
 	^ backlogArea.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JA 5/16/2024 11:46'
+	#'squeak_changestamp' : 'HCH 5/29/2024 01:10'
 }
-EPGGameBoard >> backlogArea: anObject [
-	backlogArea := anObject.
+EPGGameBoard >> backlogArea: aMorph [
+
+	backlogArea := aMorph.
 ]
 
 {
@@ -94,55 +109,101 @@ EPGGameBoard >> createSectionMorphFor: aName [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JA 5/21/2024 16:00'
+	#'squeak_changestamp' : 'jmetrikat 5/29/2024 23:18'
 }
 EPGGameBoard >> initialize [
 	super initialize.
 	
-	self extent: self class boardExtent; 
+	self
+		extent: self class boardExtent; 
 		color: Color gray;
-		initializeSectionMorphs.
+		initializeSectionMorphs;
+		initializeStorypointAreas;
+		initializeBacklogAreas.
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JA 5/21/2024 15:55'
+	#'squeak_changestamp' : 'jmetrikat 5/29/2024 23:24'
+}
+EPGGameBoard >> initializeBacklogAreas [
+
+	| areas area point |
+	areas := OrderedCollection new.
+	3 timesRepeat: [areas add: EPGBacklogArea new].
+	
+	1 to: 3 do:  [:a | 
+		area := areas at: a.
+		point :=  self planningArea center x - (area extent x / 2) @ (260 + ((a - 1) *  20) + ((a - 1) * area extent y)) .
+		area position: self planningArea position + point.
+		self addMorph: area].
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'jmetrikat 5/29/2024 23:19'
 }
 EPGGameBoard >> initializeSectionMorphs [
 
-	self planningArea: (self createSectionMorphFor: 'planning');
+	self
+		planningArea: (self createSectionMorphFor: 'planning');
 		backlogArea: (self createSectionMorphFor: 'backlog');
 		reviewArea:  (self createSectionMorphFor: 'review').
 ]
 
 {
+	#category : #initialization,
+	#'squeak_changestamp' : 'jmetrikat 5/29/2024 23:28'
+}
+EPGGameBoard >> initializeStorypointAreas [
+
+	| areas area point |
+	areas := OrderedCollection new.
+	3 timesRepeat: [areas add: EPGStorypointArea new].
+	
+	1 to: 3 do:  [:a | 
+		area := areas at: a.
+		point := (10 + ((a - 1) *  4) + ((a - 1) * area extent x)) @ 10.
+		area position: self planningArea position + point.
+		(a == 1) 
+			ifTrue: [area accepts: #(#temporaryUnavailable)]
+			ifFalse: [area accepts: #(#available)].
+		area addAcceptanceToDroppedMorphs.
+		self addMorph: area].
+]
+
+{
 	#category : #accessing,
-	#'squeak_changestamp' : 'JA 5/16/2024 11:46'
+	#'squeak_changestamp' : 'HCH 5/29/2024 01:10'
 }
 EPGGameBoard >> planningArea [
+
 	^ planningArea.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JA 5/16/2024 11:46'
+	#'squeak_changestamp' : 'HCH 5/29/2024 01:11'
 }
-EPGGameBoard >> planningArea: anObject [
-	planningArea := anObject.
+EPGGameBoard >> planningArea: aMorph [
+
+	planningArea := aMorph.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JA 5/16/2024 11:46'
+	#'squeak_changestamp' : 'HCH 5/29/2024 01:11'
 }
 EPGGameBoard >> reviewArea [
+
 	^ reviewArea.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JA 5/16/2024 11:46'
+	#'squeak_changestamp' : 'HCH 5/29/2024 01:11'
 }
-EPGGameBoard >> reviewArea: anObject [
-	reviewArea := anObject.
+EPGGameBoard >> reviewArea: aMorph [
+
+	reviewArea := aMorph.
 ]
