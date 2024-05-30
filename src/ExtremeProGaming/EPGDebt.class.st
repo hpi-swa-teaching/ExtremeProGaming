@@ -9,11 +9,11 @@ Class {
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/30/2024 22:07'
+	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:21'
 }
 EPGDebt >> checkForStorypoint [
 
-	^ self dropped size == 1
+	^ self dropped size == 1.
 ]
 
 {
@@ -27,18 +27,20 @@ EPGDebt >> checkIfProcessed [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 5/30/2024 21:51'
+	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:22'
 }
 EPGDebt >> image [
-	^ image
+
+	^ image.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 5/30/2024 21:51'
+	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:22'
 }
-EPGDebt >> image: anObject [
-	image := anObject
+EPGDebt >> image: anImage [
+
+	image := anImage.
 ]
 
 {
@@ -68,36 +70,32 @@ EPGDebt >> mouseEnterDragging: evt [
 
 {
 	#category : #typesetting,
-	#'squeak_changestamp' : 'JP 5/29/2024 22:57'
+	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:37'
+}
+EPGDebt >> setCommonType: aType [
+
+	
+
+]
+
+{
+	#category : #typesetting,
+	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:41'
 }
 EPGDebt >> setType: aType [
 
-	(aType = #frontend) ifTrue: [self setTypeFrontend. ^ self].
-	(aType = #backend) ifTrue: [self setTypeBackend. ^ self]
-	ifFalse: [self error: 'Non valid Debt Type'].
-]
+	| path |
+	(aType = #frontend or: [aType = #backend])
+		ifFalse: [self error: 'Non valid Debt Type'].
+	
+	path := (aType = #frontend)
+		ifTrue: ['/assets/TechnicalDebt_Frontend.png']
+		ifFalse: ['/assets/TechnicalDebt_Backend.png'].
 
-{
-	#category : #typesetting,
-	#'squeak_changestamp' : 'JP 5/30/2024 21:53'
-}
-EPGDebt >> setTypeBackend [
-
-	self image: (ImageMorph new image:(((GitAssetLoader for: 'ExtremeProGaming') loadAsset: ('/assets/TechnicalDebt_Backend.png')) scaledToSize: 75 @ 75));
+	self
+		image: (ImageMorph new image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: path) scaledToSize: 75 @ 75));
 		addMorph: self image.
-		
-	self image center: self center.
-]
-
-{
-	#category : #typesetting,
-	#'squeak_changestamp' : 'JP 5/30/2024 22:09'
-}
-EPGDebt >> setTypeFrontend [
-
-	self image: (ImageMorph new image:(((GitAssetLoader for: 'ExtremeProGaming') loadAsset: ('/assets/TechnicalDebt_Frontend.png')) scaledToSize: 75 @ 75));
-		addMorph: self image.
-		
+	
 	self image center: self center.
 ]
 
@@ -106,16 +104,6 @@ EPGDebt >> setTypeFrontend [
 	#'squeak_changestamp' : 'JP 5/30/2024 22:12'
 }
 EPGDebt >> update: anAspectSymbol [
-
-	anAspectSymbol = #newRound
-		ifTrue: [self checkIfProcessed].
-]
-
-{
-	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/30/2024 21:02'
-}
-EPGDebt >> update: anAspectSymbol with: aValueObject [
 
 	anAspectSymbol = #newRound
 		ifTrue: [self checkIfProcessed].

@@ -10,17 +10,17 @@ Class {
 
 {
 	#category : #features,
-	#'squeak_changestamp' : 'JP 5/30/2024 22:01'
+	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:43'
 }
 EPGDebtArea >> addTechnicalDebt [
 
 	| newDebt |
-	
 	newDebt := EPGDebt new.
-	newDebt setType: self type;
+	newDebt
+		setType: self type;
 		position: (self randomPositionFor: newDebt).
-	gameBoard  addMorph: newDebt.
-	
+		
+	self gameBoard addMorph: newDebt.
 	self gameBoard addDependent: newDebt.
 ]
 
