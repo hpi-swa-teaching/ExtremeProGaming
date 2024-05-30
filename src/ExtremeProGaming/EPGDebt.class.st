@@ -103,6 +103,16 @@ EPGDebt >> setTypeFrontend [
 
 {
 	#category : #initialization,
+	#'squeak_changestamp' : 'JP 5/30/2024 22:12'
+}
+EPGDebt >> update: anAspectSymbol [
+
+	anAspectSymbol = #newRound
+		ifTrue: [self checkIfProcessed].
+]
+
+{
+	#category : #initialization,
 	#'squeak_changestamp' : 'JP 5/30/2024 21:02'
 }
 EPGDebt >> update: anAspectSymbol with: aValueObject [

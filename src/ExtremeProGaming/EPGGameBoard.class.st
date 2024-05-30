@@ -350,11 +350,11 @@ EPGGameBoard >> reviewAreaXOffset [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/30/2024 20:55'
+	#'squeak_changestamp' : 'JP 5/30/2024 22:11'
 }
 EPGGameBoard >> startNewRound [
 
-	self changed: #newRound with: nil.
+	self changed: #newRound.
 	
 ]
 
