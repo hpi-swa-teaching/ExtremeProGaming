@@ -43,15 +43,13 @@ EPGStorypointArea >> dropInMorph: aMorph [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'HCH 5/29/2024 00:51'
+	#'squeak_changestamp' : 'JP 5/29/2024 21:54'
 }
 EPGStorypointArea >> initialize [
 
 	super initialize.
 	
 	self
-		draggable: false;
-		highlightColor: Color green;
 		extent: 150 @ 200;
 		initializeVisibleArea.
 		

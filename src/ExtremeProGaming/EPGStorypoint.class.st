@@ -47,13 +47,14 @@ EPGStorypoint >> imageBag: aCollection [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/28/2024 11:17'
+	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:56'
 }
 EPGStorypoint >> initialize [
 
 	super initialize.
 	
-	self color: Color transparent;
+	self
+		color: Color transparent;
 		extent: 100 @ 100;
 		initializeImageBag;
 		image: self newStorypointMorph;
@@ -64,12 +65,13 @@ EPGStorypoint >> initialize [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/28/2024 11:16'
+	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:56'
 }
 EPGStorypoint >> initializeImageBag [
 
 	self imageBag: OrderedCollection new.
-	self imageBag add: '/assets/Storypoint_DarkOrange.png';
+	self imageBag
+		add: '/assets/Storypoint_DarkOrange.png';
 		add: '/assets/Storypoint_Orange.png';
 		add: '/assets/Storypoint_Yellow.png';
 		add: '/assets/Storypoint_Red.png';
@@ -85,4 +87,42 @@ EPGStorypoint >> initializeImageBag [
 EPGStorypoint >> newStorypointMorph [
 
 	 ^ ImageMorph new image:(((GitAssetLoader for: 'ExtremeProGaming') loadAsset: (self imageBag at: ((1 to: 6) atRandom))) scaledToSize: 50 @ 50).
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:56'
+}
+EPGStorypoint >> timeToLive [
+
+	^ timeToLive.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:57'
+}
+EPGStorypoint >> timeToLive: aTime [
+
+	timeToLive := aTime.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:58'
+}
+EPGStorypoint >> update: anAspectSymbol [
+
+	anAspectSymbol = #newRound
+		ifTrue: [self updateTimeToLive].
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:58'
+}
+EPGStorypoint >> updateTimeToLive [
+
+	self timeToLive: self timeToLive - 1.
+	(self timeToLive == 0) ifTrue: [self abandon].
 ]

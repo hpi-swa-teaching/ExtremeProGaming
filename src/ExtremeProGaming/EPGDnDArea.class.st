@@ -252,7 +252,7 @@ EPGDnDArea >> highlightColor: aColor [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'HCH 5/29/2024 01:07'
+	#'squeak_changestamp' : 'JP 5/29/2024 21:48'
 }
 EPGDnDArea >> initialize [
 
@@ -260,11 +260,13 @@ EPGDnDArea >> initialize [
 	
 	self
 		dropEnabled: true;
-		draggable: true;
+		draggable: false;
+		highlightColor: Color green;
 		color: Color transparent;
 		borderVisible: false;
 		dropped: OrderedCollection new;
 		accepts: #();
+		extent: 200 @ 250;
 		backgroundMargin: 25@25.
 
 ]
