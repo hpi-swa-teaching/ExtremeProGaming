@@ -10,72 +10,74 @@ Class {
 
 {
 	#category : #features,
-	#'squeak_changestamp' : 'JP 5/30/2024 20:37'
+	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:01'
 }
 EPGDebtArea >> addTechnicalDebt [
 
 	| newDebt |
-	
 	newDebt := EPGDebt new.
-	newDebt setType: self type;
+	newDebt
+		setType: self type;
 		position: (self randomPositionFor: newDebt).
+		
 	self addMorph: newDebt.
-	
 	self gameBoard addDependent: newDebt.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 5/30/2024 20:22'
+	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:01'
 }
 EPGDebtArea >> gameBoard [
-	^ gameBoard
+
+	^ gameBoard.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 5/30/2024 20:22'
+	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:02'
 }
-EPGDebtArea >> gameBoard: anObject [
-	gameBoard := anObject
+EPGDebtArea >> gameBoard: aGameBoard [
+
+	gameBoard := aGameBoard.
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/29/2024 22:32'
+	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:01'
 }
 EPGDebtArea >> initialize [ 
 
 	super initialize.
 	
-	self 
-		extent: 375 @ 225.
+	self extent: 375 @ 225.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 5/29/2024 23:01'
+	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:02'
 }
 EPGDebtArea >> randomPositionFor: aMorph [
 
 	| range |
-
-	range := self extent  - aMorph extent.
-	^ self position +  ((0 to: range x ) atRandom @ (0 to: range y) atRandom).
+	range := self extent - aMorph extent.
+	^ self position + ((0 to: range x) atRandom @ (0 to: range y) atRandom).
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 5/29/2024 22:29'
+	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:02'
 }
 EPGDebtArea >> type [
-	^ type
+
+	^ type.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 5/29/2024 22:29'
+	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:02'
 }
-EPGDebtArea >> type: anObject [
-	type := anObject
+EPGDebtArea >> type: aType [
+
+	type := aType.
 ]

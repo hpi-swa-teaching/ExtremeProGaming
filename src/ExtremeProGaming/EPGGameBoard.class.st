@@ -66,18 +66,20 @@ EPGGameBoard >> areaGap [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 5/29/2024 22:50'
+	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:15'
 }
 EPGGameBoard >> backendDebtArea [
-	^ backendDebtArea
+
+	^ backendDebtArea.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 5/29/2024 22:50'
+	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:16'
 }
-EPGGameBoard >> backendDebtArea: anObject [
-	backendDebtArea := anObject
+EPGGameBoard >> backendDebtArea: aDebtArea [
+
+	backendDebtArea := aDebtArea.
 ]
 
 {
@@ -161,12 +163,14 @@ EPGGameBoard >> frontendDebtArea: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/30/2024 21:28'
+	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:15'
 }
 EPGGameBoard >> initialize [
+
 	super initialize.
 	
-	self extent: self class boardExtent; 
+	self
+		extent: self class boardExtent; 
 		color: Color gray;
 		initializeSectionMorphs;
 		initializeStorypointAreas;

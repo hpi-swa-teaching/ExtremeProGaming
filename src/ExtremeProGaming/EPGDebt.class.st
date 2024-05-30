@@ -2,19 +2,19 @@ Class {
 	#name : #EPGDebt,
 	#superclass : #EPGDnDArea,
 	#instVars : [
-		'timeToLife'
+		'timeToLive'
 	],
 	#category : #ExtremeProGaming
 }
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/30/2024 21:10'
+	#'squeak_changestamp' : 'jmetrikat 5/30/2024 21:52'
 }
 EPGDebt >> checkIfProcessed [
 
 	(self dropped size == 1) ifTrue: [self abandon].
-	(self dropped size > 1) ifTrue: [self error: 'To many Storypoints on one Technical Debt'].
+	(self dropped size > 1) ifTrue: [self error: 'Too many Storypoints on one Technical Debt'].
 ]
 
 {
