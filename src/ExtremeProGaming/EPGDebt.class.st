@@ -70,16 +70,6 @@ EPGDebt >> mouseEnterDragging: evt [
 
 {
 	#category : #typesetting,
-	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:37'
-}
-EPGDebt >> setCommonType: aType [
-
-	
-
-]
-
-{
-	#category : #typesetting,
 	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:41'
 }
 EPGDebt >> setType: aType [
