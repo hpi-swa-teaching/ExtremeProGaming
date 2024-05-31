@@ -18,11 +18,12 @@ EPGStorypointArea >> addAcceptanceToDroppedMorphs [
 
 {
 	#category : #features,
-	#'squeak_changestamp' : 'HCH 5/29/2024 00:43'
+	#'squeak_changestamp' : 'jmetrikat 5/29/2024 23:16'
 }
 EPGStorypointArea >> addStorypoints: aNumber [
 
-	aNumber timesRepeat: [|newStorypoint|
+	| newStorypoint |
+	aNumber timesRepeat: [
 		newStorypoint := EPGStorypoint new.
 		self dropInMorph: newStorypoint]
 ]
@@ -42,15 +43,13 @@ EPGStorypointArea >> dropInMorph: aMorph [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'HCH 5/29/2024 00:51'
+	#'squeak_changestamp' : 'JP 5/29/2024 21:54'
 }
 EPGStorypointArea >> initialize [
 
 	super initialize.
 	
 	self
-		draggable: false;
-		highlightColor: Color green;
 		extent: 150 @ 200;
 		initializeVisibleArea.
 		
