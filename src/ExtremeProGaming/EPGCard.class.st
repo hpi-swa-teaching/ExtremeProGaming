@@ -15,11 +15,31 @@ Class {
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'HCH 5/29/2024 20:28'
+	#'squeak_changestamp' : 'HCH 5/30/2024 14:02'
 }
 EPGCard class >> headerFont [
 
- 	^ TextFontReference  toFont: (StrikeFont familyName: 'DejaVu' size: 42).
+ 	^ TextFontReference  toFont: (StrikeFont familyName: 'DejaVu' size: 30).
+
+	
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'HCH 5/30/2024 13:55'
+}
+EPGCard class >> headerSymbol [
+
+	^ Morph new extent: 20@20; color: Color yellow.
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'HCH 5/31/2024 12:14'
+}
+EPGCard class >> taskFont [
+
+ 	^ TextFontReference  toFont: (StrikeFont familyName: 'DejaVu' size: 20).
 
 	
 ]
@@ -88,14 +108,23 @@ EPGCard >> body: aMorph [
 ]
 
 {
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 5/31/2024 12:04'
+}
+EPGCard >> bodyOrigin [
+
+	^ self colorBar bounds origin + (0 @ self colorBar height).
+]
+
+{
 	#category : #body,
-	#'squeak_changestamp' : 'HCH 5/29/2024 20:55'
+	#'squeak_changestamp' : 'HCH 5/31/2024 12:04'
 }
 EPGCard >> changeBody: aMorph [
 
 	self body ifNotNil: [self removeMorph: self body].
 	self body: aMorph.
-	aMorph position: self subColorBarOrigin.
+	aMorph position: self bodyOrigin.
 	self addMorph: self body.
 ]
 
@@ -147,6 +176,32 @@ EPGCard >> colorBarSelector: aSelector [
 ]
 
 {
+	#category : #body,
+	#'squeak_changestamp' : 'HCH 5/31/2024 12:31'
+}
+EPGCard >> consequence: aText [
+
+	| textMorph |
+	textMorph := self formatTask: aText.
+	self backBody addMorph: textMorph.
+]
+
+{
+	#category : #body,
+	#'squeak_changestamp' : 'HCH 5/31/2024 12:29'
+}
+EPGCard >> effect: aText [
+
+	| textMorph |
+	textMorph := self formatTask: aText.
+	textMorph position: 
+		self bounds origin 
+		+ (0@(self height - textMorph height - 10)) 
+		- self bodyOrigin.
+	self backBody addMorph: textMorph.
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 5/29/2024 20:46'
 }
@@ -166,7 +221,7 @@ EPGCard >> facing: aSelector [
 
 {
 	#category : #header,
-	#'squeak_changestamp' : 'HCH 5/29/2024 20:27'
+	#'squeak_changestamp' : 'HCH 5/31/2024 11:31'
 }
 EPGCard >> formatAsTextMorph: aText [
 
@@ -175,10 +230,27 @@ EPGCard >> formatAsTextMorph: aText [
 	^ TextMorph new
 		contents: formattedText;
 		vResizing: #rigid;
-		hResizing: #rigid;
-		centered;
+		hResizing: #shrinkWrap;
 		width: self extent x;
 		height: 50;
+		yourself.
+]
+
+{
+	#category : #body,
+	#'squeak_changestamp' : 'HCH 5/31/2024 12:21'
+}
+EPGCard >> formatTask: aText [
+
+	| formattedText |
+	formattedText := (aText asText addAttribute: self class taskFont) addAttribute: TextEmphasis italic.
+	^ TextMorph new
+		contents: formattedText;
+		hResizing: #rigid;
+		vResizing: #shrinkWrap;
+		width: self width;
+		margins: 10@10;
+		lock;
 		yourself.
 ]
 
@@ -220,7 +292,29 @@ EPGCard >> header: aMorph [
 
 {
 	#category : #header,
-	#'squeak_changestamp' : 'HCH 5/29/2024 20:33'
+	#'squeak_changestamp' : 'HCH 5/30/2024 14:01'
+}
+EPGCard >> headerSymbol: aMorph [
+
+	self header addMorph: (aMorph center: self headerSymbolPosition).
+
+	
+]
+
+{
+	#category : #header,
+	#'squeak_changestamp' : 'HCH 5/30/2024 14:01'
+}
+EPGCard >> headerSymbolPosition [
+
+	^ self header center + (30 @ 0).
+
+	
+]
+
+{
+	#category : #header,
+	#'squeak_changestamp' : 'HCH 5/31/2024 11:32'
 }
 EPGCard >> headerText: aText [
 	
@@ -233,25 +327,28 @@ EPGCard >> headerText: aText [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'HCH 5/29/2024 20:59'
+	#'squeak_changestamp' : 'HCH 5/31/2024 12:30'
 }
 EPGCard >> initialize [
 
 	super initialize.
 	self 
 		color: Color white;
-		extent: 250 @ 417;
+		extent: 270 @ 405;
 		initializeHeader: 'Dummy';
 		colorBar: Color green withLayout: #full;
-		frontBody: (Morph new color: Color blue);
-		backBody: (Morph new color: Color green);
+		frontBody: (Morph new color: Color transparent);
+		backBody: (Morph new color: Color transparent);
+		task: 'Rewrite in Rust';
+		consequence: 'Two of your team members commited suicide beacuase they had to work with COBOL.';
+		effect: 'You permanently have 6 Storypoints less';
 		changeBody: frontBody;
 		facing: #front.
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'HCH 5/29/2024 20:34'
+	#'squeak_changestamp' : 'HCH 5/30/2024 14:01'
 }
 EPGCard >> initializeHeader: aText [
 
@@ -263,16 +360,8 @@ EPGCard >> initializeHeader: aText [
 	self
 		addMorph: header;
 	 	header: header;
-	 	headerText: aText.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 5/29/2024 20:50'
-}
-EPGCard >> subColorBarOrigin [
-
-	^ self colorBar bounds origin + (0 @ self colorBar height).
+	 	headerText: aText;
+		headerSymbol: self class headerSymbol.
 ]
 
 {
@@ -282,6 +371,21 @@ EPGCard >> subColorBarOrigin [
 EPGCard >> subHeaderOrigin [
 
 	^ self header bounds origin + (0 @ self header height).
+]
+
+{
+	#category : #body,
+	#'squeak_changestamp' : 'HCH 5/31/2024 12:29'
+}
+EPGCard >> task: aText [
+
+	| textMorph |
+	textMorph := self formatTask: aText.
+	textMorph position: 
+		self bounds origin 
+		+ (0@(self height - textMorph height - 10)) 
+		- self bodyOrigin.
+	self frontBody addMorph: textMorph.
 ]
 
 {

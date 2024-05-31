@@ -12,6 +12,15 @@ Class {
 
 {
 	#category : #constants,
+	#'squeak_changestamp' : 'HCH 5/30/2024 13:33'
+}
+EPGCostDisplay class >> backendColor [
+
+	^ Color magenta.
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'HCH 5/29/2024 22:52'
 }
 EPGCostDisplay class >> font [
@@ -21,7 +30,42 @@ EPGCostDisplay class >> font [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'HCH 5/29/2024 22:04'
+	#'squeak_changestamp' : 'HCH 5/30/2024 13:33'
+}
+EPGCostDisplay class >> frontendColor [
+
+	^ Color red.
+]
+
+{
+	#category : #'instance creation',
+	#'squeak_changestamp' : 'HCH 5/30/2024 13:42'
+}
+EPGCostDisplay class >> newBackendWithCost: aCost perTechnicalDebt: aNumber [
+
+	^ self basicNew
+		beBackend;
+		cost: aCost;
+		perTechnicalDebt: aNumber;
+		initialize.
+]
+
+{
+	#category : #'instance creation',
+	#'squeak_changestamp' : 'HCH 5/30/2024 13:42'
+}
+EPGCostDisplay class >> newFrontendWithCost: aCost perTechnicalDebt: aNumber [
+
+	^ self basicNew
+		beFrontend;
+		cost: aCost;
+		perTechnicalDebt: aNumber;
+		initialize.
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'HCH 5/30/2024 13:39'
 }
 EPGCostDisplay class >> positionOffsets [
 
@@ -34,6 +78,15 @@ EPGCostDisplay class >> positionOffsets [
 		5 -> {-25@ -25 . 25@ -25 . -25@25 . 25@25 . 0@0}.
 		6 -> {-25@ -25 . -25@0 . -25@25 . 25@ -25 . 25@0 . 25@25}
 	}
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'HCH 5/30/2024 13:45'
+}
+EPGCostDisplay class >> storypoint [
+
+	^ Morph new extent: 15@15; color: Color green.
 ]
 
 {
@@ -82,6 +135,68 @@ EPGCostDisplay >> debtCenter [
 ]
 
 {
+	#category : #display,
+	#'squeak_changestamp' : 'HCH 5/30/2024 13:31'
+}
+EPGCostDisplay >> display [
+
+	self displayStorypoints.
+	self perTechnicalDebt > 0
+		ifTrue: [self 
+					displayPlus;
+					displayPerTechnicalDebt].
+	^ self.
+]
+
+{
+	#category : #display,
+	#'squeak_changestamp' : 'HCH 5/30/2024 13:34'
+}
+EPGCostDisplay >> displayPerTechnicalDebt [
+
+	| storypointOffset debtOffset  debtColor |
+	storypointOffset := -20@ -20.
+	debtOffset  := 20@20.
+	self isFrontend 
+		ifTrue: [debtColor := self class frontendColor]
+		ifFalse: [debtColor := self class backendColor].
+	self addMorph: (self formatTechnicalDebtCost center: (self debtCenter + storypointOffset)).
+	self addMorph: ((self slash: self height / 5) center: self debtCenter).
+	self addMorph: (Morph new 
+						extent: 20@20; 
+						color: debtColor; 
+						center: self debtCenter + debtOffset).
+	
+]
+
+{
+	#category : #display,
+	#'squeak_changestamp' : 'HCH 5/30/2024 13:21'
+}
+EPGCostDisplay >> displayPlus [
+
+	self addMorph: ((self plus: self height / 6) center: self center)
+	
+	
+	
+]
+
+{
+	#category : #display,
+	#'squeak_changestamp' : 'HCH 5/30/2024 13:14'
+}
+EPGCostDisplay >> displayStorypoints [
+
+	| offsets |
+	offsets := self positionOffsetsFor: self cost.
+	offsets do: [:offset | self addMorph: 
+					(self storypoint shallowCopy center: self nonDebtCenter + offset)].
+	
+	
+	
+]
+
+{
 	#category : #symbols,
 	#'squeak_changestamp' : 'HCH 5/29/2024 22:58'
 }
@@ -121,16 +236,19 @@ EPGCostDisplay >> frontend: aBoolean [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'HCH 5/29/2024 22:08'
+	#'squeak_changestamp' : 'HCH 5/31/2024 11:40'
 }
 EPGCostDisplay >> initialize [
 
 	super initialize.
 	
 	self 
-		perTechnicalDebt: 2;
-		extent: 300 @ 100;
-		storypoint: (Morph new extent: 15@15; color: Color green; yourself).
+		extent: 250 @ 100;
+		color: Color white;
+		borderWidth: 5;
+		borderColor: Color gray;
+		storypoint: self class storypoint;
+		display.
 ]
 
 {
@@ -209,21 +327,6 @@ EPGCostDisplay >> positionOffsetsFor: aNumber [
 	(1 <= aNumber and: [aNumber <= 6]) 
 		ifFalse: [self error: 'Number of Storypoints cannot be outside [1,6]'].
 	^ self class positionOffsets at: aNumber.
-	
-	
-	
-]
-
-{
-	#category : #positioning,
-	#'squeak_changestamp' : 'HCH 5/29/2024 22:18'
-}
-EPGCostDisplay >> positionStorypoints [
-
-	| offsets |
-	offsets := self positionOffsetsFor: self cost.
-	offsets do: [:offset | self addMorph: 
-					(self storypoint shallowCopy center: self nonDebtCenter + offset)].
 	
 	
 	
