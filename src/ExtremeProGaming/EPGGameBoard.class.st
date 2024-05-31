@@ -221,21 +221,19 @@ EPGGameBoard >> initialize [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/31/2024 14:12'
+	#'squeak_changestamp' : 'jmetrikat 5/31/2024 15:54'
 }
 EPGGameBoard >> initializeBacklogAreas [
 
-	| areas |
-	
+	| areas area point |
 	1 to: 3 do:  [:a | 
 		areas := OrderedCollection new.
 		3 timesRepeat: [areas add: EPGBacklogArea new].
-		1 to: 3 do: [:b | 
-			| area point |
+		1 to: 3 do: [:b |
 			area := areas at: b.
 			point :=  self backlogArea position x  + ((b - 1) * area extent x) + (b * self class areaGap) + self class backlogAreaXOffset @ (self class yOffset + ((a - 1) * self class areaGap) + ((a - 1) * area extent y)) .
 			area position: self planningArea position + point.
-			area image: (ImageMorph new image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: ('/assets/BacklogAreas/BacklogArea',a,b,'.png')) scaledToSize: 200 @ 250)).
+			area image: (ImageMorph new image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: ('/assets/BacklogAreas/BacklogArea', a, b, '.png')) scaledToSize: 200 @ 250)).
 			area addMorph: area image.
 			area image center: area center.
 			self addMorph: area]].

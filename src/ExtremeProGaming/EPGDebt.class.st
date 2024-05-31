@@ -70,7 +70,7 @@ EPGDebt >> mouseEnterDragging: evt [
 
 {
 	#category : #typesetting,
-	#'squeak_changestamp' : 'JP 5/31/2024 14:09'
+	#'squeak_changestamp' : 'jmetrikat 5/31/2024 15:50'
 }
 EPGDebt >> setType: aType [
 
