@@ -65,18 +65,18 @@ EPGStorypoint >> initialize [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:56'
+	#'squeak_changestamp' : 'JP 5/31/2024 14:01'
 }
 EPGStorypoint >> initializeImageBag [
 
 	self imageBag: OrderedCollection new.
 	self imageBag
-		add: '/assets/Storypoint_DarkOrange.png';
-		add: '/assets/Storypoint_Orange.png';
-		add: '/assets/Storypoint_Yellow.png';
-		add: '/assets/Storypoint_Red.png';
-		add: '/assets/Storypoint_White.png';
-		add: '/assets/Storypoint_Green.png'.
+		add: '/assets/Storypoints/Storypoint_DarkOrange.png';
+		add: '/assets/Storypoints/Storypoint_Orange.png';
+		add: '/assets/Storypoints/Storypoint_Yellow.png';
+		add: '/assets/Storypoints/Storypoint_Red.png';
+		add: '/assets/Storypoints/Storypoint_White.png';
+		add: '/assets/Storypoints/Storypoint_Green.png'.
 		
 ]
 

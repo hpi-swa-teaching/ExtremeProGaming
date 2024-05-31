@@ -20,7 +20,7 @@ EPGPlanningArea >> initialize [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/29/2024 21:56'
+	#'squeak_changestamp' : 'JP 5/31/2024 13:57'
 }
 EPGPlanningArea >> initializeCardStack [
 
