@@ -70,7 +70,7 @@ EPGDebt >> mouseEnterDragging: evt [
 
 {
 	#category : #typesetting,
-	#'squeak_changestamp' : 'jmetrikat 5/30/2024 23:02'
+	#'squeak_changestamp' : 'JP 5/31/2024 14:09'
 }
 EPGDebt >> setType: aType [
 
@@ -83,7 +83,7 @@ EPGDebt >> setType: aType [
 		ifFalse: ['/assets/TechnicalDebt_Backend.png'].
 
 	self
-		image: (ImageMorph new image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: path) scaledToSize: 75 @ 75));
+		image: (ImageMorph new image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: path) scaledToSize: (self backgroundExtent - self backgroundMargin)));
 		addMorph: self image.
 
 	self image center: self center.

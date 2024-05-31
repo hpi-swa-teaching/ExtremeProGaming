@@ -252,7 +252,7 @@ EPGDnDArea >> highlightColor: aColor [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/29/2024 21:48'
+	#'squeak_changestamp' : 'JP 5/31/2024 14:10'
 }
 EPGDnDArea >> initialize [
 
@@ -267,7 +267,7 @@ EPGDnDArea >> initialize [
 		dropped: OrderedCollection new;
 		accepts: #();
 		extent: 200 @ 250;
-		backgroundMargin: 25@25.
+		backgroundMargin: 15 @ 15.
 
 ]
 

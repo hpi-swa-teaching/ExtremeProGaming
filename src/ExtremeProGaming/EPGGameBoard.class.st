@@ -221,7 +221,7 @@ EPGGameBoard >> initialize [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/31/2024 14:01'
+	#'squeak_changestamp' : 'JP 5/31/2024 14:12'
 }
 EPGGameBoard >> initializeBacklogAreas [
 
