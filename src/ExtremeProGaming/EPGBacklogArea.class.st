@@ -9,18 +9,20 @@ Class {
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 5/31/2024 12:32'
+	#'squeak_changestamp' : 'JP 5/31/2024 14:37'
 }
 EPGBacklogArea >> image [
-	^ image
+
+	^ image.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 5/31/2024 12:32'
+	#'squeak_changestamp' : 'JP 5/31/2024 14:37'
 }
-EPGBacklogArea >> image: anObject [
-	image := anObject
+EPGBacklogArea >> image: anImage [
+
+	image := anImage.
 ]
 
 {
