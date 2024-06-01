@@ -284,7 +284,7 @@ EPGGameBoard >> initializeDoneAreas [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:55'
+	#'squeak_changestamp' : 'JP 6/1/2024 11:08'
 }
 EPGGameBoard >> initializePlanningAreas [
 
@@ -295,6 +295,9 @@ EPGGameBoard >> initializePlanningAreas [
 		area := areas at: a.
 		point :=  self planningArea center x - (area extent x / 2) @ (self class yOffset + ((a - 1) * self class areaGap) + ((a - 1) * area extent y)).
 		area position: self planningArea position + point.
+		area image: (ImageMorph new image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: ('/assets/PlanningAreas/PlanningArea', a,'.png')) scaledToSize: 200 @ 250)).
+		area addMorph: area image.
+		area image center: area center.
 		self addMorph: area].
 ]
 
