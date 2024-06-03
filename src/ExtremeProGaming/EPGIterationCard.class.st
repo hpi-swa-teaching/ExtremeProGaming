@@ -5,6 +5,19 @@ Class {
 }
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'HCH 6/3/2024 16:30'
+}
+EPGIterationCard class >> headerSymbol [
+
+	^ ImageMorph new
+		image:
+			(((GitAssetLoader for: 'ExtremeProGaming')
+			loadAsset: '/assets/Event.png')
+			scaledToSize: 30@30).
+]
+
+{
 	#category : #initialization,
 	#'squeak_changestamp' : 'jmetrikat 5/29/2024 23:13'
 }

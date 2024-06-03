@@ -40,7 +40,21 @@
 	SquotImageMapper {
 		#path : FSAbsolutePath [
 			'assets',
+			'Bug.png'
+		],
+		#encoding : @4
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
 			'TechnicalDebt_Frontend.png'
+		],
+		#encoding : @4
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'Event.png'
 		],
 		#encoding : @4
 	},
@@ -49,6 +63,13 @@
 			'assets',
 			'Storypoints',
 			'Storypoint_Green.png'
+		],
+		#encoding : @4
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'Feature.png'
 		],
 		#encoding : @4
 	},
