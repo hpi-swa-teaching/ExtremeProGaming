@@ -19,6 +19,24 @@ Class {
 
 {
 	#category : #constants,
+	#'squeak_changestamp' : 'HCH 6/3/2024 16:59'
+}
+EPGCard class >> backendColor [
+
+	^ Color fromString: '#5f4dfa'.
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'HCH 6/3/2024 17:29'
+}
+EPGCard class >> frontendColor [
+
+	^ Color fromString: '#fc5d5d'.
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'HCH 5/30/2024 14:02'
 }
 EPGCard class >> headerFont [
@@ -111,6 +129,24 @@ EPGCard >> beFrontend [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/3/2024 17:03'
+}
+EPGCard >> beNegative [
+
+	self effectSelector: #negative.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/3/2024 17:03'
+}
+EPGCard >> bePositive [
+
+	self effectSelector: #positive.
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 5/29/2024 20:57'
 }
 EPGCard >> body [
@@ -130,12 +166,12 @@ EPGCard >> body: aMorph [
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/3/2024 10:27'
+	#category : #body,
+	#'squeak_changestamp' : 'HCH 6/3/2024 16:53'
 }
 EPGCard >> bodyOrigin [
 
-	^ (0 @ (self colorBar height + self header height)).
+	^ self bounds origin + (0 @ (self colorBar height + self header height)).
 ]
 
 {
@@ -228,6 +264,18 @@ EPGCard >> cost: aNumber [
 
 {
 	#category : #body,
+	#'squeak_changestamp' : 'HCH 6/3/2024 17:02'
+}
+EPGCard >> cost: aCost perTechnicalDebt: aNumber [
+
+	self 
+		cost: aCost;
+		perTechnicalDebt: aNumber;
+		displayCost.
+]
+
+{
+	#category : #body,
 	#'squeak_changestamp' : 'HCH 6/3/2024 09:57'
 }
 EPGCard >> displayCost [
@@ -267,7 +315,7 @@ EPGCard >> effect [
 
 {
 	#category : #body,
-	#'squeak_changestamp' : 'HCH 6/3/2024 16:24'
+	#'squeak_changestamp' : 'HCH 6/3/2024 16:46'
 }
 EPGCard >> effect: aText [
 
@@ -439,7 +487,7 @@ EPGCard >> headerText: aText [
 ]
 
 {
-	#category : #accessing,
+	#category : #header,
 	#'squeak_changestamp' : 'HCH 6/3/2024 16:33'
 }
 EPGCard >> headerTextCenter [
@@ -449,12 +497,18 @@ EPGCard >> headerTextCenter [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'HCH 6/3/2024 10:21'
+	#'squeak_changestamp' : 'HCH 6/3/2024 16:42'
 }
 EPGCard >> initialize [
 
 	super initialize.
 	
+	self
+		color: Color white;
+		extent: 270 @ 405;
+		frontBody: (Morph new color: Color transparent);
+		backBody: (Morph new color: Color transparent);
+		facing: #front.
 ]
 
 {
@@ -512,7 +566,7 @@ EPGCard >> perTechnicalDebt: aNumber [
 ]
 
 {
-	#category : #accessing,
+	#category : #header,
 	#'squeak_changestamp' : 'HCH 5/27/2024 20:29'
 }
 EPGCard >> subHeaderOrigin [

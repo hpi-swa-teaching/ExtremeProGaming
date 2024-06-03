@@ -18,7 +18,57 @@ EPGBugCard class >> headerSymbol [
 ]
 
 {
-	#category : #accessing,
+	#category : #'instance creation',
+	#'squeak_changestamp' : 'HCH 6/3/2024 17:08'
+}
+EPGBugCard class >> newBackendWithTask: aTask consequence: aConsequence effect: anEffect cost: aCost perTechnicalDebt: aNumber positive: aBoolean [
+	
+	| instance |
+	instance := self new
+					beBackend;
+					initializeHeader: 'Bug';
+					colorBar: self backendColor withLayout: #right;
+					task: aTask;
+					consequence: aConsequence;
+					effect: anEffect;
+					cost: aCost perTechnicalDebt: aNumber.
+	aBoolean 
+		ifTrue: [instance bePositive]
+		ifFalse: [instance beNegative].
+	instance 
+		displayEffect;
+		changeBody: instance frontBody.
+	^ instance.
+	
+]
+
+{
+	#category : #'instance creation',
+	#'squeak_changestamp' : 'HCH 6/3/2024 17:29'
+}
+EPGBugCard class >> newFrontendWithTask: aTask consequence: aConsequence effect: anEffect cost: aCost perTechnicalDebt: aNumber positive: aBoolean [
+	
+	| instance |
+	instance := self new
+					beFrontend;
+					initializeHeader: 'Bug';
+					colorBar: self frontendColor withLayout: #left;
+					task: aTask;
+					consequence: aConsequence;
+					effect: anEffect;
+					cost: aCost perTechnicalDebt: aNumber.
+	aBoolean 
+		ifTrue: [instance bePositive]
+		ifFalse: [instance beNegative].
+	instance 
+		displayEffect;
+		changeBody: instance frontBody.
+	^ instance.
+	
+]
+
+{
+	#category : #header,
 	#'squeak_changestamp' : 'HCH 6/3/2024 16:36'
 }
 EPGBugCard >> headerSymbolCenter [
@@ -27,7 +77,7 @@ EPGBugCard >> headerSymbolCenter [
 ]
 
 {
-	#category : #accessing,
+	#category : #header,
 	#'squeak_changestamp' : 'HCH 6/3/2024 16:33'
 }
 EPGBugCard >> headerTextCenter [
@@ -37,29 +87,9 @@ EPGBugCard >> headerTextCenter [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'HCH 6/3/2024 16:25'
+	#'squeak_changestamp' : 'HCH 6/3/2024 17:31'
 }
 EPGBugCard >> initialize [
 
 	super initialize.
-
-	super initialize.
-	self 
-		color: Color white;
-		extent: 270 @ 405;
-		initializeHeader: 'Bug';
-		colorBar: (Color fromString: '#5f4dfa') withLayout: #right;
-		frontBody: (Morph new color: Color transparent);
-		backBody: (Morph new color: Color transparent);
-		task: 'Rewrite in Rust';
-		consequence: 'Two of your team members commited suicide beacuase they had to work with COBOL.';
-		effect: 'You permanently have 6 Storypoints less.';
-		cost: 6;
-		perTechnicalDebt: 2;
-		beBackend;
-		displayCost;
-		effectSelector: #negative;
-		displayEffect;
-		changeBody: frontBody;
-		facing: #front.
 ]

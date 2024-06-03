@@ -18,16 +18,66 @@ EPGFeatureCard class >> headerSymbol [
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/3/2024 16:37'
+	#category : #'instance creation',
+	#'squeak_changestamp' : 'HCH 6/3/2024 17:30'
 }
-EPGFeatureCard >> headerSymbolCenter [
-
-	^ self header center + (50@0).
+EPGFeatureCard class >> newBackendWithTask: aTask consequence: aConsequence effect: anEffect cost: aCost perTechnicalDebt: aNumber positive: aBoolean [
+	
+	| instance |
+	instance := self new
+					beBackend;
+					initializeHeader: 'Feature';
+					colorBar: self backendColor withLayout: #right;
+					task: aTask;
+					consequence: aConsequence;
+					effect: anEffect;
+					cost: aCost perTechnicalDebt: aNumber.
+	aBoolean 
+		ifTrue: [instance bePositive]
+		ifFalse: [instance beNegative].
+	instance 
+		displayEffect;
+		changeBody: instance frontBody.
+	^ instance.
+	
 ]
 
 {
-	#category : #accessing,
+	#category : #'instance creation',
+	#'squeak_changestamp' : 'HCH 6/3/2024 17:30'
+}
+EPGFeatureCard class >> newFrontendWithTask: aTask consequence: aConsequence effect: anEffect cost: aCost perTechnicalDebt: aNumber positive: aBoolean [
+	
+	| instance |
+	instance := self new
+					beFrontend;
+					initializeHeader: 'Feature';
+					colorBar: self frontendColor withLayout: #left;
+					task: aTask;
+					consequence: aConsequence;
+					effect: anEffect;
+					cost: aCost perTechnicalDebt: aNumber.
+	aBoolean 
+		ifTrue: [instance bePositive]
+		ifFalse: [instance beNegative].
+	instance 
+		displayEffect;
+		changeBody: instance frontBody.
+	^ instance.
+	
+]
+
+{
+	#category : #header,
+	#'squeak_changestamp' : 'HCH 6/3/2024 16:38'
+}
+EPGFeatureCard >> headerSymbolCenter [
+
+	^ self header center + (50 @ 0).
+]
+
+{
+	#category : #header,
 	#'squeak_changestamp' : 'HCH 6/3/2024 16:37'
 }
 EPGFeatureCard >> headerTextCenter [
@@ -37,27 +87,9 @@ EPGFeatureCard >> headerTextCenter [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'HCH 6/3/2024 16:25'
+	#'squeak_changestamp' : 'HCH 6/3/2024 17:31'
 }
 EPGFeatureCard >> initialize [
 
 	super initialize.
-	self 
-		color: Color white;
-		extent: 270 @ 405;
-		initializeHeader: 'Feature';
-		colorBar: (Color fromString: '#fc5d5d') withLayout: #left;
-		frontBody: (Morph new color: Color transparent);
-		backBody: (Morph new color: Color transparent);
-		task: 'Make Design responsive';
-		consequence: 'Your Developers had a fist fight with the Designer over unreasonable layouting choices.';
-		effect: 'You have to visit him in the hospital and have 2 story points less for the next Iteration.';
-		cost: 2;
-		perTechnicalDebt: 1;
-		beFrontend;
-		displayCost;
-		effectSelector: #negative;
-		displayEffect;
-		changeBody: frontBody;
-		facing: #front.
 ]
