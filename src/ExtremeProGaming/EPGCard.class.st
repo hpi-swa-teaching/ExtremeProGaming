@@ -8,7 +8,11 @@ Class {
 		'backBody',
 		'header',
 		'colorBar',
-		'colorBarSelector'
+		'colorBarSelector',
+		'cost',
+		'perTechnicalDebt',
+		'frontend',
+		'effect'
 	],
 	#category : #ExtremeProGaming
 }
@@ -85,6 +89,24 @@ EPGCard >> backBody [
 EPGCard >> backBody: aMorph [
 
 	backBody := aMorph.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/3/2024 09:54'
+}
+EPGCard >> beBackend [
+
+	self frontend: false.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/3/2024 09:54'
+}
+EPGCard >> beFrontend [
+
+	self frontend: true.
 ]
 
 {
@@ -187,18 +209,69 @@ EPGCard >> consequence: aText [
 ]
 
 {
-	#category : #body,
-	#'squeak_changestamp' : 'HCH 5/31/2024 12:29'
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/3/2024 09:49'
 }
-EPGCard >> effect: aText [
+EPGCard >> cost [
 
-	| textMorph |
-	textMorph := self formatTask: aText.
-	textMorph position: 
-		self bounds origin 
-		+ (0@(self height - textMorph height - 10)) 
-		- self bodyOrigin.
-	self backBody addMorph: textMorph.
+	^ cost.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/3/2024 09:49'
+}
+EPGCard >> cost: aNumber [
+
+	cost :=  aNumber.
+]
+
+{
+	#category : #body,
+	#'squeak_changestamp' : 'HCH 6/3/2024 09:57'
+}
+EPGCard >> displayCost [
+
+	| display |
+	self isFrontend
+		ifTrue: [display := EPGCostDisplay newFrontendWithCost: self cost perTechnicalDebt: self perTechnicalDebt]
+		ifFalse: [display := EPGCostDisplay newBackendWithCost: self cost perTechnicalDebt: self perTechnicalDebt].
+	display center: ((self width / 2)@30 )+ self subHeaderOrigin.
+	self frontBody addMorph: display.
+]
+
+{
+	#category : #body,
+	#'squeak_changestamp' : 'HCH 6/3/2024 10:04'
+}
+EPGCard >> displayEffect [
+
+	| arrow |
+	arrow := ImageMorph new.
+	self effect = #positive
+		ifTrue: [arrow image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: '/assets/ArrowUp.png') scaledToSize: 60@60)].
+	self effect = #negative
+		ifTrue: [arrow image:( ((GitAssetLoader for: 'ExtremeProGaming') loadAsset: '/assets/ArrowDown.png') scaledToSize: 60@60)].
+	arrow center: self bodyOrigin + (self width / 2@110).
+	self frontBody addMorph: arrow.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/3/2024 09:59'
+}
+EPGCard >> effect [
+
+	^ effect
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/3/2024 09:59'
+}
+EPGCard >> effect: aSelector [
+
+	effect := aSelector.
 ]
 
 {
@@ -274,6 +347,24 @@ EPGCard >> frontBody: aMorph [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/3/2024 09:53'
+}
+EPGCard >> frontend [
+
+	^ frontend.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/3/2024 09:53'
+}
+EPGCard >> frontend: aBoolean [
+
+	frontend := aBoolean.
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 5/27/2024 20:30'
 }
 EPGCard >> header [
@@ -327,7 +418,7 @@ EPGCard >> headerText: aText [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'HCH 5/31/2024 12:30'
+	#'squeak_changestamp' : 'HCH 6/3/2024 09:59'
 }
 EPGCard >> initialize [
 
@@ -342,6 +433,12 @@ EPGCard >> initialize [
 		task: 'Rewrite in Rust';
 		consequence: 'Two of your team members commited suicide beacuase they had to work with COBOL.';
 		effect: 'You permanently have 6 Storypoints less';
+		cost: 3;
+		perTechnicalDebt: 1;
+		beFrontend;
+		displayCost;
+		effect: #negative;
+		displayEffect;
 		changeBody: frontBody;
 		facing: #front.
 ]
@@ -362,6 +459,42 @@ EPGCard >> initializeHeader: aText [
 	 	header: header;
 	 	headerText: aText;
 		headerSymbol: self class headerSymbol.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/3/2024 09:54'
+}
+EPGCard >> isBackend [
+
+	^ self frontend not.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/3/2024 09:54'
+}
+EPGCard >> isFrontend [
+
+	^ self frontend.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/3/2024 09:49'
+}
+EPGCard >> perTechnicalDebt [
+
+	^ perTechnicalDebt.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/3/2024 09:49'
+}
+EPGCard >> perTechnicalDebt: aNumber [
+
+	perTechnicalDebt :=  aNumber.
 ]
 
 {

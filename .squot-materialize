@@ -9,6 +9,13 @@
 	SquotImageMapper {
 		#path : FSAbsolutePath [
 			'assets',
+			'ArrowUp.png'
+		],
+		#encoding : @4
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
 			'TechnicalDebt_Backend.png'
 		],
 		#encoding : @4
@@ -55,6 +62,13 @@
 		#path : FSAbsolutePath [
 			'src'
 		]
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'ArrowDown.png'
+		],
+		#encoding : @4
 	},
 	SquotImageMapper {
 		#path : FSAbsolutePath [

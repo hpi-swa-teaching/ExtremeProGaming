@@ -90,6 +90,17 @@ EPGCostDisplay class >> storypoint [
 ]
 
 {
+	#category : #display,
+	#'squeak_changestamp' : 'HCH 6/1/2024 15:11'
+}
+EPGCostDisplay >> backendSymbol [
+
+	^ ImageMorph new image: 
+		(((GitAssetLoader for: 'ExtremeProGaming') 
+		loadAsset: '/assets/TechnicalDebt_Backend.png' ) scaledToSize: 25@25).
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 5/29/2024 21:31'
 }
@@ -150,22 +161,19 @@ EPGCostDisplay >> display [
 
 {
 	#category : #display,
-	#'squeak_changestamp' : 'HCH 5/30/2024 13:34'
+	#'squeak_changestamp' : 'HCH 6/1/2024 15:10'
 }
 EPGCostDisplay >> displayPerTechnicalDebt [
 
-	| storypointOffset debtOffset  debtColor |
+	| storypointOffset debtOffset debtMorph |
 	storypointOffset := -20@ -20.
 	debtOffset  := 20@20.
 	self isFrontend 
-		ifTrue: [debtColor := self class frontendColor]
-		ifFalse: [debtColor := self class backendColor].
+		ifTrue: [debtMorph := self frontendSymbol center: self debtCenter + debtOffset]
+		ifFalse: [debtMorph := self  backendSymbol center: self debtCenter + debtOffset].
 	self addMorph: (self formatTechnicalDebtCost center: (self debtCenter + storypointOffset)).
 	self addMorph: ((self slash: self height / 5) center: self debtCenter).
-	self addMorph: (Morph new 
-						extent: 20@20; 
-						color: debtColor; 
-						center: self debtCenter + debtOffset).
+	self addMorph: debtMorph.
 	
 ]
 
@@ -232,6 +240,17 @@ EPGCostDisplay >> frontend [
 EPGCostDisplay >> frontend: aBoolean [
 
 	frontend := aBoolean.
+]
+
+{
+	#category : #display,
+	#'squeak_changestamp' : 'HCH 6/1/2024 15:11'
+}
+EPGCostDisplay >> frontendSymbol [
+
+	^ ImageMorph new image: 
+		(((GitAssetLoader for: 'ExtremeProGaming') 
+		loadAsset: '/assets/TechnicalDebt_Frontend.png' ) scaledToSize: 25@25).
 ]
 
 {
