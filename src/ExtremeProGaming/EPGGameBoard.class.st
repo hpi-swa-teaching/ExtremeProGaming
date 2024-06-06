@@ -62,6 +62,15 @@ EPGGameBoard class >> boardExtent [
 
 {
 	#category : #constants,
+	#'squeak_changestamp' : 'Philipp 6/6/2024 22:34'
+}
+EPGGameBoard class >> buttonExtent [
+
+	^ 375 @ 100.
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:48'
 }
 EPGGameBoard class >> reviewAreaXOffset [
@@ -202,7 +211,7 @@ EPGGameBoard >> frontendDebtArea: aDebtArea [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:15'
+	#'squeak_changestamp' : 'Philipp 6/6/2024 22:18'
 }
 EPGGameBoard >> initialize [
 
@@ -216,7 +225,8 @@ EPGGameBoard >> initialize [
 		initializePlanningAreas;
 		initializeBacklogAreas;
 		initializeDebtAreas;
-		initializeDoneAreas.
+		initializeDoneAreas;
+		initializeButtons.
 ]
 
 {
@@ -237,6 +247,28 @@ EPGGameBoard >> initializeBacklogAreas [
 			area addMorph: area image.
 			area image center: area center.
 			self addMorph: area]].
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'Philipp 6/6/2024 22:39'
+}
+EPGGameBoard >> initializeButtons [
+
+	| button |
+	
+	button := SimpleButtonMorph new
+			useRoundedCorners;
+			label: 'next round';
+			extent: self class buttonExtent;
+			position:  self reviewArea position + ((self class reviewAreaXOffset +12)  @ (self class yOffset + 12 - self class buttonExtent y - (4 * self class areaGap))); 
+			color: Color gray;
+			target: [self startNewRound];
+			actionSelector: #value;
+			yourself.
+	
+	self addMorph: button.
+	
 ]
 
 {
