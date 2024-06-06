@@ -65,7 +65,7 @@ EPGDnDArea >> accepts: aCollection [
 
 {
 	#category : #'dragging/dropping',
-	#'squeak_changestamp' : 'HCH 5/29/2024 00:22'
+	#'squeak_changestamp' : 'jmetrikat 6/6/2024 22:28'
 }
 EPGDnDArea >> acceptsMorph: aMorph [
 
@@ -357,7 +357,7 @@ EPGDnDArea >> toggleBorder [
 
 {
 	#category : #'dragging/dropping',
-	#'squeak_changestamp' : 'HCH 5/29/2024 01:06'
+	#'squeak_changestamp' : 'jmetrikat 6/6/2024 23:06'
 }
 EPGDnDArea >> wantsDroppedMorph: aMorph event: evt [
 

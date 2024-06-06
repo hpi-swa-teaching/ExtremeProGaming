@@ -87,9 +87,11 @@ EPGFeatureCard >> headerTextCenter [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'HCH 6/3/2024 17:31'
+	#'squeak_changestamp' : 'jmetrikat 6/6/2024 22:48'
 }
 EPGFeatureCard >> initialize [
 
 	super initialize.
+	
+	self setProperty: #EPGFeatureCard toValue: true.
 ]

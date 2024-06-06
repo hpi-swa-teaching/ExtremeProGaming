@@ -19,11 +19,13 @@ EPGIterationCard class >> headerSymbol [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 5/29/2024 23:13'
+	#'squeak_changestamp' : 'jmetrikat 6/6/2024 22:48'
 }
 EPGIterationCard >> initialize [
 
 	super initialize.
 	
-	self colorBar: (Color fromString: '#ffe1a1') withLayout: #full.
+	self
+		colorBar: (Color fromString: '#ffe1a1') withLayout: #full;
+		setProperty: #EPGIterationCard toValue: true.
 ]

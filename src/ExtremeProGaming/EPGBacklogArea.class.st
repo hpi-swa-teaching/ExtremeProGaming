@@ -27,7 +27,7 @@ EPGBacklogArea >> image: anImage [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/31/2024 12:40'
+	#'squeak_changestamp' : 'jmetrikat 6/6/2024 23:07'
 }
 EPGBacklogArea >> initialize [
 
@@ -35,6 +35,7 @@ EPGBacklogArea >> initialize [
 	
 	self
 		extent: 200 @ 250;
+		accepts: #(#EPGBugCard #EPGFeatureCard);
 		initializeVisibleArea.
 		
 	self area color: Color transparent.
