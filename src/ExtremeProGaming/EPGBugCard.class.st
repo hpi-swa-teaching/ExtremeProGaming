@@ -87,9 +87,11 @@ EPGBugCard >> headerTextCenter [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'HCH 6/3/2024 17:31'
+	#'squeak_changestamp' : 'jmetrikat 6/6/2024 22:45'
 }
 EPGBugCard >> initialize [
 
 	super initialize.
+	
+	self setProperty: #EPGBugCard toValue: true.
 ]

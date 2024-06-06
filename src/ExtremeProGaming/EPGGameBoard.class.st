@@ -316,19 +316,24 @@ EPGGameBoard >> initializeDoneAreas [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 6/1/2024 11:08'
+	#'squeak_changestamp' : 'jmetrikat 6/6/2024 23:08'
 }
 EPGGameBoard >> initializePlanningAreas [
 
-	| areas area point |
+	| areas area point acceptedMorphs |
 	areas := OrderedCollection new.
 	3 timesRepeat: [areas add: EPGPlanningArea new].
+	acceptedMorphs := #(#EPGIterationCard #EPGFeatureCard #EPGBugCard).
+	
 	1 to: 3 do:  [:a | 
 		area := areas at: a.
 		point :=  self planningArea center x - (area extent x / 2) @ (self class yOffset + ((a - 1) * self class areaGap) + ((a - 1) * area extent y)).
-		area position: self planningArea position + point.
-		area image: (ImageMorph new image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: ('/assets/PlanningAreas/PlanningArea', a,'.png')) scaledToSize: 200 @ 250)).
-		area addMorph: area image.
+		area
+			position: self planningArea position + point;
+			image: (ImageMorph new image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: ('/assets/PlanningAreas/PlanningArea', a,'.png')) scaledToSize: 200 @ 250));
+	 		addMorph: area image;
+			accepts: (Array with: (acceptedMorphs at: a)).
+			
 		area image center: area center.
 		self addMorph: area].
 ]

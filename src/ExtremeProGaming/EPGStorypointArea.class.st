@@ -30,11 +30,11 @@ EPGStorypointArea >> addStorypoints: aNumber [
 
 {
 	#category : #features,
-	#'squeak_changestamp' : 'JP 5/27/2024 23:50'
+	#'squeak_changestamp' : 'jmetrikat 6/6/2024 22:31'
 }
 EPGStorypointArea >> dropInMorph: aMorph [
-	| range |
 
+	| range |
 	range := self extent  - aMorph extent.
 	self addMorphFront: (aMorph position: self position +  ((0 to: range x ) atRandom @ (0 to: range y) atRandom)).
 	self dropped addFirst: aMorph.
