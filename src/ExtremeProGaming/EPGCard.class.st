@@ -48,11 +48,11 @@ EPGCard class >> headerFont [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'HCH 5/30/2024 13:55'
+	#'squeak_changestamp' : 'HCH 6/6/2024 20:02'
 }
 EPGCard class >> headerSymbol [
 
-	^ Morph new extent: 20@20; color: Color yellow.
+	^ Morph new extent: 20 @ 20; color: Color yellow.
 ]
 
 {
@@ -157,11 +157,11 @@ EPGCard >> body [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 5/29/2024 20:52'
+	#'squeak_changestamp' : 'HCH 6/6/2024 20:02'
 }
 EPGCard >> body: aMorph [
 
-	body := aMorph
+	body := aMorph.
 
 ]
 
@@ -290,38 +290,38 @@ EPGCard >> displayCost [
 
 {
 	#category : #body,
-	#'squeak_changestamp' : 'HCH 6/3/2024 10:04'
+	#'squeak_changestamp' : 'HCH 6/6/2024 20:02'
 }
 EPGCard >> displayEffect [
 
 	| arrow |
 	arrow := ImageMorph new.
 	self effect = #positive
-		ifTrue: [arrow image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: '/assets/ArrowUp.png') scaledToSize: 60@60)].
+		ifTrue: [arrow image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: '/assets/ArrowUp.png') scaledToSize: 60 @ 60)].
 	self effect = #negative
-		ifTrue: [arrow image:( ((GitAssetLoader for: 'ExtremeProGaming') loadAsset: '/assets/ArrowDown.png') scaledToSize: 60@60)].
-	arrow center: self bodyOrigin + (self width / 2@110).
+		ifTrue: [arrow image:( ((GitAssetLoader for: 'ExtremeProGaming') loadAsset: '/assets/ArrowDown.png') scaledToSize: 60 @ 60)].
+	arrow center: self bodyOrigin + (self width / 2 @ 110).
 	self frontBody addMorph: arrow.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/3/2024 09:59'
+	#'squeak_changestamp' : 'HCH 6/6/2024 20:03'
 }
 EPGCard >> effect [
 
-	^ effect
+	^ effect.
 ]
 
 {
 	#category : #body,
-	#'squeak_changestamp' : 'HCH 6/3/2024 16:46'
+	#'squeak_changestamp' : 'HCH 6/6/2024 20:03'
 }
 EPGCard >> effect: aText [
 
 	| textMorph |
 	textMorph := self formatTask: aText.
-	textMorph position:  (0@(self height - textMorph height - self bodyOrigin y)).
+	textMorph position:  (0 @ (self height - textMorph height - self bodyOrigin y)).
 	self backBody addMorph: textMorph.
 ]
 
@@ -381,7 +381,7 @@ EPGCard >> formatAsTextMorph: aText [
 
 {
 	#category : #body,
-	#'squeak_changestamp' : 'HCH 5/31/2024 12:21'
+	#'squeak_changestamp' : 'HCH 6/6/2024 20:03'
 }
 EPGCard >> formatTask: aText [
 
@@ -392,7 +392,7 @@ EPGCard >> formatTask: aText [
 		hResizing: #rigid;
 		vResizing: #shrinkWrap;
 		width: self width;
-		margins: 10@10;
+		margins: 10 @ 10;
 		lock;
 		yourself.
 ]
@@ -513,7 +513,7 @@ EPGCard >> initialize [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'HCH 5/30/2024 14:01'
+	#'squeak_changestamp' : 'HCH 6/6/2024 20:03'
 }
 EPGCard >> initializeHeader: aText [
 
@@ -521,7 +521,7 @@ EPGCard >> initializeHeader: aText [
 	header := Morph new
 		extent: self extent x @ 50;
 		color: Color transparent;
-		position:  0@0.
+		position:  0 @ 0.
 	self
 		addMorph: header;
 	 	header: header;
@@ -576,7 +576,7 @@ EPGCard >> subHeaderOrigin [
 
 {
 	#category : #body,
-	#'squeak_changestamp' : 'HCH 5/31/2024 12:29'
+	#'squeak_changestamp' : 'HCH 6/6/2024 20:03'
 }
 EPGCard >> task: aText [
 
@@ -584,7 +584,7 @@ EPGCard >> task: aText [
 	textMorph := self formatTask: aText.
 	textMorph position: 
 		self bounds origin 
-		+ (0@(self height - textMorph height - 10)) 
+		+ (0 @ (self height - textMorph height - 10)) 
 		- self bodyOrigin.
 	self frontBody addMorph: textMorph.
 ]

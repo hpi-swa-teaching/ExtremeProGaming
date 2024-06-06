@@ -6,7 +6,7 @@ Class {
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'HCH 6/3/2024 16:29'
+	#'squeak_changestamp' : 'HCH 6/6/2024 20:02'
 }
 EPGFeatureCard class >> headerSymbol [
 
@@ -14,7 +14,7 @@ EPGFeatureCard class >> headerSymbol [
 		image:
 			(((GitAssetLoader for: 'ExtremeProGaming')
 			loadAsset: '/assets/Feature.png')
-			scaledToSize: 30@30).
+			scaledToSize: 30 @ 30).
 ]
 
 {

@@ -65,18 +65,18 @@ EPGCostDisplay class >> newFrontendWithCost: aCost perTechnicalDebt: aNumber [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'HCH 5/30/2024 13:39'
+	#'squeak_changestamp' : 'HCH 6/6/2024 19:59'
 }
 EPGCostDisplay class >> positionOffsets [
 
 	^ Dictionary newFrom:
 	{
-		1 -> {0@0}.
-		2 -> {15@ -15 . -15@15}.
-		3 -> {15@ 15 . -15@15 . 0@ -15}.
-		4 -> {-25@ -25 . 25@ -25 . -25@25 . 25@25}.
-		5 -> {-25@ -25 . 25@ -25 . -25@25 . 25@25 . 0@0}.
-		6 -> {-25@ -25 . -25@0 . -25@25 . 25@ -25 . 25@0 . 25@25}
+		1 -> {0 @ 0}.
+		2 -> {15 @ -15 . -15 @ 15}.
+		3 -> {15 @ 15 . -15 @ 15 . 0 @ -15}.
+		4 -> {-25 @ -25 . 25 @ -25 . -25 @ 25 . 25 @ 25}.
+		5 -> {-25 @ -25 . 25 @ -25 . -25 @25 . 25 @ 25 . 0 @ 0}.
+		6 -> {-25 @ -25 . -25 @ 0 . -25 @ 25 . 25 @ -25 . 25 @ 0 . 25 @ 25}.
 	}
 ]
 
@@ -161,13 +161,13 @@ EPGCostDisplay >> display [
 
 {
 	#category : #display,
-	#'squeak_changestamp' : 'HCH 6/1/2024 15:10'
+	#'squeak_changestamp' : 'HCH 6/6/2024 20:00'
 }
 EPGCostDisplay >> displayPerTechnicalDebt [
 
 	| storypointOffset debtOffset debtMorph |
-	storypointOffset := -20@ -20.
-	debtOffset  := 20@20.
+	storypointOffset := -20 @ -20.
+	debtOffset  := 20 @ 20.
 	self isFrontend 
 		ifTrue: [debtMorph := self frontendSymbol center: self debtCenter + debtOffset]
 		ifFalse: [debtMorph := self  backendSymbol center: self debtCenter + debtOffset].
@@ -179,11 +179,11 @@ EPGCostDisplay >> displayPerTechnicalDebt [
 
 {
 	#category : #display,
-	#'squeak_changestamp' : 'HCH 5/30/2024 13:21'
+	#'squeak_changestamp' : 'HCH 6/6/2024 20:01'
 }
 EPGCostDisplay >> displayPlus [
 
-	self addMorph: ((self plus: self height / 6) center: self center)
+	self addMorph: ((self plus: self height / 6) center: self center).
 	
 	
 	
@@ -319,7 +319,7 @@ EPGCostDisplay >> perTechnicalDebt: aNumber [
 
 {
 	#category : #symbols,
-	#'squeak_changestamp' : 'HCH 5/29/2024 22:36'
+	#'squeak_changestamp' : 'HCH 6/6/2024 20:01'
 }
 EPGCostDisplay >> plus: aNumber [
 
@@ -327,9 +327,9 @@ EPGCostDisplay >> plus: aNumber [
 	vertices := {
 		(aNumber / 2) negated @ 0 . 
 		aNumber / 2 @ 0 . 
-		0@0 . 
-		0@(aNumber / 2) negated . 
-		0@(aNumber / 2) . 0@0}.
+		0 @ 0 . 
+		0 @ (aNumber / 2) negated . 
+		0 @ (aNumber / 2) . 0 @ 0}.
 	^ PolygonMorph
 		 	vertices: vertices 
 			color: Color black 
@@ -353,7 +353,7 @@ EPGCostDisplay >> positionOffsetsFor: aNumber [
 
 {
 	#category : #symbols,
-	#'squeak_changestamp' : 'HCH 5/29/2024 22:38'
+	#'squeak_changestamp' : 'HCH 6/6/2024 20:00'
 }
 EPGCostDisplay >> slash: aNumber [
 
@@ -361,7 +361,7 @@ EPGCostDisplay >> slash: aNumber [
 	vertices := {
 		(aNumber / 2) negated @ (aNumber / 2) . 
 		(aNumber / 2) @ (aNumber / 2) negated . 
-		0@0}.
+		0 @ 0}.
 	^ PolygonMorph
 		 	vertices: vertices 
 			color: Color black 
