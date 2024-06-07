@@ -211,7 +211,7 @@ EPGGameBoard >> frontendDebtArea: aDebtArea [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'Philipp 6/7/2024 16:55'
+	#'squeak_changestamp' : 'Philipp 6/7/2024 17:33'
 }
 EPGGameBoard >> generateBugCard [
 

@@ -95,3 +95,14 @@ EPGFeatureCard >> initialize [
 	
 	self setProperty: #EPGFeatureCard toValue: true.
 ]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'Philipp 6/7/2024 17:31'
+}
+EPGFeatureCard >> process: aDebtArea [
+
+	aDebtArea addTechnicalDebt.
+	super process: aDebtArea.
+	
+]
