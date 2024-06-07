@@ -6,7 +6,7 @@ Class {
 
 {
 	#category : #'dragging/dropping',
-	#'squeak_changestamp' : 'JP 5/27/2024 23:11'
+	#'squeak_changestamp' : 'Philipp 6/6/2024 23:39'
 }
 EPGDnDMorph >> initialize [
 
@@ -65,6 +65,16 @@ EPGDnDMorph >> slideBackToFormerSituation: evt [
 		ifFalse: [formerOwner addMorph: self].
 	self position: formerPosition.
 	self justDroppedInto: formerOwner event: evt
+]
+
+{
+	#category : #'dragging/dropping',
+	#'squeak_changestamp' : 'Philipp 6/6/2024 23:42'
+}
+EPGDnDMorph >> update: anAspectSymbol [
+
+	anAspectSymbol = #newRound
+		ifTrue: [self checkIfProcessed].
 ]
 
 {

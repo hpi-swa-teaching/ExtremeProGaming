@@ -82,6 +82,15 @@ EPGStorypoint >> initializeImageBag [
 
 {
 	#category : #initialization,
+	#'squeak_changestamp' : 'Philipp 6/7/2024 16:34'
+}
+EPGStorypoint >> isEPGStorypoint [
+
+	^true.
+]
+
+{
+	#category : #initialization,
 	#'squeak_changestamp' : 'JP 5/28/2024 12:05'
 }
 EPGStorypoint >> newStorypointMorph [

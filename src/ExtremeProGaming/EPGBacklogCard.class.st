@@ -6,20 +6,20 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Philipp 6/6/2024 22:48'
+	#'squeak_changestamp' : 'Philipp 6/7/2024 16:56'
 }
-EPGBacklogCard >> checkIfProcessed [
+EPGBacklogCard >> checkCost [
 
-	Transcript show: '1'.
-	"(self checkForStorypoint) ifTrue: [self abandon]." "Cascade expected ->"
+	| debt |
+	debt := (self frontend ifTrue: [self gameBoard frontendDebtArea] ifFalse: [self gameBoard backendDebtArea]) currentDebt.
+	^ (self cost + (self perTechnicalDebt * debt) <= self owner storyPoints)
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Philipp 6/6/2024 22:47'
+	#'squeak_changestamp' : 'Philipp 6/7/2024 16:56'
 }
-EPGBacklogCard >> update: anAspectSymbol [
-
-	anAspectSymbol = #newRound
-		ifTrue: [self checkIfProcessed].
+EPGBacklogCard >> checkIfProcessed [
+	
+	((self owner isKindOf: EPGBacklogArea) and:[self checkCost]) ifTrue: [self abandon].
 ]

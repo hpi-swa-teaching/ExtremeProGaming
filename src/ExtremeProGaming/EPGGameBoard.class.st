@@ -211,6 +211,21 @@ EPGGameBoard >> frontendDebtArea: aDebtArea [
 
 {
 	#category : #initialization,
+	#'squeak_changestamp' : 'Philipp 6/7/2024 16:55'
+}
+EPGGameBoard >> generateBugCard [
+
+	| card |
+	card := EPGBugCard new.
+	card gameBoard: self.
+	self addDependent: card.
+	card openInWorld.
+	^ card.
+	
+]
+
+{
+	#category : #initialization,
 	#'squeak_changestamp' : 'Philipp 6/6/2024 22:18'
 }
 EPGGameBoard >> initialize [
