@@ -1,0 +1,14 @@
+[
+    {
+        "name": "FrozenPizza",
+        "ingredients": [
+            {
+                "name": "RRFrozenPizza",
+                "stage": "baked"
+            }
+        ],
+        "paths": [
+            "assets/RRIngredients/frozenPizza/baked.png"
+        ]
+    }
+]
