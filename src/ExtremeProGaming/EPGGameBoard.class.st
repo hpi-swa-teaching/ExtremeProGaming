@@ -8,7 +8,8 @@ Class {
 		'frontendDebtArea',
 		'backendDebtArea',
 		'storyPointAreas',
-		'planningAreas'
+		'planningAreas',
+		'doneAreas'
 	],
 	#category : #ExtremeProGaming
 }
@@ -195,6 +196,24 @@ EPGGameBoard >> createSectionMorphFor: aName [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'jmetrikat 6/8/2024 18:00'
+}
+EPGGameBoard >> doneAreas [
+
+	^ doneAreas.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'jmetrikat 6/8/2024 18:01'
+}
+EPGGameBoard >> doneAreas: aCollection [
+
+	doneAreas := aCollection.
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:47'
 }
 EPGGameBoard >> frontendDebtArea [
@@ -213,12 +232,12 @@ EPGGameBoard >> frontendDebtArea: aDebtArea [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 6/8/2024 17:18'
+	#'squeak_changestamp' : 'jmetrikat 6/8/2024 17:53'
 }
 EPGGameBoard >> generateCards [
 
 	| card cardTypes |
-	cardTypes := #(#EPGFeatureCard EPGBugCard).
+	cardTypes := #(#EPGFeatureCard #EPGBugCard).
 	2 to: 3 do: [:areaNumber | 
 		3 timesRepeat: [
 			card := (Smalltalk at: (cardTypes at: (areaNumber - 1)))
@@ -326,20 +345,22 @@ EPGGameBoard >> initializeDebtAreas [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 6/8/2024 17:30'
+	#'squeak_changestamp' : 'jmetrikat 6/8/2024 18:05'
 }
 EPGGameBoard >> initializeDoneAreas [	
-	| area |
 	
-	area := self newDoneAreaAccepting: #EPGFeatureCard.
-	area position: self reviewArea position + (self class reviewAreaXOffset @ (self class yOffset + (2 * self class areaGap) + (2 * area extent y))).
-	self addMorph: area.
+	| featureArea bugArea |
+	featureArea := self newDoneAreaAccepting: #EPGFeatureCard.
+	featureArea position: self reviewArea position + (self class reviewAreaXOffset @ (self class yOffset + (2 * self class areaGap) + (2 * featureArea extent y))).
+	self addMorph: featureArea.
 	
-	area :=  self newDoneAreaAccepting: #EPGBugCard.
-	area
-		position: self reviewArea position + (self class reviewAreaXOffset + area extent x @ (self class yOffset + (2 * self class areaGap) + (2 * area extent y)));
+	bugArea :=  self newDoneAreaAccepting: #EPGBugCard.
+	bugArea
+		position: self reviewArea position + (self class reviewAreaXOffset + bugArea extent x @ (self class yOffset + (2 * self class areaGap) + (2 * bugArea extent y)));
 		gameBoard: self.
-	self addMorph: area.
+	self addMorph: bugArea.
+	
+	self doneAreas: (OrderedCollection with: featureArea with: bugArea).
 ]
 
 {
