@@ -6,18 +6,6 @@ Class {
 
 {
 	#category : #features,
-	#'squeak_changestamp' : 'HCH 5/29/2024 00:45'
-}
-EPGStorypointArea >> addAcceptanceToDroppedMorphs [
-
-	self dropped do: [:morph | 
-			self accepts do: [:selector | morph setProperty: selector toValue: true]].
-
-	
-]
-
-{
-	#category : #features,
 	#'squeak_changestamp' : 'jmetrikat 5/29/2024 23:16'
 }
 EPGStorypointArea >> addStorypoints: aNumber [

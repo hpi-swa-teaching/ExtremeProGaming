@@ -6,7 +6,8 @@ Class {
 		'backlogArea',
 		'reviewArea',
 		'frontendDebtArea',
-		'backendDebtArea'
+		'backendDebtArea',
+		'storyPointAreas'
 	],
 	#category : #ExtremeProGaming
 }
@@ -211,16 +212,20 @@ EPGGameBoard >> frontendDebtArea: aDebtArea [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'Philipp 6/7/2024 17:33'
+	#'squeak_changestamp' : 'jmetrikat 6/8/2024 16:55'
 }
 EPGGameBoard >> generateBugCard [
 
 	| card |
-	card := EPGBugCard new.
+	card := (EPGFeatureCard 
+		newBackendWithTask: 'Server schmiert ab' 
+		consequence: 'Ihr habt nebenbei 10 sleep statements entfernt und die App dadurch schneller gemacht' 
+		effect: 'Harald gönnt fetten Bonus, ihr habt 3 Story points mehr durch Motivation' 
+		cost: 3 perTechnicalDebt: 1 
+		positive: true).
 	card gameBoard: self.
 	self addDependent: card.
 	card openInWorld.
-	^ card.
 	
 ]
 
@@ -367,21 +372,20 @@ EPGGameBoard >> initializeSectionMorphs [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:52'
+	#'squeak_changestamp' : 'jmetrikat 6/8/2024 16:22'
 }
 EPGGameBoard >> initializeStorypointAreas [
 
-	| areas area point |
-	areas := OrderedCollection new.
-	3 timesRepeat: [areas add: EPGStorypointArea new].
-	1 to: 3 do:  [:a | 
-		area := areas at: a.
+	| area point |
+	self storyPointAreas: OrderedCollection new.
+	3 timesRepeat: [self storyPointAreas add: EPGStorypointArea new].
+	1 to: 3 do: [:a |
+		area := self storyPointAreas at: a.
 		point := (self class storypointOffset + ((a - 1) * self class storypointGap) + ((a - 1) * area extent x)) @ self class storypointOffset.
 		area position: self planningArea position + point.
 		(a == 1) 
 			ifTrue: [area dropEnabled: false.]
 			ifFalse: [area accepts: #(#EPGStorypoint)].
-		area addAcceptanceToDroppedMorphs.
 		self addMorph: area].
 ]
 
@@ -440,4 +444,22 @@ EPGGameBoard >> startNewRound [
 
 	self changed: #newRound.
 	
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'jmetrikat 6/8/2024 15:46'
+}
+EPGGameBoard >> storyPointAreas [
+
+	^ storyPointAreas.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'jmetrikat 6/8/2024 15:47'
+}
+EPGGameBoard >> storyPointAreas: aCollection [
+
+	storyPointAreas := aCollection.
 ]

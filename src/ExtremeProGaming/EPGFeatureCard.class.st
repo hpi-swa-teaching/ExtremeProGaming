@@ -97,7 +97,7 @@ EPGFeatureCard >> initialize [
 ]
 
 {
-	#category : #initialization,
+	#category : #'events-processing',
 	#'squeak_changestamp' : 'Philipp 6/7/2024 17:31'
 }
 EPGFeatureCard >> process: aDebtArea [

@@ -3,19 +3,37 @@ Class {
 	#superclass : #EPGDnDArea,
 	#instVars : [
 		'image',
-		'storyPoints'
+		'amountOfStoryPoints'
 	],
 	#category : #ExtremeProGaming
 }
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Philipp 6/7/2024 16:51'
+	#'squeak_changestamp' : 'jmetrikat 6/8/2024 16:17'
+}
+EPGBacklogArea >> amounfOfStoryPoints [
+
+	^ amountOfStoryPoints.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'jmetrikat 6/8/2024 16:17'
+}
+EPGBacklogArea >> amountOfStoryPoints: aNumber [
+
+	amountOfStoryPoints := aNumber.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'jmetrikat 6/8/2024 16:17'
 }
 EPGBacklogArea >> dropInMorph: aMorph [
 
 	super dropInMorph: aMorph.
-	aMorph isEPGStorypoint ifTrue: [self storyPoints: self storyPoints + 1].
+	aMorph isEPGStorypoint ifTrue: [self amountOfStoryPoints: self amounfOfStoryPoints + 1].
 ]
 
 {
@@ -38,7 +56,7 @@ EPGBacklogArea >> image: anImage [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'Philipp 6/7/2024 16:51'
+	#'squeak_changestamp' : 'jmetrikat 6/8/2024 16:17'
 }
 EPGBacklogArea >> initialize [
 
@@ -46,27 +64,9 @@ EPGBacklogArea >> initialize [
 	
 	self
 		extent: 200 @ 250;
-		storyPoints: 0;
+		amountOfStoryPoints: 0;
 		accepts: #(#EPGBugCard #EPGFeatureCard #EPGStorypoint);
 		initializeVisibleArea.
 		
 	self area color: Color transparent.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'Philipp 6/7/2024 16:51'
-}
-EPGBacklogArea >> storyPoints [
-
-	^ storyPoints.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'Philipp 6/7/2024 16:51'
-}
-EPGBacklogArea >> storyPoints: aNumber [
-
-	storyPoints := aNumber.
 ]

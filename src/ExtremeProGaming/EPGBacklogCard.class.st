@@ -5,31 +5,52 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Philipp 6/7/2024 17:23'
+	#category : #'events-processing',
+	#'squeak_changestamp' : 'jmetrikat 6/8/2024 16:17'
 }
-EPGBacklogCard >> checkCost: aDebt [
+EPGBacklogCard >> checkCost: aDebtAmount [
 
-	^ (self cost + (self perTechnicalDebt * aDebt) <= self owner storyPoints)
+	^ (self cost + (self perTechnicalDebt * aDebtAmount) <= self owner amounfOfStoryPoints)
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Philipp 6/7/2024 17:32'
+	#category : #'events-processing',
+	#'squeak_changestamp' : 'jmetrikat 6/8/2024 16:13'
 }
 EPGBacklogCard >> checkIfProcessed [
-
+	
 	| debtArea |
-	debtArea := self frontend ifTrue: [self gameBoard frontendDebtArea] ifFalse: [self gameBoard backendDebtArea].
-	((self owner isKindOf: EPGBacklogArea) and:[self checkCost: debtArea currentDebt]) ifTrue: [self process: debtArea].
+	debtArea := self frontend
+		ifTrue: [self gameBoard frontendDebtArea]
+		ifFalse: [self gameBoard backendDebtArea].
+
+	((self owner isKindOf: EPGBacklogArea) and: [self checkCost: debtArea currentDebt])
+		ifTrue: [self processStorypoints. self processCard].
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Philipp 6/7/2024 17:32'
+	#category : #'events-processing',
+	#'squeak_changestamp' : 'jmetrikat 6/8/2024 16:19'
 }
-EPGBacklogCard >> process: aDebtArea [
+EPGBacklogCard >> processCard [
 	
 	self owner dropped remove: self.
 	self abandon.
+]
+
+{
+	#category : #'events-processing',
+	#'squeak_changestamp' : 'jmetrikat 6/8/2024 16:46'
+}
+EPGBacklogCard >> processStorypoints [
+	
+	| submorphsToRemove regularStoryPointArea |
+	self owner dropped removeAllSuchThat: [:morph | morph isKindOf: EPGStorypoint].
+	
+	submorphsToRemove := (owner submorphs select: [:morph | morph isKindOf: EPGStorypoint]).
+	submorphsToRemove do: [:morph | self owner removeMorph: morph].
+	
+	regularStoryPointArea := (self gameBoard storyPointAreas at: 2).
+	regularStoryPointArea addStorypoints: self owner amounfOfStoryPoints.
+	self owner amountOfStoryPoints: 0.
 ]

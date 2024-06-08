@@ -47,7 +47,7 @@ EPGStorypoint >> imageBag: aCollection [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:56'
+	#'squeak_changestamp' : 'jmetrikat 6/8/2024 16:22'
 }
 EPGStorypoint >> initialize [
 
@@ -58,7 +58,8 @@ EPGStorypoint >> initialize [
 		extent: 100 @ 100;
 		initializeImageBag;
 		image: self newStorypointMorph;
-		addMorph: self image.
+		addMorph: self image;
+		setProperty: #EPGStorypoint toValue: true.
 		
 	self image center: self center.
 ]
