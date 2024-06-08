@@ -129,10 +129,11 @@ EPGStorypoint >> update: anAspectSymbol [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:58'
+	#'squeak_changestamp' : 'jmetrikat 6/8/2024 17:49'
 }
 EPGStorypoint >> updateTimeToLive [
 
-	self timeToLive: self timeToLive - 1.
-	(self timeToLive == 0) ifTrue: [self abandon].
+	self timeToLive ifNotNil: [
+		self timeToLive: self timeToLive - 1.
+		(self timeToLive == 0) ifTrue: [self abandon]].
 ]

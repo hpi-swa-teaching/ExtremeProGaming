@@ -2,8 +2,7 @@ Class {
 	#name : #EPGDebt,
 	#superclass : #EPGDnDArea,
 	#instVars : [
-		'image',
-		'gameBoard'
+		'image'
 	],
 	#category : #ExtremeProGaming
 }
@@ -28,24 +27,6 @@ EPGDebt >> checkIfProcessed [
 			self area decrementDebt.
 			self gameBoard removeDependent: self.
 			self abandon].
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'jmetrikat 6/8/2024 16:53'
-}
-EPGDebt >> gameBoard [
-
-	^ gameBoard.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'jmetrikat 6/8/2024 16:53'
-}
-EPGDebt >> gameBoard: aGameBoard [
-
-	gameBoard := aGameBoard.
 ]
 
 {

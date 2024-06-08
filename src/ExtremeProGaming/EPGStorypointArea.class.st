@@ -6,13 +6,14 @@ Class {
 
 {
 	#category : #features,
-	#'squeak_changestamp' : 'jmetrikat 5/29/2024 23:16'
+	#'squeak_changestamp' : 'jmetrikat 6/8/2024 17:43'
 }
 EPGStorypointArea >> addStorypoints: aNumber [
 
 	| newStorypoint |
 	aNumber timesRepeat: [
 		newStorypoint := EPGStorypoint new.
+		self gameBoard addDependent: newStorypoint.
 		self dropInMorph: newStorypoint]
 ]
 
@@ -31,7 +32,7 @@ EPGStorypointArea >> dropInMorph: aMorph [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/29/2024 21:54'
+	#'squeak_changestamp' : 'jmetrikat 6/8/2024 17:45'
 }
 EPGStorypointArea >> initialize [
 
@@ -40,6 +41,4 @@ EPGStorypointArea >> initialize [
 	self
 		extent: 150 @ 200;
 		initializeVisibleArea.
-		
-	self addStorypoints: 3.
 ]
