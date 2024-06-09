@@ -98,6 +98,24 @@ EPGFeatureCard >> initialize [
 
 {
 	#category : #'events-processing',
+	#'squeak_changestamp' : 'sv 6/9/2024 15:30'
+}
+EPGFeatureCard >> isEPGBugCard [
+
+	^ false.
+]
+
+{
+	#category : #'events-processing',
+	#'squeak_changestamp' : 'sv 6/9/2024 15:30'
+}
+EPGFeatureCard >> isEPGFeatureCard [
+
+	^ true.
+]
+
+{
+	#category : #'events-processing',
 	#'squeak_changestamp' : 'Philipp 6/7/2024 17:31'
 }
 EPGFeatureCard >> process: aDebtArea [

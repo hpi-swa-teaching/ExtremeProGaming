@@ -1,0 +1,12 @@
+[
+    {
+        "type": "Feature",
+        "frontend": true,
+        "task": "Das Team hat Hunger UND Langeweile",
+        "consequence": "Ihr habt Tiefkühlpizza in den Ofen geworfen und euch entschieden, eine Runde Raging Raccons Kitchen zu spielen.",
+        "effect": "Zwei eurer Developerinnen kriegen sich in die Haare, einer liegt mit Bauchkrämpfen vor Hunger auf dem Boden und ein weiterer heult vor Freude über das schöne Design des Spiels.",
+        "cost": 2,
+        "techDebt": 0,
+        "positive": false
+    }
+]

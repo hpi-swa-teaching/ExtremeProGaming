@@ -95,3 +95,21 @@ EPGBugCard >> initialize [
 	
 	self setProperty: #EPGBugCard toValue: true.
 ]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'sv 6/9/2024 15:30'
+}
+EPGBugCard >> isEPGBugCard [
+
+	^ true.
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'sv 6/9/2024 15:30'
+}
+EPGBugCard >> isEPGFeatureCard [
+
+	^ false.
+]
