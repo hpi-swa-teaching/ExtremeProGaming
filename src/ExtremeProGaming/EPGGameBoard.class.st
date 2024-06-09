@@ -74,11 +74,29 @@ EPGGameBoard class >> buttonExtent [
 
 {
 	#category : #constants,
+	#'squeak_changestamp' : 'jmetrikat 6/9/2024 18:24'
+}
+EPGGameBoard class >> doneAreaTypes [
+
+	^ #(#Feature # Bug).
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:48'
 }
 EPGGameBoard class >> reviewAreaXOffset [
 
 	^ 40.
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'jmetrikat 6/9/2024 18:26'
+}
+EPGGameBoard class >> storyPointAreaTypes [
+
+	^ #(#temporaryUnavailable #regular #temporaryAdditional).
 ]
 
 {
@@ -255,7 +273,7 @@ EPGGameBoard >> generateCards [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'Philipp 6/6/2024 22:18'
+	#'squeak_changestamp' : 'jmetrikat 6/9/2024 18:11'
 }
 EPGGameBoard >> initialize [
 
@@ -270,7 +288,7 @@ EPGGameBoard >> initialize [
 		initializeBacklogAreas;
 		initializeDebtAreas;
 		initializeDoneAreas;
-		initializeButtons.
+		initializeButton.
 ]
 
 {
@@ -297,9 +315,9 @@ EPGGameBoard >> initializeBacklogAreas [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 6/8/2024 17:31'
+	#'squeak_changestamp' : 'jmetrikat 6/9/2024 18:11'
 }
-EPGGameBoard >> initializeButtons [
+EPGGameBoard >> initializeButton [
 
 	| button |
 	button := SimpleButtonMorph new

@@ -83,11 +83,11 @@ EPGStorypoint >> initializeImageBag [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'Philipp 6/7/2024 16:34'
+	#'squeak_changestamp' : 'jmetrikat 6/9/2024 17:52'
 }
 EPGStorypoint >> isEPGStorypoint [
 
-	^true.
+	^ true.
 ]
 
 {
