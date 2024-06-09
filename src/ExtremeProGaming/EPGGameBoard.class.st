@@ -294,17 +294,18 @@ EPGGameBoard >> generateBugCards [
 
 {
 	#category : #'card generation',
-	#'squeak_changestamp' : 'sv 6/9/2024 16:13'
+	#'squeak_changestamp' : 'jmetrikat 6/9/2024 18:39'
 }
 EPGGameBoard >> generateCards [
 
 	| parser |
 	parser := self cardSource.
 	parser createCards.
-	self numOfFeatureCards: parser featureCards size;
-		numOfBugCards: parser bugCards size.
 	
-	self generateFeatureCards;
+	self 
+		numOfFeatureCards: parser featureCards size;
+		numOfBugCards: parser bugCards size;
+		generateFeatureCards;
 		generateBugCards.
 ]
 
@@ -324,7 +325,7 @@ EPGGameBoard >> generateFeatureCards [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 6/9/2024 18:37'
+	#'squeak_changestamp' : 'jmetrikat 6/9/2024 18:40'
 }
 EPGGameBoard >> initialize [
 
@@ -333,6 +334,7 @@ EPGGameBoard >> initialize [
 	self
 		extent: self class boardExtent; 
 		color: Color gray;
+		cardSource: EPGJSONParser new;
 		initializeSectionMorphs;
 		initializeStorypointAreas;
 		initializePlanningAreas;
@@ -340,7 +342,6 @@ EPGGameBoard >> initialize [
 		initializeDebtAreas;
 		initializeDoneAreas;
 		initializeButton;
-		cardSource: EPGJSONParser new;
 		generateCards.
 		
 		
@@ -374,27 +375,6 @@ EPGGameBoard >> initializeBacklogAreas [
 	#'squeak_changestamp' : 'jmetrikat 6/9/2024 18:11'
 }
 EPGGameBoard >> initializeButton [
-
-	| button |
-	button := SimpleButtonMorph new
-			useRoundedCorners;
-			label: 'next round';
-			extent: self class buttonExtent;
-			position:  self reviewArea position + ((self class reviewAreaXOffset + 12) @ (self class yOffset + 12 - self class buttonExtent y - (4 * self class areaGap))); 
-			color: Color gray;
-			target: [self startNewRound];
-			actionSelector: #value;
-			yourself.
-	
-	self addMorph: button.
-	
-]
-
-{
-	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 6/8/2024 17:31'
-}
-EPGGameBoard >> initializeButtons [
 
 	| button |
 	button := SimpleButtonMorph new

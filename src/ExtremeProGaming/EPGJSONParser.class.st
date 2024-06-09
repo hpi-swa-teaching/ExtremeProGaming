@@ -188,14 +188,15 @@ EPGJSONParser >> featureCards: aFeatureCardCollection [
 
 {
 	#category : #'initialize-release',
-	#'squeak_changestamp' : 'sv 6/8/2024 19:29'
+	#'squeak_changestamp' : 'jmetrikat 6/9/2024 18:43'
 }
 EPGJSONParser >> initialize [
 
 	super initialize.
 	
-	self assetPath: '/assets/cards.json'.
-	self decodeJson.
+	self
+		assetPath: '/assets/cards.json';
+		decodeJson.
 ]
 
 {

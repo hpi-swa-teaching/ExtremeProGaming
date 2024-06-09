@@ -47,20 +47,6 @@ EPGBacklogCard >> process: aDebtArea [
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'jmetrikat 6/8/2024 18:17'
-}
-EPGBacklogCard >> processCard [
-	
-	| doneArea |
-	self owner dropped remove: self.
-	doneArea := (self hasProperty: #EPGFeatureCard)
-		ifTrue: [self gameBoard doneAreas at: 1]
-		ifFalse: [self gameBoard doneAreas at: 2].
-	doneArea dropInMorph: self.
-]
-
-{
-	#category : #'events-processing',
 	#'squeak_changestamp' : 'jmetrikat 6/9/2024 18:27'
 }
 EPGBacklogCard >> processStorypoints [

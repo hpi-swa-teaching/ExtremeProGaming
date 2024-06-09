@@ -49,10 +49,10 @@ EPGJSONParserTests >> testBugFrontendCardCreation [
 
 {
 	#category : #'card generation',
-	#'squeak_changestamp' : 'sv 6/9/2024 16:12'
+	#'squeak_changestamp' : 'jmetrikat 6/9/2024 18:45'
 }
 EPGJSONParserTests >> testCardAmountSetting [
-"manually set the parser of the board to testing parser"
+	"manually set the parser of the board to testing parser"
 	board cardSource: parser.
 	board generateCards.
 	
@@ -96,7 +96,7 @@ EPGJSONParserTests >> testCardCollectionElement [
 
 {
 	#category : #'parsing functionality',
-	#'squeak_changestamp' : 'sv 6/8/2024 20:40'
+	#'squeak_changestamp' : 'jmetrikat 6/9/2024 18:48'
 }
 EPGJSONParserTests >> testEffectExistence [
 
