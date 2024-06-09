@@ -70,3 +70,12 @@ EPGBacklogArea >> initialize [
 		
 	self area color: Color transparent.
 ]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'jmetrikat 6/9/2024 17:55'
+}
+EPGBacklogArea >> isEPGBacklogArea [
+
+	^ true.
+]

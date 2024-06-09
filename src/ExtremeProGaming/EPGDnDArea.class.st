@@ -306,6 +306,15 @@ EPGDnDArea >> initializeVisibleArea [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'jmetrikat 6/9/2024 17:54'
+}
+EPGDnDArea >> isEPGBacklogArea [
+
+	^ false.
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 5/27/2024 17:57'
 }
 EPGDnDArea >> isEPGDnDArea [

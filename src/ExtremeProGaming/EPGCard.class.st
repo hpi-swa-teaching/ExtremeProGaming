@@ -559,11 +559,11 @@ EPGCard >> isBackend [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Philipp 6/7/2024 16:37'
+	#'squeak_changestamp' : 'jmetrikat 6/9/2024 17:52'
 }
 EPGCard >> isEPGStorypoint [
 
-	^false.
+	^ false.
 ]
 
 {

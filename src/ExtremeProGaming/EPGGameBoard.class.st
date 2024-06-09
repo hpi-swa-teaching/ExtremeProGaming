@@ -77,6 +77,15 @@ EPGGameBoard class >> buttonExtent [
 
 {
 	#category : #constants,
+	#'squeak_changestamp' : 'jmetrikat 6/9/2024 18:24'
+}
+EPGGameBoard class >> doneAreaTypes [
+
+	^ #(#Feature # Bug).
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'sv 6/9/2024 16:34'
 }
 EPGGameBoard class >> planningAreasAcceptance [
@@ -91,6 +100,15 @@ EPGGameBoard class >> planningAreasAcceptance [
 EPGGameBoard class >> reviewAreaXOffset [
 
 	^ 40.
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'jmetrikat 6/9/2024 18:26'
+}
+EPGGameBoard class >> storyPointAreaTypes [
+
+	^ #(#temporaryUnavailable #regular #temporaryAdditional).
 ]
 
 {
@@ -306,7 +324,7 @@ EPGGameBoard >> generateFeatureCards [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'sv 6/9/2024 16:27'
+	#'squeak_changestamp' : 'jmetrikat 6/9/2024 18:35'
 }
 EPGGameBoard >> initialize [
 
@@ -323,7 +341,7 @@ EPGGameBoard >> initialize [
 		initializeDoneAreas;
 		initializeButtons;
 		cardSource: EPGJSONParser new;
-		generateCards.
+		generateCard.
 		
 		
 		
@@ -349,6 +367,27 @@ EPGGameBoard >> initializeBacklogAreas [
 			area addMorph: area image.
 			area image center: area center.
 			self addMorph: area]].
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'jmetrikat 6/9/2024 18:11'
+}
+EPGGameBoard >> initializeButton [
+
+	| button |
+	button := SimpleButtonMorph new
+			useRoundedCorners;
+			label: 'next round';
+			extent: self class buttonExtent;
+			position:  self reviewArea position + ((self class reviewAreaXOffset + 12) @ (self class yOffset + 12 - self class buttonExtent y - (4 * self class areaGap))); 
+			color: Color gray;
+			target: [self startNewRound];
+			actionSelector: #value;
+			yourself.
+	
+	self addMorph: button.
+	
 ]
 
 {
