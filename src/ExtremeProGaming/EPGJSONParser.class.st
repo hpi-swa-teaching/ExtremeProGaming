@@ -15,7 +15,7 @@ Class {
 	#'squeak_changestamp' : 'sv 6/8/2024 19:28'
 }
 EPGJSONParser >> assetPath [
-	
+
 	^ assetPath.
 ]
 
@@ -24,7 +24,7 @@ EPGJSONParser >> assetPath [
 	#'squeak_changestamp' : 'sv 6/8/2024 19:28'
 }
 EPGJSONParser >> assetPath: aString [
-	
+
 	assetPath := aString.
 ]
 
@@ -33,7 +33,7 @@ EPGJSONParser >> assetPath: aString [
 	#'squeak_changestamp' : 'sv 6/9/2024 12:19'
 }
 EPGJSONParser >> bugCards [
-	
+
 	^ bugCards.
 ]
 
@@ -42,7 +42,7 @@ EPGJSONParser >> bugCards [
 	#'squeak_changestamp' : 'sv 6/9/2024 12:19'
 }
 EPGJSONParser >> bugCards: aBugCardCollection [
-	
+
 	bugCards := aBugCardCollection.
 ]
 
@@ -52,11 +52,11 @@ EPGJSONParser >> bugCards: aBugCardCollection [
 }
 EPGJSONParser >> createBugBackendCard: aCardJsonFormatted [
 
-	^ EPGBugCard newBackendWithTask: (aCardJsonFormatted at: 'task') 
-			consequence: (aCardJsonFormatted at: 'consequence') 
-			effect: (aCardJsonFormatted at: 'effect') 
+	^ EPGBugCard newBackendWithTask: (aCardJsonFormatted at: 'task')
+			consequence: (aCardJsonFormatted at: 'consequence')
+			effect: (aCardJsonFormatted at: 'effect')
 			cost: (aCardJsonFormatted at: 'cost')
-			perTechnicalDebt: (aCardJsonFormatted at: 'techDept') 
+			perTechnicalDebt: (aCardJsonFormatted at: 'techDebt')
 			positive: (aCardJsonFormatted at: 'positive').
 ]
 
@@ -79,11 +79,11 @@ EPGJSONParser >> createBugCard: aCardJsonFormatted [
 }
 EPGJSONParser >> createBugFrontendCard: aCardJsonFormatted [
 
-	^ EPGBugCard newFrontendWithTask: (aCardJsonFormatted at: 'task') 
-			consequence: (aCardJsonFormatted at: 'consequence') 
-			effect: (aCardJsonFormatted at: 'effect') 
+	^ EPGBugCard newFrontendWithTask: (aCardJsonFormatted at: 'task')
+			consequence: (aCardJsonFormatted at: 'consequence')
+			effect: (aCardJsonFormatted at: 'effect')
 			cost: (aCardJsonFormatted at: 'cost')
-			perTechnicalDebt: (aCardJsonFormatted at: 'techDept') 
+			perTechnicalDebt: (aCardJsonFormatted at: 'techDebt')
 			positive: (aCardJsonFormatted at: 'positive').
 ]
 
@@ -122,11 +122,11 @@ EPGJSONParser >> createCards [
 }
 EPGJSONParser >> createFeatureBackendCard: aCardJsonFormatted [
 
-	^ EPGFeatureCard newBackendWithTask: (aCardJsonFormatted at: 'task') 
-			consequence: (aCardJsonFormatted at: 'consequence') 
-			effect: (aCardJsonFormatted at: 'effect') 
+	^ EPGFeatureCard newBackendWithTask: (aCardJsonFormatted at: 'task')
+			consequence: (aCardJsonFormatted at: 'consequence')
+			effect: (aCardJsonFormatted at: 'effect')
 			cost: (aCardJsonFormatted at: 'cost')
-			perTechnicalDebt: (aCardJsonFormatted at: 'techDept') 
+			perTechnicalDebt: (aCardJsonFormatted at: 'techDebt')
 			positive: (aCardJsonFormatted at: 'positive').
 ]
 
@@ -149,11 +149,11 @@ EPGJSONParser >> createFeatureCard: aCardJsonFormatted [
 }
 EPGJSONParser >> createFeatureFrontendCard: aCardJsonFormatted [
 
-	^ EPGFeatureCard newFrontendWithTask: (aCardJsonFormatted at: 'task') 
-			consequence: (aCardJsonFormatted at: 'consequence') 
-			effect: (aCardJsonFormatted at: 'effect') 
+	^ EPGFeatureCard newFrontendWithTask: (aCardJsonFormatted at: 'task')
+			consequence: (aCardJsonFormatted at: 'consequence')
+			effect: (aCardJsonFormatted at: 'effect')
 			cost: (aCardJsonFormatted at: 'cost')
-			perTechnicalDebt: (aCardJsonFormatted at: 'techDept') 
+			perTechnicalDebt: (aCardJsonFormatted at: 'techDebt')
 			positive: (aCardJsonFormatted at: 'positive').
 ]
 
@@ -173,7 +173,7 @@ EPGJSONParser >> decodeJson [
 	#'squeak_changestamp' : 'sv 6/9/2024 12:20'
 }
 EPGJSONParser >> featureCards [
-	
+
 	^ featureCards.
 ]
 
@@ -182,7 +182,7 @@ EPGJSONParser >> featureCards [
 	#'squeak_changestamp' : 'sv 6/9/2024 12:20'
 }
 EPGJSONParser >> featureCards: aFeatureCardCollection [
-	
+
 	featureCards := aFeatureCardCollection.
 ]
 
@@ -193,7 +193,7 @@ EPGJSONParser >> featureCards: aFeatureCardCollection [
 EPGJSONParser >> initialize [
 
 	super initialize.
-	
+
 	self
 		assetPath: '/assets/cards.json';
 		decodeJson.
@@ -204,7 +204,7 @@ EPGJSONParser >> initialize [
 	#'squeak_changestamp' : 'sv 6/8/2024 18:50'
 }
 EPGJSONParser >> jsonContent [
-	
+
 	^ jsonContent.
 ]
 
@@ -213,6 +213,6 @@ EPGJSONParser >> jsonContent [
 	#'squeak_changestamp' : 'sv 6/8/2024 18:51'
 }
 EPGJSONParser >> jsonContent: aString [
-	
+
 	jsonContent := aString.
 ]

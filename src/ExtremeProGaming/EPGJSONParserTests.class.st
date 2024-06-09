@@ -16,7 +16,7 @@ EPGJSONParserTests >> setUp [
 
 	parser := EPGJSONParser new.
 	board := EPGGameBoard new.
-	
+
 	"reseting the jsonContent for a indicidual testing file"
 	parser jsonContent: ''.
 	parser assetPath: '/assets/cardsTesting.json'.
@@ -30,7 +30,7 @@ EPGJSONParserTests >> setUp [
 EPGJSONParserTests >> testBugBackendCardCreation [
 
 	| mockJSON |
-	mockJSON := Dictionary newFrom: {'type' -> 'Bug'. 'frontend' -> false. 'task' -> ''. 'consequence' -> ''. 'effect' -> ''. 'cost' -> 1. 'techDept' -> 0. 'positive' -> false}.
+	mockJSON := Dictionary newFrom: {'type' -> 'Bug'. 'frontend' -> false. 'task' -> ''. 'consequence' -> ''. 'effect' -> ''. 'cost' -> 1. 'techDebt' -> 0. 'positive' -> false}.
 
 	self assert: true equals: (parser createCard: mockJSON) isBackend.
 ]
@@ -42,7 +42,7 @@ EPGJSONParserTests >> testBugBackendCardCreation [
 EPGJSONParserTests >> testBugFrontendCardCreation [
 
 	| mockJSON |
-	mockJSON := Dictionary newFrom: {'type' -> 'Bug'. 'frontend' -> true. 'task' -> ''. 'consequence' -> ''. 'effect' -> ''. 'cost' -> 1. 'techDept' -> 0. 'positive' -> false}.
+	mockJSON := Dictionary newFrom: {'type' -> 'Bug'. 'frontend' -> true. 'task' -> ''. 'consequence' -> ''. 'effect' -> ''. 'cost' -> 1. 'techDebt' -> 0. 'positive' -> false}.
 
 	self assert: false equals: (parser createCard: mockJSON) isBackend.
 ]
@@ -55,7 +55,7 @@ EPGJSONParserTests >> testCardAmountSetting [
 	"manually set the parser of the board to testing parser"
 	board cardSource: parser.
 	board generateCards.
-	
+
 	self assert: 1 equals: board numOfFeatureCards.
 	self assert: 0 equals: board numOfBugCards.
 ]
@@ -67,7 +67,7 @@ EPGJSONParserTests >> testCardAmountSetting [
 EPGJSONParserTests >> testCardAmountSettingReal [
 
 	board generateCards.
-	
+
 	self assert: false equals: board numOfFeatureCards isNil.
 	self assert: false equals: board numOfBugCards isNil.
 ]
@@ -101,7 +101,7 @@ EPGJSONParserTests >> testCardCollectionElement [
 EPGJSONParserTests >> testEffectExistence [
 
 	| mockJSON |
-	mockJSON := Dictionary newFrom: {'type' -> 'Bug'. 'frontend' -> false. 'task' -> ''. 'consequence' -> ''. 'effect' -> 'dummy effect'. 'cost' -> 1. 'techDept' -> 0. 'positive' -> false}.
+	mockJSON := Dictionary newFrom: {'type' -> 'Bug'. 'frontend' -> false. 'task' -> ''. 'consequence' -> ''. 'effect' -> 'dummy effect'. 'cost' -> 1. 'techDebt' -> 0. 'positive' -> false}.
 
 	"self assert: 'dummy effect' equals: (parser createCard: mockJSON) effect."
 ]
@@ -113,7 +113,7 @@ EPGJSONParserTests >> testEffectExistence [
 EPGJSONParserTests >> testFeatureBackendCardCreation [
 
 	| mockJSON |
-	mockJSON := Dictionary newFrom: {'type' -> 'Feature'. 'frontend' -> false. 'task' -> ''. 'consequence' -> ''. 'effect' -> ''. 'cost' -> 1. 'techDept' -> 0. 'positive' -> false}.
+	mockJSON := Dictionary newFrom: {'type' -> 'Feature'. 'frontend' -> false. 'task' -> ''. 'consequence' -> ''. 'effect' -> ''. 'cost' -> 1. 'techDebt' -> 0. 'positive' -> false}.
 
 	self assert: true equals: (parser createCard: mockJSON) isBackend.
 ]
@@ -125,7 +125,7 @@ EPGJSONParserTests >> testFeatureBackendCardCreation [
 EPGJSONParserTests >> testFeatureFrontendCardCreation [
 
 	| mockJSON |
-	mockJSON := Dictionary newFrom: {'type' -> 'Feature'. 'frontend' -> true. 'task' -> ''. 'consequence' -> ''. 'effect' -> ''. 'cost' -> 1. 'techDept' -> 0. 'positive' -> false}.
+	mockJSON := Dictionary newFrom: {'type' -> 'Feature'. 'frontend' -> true. 'task' -> ''. 'consequence' -> ''. 'effect' -> ''. 'cost' -> 1. 'techDebt' -> 0. 'positive' -> false}.
 
 	self assert: false equals: (parser createCard: mockJSON) isBackend.
 ]
@@ -135,7 +135,7 @@ EPGJSONParserTests >> testFeatureFrontendCardCreation [
 	#'squeak_changestamp' : 'sv 6/9/2024 16:31'
 }
 EPGJSONParserTests >> testGenerateCardsSuccessful [
-	
+
 	self assert: false equals: board cardSource featureCards isEmpty.
 	self assert: false equals: board cardSource bugCards isEmpty.
 ]
@@ -154,7 +154,7 @@ EPGJSONParserTests >> testJsonContentNotEmpty [
 	#'squeak_changestamp' : 'sv 6/9/2024 15:54'
 }
 EPGJSONParserTests >> testParserForGameExistence [
-	
+
 	self assert: false equals: board cardSource isNil.
 ]
 
@@ -162,10 +162,10 @@ EPGJSONParserTests >> testParserForGameExistence [
 	#category : #'parsing functionality',
 	#'squeak_changestamp' : 'sv 6/8/2024 20:41'
 }
-EPGJSONParserTests >> testTechDeptExistence [
+EPGJSONParserTests >> testtechDebtExistence [
 
 	| mockJSON |
-	mockJSON := Dictionary newFrom: {'type' -> 'Bug'. 'frontend' -> false. 'task' -> 'Challenging task here'. 'consequence' -> ''. 'effect' -> ''. 'cost' -> 1. 'techDept' -> 3. 'positive' -> false}.
+	mockJSON := Dictionary newFrom: {'type' -> 'Bug'. 'frontend' -> false. 'task' -> 'Challenging task here'. 'consequence' -> ''. 'effect' -> ''. 'cost' -> 1. 'techDebt' -> 3. 'positive' -> false}.
 
 	self assert: 3 equals: (parser createCard: mockJSON) perTechnicalDebt.
 ]
