@@ -188,7 +188,7 @@ EPGJSONParser >> featureCards: aFeatureCardCollection [
 
 {
 	#category : #'initialize-release',
-	#'squeak_changestamp' : 'jmetrikat 6/9/2024 18:43'
+	#'squeak_changestamp' : 'sv 6/9/2024 20:12'
 }
 EPGJSONParser >> initialize [
 

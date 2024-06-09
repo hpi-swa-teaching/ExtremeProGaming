@@ -96,18 +96,6 @@ EPGJSONParserTests >> testCardCollectionElement [
 
 {
 	#category : #'parsing functionality',
-	#'squeak_changestamp' : 'jmetrikat 6/9/2024 18:48'
-}
-EPGJSONParserTests >> testEffectExistence [
-
-	| mockJSON |
-	mockJSON := Dictionary newFrom: {'type' -> 'Bug'. 'frontend' -> false. 'task' -> ''. 'consequence' -> ''. 'effect' -> 'dummy effect'. 'cost' -> 1. 'techDebt' -> 0. 'positive' -> false}.
-
-	"self assert: 'dummy effect' equals: (parser createCard: mockJSON) effect."
-]
-
-{
-	#category : #'parsing functionality',
 	#'squeak_changestamp' : 'sv 6/8/2024 20:26'
 }
 EPGJSONParserTests >> testFeatureBackendCardCreation [
