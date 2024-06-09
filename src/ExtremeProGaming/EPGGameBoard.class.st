@@ -324,7 +324,7 @@ EPGGameBoard >> generateFeatureCards [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 6/9/2024 18:35'
+	#'squeak_changestamp' : 'jmetrikat 6/9/2024 18:37'
 }
 EPGGameBoard >> initialize [
 
@@ -339,9 +339,9 @@ EPGGameBoard >> initialize [
 		initializeBacklogAreas;
 		initializeDebtAreas;
 		initializeDoneAreas;
-		initializeButtons;
+		initializeButton;
 		cardSource: EPGJSONParser new;
-		generateCard.
+		generateCards.
 		
 		
 		
