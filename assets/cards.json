@@ -1,14 +1,52 @@
 [
     {
-        "name": "FrozenPizza",
-        "ingredients": [
-            {
-                "name": "RRFrozenPizza",
-                "stage": "baked"
-            }
-        ],
-        "paths": [
-            "assets/RRIngredients/frozenPizza/baked.png"
-        ]
+        "type": "Feature",
+        "frontend": true,
+        "task": "Das Team hat Hunger UND Langeweile",
+        "consequence": "Ihr habt Tiefkühlpizza in den Ofen geworfen und euch entschieden, eine Runde Raging Raccons Kitchen zu spielen.",
+        "effect": "Zwei eurer Developerinnen kriegen sich in die Haare, einer liegt mit Bauchkrämpfen vor Hunger auf dem Boden und ein weiterer heult vor Freude über das schöne Design des Spiels.",
+        "cost": 2,
+        "techDept": 0,
+        "positive": false
+    }, 
+    {
+        "type": "Feature",
+        "frontend": false,
+        "task": "Das Team hat Hunger UND Langeweile",
+        "consequence": "Ihr habt Tiefkühlpizza in den Ofen geworfen und euch entschieden, eine Runde Raging Raccons Kitchen zu spielen.",
+        "effect": "Zwei eurer Developerinnen kriegen sich in die Haare, einer liegt mit Bauchkrämpfen vor Hunger auf dem Boden und ein weiterer heult vor Freude über das schöne Design des Spiels.",
+        "cost": 2,
+        "techDept": 0,
+        "positive": false
+    },
+    {
+        "type": "Bug",
+        "frontend": true,
+        "task": "Das Team hat Hunger UND Langeweile",
+        "consequence": "Ihr habt Tiefkühlpizza in den Ofen geworfen und euch entschieden, eine Runde Raging Raccons Kitchen zu spielen.",
+        "effect": "Zwei eurer Developerinnen kriegen sich in die Haare, einer liegt mit Bauchkrämpfen vor Hunger auf dem Boden und ein weiterer heult vor Freude über das schöne Design des Spiels.",
+        "cost": 2,
+        "techDept": 0,
+        "positive": false
+    },
+    {
+        "type": "Bug",
+        "frontend": false,
+        "task": "Das Team hat Hunger UND Langeweile",
+        "consequence": "Ihr habt Tiefkühlpizza in den Ofen geworfen und euch entschieden, eine Runde Raging Raccons Kitchen zu spielen.",
+        "effect": "Zwei eurer Developerinnen kriegen sich in die Haare, einer liegt mit Bauchkrämpfen vor Hunger auf dem Boden und ein weiterer heult vor Freude über das schöne Design des Spiels.",
+        "cost": 2,
+        "techDept": 0,
+        "positive": false
+    },
+    {
+        "type": "Bug",
+        "frontend": true,
+        "task": "Das Team hat Hunger UND Langeweile",
+        "consequence": "Ihr habt Tiefkühlpizza in den Ofen geworfen und euch entschieden, eine Runde Raging Raccons Kitchen zu spielen.",
+        "effect": "Zwei eurer Developerinnen kriegen sich in die Haare, einer liegt mit Bauchkrämpfen vor Hunger auf dem Boden und ein weiterer heult vor Freude über das schöne Design des Spiels.",
+        "cost": 2,
+        "techDept": 0,
+        "positive": true
     }
 ]

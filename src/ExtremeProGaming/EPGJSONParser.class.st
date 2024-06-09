@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'jsonContent',
 		'assetPath',
-		'cards'
+		'bugCards',
+		'featureCards'
 	],
 	#category : #ExtremeProGaming
 }
@@ -29,20 +30,20 @@ EPGJSONParser >> assetPath: aString [
 
 {
 	#category : #accessors,
-	#'squeak_changestamp' : 'sv 6/8/2024 19:05'
+	#'squeak_changestamp' : 'sv 6/9/2024 12:19'
 }
-EPGJSONParser >> cards [
+EPGJSONParser >> bugCards [
 	
-	^ cards.
+	^ bugCards.
 ]
 
 {
 	#category : #accessors,
-	#'squeak_changestamp' : 'sv 6/8/2024 19:04'
+	#'squeak_changestamp' : 'sv 6/9/2024 12:19'
 }
-EPGJSONParser >> cards: aCardCollection [
-
-	cards := aCardCollection.
+EPGJSONParser >> bugCards: aBugCardCollection [
+	
+	bugCards := aBugCardCollection.
 ]
 
 {
@@ -104,12 +105,15 @@ EPGJSONParser >> createCard: aCardJsonFormatted [
 
 {
 	#category : #'card creation',
-	#'squeak_changestamp' : 'sv 6/8/2024 19:05'
+	#'squeak_changestamp' : 'sv 6/9/2024 15:38'
 }
 EPGJSONParser >> createCards [
 
-	self cards: (self jsonContent collect: [:card |
+	| cards |
+	cards := (self jsonContent collect: [:card |
 		self createCard: card]).
+	self featureCards: (cards select: [:card | card isEPGFeatureCard]).
+	self bugCards: (cards select: [:card | card isEPGBugCard]).
 ]
 
 {
@@ -162,6 +166,24 @@ EPGJSONParser >> decodeJson [
 	| readStream |
 	readStream := ReadStream on: ((GitAssetLoader for: 'ExtremeProGaming') loadString: assetPath).
 	self jsonContent: (WebUtils jsonDecode: readStream).
+]
+
+{
+	#category : #accessors,
+	#'squeak_changestamp' : 'sv 6/9/2024 12:20'
+}
+EPGJSONParser >> featureCards [
+	
+	^ featureCards.
+]
+
+{
+	#category : #accessors,
+	#'squeak_changestamp' : 'sv 6/9/2024 12:20'
+}
+EPGJSONParser >> featureCards: aFeatureCardCollection [
+	
+	featureCards := aFeatureCardCollection.
 ]
 
 {

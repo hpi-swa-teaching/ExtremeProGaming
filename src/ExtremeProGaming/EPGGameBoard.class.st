@@ -9,7 +9,10 @@ Class {
 		'backendDebtArea',
 		'storyPointAreas',
 		'planningAreas',
-		'doneAreas'
+		'doneAreas',
+		'cardSource',
+		'numOfFeatureCards',
+		'numOfBugCards'
 	],
 	#category : #ExtremeProGaming
 }
@@ -70,6 +73,15 @@ EPGGameBoard class >> boardExtent [
 EPGGameBoard class >> buttonExtent [
 
 	^ 375 @ 100.
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'sv 6/9/2024 16:34'
+}
+EPGGameBoard class >> planningAreasAcceptance [
+
+	^ #(#EPGIterationCard #EPGFeatureCard #EPGBugCard).
 ]
 
 {
@@ -177,6 +189,24 @@ EPGGameBoard >> calculateAreaPositionFor: aName [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'sv 6/9/2024 15:45'
+}
+EPGGameBoard >> cardSource [
+
+	^ cardSource.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'sv 6/9/2024 15:46'
+}
+EPGGameBoard >> cardSource: anEPGJSONParser [
+
+	cardSource := anEPGJSONParser.
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:47'
 }
 EPGGameBoard >> createSectionMorphFor: aName [
@@ -231,31 +261,52 @@ EPGGameBoard >> frontendDebtArea: aDebtArea [
 ]
 
 {
-	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 6/8/2024 17:53'
+	#category : #'card generation',
+	#'squeak_changestamp' : 'sv 6/9/2024 16:36'
+}
+EPGGameBoard >> generateBugCards [
+
+	| index |
+	index := self class planningAreasAcceptance indexOf: #EPGBugCard.
+	self cardSource bugCards do: [:card |
+		card gameBoard: self.
+		self addDependent: card.
+		(self planningAreas at: index) dropInMorph: card].
+]
+
+{
+	#category : #'card generation',
+	#'squeak_changestamp' : 'sv 6/9/2024 16:13'
 }
 EPGGameBoard >> generateCards [
 
-	| card cardTypes |
-	cardTypes := #(#EPGFeatureCard #EPGBugCard).
-	2 to: 3 do: [:areaNumber | 
-		3 timesRepeat: [
-			card := (Smalltalk at: (cardTypes at: (areaNumber - 1)))
-				newBackendWithTask: 'Server schmiert ab' 
-				consequence: 'Ihr habt nebenbei 10 sleep statements entfernt und die App dadurch schneller gemacht' 
-				effect: 'Harald gönnt fetten Bonus, ihr habt 3 Story points mehr durch Motivation' 
-				cost: 3 perTechnicalDebt: 1 
-				positive: true.
-			card gameBoard: self.
-			self addDependent: card.
-			(self planningAreas at: areaNumber) dropInMorph: card
-		]
-	]
+	| parser |
+	parser := self cardSource.
+	parser createCards.
+	self numOfFeatureCards: parser featureCards size;
+		numOfBugCards: parser bugCards size.
+	
+	self generateFeatureCards;
+		generateBugCards.
+]
+
+{
+	#category : #'card generation',
+	#'squeak_changestamp' : 'sv 6/9/2024 16:37'
+}
+EPGGameBoard >> generateFeatureCards [
+
+	| index |
+	index := self class planningAreasAcceptance indexOf: #EPGFeatureCard.
+	self cardSource featureCards do: [:card |
+		card gameBoard: self.
+		self addDependent: card.
+		(self planningAreas at: index) dropInMorph: card].
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'Philipp 6/6/2024 22:18'
+	#'squeak_changestamp' : 'sv 6/9/2024 16:27'
 }
 EPGGameBoard >> initialize [
 
@@ -270,7 +321,12 @@ EPGGameBoard >> initialize [
 		initializeBacklogAreas;
 		initializeDebtAreas;
 		initializeDoneAreas;
-		initializeButtons.
+		initializeButtons;
+		cardSource: EPGJSONParser new;
+		generateCards.
+		
+		
+		
 ]
 
 {
@@ -365,14 +421,14 @@ EPGGameBoard >> initializeDoneAreas [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 6/8/2024 17:30'
+	#'squeak_changestamp' : 'sv 6/9/2024 16:34'
 }
 EPGGameBoard >> initializePlanningAreas [
 
 	| area point acceptedMorphs |
 	self planningAreas: OrderedCollection new.
 	3 timesRepeat: [self planningAreas add: EPGPlanningArea new].
-	acceptedMorphs := #(#EPGIterationCard #EPGFeatureCard #EPGBugCard).
+	acceptedMorphs := self class planningAreasAcceptance.
 	
 	1 to: 3 do:  [:a | 
 		area := self planningAreas at: a.
@@ -431,6 +487,42 @@ EPGGameBoard >> newDoneAreaAccepting: aSelector [
 	^ EPGDnDArea new accepts: #(aSelector);
 		initializeVisibleArea.
 
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'sv 6/9/2024 16:11'
+}
+EPGGameBoard >> numOfBugCards [
+
+	^ numOfBugCards.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'sv 6/9/2024 16:11'
+}
+EPGGameBoard >> numOfBugCards: aNumber [
+
+	numOfBugCards := aNumber.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'sv 6/9/2024 16:11'
+}
+EPGGameBoard >> numOfFeatureCards [
+
+	^ numOfFeatureCards.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'sv 6/9/2024 16:11'
+}
+EPGGameBoard >> numOfFeatureCards: aNumber [
+
+	numOfFeatureCards := aNumber.
 ]
 
 {
