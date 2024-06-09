@@ -12,7 +12,8 @@ Class {
 		'dropEnabled',
 		'accepts',
 		'backgroundMargin',
-		'draggable'
+		'draggable',
+		'gameBoard'
 	],
 	#category : #ExtremeProGaming,
 	#'squeak_changestamp' : 'HCH 5/29/2024 00:29'
@@ -65,7 +66,7 @@ EPGDnDArea >> accepts: aCollection [
 
 {
 	#category : #'dragging/dropping',
-	#'squeak_changestamp' : 'HCH 5/29/2024 00:22'
+	#'squeak_changestamp' : 'jmetrikat 6/6/2024 22:28'
 }
 EPGDnDArea >> acceptsMorph: aMorph [
 
@@ -222,6 +223,24 @@ EPGDnDArea >> dropped: aCollection [
 ]
 
 {
+	#category : #accessing,
+	#'squeak_changestamp' : 'jmetrikat 6/8/2024 17:28'
+}
+EPGDnDArea >> gameBoard [
+
+	^ gameBoard.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'jmetrikat 6/8/2024 17:29'
+}
+EPGDnDArea >> gameBoard: aGameBoard [
+
+	gameBoard := aGameBoard.
+]
+
+{
 	#category : #'dragging/dropping',
 	#'squeak_changestamp' : 'HCH 5/27/2024 18:03'
 }
@@ -283,6 +302,15 @@ EPGDnDArea >> initializeVisibleArea [
 		extent: self backgroundExtent - (self backgroundMargin);
 		center: self center.
 	self addMorph: self area.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'jmetrikat 6/9/2024 17:54'
+}
+EPGDnDArea >> isEPGBacklogArea [
+
+	^ false.
 ]
 
 {
@@ -357,7 +385,7 @@ EPGDnDArea >> toggleBorder [
 
 {
 	#category : #'dragging/dropping',
-	#'squeak_changestamp' : 'HCH 5/29/2024 01:06'
+	#'squeak_changestamp' : 'jmetrikat 6/6/2024 23:06'
 }
 EPGDnDArea >> wantsDroppedMorph: aMorph event: evt [
 

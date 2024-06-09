@@ -18,11 +18,15 @@ EPGDebt >> checkForStorypoint [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/30/2024 22:07'
+	#'squeak_changestamp' : 'jmetrikat 6/8/2024 16:53'
 }
 EPGDebt >> checkIfProcessed [
 
-	(self checkForStorypoint) ifTrue: [self abandon].
+	(self checkForStorypoint)
+		ifTrue: [
+			self area decrementDebt.
+			self gameBoard removeDependent: self.
+			self abandon].
 ]
 
 {
@@ -70,7 +74,7 @@ EPGDebt >> mouseEnterDragging: evt [
 
 {
 	#category : #typesetting,
-	#'squeak_changestamp' : 'jmetrikat 5/31/2024 15:50'
+	#'squeak_changestamp' : 'Philipp 6/7/2024 16:20'
 }
 EPGDebt >> setType: aType [
 

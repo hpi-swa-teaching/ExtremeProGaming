@@ -47,7 +47,7 @@ EPGStorypoint >> imageBag: aCollection [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:56'
+	#'squeak_changestamp' : 'jmetrikat 6/8/2024 16:22'
 }
 EPGStorypoint >> initialize [
 
@@ -58,7 +58,8 @@ EPGStorypoint >> initialize [
 		extent: 100 @ 100;
 		initializeImageBag;
 		image: self newStorypointMorph;
-		addMorph: self image.
+		addMorph: self image;
+		setProperty: #EPGStorypoint toValue: true.
 		
 	self image center: self center.
 ]
@@ -78,6 +79,15 @@ EPGStorypoint >> initializeImageBag [
 		add: '/assets/Storypoints/Storypoint_White.png';
 		add: '/assets/Storypoints/Storypoint_Green.png'.
 		
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'jmetrikat 6/9/2024 17:52'
+}
+EPGStorypoint >> isEPGStorypoint [
+
+	^ true.
 ]
 
 {
@@ -119,10 +129,11 @@ EPGStorypoint >> update: anAspectSymbol [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:58'
+	#'squeak_changestamp' : 'jmetrikat 6/8/2024 17:49'
 }
 EPGStorypoint >> updateTimeToLive [
 
-	self timeToLive: self timeToLive - 1.
-	(self timeToLive == 0) ifTrue: [self abandon].
+	self timeToLive ifNotNil: [
+		self timeToLive: self timeToLive - 1.
+		(self timeToLive == 0) ifTrue: [self abandon]].
 ]

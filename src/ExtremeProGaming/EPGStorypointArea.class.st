@@ -6,35 +6,24 @@ Class {
 
 {
 	#category : #features,
-	#'squeak_changestamp' : 'HCH 5/29/2024 00:45'
-}
-EPGStorypointArea >> addAcceptanceToDroppedMorphs [
-
-	self dropped do: [:morph | 
-			self accepts do: [:selector | morph setProperty: selector toValue: true]].
-
-	
-]
-
-{
-	#category : #features,
-	#'squeak_changestamp' : 'jmetrikat 5/29/2024 23:16'
+	#'squeak_changestamp' : 'jmetrikat 6/8/2024 17:43'
 }
 EPGStorypointArea >> addStorypoints: aNumber [
 
 	| newStorypoint |
 	aNumber timesRepeat: [
 		newStorypoint := EPGStorypoint new.
+		self gameBoard addDependent: newStorypoint.
 		self dropInMorph: newStorypoint]
 ]
 
 {
 	#category : #features,
-	#'squeak_changestamp' : 'JP 5/27/2024 23:50'
+	#'squeak_changestamp' : 'jmetrikat 6/6/2024 22:31'
 }
 EPGStorypointArea >> dropInMorph: aMorph [
-	| range |
 
+	| range |
 	range := self extent  - aMorph extent.
 	self addMorphFront: (aMorph position: self position +  ((0 to: range x ) atRandom @ (0 to: range y) atRandom)).
 	self dropped addFirst: aMorph.
@@ -43,7 +32,7 @@ EPGStorypointArea >> dropInMorph: aMorph [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/29/2024 21:54'
+	#'squeak_changestamp' : 'jmetrikat 6/8/2024 17:45'
 }
 EPGStorypointArea >> initialize [
 
@@ -52,6 +41,4 @@ EPGStorypointArea >> initialize [
 	self
 		extent: 150 @ 200;
 		initializeVisibleArea.
-		
-	self addStorypoints: 3.
 ]

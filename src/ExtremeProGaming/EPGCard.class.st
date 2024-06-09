@@ -12,7 +12,8 @@ Class {
 		'cost',
 		'perTechnicalDebt',
 		'frontend',
-		'effect'
+		'effect',
+		'gameBoard'
 	],
 	#category : #ExtremeProGaming
 }
@@ -435,6 +436,24 @@ EPGCard >> frontend: aBoolean [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'Philipp 6/7/2024 17:02'
+}
+EPGCard >> gameBoard [
+
+	^ gameBoard.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Philipp 6/7/2024 17:03'
+}
+EPGCard >> gameBoard: aGameBoard [
+
+	gameBoard := aGameBoard.
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 5/27/2024 20:30'
 }
 EPGCard >> header [
@@ -536,6 +555,15 @@ EPGCard >> initializeHeader: aText [
 EPGCard >> isBackend [
 
 	^ self frontend not.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'jmetrikat 6/9/2024 17:52'
+}
+EPGCard >> isEPGStorypoint [
+
+	^ false.
 ]
 
 {
