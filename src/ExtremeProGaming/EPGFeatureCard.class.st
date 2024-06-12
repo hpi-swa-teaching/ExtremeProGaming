@@ -69,20 +69,20 @@ EPGFeatureCard class >> newFrontendWithTask: aTask consequence: aConsequence eff
 
 {
 	#category : #header,
-	#'squeak_changestamp' : 'HCH 6/3/2024 16:38'
+	#'squeak_changestamp' : 'HCH 6/12/2024 14:37'
 }
 EPGFeatureCard >> headerSymbolCenter [
 
-	^ self header center + (50 @ 0).
+	^ self header center + (45 @ 0).
 ]
 
 {
 	#category : #header,
-	#'squeak_changestamp' : 'HCH 6/3/2024 16:37'
+	#'squeak_changestamp' : 'HCH 6/12/2024 14:19'
 }
 EPGFeatureCard >> headerTextCenter [
 
-	^ 100 @ 25.
+	^ 75 @ 25.
 ]
 
 {

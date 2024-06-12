@@ -58,16 +58,16 @@ EPGCostDisplayTests >> testDisplayZeroCostError [
 
 {
 	#category : #initializing,
-	#'squeak_changestamp' : 'JA 6/8/2024 18:49'
+	#'squeak_changestamp' : 'HCH 6/12/2024 14:49'
 }
 EPGCostDisplayTests >> testInitializeCostDisplayBackend [
 
 	| costDisplayMorph |
 	
 	costDisplayMorph := Morph new
-		extent: 250 @ 100;
+		extent: 180 @ 70;
 		color: Color white;
-		borderWidth: 5;
+		borderWidth: 3;
 		borderColor: Color gray.
 
 	self assert: (costDisplayMorph extent) equals: (morphBack extent).
@@ -75,7 +75,7 @@ EPGCostDisplayTests >> testInitializeCostDisplayBackend [
 	self assert: (costDisplayMorph borderWidth) equals: (morphBack borderWidth).
 	self assert: (costDisplayMorph borderColor) equals: (morphBack borderColor).
 	
-	self assert: (morphBack storypoint extent) equals: (15 @ 15).
+	self assert: (morphBack storypoint extent) equals: (12 @ 12).
 	self assert: (morphBack storypoint color) equals: (Color green).
 	
 	self assert: (morphBack isFrontend) equals: false.
@@ -84,16 +84,16 @@ EPGCostDisplayTests >> testInitializeCostDisplayBackend [
 
 {
 	#category : #initializing,
-	#'squeak_changestamp' : 'JA 6/8/2024 18:50'
+	#'squeak_changestamp' : 'HCH 6/12/2024 14:50'
 }
 EPGCostDisplayTests >> testInitializeCostDisplayFrontend [
 
 	| costDisplayMorph |
 	
 	costDisplayMorph := Morph new
-		extent: 250 @ 100;
+		extent: 180 @ 70;
 		color: Color white;
-		borderWidth: 5;
+		borderWidth: 3;
 		borderColor: Color gray.
 
 	self assert: (costDisplayMorph extent) equals: (morphFront extent).
@@ -101,7 +101,7 @@ EPGCostDisplayTests >> testInitializeCostDisplayFrontend [
 	self assert: (costDisplayMorph borderWidth) equals: (morphFront borderWidth).
 	self assert: (costDisplayMorph borderColor) equals: (morphFront borderColor).
 	
-	self assert: (morphFront storypoint extent) equals: (15 @ 15).
+	self assert: (morphFront storypoint extent) equals: (12 @ 12).
 	self assert: (morphFront storypoint color) equals: (Color green).
 	
 	self assert: (morphFront isFrontend) equals: true.
