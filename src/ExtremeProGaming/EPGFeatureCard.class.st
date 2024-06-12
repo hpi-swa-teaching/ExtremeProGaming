@@ -100,15 +100,6 @@ EPGFeatureCard >> initialize [
 	#category : #'events-processing',
 	#'squeak_changestamp' : 'sv 6/9/2024 15:30'
 }
-EPGFeatureCard >> isEPGBugCard [
-
-	^ false.
-]
-
-{
-	#category : #'events-processing',
-	#'squeak_changestamp' : 'sv 6/9/2024 15:30'
-}
 EPGFeatureCard >> isEPGFeatureCard [
 
 	^ true.
