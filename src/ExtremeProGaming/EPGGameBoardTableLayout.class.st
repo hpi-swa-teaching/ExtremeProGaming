@@ -1,5 +1,5 @@
 Class {
-	#name : #EPGGameBoard,
+	#name : #EPGGameBoardTableLayout,
 	#superclass : #Morph,
 	#instVars : [
 		'planningArea',
@@ -21,7 +21,7 @@ Class {
 	#category : #constants,
 	#'squeak_changestamp' : 'JA 5/21/2024 16:33'
 }
-EPGGameBoard class >> areaExtentRatio [
+EPGGameBoardTableLayout class >> areaExtentRatio [
 
 	^ Dictionary newFrom: {'planning' -> 0.25. 'backlog' -> 0.5. 'review' -> 0.25}.
 ]
@@ -30,7 +30,7 @@ EPGGameBoard class >> areaExtentRatio [
 	#category : #constants,
 	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:44'
 }
-EPGGameBoard class >> areaGap [
+EPGGameBoardTableLayout class >> areaGap [
 
 	^ 20.
 ]
@@ -39,7 +39,7 @@ EPGGameBoard class >> areaGap [
 	#category : #constants,
 	#'squeak_changestamp' : 'JA 5/21/2024 16:37'
 }
-EPGGameBoard class >> areaPositionRatio [
+EPGGameBoardTableLayout class >> areaPositionRatio [
 
 	| backlogPosition reviewPosition |
 	backlogPosition := self areaExtentRatio at: 'planning'.
@@ -52,7 +52,7 @@ EPGGameBoard class >> areaPositionRatio [
 	#category : #constants,
 	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:46'
 }
-EPGGameBoard class >> backlogAreaXOffset [
+EPGGameBoardTableLayout class >> backlogAreaXOffset [
 
 	^ 140.
 ]
@@ -61,7 +61,7 @@ EPGGameBoard class >> backlogAreaXOffset [
 	#category : #constants,
 	#'squeak_changestamp' : 'JA 5/16/2024 10:48'
 }
-EPGGameBoard class >> boardExtent [
+EPGGameBoardTableLayout class >> boardExtent [
 
 	^ 1920 @ 1080.
 ]
@@ -70,7 +70,7 @@ EPGGameBoard class >> boardExtent [
 	#category : #constants,
 	#'squeak_changestamp' : 'Philipp 6/6/2024 22:34'
 }
-EPGGameBoard class >> buttonExtent [
+EPGGameBoardTableLayout class >> buttonExtent [
 
 	^ 375 @ 100.
 ]
@@ -79,7 +79,7 @@ EPGGameBoard class >> buttonExtent [
 	#category : #constants,
 	#'squeak_changestamp' : 'jmetrikat 6/9/2024 18:24'
 }
-EPGGameBoard class >> doneAreaTypes [
+EPGGameBoardTableLayout class >> doneAreaTypes [
 
 	^ #(#Feature # Bug).
 ]
@@ -88,7 +88,7 @@ EPGGameBoard class >> doneAreaTypes [
 	#category : #constants,
 	#'squeak_changestamp' : 'sv 6/9/2024 16:34'
 }
-EPGGameBoard class >> planningAreasAcceptance [
+EPGGameBoardTableLayout class >> planningAreasAcceptance [
 
 	^ #(#EPGIterationCard #EPGFeatureCard #EPGBugCard).
 ]
@@ -97,7 +97,7 @@ EPGGameBoard class >> planningAreasAcceptance [
 	#category : #constants,
 	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:48'
 }
-EPGGameBoard class >> reviewAreaXOffset [
+EPGGameBoardTableLayout class >> reviewAreaXOffset [
 
 	^ 40.
 ]
@@ -106,7 +106,7 @@ EPGGameBoard class >> reviewAreaXOffset [
 	#category : #constants,
 	#'squeak_changestamp' : 'jmetrikat 6/9/2024 18:26'
 }
-EPGGameBoard class >> storyPointAreaTypes [
+EPGGameBoardTableLayout class >> storyPointAreaTypes [
 
 	^ #(#temporaryUnavailable #regular #temporaryAdditional).
 ]
@@ -115,7 +115,7 @@ EPGGameBoard class >> storyPointAreaTypes [
 	#category : #constants,
 	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:52'
 }
-EPGGameBoard class >> storypointGap [
+EPGGameBoardTableLayout class >> storypointGap [
 
 	^ 4.
 ]
@@ -124,7 +124,7 @@ EPGGameBoard class >> storypointGap [
 	#category : #constants,
 	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:51'
 }
-EPGGameBoard class >> storypointOffset [
+EPGGameBoardTableLayout class >> storypointOffset [
 
 	^ 10.
 ]
@@ -133,7 +133,7 @@ EPGGameBoard class >> storypointOffset [
 	#category : #constants,
 	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:50'
 }
-EPGGameBoard class >> yOffset [
+EPGGameBoardTableLayout class >> yOffset [
 
 	^ 242.
 ]
@@ -142,7 +142,7 @@ EPGGameBoard class >> yOffset [
 	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 5/29/2024 01:10'
 }
-EPGGameBoard >> aboutToBeGrabbedBy: aHand [
+EPGGameBoardTableLayout >> aboutToBeGrabbedBy: aHand [
 
 	self submorphs do: 
 		[:sub | (sub isEPGDnDArea 
@@ -155,7 +155,7 @@ EPGGameBoard >> aboutToBeGrabbedBy: aHand [
 	#category : #accessing,
 	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:15'
 }
-EPGGameBoard >> backendDebtArea [
+EPGGameBoardTableLayout >> backendDebtArea [
 
 	^ backendDebtArea.
 ]
@@ -164,7 +164,7 @@ EPGGameBoard >> backendDebtArea [
 	#category : #accessing,
 	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:16'
 }
-EPGGameBoard >> backendDebtArea: aDebtArea [
+EPGGameBoardTableLayout >> backendDebtArea: aDebtArea [
 
 	backendDebtArea := aDebtArea.
 ]
@@ -173,7 +173,7 @@ EPGGameBoard >> backendDebtArea: aDebtArea [
 	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 5/29/2024 01:10'
 }
-EPGGameBoard >> backlogArea [
+EPGGameBoardTableLayout >> backlogArea [
 
 	^ backlogArea.
 ]
@@ -182,25 +182,25 @@ EPGGameBoard >> backlogArea [
 	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 5/29/2024 01:10'
 }
-EPGGameBoard >> backlogArea: aMorph [
+EPGGameBoardTableLayout >> backlogArea: aMorph [
 
 	backlogArea := aMorph.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 6/13/2024 22:36'
+	#'squeak_changestamp' : 'JP 6/13/2024 22:37'
 }
-EPGGameBoard >> calculateAreaExtendFor: aName [
+EPGGameBoardTableLayout >> calculateAreaExtendFor: aName [
 
-	^ (self extent x * self class areaExtentRatio at: aName) @ self extent y.
+	^ ((self extent x * self class areaExtentRatio at: aName) @ self extent y) - (2 * self sectionPadding).
 ]
 
 {
 	#category : #accessing,
 	#'squeak_changestamp' : 'JA 5/21/2024 16:34'
 }
-EPGGameBoard >> calculateAreaPositionFor: aName [
+EPGGameBoardTableLayout >> calculateAreaPositionFor: aName [
 
 	^ (self position x + ((self class areaPositionRatio at: aName) * self extent x)) @ self position y.
 ]
@@ -209,7 +209,7 @@ EPGGameBoard >> calculateAreaPositionFor: aName [
 	#category : #accessing,
 	#'squeak_changestamp' : 'sv 6/9/2024 15:45'
 }
-EPGGameBoard >> cardSource [
+EPGGameBoardTableLayout >> cardSource [
 
 	^ cardSource.
 ]
@@ -218,25 +218,26 @@ EPGGameBoard >> cardSource [
 	#category : #accessing,
 	#'squeak_changestamp' : 'sv 6/9/2024 15:46'
 }
-EPGGameBoard >> cardSource: anEPGJSONParser [
+EPGGameBoardTableLayout >> cardSource: anEPGJSONParser [
 
 	cardSource := anEPGJSONParser.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:47'
+	#'squeak_changestamp' : 'JP 6/13/2024 22:57'
 }
-EPGGameBoard >> createSectionMorphFor: aName [
+EPGGameBoardTableLayout >> createSectionMorphFor: aName [
 
 	| sectionMorph |
 	sectionMorph := Morph new.
 	sectionMorph
 		extent: (self calculateAreaExtendFor: aName);
-		position: (self calculateAreaPositionFor: aName);
-		color: Color darkGray;
-		borderWidth: 5;
-		borderColor: Color lightGray.
+		vResizing: #spaceFill;
+		layoutPolicy: TableLayout new;
+		listDirection: #topToBottom;
+		wrapCentering: #center;
+		color: Color darkGray.
 
 	self addMorph: sectionMorph.
 	^ sectionMorph.
@@ -246,7 +247,7 @@ EPGGameBoard >> createSectionMorphFor: aName [
 	#category : #accessing,
 	#'squeak_changestamp' : 'jmetrikat 6/8/2024 18:00'
 }
-EPGGameBoard >> doneAreas [
+EPGGameBoardTableLayout >> doneAreas [
 
 	^ doneAreas.
 ]
@@ -255,7 +256,7 @@ EPGGameBoard >> doneAreas [
 	#category : #accessing,
 	#'squeak_changestamp' : 'jmetrikat 6/8/2024 18:01'
 }
-EPGGameBoard >> doneAreas: aCollection [
+EPGGameBoardTableLayout >> doneAreas: aCollection [
 
 	doneAreas := aCollection.
 ]
@@ -264,7 +265,7 @@ EPGGameBoard >> doneAreas: aCollection [
 	#category : #accessing,
 	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:47'
 }
-EPGGameBoard >> frontendDebtArea [
+EPGGameBoardTableLayout >> frontendDebtArea [
 
 	^ frontendDebtArea.
 ]
@@ -273,7 +274,7 @@ EPGGameBoard >> frontendDebtArea [
 	#category : #accessing,
 	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:47'
 }
-EPGGameBoard >> frontendDebtArea: aDebtArea [
+EPGGameBoardTableLayout >> frontendDebtArea: aDebtArea [
 
 	frontendDebtArea := aDebtArea.
 ]
@@ -282,7 +283,7 @@ EPGGameBoard >> frontendDebtArea: aDebtArea [
 	#category : #'card generation',
 	#'squeak_changestamp' : 'sv 6/9/2024 16:36'
 }
-EPGGameBoard >> generateBugCards [
+EPGGameBoardTableLayout >> generateBugCards [
 
 	| index |
 	index := self class planningAreasAcceptance indexOf: #EPGBugCard.
@@ -296,7 +297,7 @@ EPGGameBoard >> generateBugCards [
 	#category : #'card generation',
 	#'squeak_changestamp' : 'jmetrikat 6/9/2024 18:39'
 }
-EPGGameBoard >> generateCards [
+EPGGameBoardTableLayout >> generateCards [
 
 	| parser |
 	parser := self cardSource.
@@ -313,7 +314,7 @@ EPGGameBoard >> generateCards [
 	#category : #'card generation',
 	#'squeak_changestamp' : 'sv 6/9/2024 16:37'
 }
-EPGGameBoard >> generateFeatureCards [
+EPGGameBoardTableLayout >> generateFeatureCards [
 
 	| index |
 	index := self class planningAreasAcceptance indexOf: #EPGFeatureCard.
@@ -325,24 +326,25 @@ EPGGameBoard >> generateFeatureCards [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 6/9/2024 18:40'
+	#'squeak_changestamp' : 'JP 6/13/2024 22:44'
 }
-EPGGameBoard >> initialize [
+EPGGameBoardTableLayout >> initialize [
 
 	super initialize.
 	
 	self
-		extent: self class boardExtent; 
+		extent: self class boardExtent;
 		color: Color gray;
 		cardSource: EPGJSONParser new;
+		initializeTableLayout;
 		initializeSectionMorphs;
-		initializeStorypointAreas;
-		initializePlanningAreas;
+		initializeStorypointAreas.
+		"initializePlanningAreas;
 		initializeBacklogAreas;
 		initializeDebtAreas;
 		initializeDoneAreas;
 		initializeButton;
-		generateCards.
+		generateCards."
 		
 		
 		
@@ -352,7 +354,7 @@ EPGGameBoard >> initialize [
 	#category : #initialization,
 	#'squeak_changestamp' : 'jmetrikat 6/8/2024 17:31'
 }
-EPGGameBoard >> initializeBacklogAreas [
+EPGGameBoardTableLayout >> initializeBacklogAreas [
 
 	| areas area point |
 	1 to: 3 do:  [:a | 
@@ -374,7 +376,7 @@ EPGGameBoard >> initializeBacklogAreas [
 	#category : #initialization,
 	#'squeak_changestamp' : 'jmetrikat 6/9/2024 18:11'
 }
-EPGGameBoard >> initializeButton [
+EPGGameBoardTableLayout >> initializeButton [
 
 	| button |
 	button := SimpleButtonMorph new
@@ -395,7 +397,7 @@ EPGGameBoard >> initializeButton [
 	#category : #initialization,
 	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:54'
 }
-EPGGameBoard >> initializeDebtAreas [	
+EPGGameBoardTableLayout >> initializeDebtAreas [	
 	
 	self frontendDebtArea: EPGDebtArea new.
 	self frontendDebtArea
@@ -422,7 +424,7 @@ EPGGameBoard >> initializeDebtAreas [
 	#category : #initialization,
 	#'squeak_changestamp' : 'jmetrikat 6/8/2024 18:05'
 }
-EPGGameBoard >> initializeDoneAreas [	
+EPGGameBoardTableLayout >> initializeDoneAreas [	
 	
 	| featureArea bugArea |
 	featureArea := self newDoneAreaAccepting: #EPGFeatureCard.
@@ -442,7 +444,7 @@ EPGGameBoard >> initializeDoneAreas [
 	#category : #initialization,
 	#'squeak_changestamp' : 'sv 6/9/2024 16:34'
 }
-EPGGameBoard >> initializePlanningAreas [
+EPGGameBoardTableLayout >> initializePlanningAreas [
 
 	| area point acceptedMorphs |
 	self planningAreas: OrderedCollection new.
@@ -465,43 +467,59 @@ EPGGameBoard >> initializePlanningAreas [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 5/29/2024 23:19'
+	#'squeak_changestamp' : 'JP 6/13/2024 22:52'
 }
-EPGGameBoard >> initializeSectionMorphs [
+EPGGameBoardTableLayout >> initializeSectionMorphs [
 
 	self
-		planningArea: (self createSectionMorphFor: 'planning');
+		reviewArea:  (self createSectionMorphFor: 'review');
 		backlogArea: (self createSectionMorphFor: 'backlog');
-		reviewArea:  (self createSectionMorphFor: 'review').
+		planningArea: (self createSectionMorphFor: 'planning').
+		
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 6/8/2024 17:45'
+	#'squeak_changestamp' : 'JP 6/13/2024 23:01'
 }
-EPGGameBoard >> initializeStorypointAreas [
+EPGGameBoardTableLayout >> initializeStorypointAreas [
 
-	| area point |
+	| wrapper area |
+		
+	wrapper := self newStorypointWrapper.
+	self planningArea addMorph: wrapper.	
+		
 	self storyPointAreas: OrderedCollection new.
 	3 timesRepeat: [self storyPointAreas add: EPGStorypointArea new].
 	1 to: 3 do: [:a |
 		area := self storyPointAreas at: a.
-		point := (self class storypointOffset + ((a - 1) * self class storypointGap) + ((a - 1) * area extent x)) @ self class storypointOffset.
 		area
-			position: self planningArea position + point;
 			gameBoard: self;
 			addStorypoints: 3.
 		(a == 1) 
 			ifTrue: [area dropEnabled: false.]
 			ifFalse: [area accepts: #(#EPGStorypoint)].
-		self addMorph: area].
+		wrapper addMorph: area].
+]
+
+{
+	#category : #'card generation',
+	#'squeak_changestamp' : 'JP 6/13/2024 22:51'
+}
+EPGGameBoardTableLayout >> initializeTableLayout [
+
+	self
+		layoutPolicy: TableLayout new;
+		listDirection: #leftToRight;
+		cellInset: self sectionPadding;
+		minCellSize: 0 @ (self class boardExtent  - self sectionPadding) y.
 ]
 
 {
 	#category : #initialization,
 	#'squeak_changestamp' : 'JP 5/29/2024 22:03'
 }
-EPGGameBoard >> newDoneAreaAccepting: aSelector [
+EPGGameBoardTableLayout >> newDoneAreaAccepting: aSelector [
 	
 	^ EPGDnDArea new accepts: #(aSelector);
 		initializeVisibleArea.
@@ -510,9 +528,24 @@ EPGGameBoard >> newDoneAreaAccepting: aSelector [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'JP 6/13/2024 23:01'
+}
+EPGGameBoardTableLayout >> newStorypointWrapper [
+
+	^ Morph new
+		layoutPolicy: TableLayout new;
+		listDirection: #leftToRight;
+		listCentering: #justified;
+		wrapCentering: #justified;
+		vResizing: #shrinkWrap;
+		hResizing: #spaceFill.
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'sv 6/9/2024 16:11'
 }
-EPGGameBoard >> numOfBugCards [
+EPGGameBoardTableLayout >> numOfBugCards [
 
 	^ numOfBugCards.
 ]
@@ -521,7 +554,7 @@ EPGGameBoard >> numOfBugCards [
 	#category : #accessing,
 	#'squeak_changestamp' : 'sv 6/9/2024 16:11'
 }
-EPGGameBoard >> numOfBugCards: aNumber [
+EPGGameBoardTableLayout >> numOfBugCards: aNumber [
 
 	numOfBugCards := aNumber.
 ]
@@ -530,7 +563,7 @@ EPGGameBoard >> numOfBugCards: aNumber [
 	#category : #accessing,
 	#'squeak_changestamp' : 'sv 6/9/2024 16:11'
 }
-EPGGameBoard >> numOfFeatureCards [
+EPGGameBoardTableLayout >> numOfFeatureCards [
 
 	^ numOfFeatureCards.
 ]
@@ -539,7 +572,7 @@ EPGGameBoard >> numOfFeatureCards [
 	#category : #accessing,
 	#'squeak_changestamp' : 'sv 6/9/2024 16:11'
 }
-EPGGameBoard >> numOfFeatureCards: aNumber [
+EPGGameBoardTableLayout >> numOfFeatureCards: aNumber [
 
 	numOfFeatureCards := aNumber.
 ]
@@ -548,7 +581,7 @@ EPGGameBoard >> numOfFeatureCards: aNumber [
 	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 5/29/2024 01:10'
 }
-EPGGameBoard >> planningArea [
+EPGGameBoardTableLayout >> planningArea [
 
 	^ planningArea.
 ]
@@ -557,7 +590,7 @@ EPGGameBoard >> planningArea [
 	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 5/29/2024 01:11'
 }
-EPGGameBoard >> planningArea: aMorph [
+EPGGameBoardTableLayout >> planningArea: aMorph [
 
 	planningArea := aMorph.
 ]
@@ -566,7 +599,7 @@ EPGGameBoard >> planningArea: aMorph [
 	#category : #accessing,
 	#'squeak_changestamp' : 'jmetrikat 6/8/2024 17:04'
 }
-EPGGameBoard >> planningAreas [
+EPGGameBoardTableLayout >> planningAreas [
 	^ planningAreas
 ]
 
@@ -574,7 +607,7 @@ EPGGameBoard >> planningAreas [
 	#category : #accessing,
 	#'squeak_changestamp' : 'jmetrikat 6/8/2024 17:04'
 }
-EPGGameBoard >> planningAreas: anObject [
+EPGGameBoardTableLayout >> planningAreas: anObject [
 	planningAreas := anObject
 ]
 
@@ -582,7 +615,7 @@ EPGGameBoard >> planningAreas: anObject [
 	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 5/29/2024 01:11'
 }
-EPGGameBoard >> reviewArea [
+EPGGameBoardTableLayout >> reviewArea [
 
 	^ reviewArea.
 ]
@@ -591,16 +624,25 @@ EPGGameBoard >> reviewArea [
 	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 5/29/2024 01:11'
 }
-EPGGameBoard >> reviewArea: aMorph [
+EPGGameBoardTableLayout >> reviewArea: aMorph [
 
 	reviewArea := aMorph.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'JP 6/13/2024 22:36'
+}
+EPGGameBoardTableLayout >> sectionPadding [
+	
+	^ 5 @ 5.
 ]
 
 {
 	#category : #initialization,
 	#'squeak_changestamp' : 'JP 5/30/2024 22:11'
 }
-EPGGameBoard >> startNewRound [
+EPGGameBoardTableLayout >> startNewRound [
 
 	self changed: #newRound.
 	
@@ -610,7 +652,7 @@ EPGGameBoard >> startNewRound [
 	#category : #accessing,
 	#'squeak_changestamp' : 'jmetrikat 6/8/2024 15:46'
 }
-EPGGameBoard >> storyPointAreas [
+EPGGameBoardTableLayout >> storyPointAreas [
 
 	^ storyPointAreas.
 ]
@@ -619,7 +661,7 @@ EPGGameBoard >> storyPointAreas [
 	#category : #accessing,
 	#'squeak_changestamp' : 'jmetrikat 6/8/2024 15:47'
 }
-EPGGameBoard >> storyPointAreas: aCollection [
+EPGGameBoardTableLayout >> storyPointAreas: aCollection [
 
 	storyPointAreas := aCollection.
 ]
