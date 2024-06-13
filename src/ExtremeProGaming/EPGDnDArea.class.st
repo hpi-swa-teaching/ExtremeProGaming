@@ -103,11 +103,11 @@ EPGDnDArea >> area: aMorph [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 5/27/2024 22:34'
+	#'squeak_changestamp' : 'JP 6/14/2024 00:33'
 }
 EPGDnDArea >> backgroundExtent [
 
-	^ self extent.
+	^ self extent - self backgroundMargin.
 ]
 
 {
@@ -271,7 +271,7 @@ EPGDnDArea >> highlightColor: aColor [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 6/13/2024 23:41'
+	#'squeak_changestamp' : 'JP 6/14/2024 00:31'
 }
 EPGDnDArea >> initialize [
 
@@ -285,21 +285,22 @@ EPGDnDArea >> initialize [
 		borderVisible: false;
 		dropped: OrderedCollection new;
 		accepts: #();
-		extent: EPGCard cardExtent;
-		backgroundMargin: 15 @ 15.
+		backgroundMargin: 15 @ 15;
+		extent: EPGCard cardExtent + self backgroundMargin.
+		
 
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 5/29/2024 23:11'
+	#'squeak_changestamp' : 'JP 6/14/2024 00:31'
 }
 EPGDnDArea >> initializeVisibleArea [
 
 	self area: Morph new.
 	self area
 		color: Color gray lighter;
-		extent: self backgroundExtent - (self backgroundMargin);
+		extent: self backgroundExtent;
 		center: self center.
 	self addMorph: self area.
 ]
