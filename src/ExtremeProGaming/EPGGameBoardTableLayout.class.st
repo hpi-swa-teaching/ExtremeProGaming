@@ -140,11 +140,11 @@ EPGGameBoardTableLayout class >> yOffset [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 5/29/2024 01:10'
+	#'squeak_changestamp' : 'HCH 6/14/2024 00:18'
 }
 EPGGameBoardTableLayout >> aboutToBeGrabbedBy: aHand [
 
-	self submorphs do: 
+	self allMorphs do: 
 		[:sub | (sub isEPGDnDArea 
 				and: [sub intersects: aHand bounds]) 
 				ifTrue: [^ sub aboutToBeGrabbedBy: aHand]].
