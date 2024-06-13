@@ -378,14 +378,14 @@ EPGGameBoardTableLayout >> generateFeatureCards [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 6/13/2024 23:38'
+	#'squeak_changestamp' : 'JP 6/13/2024 23:47'
 }
 EPGGameBoardTableLayout >> initialize [
 
 	super initialize.
 	
 	self
-		extent: self class boardExtent;
+		extent: self class boardExtent; 
 		color: Color gray;
 		cardSource: EPGJSONParser new;
 		initializeTableLayout;
@@ -545,14 +545,16 @@ EPGGameBoardTableLayout >> initializeStorypointAreas [
 ]
 
 {
-	#category : #'card generation',
-	#'squeak_changestamp' : 'JP 6/13/2024 22:51'
+	#category : #initialization,
+	#'squeak_changestamp' : 'JP 6/13/2024 23:45'
 }
 EPGGameBoardTableLayout >> initializeTableLayout [
 
 	self
 		layoutPolicy: TableLayout new;
 		listDirection: #leftToRight;
+		hResizing: #shrinkWrap;
+		vResizing: #shrinkWrap;
 		cellInset: self sectionPadding;
 		minCellSize: 0 @ (self class boardExtent  - self sectionPadding) y.
 ]
