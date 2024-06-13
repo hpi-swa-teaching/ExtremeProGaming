@@ -69,7 +69,7 @@ EPGBugCard class >> newFrontendWithTask: aTask consequence: aConsequence effect:
 
 {
 	#category : #header,
-	#'squeak_changestamp' : 'HCH 6/3/2024 16:36'
+	#'squeak_changestamp' : 'HCH 6/12/2024 14:37'
 }
 EPGBugCard >> headerSymbolCenter [
 
@@ -78,11 +78,11 @@ EPGBugCard >> headerSymbolCenter [
 
 {
 	#category : #header,
-	#'squeak_changestamp' : 'HCH 6/3/2024 16:33'
+	#'squeak_changestamp' : 'HCH 6/12/2024 14:17'
 }
 EPGBugCard >> headerTextCenter [
 
-	^ 90 @ 25.
+	^ 70 @ 25.
 ]
 
 {
