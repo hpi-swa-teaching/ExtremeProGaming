@@ -271,7 +271,7 @@ EPGDnDArea >> highlightColor: aColor [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/31/2024 14:10'
+	#'squeak_changestamp' : 'JP 6/13/2024 23:41'
 }
 EPGDnDArea >> initialize [
 
@@ -285,7 +285,7 @@ EPGDnDArea >> initialize [
 		borderVisible: false;
 		dropped: OrderedCollection new;
 		accepts: #();
-		extent: 200 @ 250;
+		extent: EPGCard cardExtent;
 		backgroundMargin: 15 @ 15.
 
 ]

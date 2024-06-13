@@ -25,14 +25,13 @@ EPGPlanningArea >> image: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 6/1/2024 11:04'
+	#'squeak_changestamp' : 'JP 6/13/2024 23:42'
 }
 EPGPlanningArea >> initialize [
 
 	super initialize.
 	
 	self
-		extent: 200@250;
 		enableDrop: false;
 		initializeVisibleArea.
 		
