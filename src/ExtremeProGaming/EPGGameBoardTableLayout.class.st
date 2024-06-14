@@ -59,11 +59,11 @@ EPGGameBoardTableLayout class >> backlogAreaXOffset [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'JA 5/16/2024 10:48'
+	#'squeak_changestamp' : 'JP 6/14/2024 14:55'
 }
 EPGGameBoardTableLayout class >> boardExtent [
 
-	^ 1920 @ 1080.
+	^ 1920 @ 1310.
 ]
 
 {
@@ -225,7 +225,7 @@ EPGGameBoardTableLayout >> cardSource: anEPGJSONParser [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 6/14/2024 11:24'
+	#'squeak_changestamp' : 'JP 6/14/2024 11:48'
 }
 EPGGameBoardTableLayout >> createBacklogArea [
 
@@ -291,14 +291,14 @@ EPGGameBoardTableLayout >> createReviewArea [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 6/14/2024 11:15'
+	#'squeak_changestamp' : 'JP 6/14/2024 14:45'
 }
 EPGGameBoardTableLayout >> createSectionMorphFor: aName [
 
 	^ Morph new
 		color: Color darkGray;
 		borderWidth: 5;
-		borderColor: Color transparent;
+		borderColor: Color yellow;
 		layoutPolicy: TableLayout new.
 ]
 
@@ -385,14 +385,14 @@ EPGGameBoardTableLayout >> generateFeatureCards [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 6/14/2024 11:07'
+	#'squeak_changestamp' : 'JP 6/14/2024 14:54'
 }
 EPGGameBoardTableLayout >> initialize [
 
 	super initialize.
 	
 	self
-		extent: self class boardExtent; 
+		extent: self class boardExtent;
 		color: Color gray;
 		cardSource: EPGJSONParser new;
 		layoutPolicy: ProportionalLayout new;
@@ -553,21 +553,6 @@ EPGGameBoardTableLayout >> initializeStorypointAreas [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 6/13/2024 23:45'
-}
-EPGGameBoardTableLayout >> initializeTableLayout [
-
-	self
-		layoutPolicy: TableLayout new;
-		listDirection: #leftToRight;
-		hResizing: #shrinkWrap;
-		vResizing: #shrinkWrap;
-		cellInset: self sectionPadding;
-		minCellSize: 0 @ (self class boardExtent  - self sectionPadding) y.
-]
-
-{
-	#category : #initialization,
 	#'squeak_changestamp' : 'JP 5/29/2024 22:03'
 }
 EPGGameBoardTableLayout >> newDoneAreaAccepting: aSelector [
@@ -679,15 +664,6 @@ EPGGameBoardTableLayout >> reviewArea [
 EPGGameBoardTableLayout >> reviewArea: aMorph [
 
 	reviewArea := aMorph.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'JP 6/13/2024 22:36'
-}
-EPGGameBoardTableLayout >> sectionPadding [
-	
-	^ 5 @ 5.
 ]
 
 {
