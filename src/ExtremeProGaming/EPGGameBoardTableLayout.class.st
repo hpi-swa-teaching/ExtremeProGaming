@@ -225,7 +225,7 @@ EPGGameBoardTableLayout >> cardSource: anEPGJSONParser [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 6/13/2024 23:29'
+	#'squeak_changestamp' : 'JP 6/14/2024 11:24'
 }
 EPGGameBoardTableLayout >> createBacklogArea [
 
@@ -236,17 +236,18 @@ EPGGameBoardTableLayout >> createBacklogArea [
 		wrapDirection: #bottomToTop;
 		listCentering: #center;
 		wrapCentering: #center;
-		layoutInset: ((sectionMorph extent y - (3 * EPGCard cardExtent y)) / 2) @ 0;
-		"layoutInset: 200;"
 		cellInset: 20.
 
-	self addMorph: sectionMorph.
+	self addMorph: sectionMorph fullFrame: (LayoutFrame 
+												  fractions: (0.25@0 corner: 0.75@1)
+												  offsets: (0@0 corner: 0 @ 0)).
+	
 	^ sectionMorph.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 6/13/2024 23:30'
+	#'squeak_changestamp' : 'JP 6/14/2024 11:10'
 }
 EPGGameBoardTableLayout >> createPlanningArea [
 
@@ -259,13 +260,16 @@ EPGGameBoardTableLayout >> createPlanningArea [
 		cellInset: 10;
 		layoutInset: 10.
 
-	self addMorph: sectionMorph.
+	self addMorph: sectionMorph fullFrame: (LayoutFrame 
+  												fractions: (0@0 corner: 0.25@1)
+ 												 offsets: (0@0 corner: 0 @ 0)).
+												
 	^ sectionMorph.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 6/13/2024 23:40'
+	#'squeak_changestamp' : 'JP 6/14/2024 11:10'
 }
 EPGGameBoardTableLayout >> createReviewArea [
 
@@ -278,20 +282,23 @@ EPGGameBoardTableLayout >> createReviewArea [
 		cellInset: 10;
 		layoutInset: 10.
 
-	self addMorph: sectionMorph.
+	self addMorph: sectionMorph fullFrame: (LayoutFrame 
+									  fractions: (0.75@0 corner: 1@1)
+									  offsets: (0@0 corner: 0 @ 0)).
+
 	^ sectionMorph.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 6/13/2024 23:11'
+	#'squeak_changestamp' : 'JP 6/14/2024 11:15'
 }
 EPGGameBoardTableLayout >> createSectionMorphFor: aName [
 
 	^ Morph new
 		color: Color darkGray;
-		extent: (self calculateAreaExtendFor: aName);
-		vResizing: #spaceFill;
+		borderWidth: 5;
+		borderColor: Color transparent;
 		layoutPolicy: TableLayout new.
 ]
 
@@ -378,7 +385,7 @@ EPGGameBoardTableLayout >> generateFeatureCards [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 6/13/2024 23:47'
+	#'squeak_changestamp' : 'JP 6/14/2024 11:07'
 }
 EPGGameBoardTableLayout >> initialize [
 
@@ -388,7 +395,7 @@ EPGGameBoardTableLayout >> initialize [
 		extent: self class boardExtent; 
 		color: Color gray;
 		cardSource: EPGJSONParser new;
-		initializeTableLayout;
+		layoutPolicy: ProportionalLayout new;
 		initializeSectionMorphs;
 		initializeStorypointAreas;
 		initializePlanningAreas;
