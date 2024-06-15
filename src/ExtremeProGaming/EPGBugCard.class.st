@@ -69,7 +69,7 @@ EPGBugCard class >> newFrontendWithTask: aTask consequence: aConsequence effect:
 
 {
 	#category : #header,
-	#'squeak_changestamp' : 'HCH 6/3/2024 16:36'
+	#'squeak_changestamp' : 'HCH 6/12/2024 14:37'
 }
 EPGBugCard >> headerSymbolCenter [
 
@@ -78,11 +78,11 @@ EPGBugCard >> headerSymbolCenter [
 
 {
 	#category : #header,
-	#'squeak_changestamp' : 'HCH 6/3/2024 16:33'
+	#'squeak_changestamp' : 'HCH 6/12/2024 14:17'
 }
 EPGBugCard >> headerTextCenter [
 
-	^ 90 @ 25.
+	^ 70 @ 25.
 ]
 
 {
@@ -103,4 +103,28 @@ EPGBugCard >> initialize [
 EPGBugCard >> isEPGBugCard [
 
 	^ true.
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'sv 6/9/2024 15:30'
+}
+EPGBugCard >> isEPGFeatureCard [
+
+	^ false.
+]
+
+{
+	#category : #'events-processing',
+	#'squeak_changestamp' : 'HCH 6/15/2024 22:32'
+}
+EPGBugCard >> moveToDone [
+
+	|doneArea index|
+	index := self gameBoard class doneAreaTypes indexOf: #Bug.
+	doneArea := self gameBoard doneAreas at: index.
+	self removeProperty: #EPGBugCard.
+	self setProperty: #EPGBugDone toValue: true.
+	doneArea dropInMorph: self.
+	
 ]

@@ -21,6 +21,15 @@ EPGCostDisplay class >> backendColor [
 
 {
 	#category : #constants,
+	#'squeak_changestamp' : 'HCH 6/12/2024 14:15'
+}
+EPGCostDisplay class >> debtOffset [
+
+	^ 15 @ 15.
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'HCH 5/29/2024 22:52'
 }
 EPGCostDisplay class >> font [
@@ -65,7 +74,7 @@ EPGCostDisplay class >> newFrontendWithCost: aCost perTechnicalDebt: aNumber [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'HCH 6/6/2024 19:59'
+	#'squeak_changestamp' : 'HCH 6/12/2024 14:12'
 }
 EPGCostDisplay class >> positionOffsets [
 
@@ -74,19 +83,28 @@ EPGCostDisplay class >> positionOffsets [
 		1 -> {0 @ 0}.
 		2 -> {15 @ -15 . -15 @ 15}.
 		3 -> {15 @ 15 . -15 @ 15 . 0 @ -15}.
-		4 -> {-25 @ -25 . 25 @ -25 . -25 @ 25 . 25 @ 25}.
-		5 -> {-25 @ -25 . 25 @ -25 . -25 @25 . 25 @ 25 . 0 @ 0}.
-		6 -> {-25 @ -25 . -25 @ 0 . -25 @ 25 . 25 @ -25 . 25 @ 0 . 25 @ 25}.
+		4 -> {-20 @ -20 . 20 @ -20 . -20 @ 20 . 20 @ 20}.
+		5 -> {-20 @ -20 . 20 @ -20 . -20 @ 20 . 20 @ 20 . 0 @ 0}.
+		6 -> {-20 @ -20 . -20 @ 0 . -20 @ 20 . 20 @ -20 . 20 @ 0 . 20 @ 20}.
 	}
 ]
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'HCH 5/30/2024 13:45'
+	#'squeak_changestamp' : 'HCH 6/12/2024 14:40'
 }
 EPGCostDisplay class >> storypoint [
 
-	^ Morph new extent: 15@15; color: Color green.
+	^ Morph new extent: 12@12; color: Color green.
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'HCH 6/12/2024 14:15'
+}
+EPGCostDisplay class >> storypointOffset [
+
+	^ -15 @ -15.
 ]
 
 {
@@ -161,13 +179,13 @@ EPGCostDisplay >> display [
 
 {
 	#category : #display,
-	#'squeak_changestamp' : 'HCH 6/6/2024 20:00'
+	#'squeak_changestamp' : 'HCH 6/12/2024 14:14'
 }
 EPGCostDisplay >> displayPerTechnicalDebt [
 
 	| storypointOffset debtOffset debtMorph |
-	storypointOffset := -20 @ -20.
-	debtOffset  := 20 @ 20.
+	storypointOffset := self class storypointOffset.
+	debtOffset  := self class debtOffset.
 	self isFrontend 
 		ifTrue: [debtMorph := self frontendSymbol center: self debtCenter + debtOffset]
 		ifFalse: [debtMorph := self  backendSymbol center: self debtCenter + debtOffset].
@@ -179,11 +197,11 @@ EPGCostDisplay >> displayPerTechnicalDebt [
 
 {
 	#category : #display,
-	#'squeak_changestamp' : 'HCH 6/6/2024 20:01'
+	#'squeak_changestamp' : 'HCH 6/12/2024 14:38'
 }
 EPGCostDisplay >> displayPlus [
 
-	self addMorph: ((self plus: self height / 6) center: self center).
+	self addMorph: ((self plus: self height / 7) center: self center).
 	
 	
 	
@@ -255,16 +273,16 @@ EPGCostDisplay >> frontendSymbol [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'HCH 5/31/2024 11:40'
+	#'squeak_changestamp' : 'HCH 6/12/2024 14:38'
 }
 EPGCostDisplay >> initialize [
 
 	super initialize.
 	
 	self 
-		extent: 250 @ 100;
+		extent: 180 @ 70;
 		color: Color white;
-		borderWidth: 5;
+		borderWidth: 3;
 		borderColor: Color gray;
 		storypoint: self class storypoint;
 		display.
@@ -319,7 +337,7 @@ EPGCostDisplay >> perTechnicalDebt: aNumber [
 
 {
 	#category : #symbols,
-	#'squeak_changestamp' : 'HCH 6/6/2024 20:01'
+	#'squeak_changestamp' : 'HCH 6/12/2024 14:39'
 }
 EPGCostDisplay >> plus: aNumber [
 
@@ -333,7 +351,7 @@ EPGCostDisplay >> plus: aNumber [
 	^ PolygonMorph
 		 	vertices: vertices 
 			color: Color black 
-			borderWidth: (aNumber / 4 max: 5) 
+			borderWidth: (aNumber / 4 max: 3) 
 			borderColor: Color black.
 ]
 

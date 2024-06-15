@@ -420,16 +420,16 @@ EPGGameBoard >> initializeDebtAreas [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 6/8/2024 18:05'
+	#'squeak_changestamp' : 'HCH 6/15/2024 22:32'
 }
 EPGGameBoard >> initializeDoneAreas [	
 	
 	| featureArea bugArea |
-	featureArea := self newDoneAreaAccepting: #EPGFeatureCard.
+	featureArea := self newDoneAreaAccepting: #EPGFeatureDone.
 	featureArea position: self reviewArea position + (self class reviewAreaXOffset @ (self class yOffset + (2 * self class areaGap) + (2 * featureArea extent y))).
 	self addMorph: featureArea.
 	
-	bugArea :=  self newDoneAreaAccepting: #EPGBugCard.
+	bugArea :=  self newDoneAreaAccepting: #EPGBugDone.
 	bugArea
 		position: self reviewArea position + (self class reviewAreaXOffset + bugArea extent x @ (self class yOffset + (2 * self class areaGap) + (2 * bugArea extent y)));
 		gameBoard: self.
@@ -499,11 +499,11 @@ EPGGameBoard >> initializeStorypointAreas [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/29/2024 22:03'
+	#'squeak_changestamp' : 'HCH 6/15/2024 22:31'
 }
 EPGGameBoard >> newDoneAreaAccepting: aSelector [
 	
-	^ EPGDnDArea new accepts: #(aSelector);
+	^ EPGDnDArea new accepts: {aSelector asSymbol};
 		initializeVisibleArea.
 
 ]

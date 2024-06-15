@@ -29,20 +29,32 @@ EPGBacklogCard >> checkIfProcessed [
 ]
 
 {
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/15/2024 21:56'
+}
+EPGBacklogCard >> isEPGBacklogCard [
+
+	^ true.
+]
+
+{
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'jmetrikat 6/9/2024 18:24'
+	#'squeak_changestamp' : 'HCH 6/15/2024 22:17'
+}
+EPGBacklogCard >> moveToDone [
+
+	^ self subclassResponsibility.
+]
+
+{
+	#category : #'events-processing',
+	#'squeak_changestamp' : 'HCH 6/15/2024 22:42'
 }
 EPGBacklogCard >> process: aDebtArea [
 	
-	| doneArea index |
 	self owner dropped remove: self.
-	index := (self hasProperty: #EPGFeatureCard)
-		ifTrue: [self gameBoard class doneAreaTypes indexOf: #Feature]
-		ifFalse: [self gameBoard class doneAreaTypes indexOf: #Bug].
-	doneArea := (self hasProperty: #EPGFeatureCard)
-		ifTrue: [self gameBoard doneAreas at: index]
-		ifFalse: [self gameBoard doneAreas at: index].
-	doneArea dropInMorph: self.
+	self owner resetAccepts.
+	self moveToDone.
 ]
 
 {

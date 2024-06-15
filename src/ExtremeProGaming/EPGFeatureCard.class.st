@@ -69,20 +69,20 @@ EPGFeatureCard class >> newFrontendWithTask: aTask consequence: aConsequence eff
 
 {
 	#category : #header,
-	#'squeak_changestamp' : 'HCH 6/3/2024 16:38'
+	#'squeak_changestamp' : 'HCH 6/12/2024 14:37'
 }
 EPGFeatureCard >> headerSymbolCenter [
 
-	^ self header center + (50 @ 0).
+	^ self header center + (45 @ 0).
 ]
 
 {
 	#category : #header,
-	#'squeak_changestamp' : 'HCH 6/3/2024 16:37'
+	#'squeak_changestamp' : 'HCH 6/12/2024 14:19'
 }
 EPGFeatureCard >> headerTextCenter [
 
-	^ 100 @ 25.
+	^ 75 @ 25.
 ]
 
 {
@@ -100,9 +100,33 @@ EPGFeatureCard >> initialize [
 	#category : #'events-processing',
 	#'squeak_changestamp' : 'sv 6/9/2024 15:30'
 }
+EPGFeatureCard >> isEPGBugCard [
+
+	^ false.
+]
+
+{
+	#category : #'events-processing',
+	#'squeak_changestamp' : 'sv 6/9/2024 15:30'
+}
 EPGFeatureCard >> isEPGFeatureCard [
 
 	^ true.
+]
+
+{
+	#category : #'events-processing',
+	#'squeak_changestamp' : 'HCH 6/15/2024 22:32'
+}
+EPGFeatureCard >> moveToDone [
+
+	|doneArea index|
+	index := self gameBoard class doneAreaTypes indexOf: #Feature.
+	doneArea := self gameBoard doneAreas at: index.
+	self removeProperty: #EPGFeatureCard.
+	self setProperty: #EPGFeatureDone toValue: true.
+	doneArea dropInMorph: self.
+	
 ]
 
 {

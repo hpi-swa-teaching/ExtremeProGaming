@@ -28,12 +28,38 @@ EPGBacklogArea >> amountOfStoryPoints: aNumber [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'jmetrikat 6/8/2024 16:17'
+	#'squeak_changestamp' : 'HCH 6/15/2024 21:53'
+}
+EPGBacklogArea >> dropInCard: aMorph [
+
+	super dropInMorph: aMorph.
+	self accepts: #(#EPGStorypoint).
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/15/2024 21:56'
 }
 EPGBacklogArea >> dropInMorph: aMorph [
 
-	super dropInMorph: aMorph.
-	aMorph isEPGStorypoint ifTrue: [self amountOfStoryPoints: self amounfOfStoryPoints + 1].
+	aMorph isEPGBacklogCard
+		ifTrue: [self dropInCard: aMorph].
+	aMorph isEPGStorypoint 
+		ifTrue: [self dropInStorypoint: aMorph].
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/15/2024 22:02'
+}
+EPGBacklogArea >> dropInStorypoint: aMorph [
+	
+	| randomPosition |
+	randomPosition := 
+		(self width / 2 - 10 to: self width / 2 + 10) atRandom @ 
+		((self height / 2 - 10 to: self height / 2 + 10) atRandom).
+	super dropInMorph: aMorph at: randomPosition.
+	self amountOfStoryPoints: self amounfOfStoryPoints + 1.
 ]
 
 {
@@ -56,7 +82,7 @@ EPGBacklogArea >> image: anImage [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 6/8/2024 16:17'
+	#'squeak_changestamp' : 'HCH 6/15/2024 22:41'
 }
 EPGBacklogArea >> initialize [
 
@@ -65,7 +91,7 @@ EPGBacklogArea >> initialize [
 	self
 		extent: 200 @ 250;
 		amountOfStoryPoints: 0;
-		accepts: #(#EPGBugCard #EPGFeatureCard #EPGStorypoint);
+		accepts: #(#EPGBugCard #EPGFeatureCard);
 		initializeVisibleArea.
 		
 	self area color: Color transparent.
@@ -78,4 +104,26 @@ EPGBacklogArea >> initialize [
 EPGBacklogArea >> isEPGBacklogArea [
 
 	^ true.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/15/2024 22:04'
+}
+EPGBacklogArea >> pickUpMorph: aMorph [
+	
+	aMorph isEPGBacklogCard ifTrue: [^ nil.].
+	aMorph formerOwner: self.
+	aMorph formerPosition: aMorph position.
+	self dropped remove: aMorph.
+	^ aMorph.
+]
+
+{
+	#category : #'events-processing',
+	#'squeak_changestamp' : 'HCH 6/15/2024 22:41'
+}
+EPGBacklogArea >> resetAccepts [
+
+	self accepts: #(#EPGBugCard #EPGFeatureCard).
 ]

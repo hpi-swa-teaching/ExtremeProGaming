@@ -195,11 +195,11 @@ EPGDnDArea >> dropInMorph: aMorph [
 
 {
 	#category : #'dragging/dropping',
-	#'squeak_changestamp' : 'JP 5/27/2024 23:37'
+	#'squeak_changestamp' : 'HCH 6/15/2024 22:02'
 }
 EPGDnDArea >> dropInMorph: aMorph at: aPosition [
 
-	self addMorphFront: (aMorph position:  aPosition).
+	self addMorphFront: (aMorph center:  aPosition + self bounds origin).
 	self dropped addFirst: aMorph.
 	self removeBorder.
 ]
@@ -385,7 +385,7 @@ EPGDnDArea >> toggleBorder [
 
 {
 	#category : #'dragging/dropping',
-	#'squeak_changestamp' : 'jmetrikat 6/6/2024 23:06'
+	#'squeak_changestamp' : 'HCH 6/15/2024 22:30'
 }
 EPGDnDArea >> wantsDroppedMorph: aMorph event: evt [
 

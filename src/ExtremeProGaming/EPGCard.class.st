@@ -29,6 +29,15 @@ EPGCard class >> backendColor [
 
 {
 	#category : #constants,
+	#'squeak_changestamp' : 'HCH 6/12/2024 14:43'
+}
+EPGCard class >> colorBarHeight [
+
+	^ 22.
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'HCH 6/3/2024 17:29'
 }
 EPGCard class >> frontendColor [
@@ -38,11 +47,11 @@ EPGCard class >> frontendColor [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'HCH 5/30/2024 14:02'
+	#'squeak_changestamp' : 'HCH 6/12/2024 14:36'
 }
 EPGCard class >> headerFont [
 
- 	^ TextFontReference  toFont: (StrikeFont familyName: 'DejaVu' size: 30).
+ 	^ TextFontReference  toFont: (StrikeFont familyName: 'Bitmap DejaVu Sans' size: 28).
 
 	
 ]
@@ -58,18 +67,18 @@ EPGCard class >> headerSymbol [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'HCH 5/31/2024 12:14'
+	#'squeak_changestamp' : 'HCH 6/12/2024 14:35'
 }
 EPGCard class >> taskFont [
 
- 	^ TextFontReference  toFont: (StrikeFont familyName: 'DejaVu' size: 20).
+ 	^ TextFontReference  toFont: (StrikeFont familyName: 'Bitmap DejaVu Sans' size: 15).
 
 	
 ]
 
 {
-	#category : #areas,
-	#'squeak_changestamp' : 'HCH 5/27/2024 20:56'
+	#category : #bar,
+	#'squeak_changestamp' : 'HCH 6/12/2024 14:42'
 }
 EPGCard >> addColorBar: aColor [
 
@@ -78,15 +87,15 @@ EPGCard >> addColorBar: aColor [
 		color: aColor.
 	 (self colorBarSelector == #full)
 		ifTrue: [bar 
-					extent: self extent x @ 30;
+					extent: self extent x @ self class colorBarHeight;
 					position: self subHeaderOrigin.].
 	(self colorBarSelector == #left)
 		ifTrue: [bar
-					extent: (self extent x / 2) @ 30;
+					extent: (self extent x / 2) @ self class colorBarHeight;
 					position: self subHeaderOrigin].
 	(self colorBarSelector == #right)
 		ifTrue: [bar
-					extent: (self extent x / 2) @ 30;
+					extent: (self extent x / 2) @ self class colorBarHeight;
 					position: self subHeaderOrigin + (bar width @ 0)].
 	self addMorph: bar.
 	self colorBar: bar.
@@ -206,7 +215,7 @@ EPGCard >> colorBar: aMorph [
 ]
 
 {
-	#category : #areas,
+	#category : #bar,
 	#'squeak_changestamp' : 'HCH 5/27/2024 20:57'
 }
 EPGCard >> colorBar: aColor withLayout: aLayoutSelector [
@@ -277,7 +286,7 @@ EPGCard >> cost: aCost perTechnicalDebt: aNumber [
 
 {
 	#category : #body,
-	#'squeak_changestamp' : 'HCH 6/3/2024 09:57'
+	#'squeak_changestamp' : 'HCH 6/12/2024 14:44'
 }
 EPGCard >> displayCost [
 
@@ -285,23 +294,23 @@ EPGCard >> displayCost [
 	self isFrontend
 		ifTrue: [display := EPGCostDisplay newFrontendWithCost: self cost perTechnicalDebt: self perTechnicalDebt]
 		ifFalse: [display := EPGCostDisplay newBackendWithCost: self cost perTechnicalDebt: self perTechnicalDebt].
-	display center: ((self width / 2)@30 )+ self subHeaderOrigin.
+	display center: ((self width / 2)@ 5)+ self subHeaderOrigin.
 	self frontBody addMorph: display.
 ]
 
 {
 	#category : #body,
-	#'squeak_changestamp' : 'HCH 6/6/2024 20:02'
+	#'squeak_changestamp' : 'HCH 6/12/2024 14:44'
 }
 EPGCard >> displayEffect [
 
 	| arrow |
 	arrow := ImageMorph new.
 	self effect = #positive
-		ifTrue: [arrow image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: '/assets/ArrowUp.png') scaledToSize: 60 @ 60)].
+		ifTrue: [arrow image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: '/assets/ArrowUp.png') scaledToSize: self effectSize)].
 	self effect = #negative
-		ifTrue: [arrow image:( ((GitAssetLoader for: 'ExtremeProGaming') loadAsset: '/assets/ArrowDown.png') scaledToSize: 60 @ 60)].
-	arrow center: self bodyOrigin + (self width / 2 @ 110).
+		ifTrue: [arrow image:( ((GitAssetLoader for: 'ExtremeProGaming') loadAsset: '/assets/ArrowDown.png') scaledToSize: self effectSize)].
+	arrow center: self bodyOrigin + (self width / 2 @ 50).
 	self frontBody addMorph: arrow.
 ]
 
@@ -342,6 +351,15 @@ EPGCard >> effectSelector [
 EPGCard >> effectSelector: aSelector [
 
 	effect := aSelector.
+]
+
+{
+	#category : #body,
+	#'squeak_changestamp' : 'HCH 6/12/2024 14:21'
+}
+EPGCard >> effectSize [
+
+	^ self width / 6. 
 ]
 
 {
@@ -516,7 +534,7 @@ EPGCard >> headerTextCenter [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'HCH 6/3/2024 16:42'
+	#'squeak_changestamp' : 'HCH 6/12/2024 14:09'
 }
 EPGCard >> initialize [
 
@@ -524,7 +542,7 @@ EPGCard >> initialize [
 	
 	self
 		color: Color white;
-		extent: 270 @ 405;
+		extent: 200 @ 300;
 		frontBody: (Morph new color: Color transparent);
 		backBody: (Morph new color: Color transparent);
 		facing: #front.
@@ -555,6 +573,15 @@ EPGCard >> initializeHeader: aText [
 EPGCard >> isBackend [
 
 	^ self frontend not.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'jmetrikat 6/9/2024 17:52'
+}
+EPGCard >> isEPGStorypoint [
+
+	^ false.
 ]
 
 {
@@ -595,16 +622,13 @@ EPGCard >> subHeaderOrigin [
 
 {
 	#category : #body,
-	#'squeak_changestamp' : 'HCH 6/6/2024 20:03'
+	#'squeak_changestamp' : 'HCH 6/12/2024 14:45'
 }
 EPGCard >> task: aText [
 
 	| textMorph |
 	textMorph := self formatTask: aText.
-	textMorph position: 
-		self bounds origin 
-		+ (0 @ (self height - textMorph height - 10)) 
-		- self bodyOrigin.
+	textMorph position: (0 @ (self height - textMorph height - self bodyOrigin y)).
 	self frontBody addMorph: textMorph.
 ]
 

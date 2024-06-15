@@ -2,7 +2,16 @@ Extension { #name : #Morph }
 
 {
 	#category : #'*ExtremeProGaming',
-	#'squeak_changestamp' : 'HCH 6/11/2024 10:29'
+	#'squeak_changestamp' : 'HCH 6/15/2024 21:57'
+}
+Morph >> isEPGBacklogCard [
+
+	^ false.
+]
+
+{
+	#category : #'*ExtremeProGaming',
+	#'squeak_changestamp' : 'HCH 6/15/2024 22:46'
 }
 Morph >> isEPGBugCard [
 
@@ -20,15 +29,16 @@ Morph >> isEPGDnDArea [
 
 {
 	#category : #'*ExtremeProGaming',
-	#'squeak_changestamp' : 'HCH 5/27/2024 13:39'
+	#'squeak_changestamp' : 'HCH 6/15/2024 22:46'
 }
 Morph >> isEPGDnDMorph [
+
 	^false.
 ]
 
 {
 	#category : #'*ExtremeProGaming',
-	#'squeak_changestamp' : 'HCH 6/11/2024 10:29'
+	#'squeak_changestamp' : 'HCH 6/15/2024 22:46'
 }
 Morph >> isEPGFeatureCard [
 
@@ -37,7 +47,7 @@ Morph >> isEPGFeatureCard [
 
 {
 	#category : #'*ExtremeProGaming',
-	#'squeak_changestamp' : 'HCH 6/11/2024 10:29'
+	#'squeak_changestamp' : 'HCH 6/15/2024 22:46'
 }
 Morph >> isEPGStorypoint [
 
