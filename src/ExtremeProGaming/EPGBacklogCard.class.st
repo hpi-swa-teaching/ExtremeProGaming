@@ -15,7 +15,7 @@ EPGBacklogCard >> checkCost: aDebtAmount [
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'jmetrikat 6/9/2024 18:17'
+	#'squeak_changestamp' : 'Philipp 6/16/2024 18:31'
 }
 EPGBacklogCard >> checkIfProcessed [
 	
@@ -59,7 +59,7 @@ EPGBacklogCard >> process: aDebtArea [
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'jmetrikat 6/16/2024 12:38'
+	#'squeak_changestamp' : 'Philipp 6/16/2024 18:31'
 }
 EPGBacklogCard >> processStorypoints [
 	

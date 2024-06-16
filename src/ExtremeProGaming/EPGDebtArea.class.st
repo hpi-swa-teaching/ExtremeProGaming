@@ -2,7 +2,7 @@ Class {
 	#name : #EPGDebtArea,
 	#superclass : #Morph,
 	#instVars : [
-		'gameBoard',
+		'game',
 		'type',
 		'currentDebt'
 	],
@@ -11,7 +11,7 @@ Class {
 
 {
 	#category : #features,
-	#'squeak_changestamp' : 'jmetrikat 6/8/2024 16:52'
+	#'squeak_changestamp' : 'Philipp 6/16/2024 18:15'
 }
 EPGDebtArea >> addTechnicalDebt [
 
@@ -20,12 +20,11 @@ EPGDebtArea >> addTechnicalDebt [
 	newDebt
 		setType: self type;
 		area: self;
-		gameBoard: self gameBoard;
+		game: self game;
 		position: (self randomPositionFor: newDebt).
 
-	self gameBoard 
-		addMorph: newDebt;
-		addDependent: newDebt.
+	self game gameBoard addMorph: newDebt.
+	self game addDependent: newDebt.
 	self incrementDebt.
 ]
 
@@ -58,20 +57,20 @@ EPGDebtArea >> decrementDebt [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:01'
+	#'squeak_changestamp' : 'Philipp 6/16/2024 17:30'
 }
-EPGDebtArea >> gameBoard [
+EPGDebtArea >> game [
 
-	^ gameBoard.
+	^ game.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:02'
+	#'squeak_changestamp' : 'Philipp 6/16/2024 17:30'
 }
-EPGDebtArea >> gameBoard: aGameBoard [
+EPGDebtArea >> game: aGame [
 
-	gameBoard := aGameBoard.
+	game := aGame.
 ]
 
 {

@@ -10,9 +10,7 @@ Class {
 		'storyPointAreas',
 		'planningAreas',
 		'doneAreas',
-		'cardSource',
-		'numOfFeatureCards',
-		'numOfBugCards'
+		'game'
 	],
 	#category : #ExtremeProGaming
 }
@@ -77,11 +75,31 @@ EPGGameBoard class >> buttonExtent [
 
 {
 	#category : #constants,
+	#'squeak_changestamp' : 'Philipp 6/16/2024 17:05'
+}
+EPGGameBoard class >> defaultColor [
+
+	^ Color gray.
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'jmetrikat 6/9/2024 18:24'
 }
 EPGGameBoard class >> doneAreaTypes [
 
 	^ #(#Feature # Bug).
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'Philipp 6/16/2024 18:03'
+}
+EPGGameBoard class >> newWithGame: aGame [
+
+	^ self basicNew
+					game: aGame;
+					initialize.
 ]
 
 {
@@ -207,24 +225,6 @@ EPGGameBoard >> calculateAreaPositionFor: aName [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'sv 6/9/2024 15:45'
-}
-EPGGameBoard >> cardSource [
-
-	^ cardSource.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'sv 6/9/2024 15:46'
-}
-EPGGameBoard >> cardSource: anEPGJSONParser [
-
-	cardSource := anEPGJSONParser.
-]
-
-{
-	#category : #accessing,
 	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:47'
 }
 EPGGameBoard >> createSectionMorphFor: aName [
@@ -279,53 +279,26 @@ EPGGameBoard >> frontendDebtArea: aDebtArea [
 ]
 
 {
-	#category : #'card generation',
-	#'squeak_changestamp' : 'sv 6/9/2024 16:36'
+	#category : #accessing,
+	#'squeak_changestamp' : 'Philipp 6/16/2024 17:00'
 }
-EPGGameBoard >> generateBugCards [
+EPGGameBoard >> game [
 
-	| index |
-	index := self class planningAreasAcceptance indexOf: #EPGBugCard.
-	self cardSource bugCards do: [:card |
-		card gameBoard: self.
-		self addDependent: card.
-		(self planningAreas at: index) dropInMorph: card].
+	^ game.
 ]
 
 {
-	#category : #'card generation',
-	#'squeak_changestamp' : 'jmetrikat 6/9/2024 18:39'
+	#category : #accessing,
+	#'squeak_changestamp' : 'Philipp 6/16/2024 17:00'
 }
-EPGGameBoard >> generateCards [
+EPGGameBoard >> game: aGame [
 
-	| parser |
-	parser := self cardSource.
-	parser createCards.
-	
-	self 
-		numOfFeatureCards: parser featureCards size;
-		numOfBugCards: parser bugCards size;
-		generateFeatureCards;
-		generateBugCards.
-]
-
-{
-	#category : #'card generation',
-	#'squeak_changestamp' : 'sv 6/9/2024 16:37'
-}
-EPGGameBoard >> generateFeatureCards [
-
-	| index |
-	index := self class planningAreasAcceptance indexOf: #EPGFeatureCard.
-	self cardSource featureCards do: [:card |
-		card gameBoard: self.
-		self addDependent: card.
-		(self planningAreas at: index) dropInMorph: card].
+	game := aGame.
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 6/9/2024 18:40'
+	#'squeak_changestamp' : 'Philipp 6/16/2024 17:05'
 }
 EPGGameBoard >> initialize [
 
@@ -333,16 +306,14 @@ EPGGameBoard >> initialize [
 	
 	self
 		extent: self class boardExtent; 
-		color: Color gray;
-		cardSource: EPGJSONParser new;
+		color: self class defaultColor;
 		initializeSectionMorphs;
 		initializeStorypointAreas;
 		initializePlanningAreas;
 		initializeBacklogAreas;
 		initializeDebtAreas;
 		initializeDoneAreas;
-		initializeButton;
-		generateCards.
+		initializeButton.
 		
 		
 		
@@ -350,7 +321,7 @@ EPGGameBoard >> initialize [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 6/8/2024 17:31'
+	#'squeak_changestamp' : 'Philipp 6/16/2024 17:27'
 }
 EPGGameBoard >> initializeBacklogAreas [
 
@@ -362,8 +333,7 @@ EPGGameBoard >> initializeBacklogAreas [
 			area := areas at: b.
 			point :=  self backlogArea position x  + ((b - 1) * area extent x) + (b * self class areaGap) + self class backlogAreaXOffset @ (self class yOffset + ((a - 1) * self class areaGap) + ((a - 1) * area extent y)) .
 			area
-				position: self planningArea position + point;
-				gameBoard: self.
+				position: self planningArea position + point.
 			area image: (ImageMorph new image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: ('/assets/BacklogAreas/BacklogArea', a, b, '.png')) scaledToSize: 200 @ 250)).
 			area addMorph: area image.
 			area image center: area center.
@@ -372,7 +342,7 @@ EPGGameBoard >> initializeBacklogAreas [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 6/9/2024 18:11'
+	#'squeak_changestamp' : 'Philipp 6/16/2024 17:06'
 }
 EPGGameBoard >> initializeButton [
 
@@ -382,8 +352,8 @@ EPGGameBoard >> initializeButton [
 			label: 'next round';
 			extent: self class buttonExtent;
 			position:  self reviewArea position + ((self class reviewAreaXOffset + 12) @ (self class yOffset + 12 - self class buttonExtent y - (4 * self class areaGap))); 
-			color: Color gray;
-			target: [self startNewRound];
+			color: self class defaultColor;
+			target: [self game startNewRound];
 			actionSelector: #value;
 			yourself.
 	
@@ -393,34 +363,30 @@ EPGGameBoard >> initializeButton [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:54'
+	#'squeak_changestamp' : 'Philipp 6/16/2024 18:11'
 }
 EPGGameBoard >> initializeDebtAreas [	
 	
-	self frontendDebtArea: EPGDebtArea new.
-	self frontendDebtArea
+	self frontendDebtArea: (EPGDebtArea new
 		position: self reviewArea position + ((self class reviewAreaXOffset + 12) @ (self class yOffset + 12));
-		color: Color gray;
+		color: self class defaultColor;
 		type: #frontend;
-		gameBoard: self.
-	self addMorph: frontendDebtArea.
+		game: self game).
+	self addMorph: self frontendDebtArea.
 	
 	self backendDebtArea: EPGDebtArea new.
 	self backendDebtArea
 		position: self reviewArea position + ((self class reviewAreaXOffset + 12) @ (self class yOffset + (3 * self class areaGap) + self backendDebtArea extent y));
-		color: Color gray;
+		color: self class defaultColor;
 		type: #backend;
-		gameBoard: self.
+		game: self game.
 	self addMorph: self backendDebtArea.
-	
-	self frontendDebtArea addTechnicalDebt.
-	self backendDebtArea addTechnicalDebt.
 	
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'HCH 6/15/2024 22:32'
+	#'squeak_changestamp' : 'Philipp 6/16/2024 18:35'
 }
 EPGGameBoard >> initializeDoneAreas [	
 	
@@ -431,8 +397,7 @@ EPGGameBoard >> initializeDoneAreas [
 	
 	bugArea :=  self newDoneAreaAccepting: #EPGBugDone.
 	bugArea
-		position: self reviewArea position + (self class reviewAreaXOffset + bugArea extent x @ (self class yOffset + (2 * self class areaGap) + (2 * bugArea extent y)));
-		gameBoard: self.
+		position: self reviewArea position + (self class reviewAreaXOffset + bugArea extent x @ (self class yOffset + (2 * self class areaGap) + (2 * bugArea extent y))).
 	self addMorph: bugArea.
 	
 	self doneAreas: (OrderedCollection with: featureArea with: bugArea).
@@ -440,7 +405,7 @@ EPGGameBoard >> initializeDoneAreas [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'sv 6/9/2024 16:34'
+	#'squeak_changestamp' : 'Philipp 6/16/2024 18:34'
 }
 EPGGameBoard >> initializePlanningAreas [
 
@@ -454,7 +419,6 @@ EPGGameBoard >> initializePlanningAreas [
 		point :=  self planningArea center x - (area extent x / 2) @ (self class yOffset + ((a - 1) * self class areaGap) + ((a - 1) * area extent y)).
 		area
 			position: self planningArea position + point;
-			gameBoard: self;
 			image: (ImageMorph new image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: ('/assets/PlanningAreas/PlanningArea', a,'.png')) scaledToSize: 200 @ 250));
 	 		addMorph: area image;
 			accepts: (Array with: (acceptedMorphs at: a)).
@@ -477,7 +441,7 @@ EPGGameBoard >> initializeSectionMorphs [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 6/8/2024 17:45'
+	#'squeak_changestamp' : 'Philipp 6/16/2024 18:19'
 }
 EPGGameBoard >> initializeStorypointAreas [
 
@@ -489,7 +453,7 @@ EPGGameBoard >> initializeStorypointAreas [
 		point := (self class storypointOffset + ((a - 1) * self class storypointGap) + ((a - 1) * area extent x)) @ self class storypointOffset.
 		area
 			position: self planningArea position + point;
-			gameBoard: self;
+			game: self game;
 			addStorypoints: 3.
 		(a == 1) 
 			ifTrue: [area dropEnabled: false.]
@@ -506,42 +470,6 @@ EPGGameBoard >> newDoneAreaAccepting: aSelector [
 	^ EPGDnDArea new accepts: {aSelector asSymbol};
 		initializeVisibleArea.
 
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'sv 6/9/2024 16:11'
-}
-EPGGameBoard >> numOfBugCards [
-
-	^ numOfBugCards.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'sv 6/9/2024 16:11'
-}
-EPGGameBoard >> numOfBugCards: aNumber [
-
-	numOfBugCards := aNumber.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'sv 6/9/2024 16:11'
-}
-EPGGameBoard >> numOfFeatureCards [
-
-	^ numOfFeatureCards.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'sv 6/9/2024 16:11'
-}
-EPGGameBoard >> numOfFeatureCards: aNumber [
-
-	numOfFeatureCards := aNumber.
 ]
 
 {
@@ -594,16 +522,6 @@ EPGGameBoard >> reviewArea [
 EPGGameBoard >> reviewArea: aMorph [
 
 	reviewArea := aMorph.
-]
-
-{
-	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/30/2024 22:11'
-}
-EPGGameBoard >> startNewRound [
-
-	self changed: #newRound.
-	
 ]
 
 {
