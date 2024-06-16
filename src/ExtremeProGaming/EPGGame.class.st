@@ -94,7 +94,7 @@ EPGGame >> generateFeatureCards [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'Philipp 6/16/2024 18:11'
+	#'squeak_changestamp' : 'jmetrikat 6/16/2024 23:15'
 }
 EPGGame >> initialize [
 
@@ -102,8 +102,8 @@ EPGGame >> initialize [
 	self 
 		gameBoard: (EPGGameBoard newWithGame: self);
 		cardSource: EPGJSONParser new.
-	self gameBoard openInWorld.
 	self initializeDefaultGameState.
+	^ self gameBoard.
 ]
 
 {

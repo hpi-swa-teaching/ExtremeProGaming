@@ -6,11 +6,11 @@ Class {
 
 {
 	#category : #'initialize-release',
-	#'squeak_changestamp' : 'JA 5/16/2024 11:35'
+	#'squeak_changestamp' : 'jmetrikat 6/16/2024 23:13'
 }
 EPGGameBoardExistenceTests >> setUp [
 
-	morph := EPGGameBoard new.
+	morph := EPGGame new.
 ]
 
 {
@@ -51,33 +51,36 @@ EPGGameBoardExistenceTests >> testBackgroundMorphOpened [
 
 {
 	#category : #'tests - initialization',
-	#'squeak_changestamp' : 'JA 5/21/2024 16:29'
+	#'squeak_changestamp' : 'jmetrikat 6/16/2024 23:27'
 }
 EPGGameBoardExistenceTests >> testCalculateAreaExtend [
 	
-	self assert: (morph calculateAreaExtendFor: 'planning') equals: (0.25 * 1920)@1080.
-	self assert: (morph calculateAreaExtendFor: 'backlog') equals: (0.5 * 1920)@1080.
-	self assert: (morph calculateAreaExtendFor: 'review') equals: (0.25 * 1920)@1080.
+	self
+		assert: (morph calculateAreaExtendFor: 'planning') equals: (0.25 * 1920) @ 1080;
+		assert: (morph calculateAreaExtendFor: 'backlog') equals: (0.5 * 1920) @ 1080;
+		assert: (morph calculateAreaExtendFor: 'review') equals: (0.25 * 1920) @ 1080.
 ]
 
 {
 	#category : #'tests - initialization',
-	#'squeak_changestamp' : 'JA 5/21/2024 16:24'
+	#'squeak_changestamp' : 'jmetrikat 6/16/2024 23:27'
 }
 EPGGameBoardExistenceTests >> testCalculateAreaPosition [
 	
-	self assert: (morph calculateAreaPositionFor: 'planning') equals: 0@0.
-	self assert: (morph calculateAreaPositionFor: 'backlog') equals: (1920*0.25)@0.
-	self assert: (morph calculateAreaPositionFor: 'review') equals: (1920*0.75)@0.
+	self
+		assert: (morph calculateAreaPositionFor: 'planning') equals: 0 @ 0;
+		assert: (morph calculateAreaPositionFor: 'backlog') equals: (1920 * 0.25) @ 0;
+		assert: (morph calculateAreaPositionFor: 'review') equals: (1920 * 0.75) @ 0.
 ]
 
 {
 	#category : #'tests - initialization',
-	#'squeak_changestamp' : 'JA 5/16/2024 11:22'
+	#'squeak_changestamp' : 'jmetrikat 6/16/2024 23:27'
 }
 EPGGameBoardExistenceTests >> testSectionMorphsExistence [
 	
-	self assert: morph planningArea isMorph equals: true;
+	self
+		assert: morph planningArea isMorph equals: true;
 		assert: morph backlogArea isMorph equals: true;
 		assert: morph reviewArea isMorph equals: true.
 ]
