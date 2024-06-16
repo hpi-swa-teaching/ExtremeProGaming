@@ -13,7 +13,10 @@ Class {
 		'perTechnicalDebt',
 		'frontend',
 		'effect',
-		'gameBoard'
+		'gameBoard',
+		'focus',
+		'originCenter',
+		'lastTimeClicked'
 	],
 	#category : #ExtremeProGaming
 }
@@ -130,6 +133,15 @@ EPGCard >> beBackend [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'sv 6/16/2024 08:37'
+}
+EPGCard >> beFocus [
+
+	focus := true.
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 6/3/2024 09:54'
 }
 EPGCard >> beFrontend [
@@ -153,6 +165,15 @@ EPGCard >> beNegative [
 EPGCard >> bePositive [
 
 	self effectSelector: #positive.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'sv 6/16/2024 08:37'
+}
+EPGCard >> beUnfocus [
+
+	focus := false.
 ]
 
 {
@@ -315,6 +336,15 @@ EPGCard >> displayEffect [
 ]
 
 {
+	#category : #'mouse events',
+	#'squeak_changestamp' : 'sv 6/16/2024 09:35'
+}
+EPGCard >> doubleClick: anEvent [
+
+	self focusCard.
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 6/6/2024 20:03'
 }
@@ -378,6 +408,21 @@ EPGCard >> facing [
 EPGCard >> facing: aSelector [
 
 	facing := aSelector.
+]
+
+{
+	#category : #'mouse events',
+	#'squeak_changestamp' : 'sv 6/16/2024 09:50'
+}
+EPGCard >> focusCard [
+
+	(self isFocus)
+		ifTrue: [self extent: self extent / 2.
+			self center: self originCenter. 
+			self beUnfocus.]
+		ifFalse: [self originCenter: self center.
+			self owner addMorph: (self extent: self extent * 2; center: self gameBoard boundsInWorld center).
+			self beFocus.]
 ]
 
 {
@@ -471,6 +516,15 @@ EPGCard >> gameBoard: aGameBoard [
 ]
 
 {
+	#category : #'mouse events',
+	#'squeak_changestamp' : 'sv 6/15/2024 18:12'
+}
+EPGCard >> handlesMouseDown: anEvent [
+
+	^ true.
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 5/27/2024 20:30'
 }
@@ -534,7 +588,7 @@ EPGCard >> headerTextCenter [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'HCH 6/12/2024 14:09'
+	#'squeak_changestamp' : 'sv 6/16/2024 08:42'
 }
 EPGCard >> initialize [
 
@@ -545,7 +599,8 @@ EPGCard >> initialize [
 		extent: 200 @ 300;
 		frontBody: (Morph new color: Color transparent);
 		backBody: (Morph new color: Color transparent);
-		facing: #front.
+		facing: #front;
+		beUnfocus.
 ]
 
 {
@@ -586,11 +641,75 @@ EPGCard >> isEPGStorypoint [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'sv 6/16/2024 08:37'
+}
+EPGCard >> isFocus [
+
+	^ focus.
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 6/3/2024 09:54'
 }
 EPGCard >> isFrontend [
 
 	^ self frontend.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'sv 6/16/2024 09:25'
+}
+EPGCard >> lastTimeClicked [
+
+	^ lastTimeClicked.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'sv 6/16/2024 09:25'
+}
+EPGCard >> lastTimeClicked: aTime [
+
+	lastTimeClicked := aTime.
+]
+
+{
+	#category : #'mouse events',
+	#'squeak_changestamp' : 'sv 6/16/2024 09:35'
+}
+EPGCard >> mouseDown: anEvent [
+
+	"| timeDifference |
+	timeDifference := Time millisecondClockValue - self lastTimeClicked.
+	timeDifference < self doubleClickThreshold 
+		ifTrue: [ self click]"
+
+	(self gameBoard backlogArea bounds containsPoint: anEvent position) 
+		ifTrue: [self turn.
+				anEvent hand waitForClicksOrDrag: self event: anEvent].
+		
+	anEvent wasHandled: false.
+	super mouseDown: anEvent.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'sv 6/16/2024 08:46'
+}
+EPGCard >> originCenter [
+
+	^ originCenter.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'sv 6/16/2024 08:46'
+}
+EPGCard >> originCenter: aPoint [
+
+	originCenter := aPoint.
 ]
 
 {
