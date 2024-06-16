@@ -64,12 +64,11 @@ EPGCostDisplayTests >> testDisplayLargeCostError [
 
 {
 	#category : #displaying,
-	#'squeak_changestamp' : 'JA 6/8/2024 18:24'
+	#'squeak_changestamp' : 'jmetrikat 6/16/2024 23:25'
 }
 EPGCostDisplayTests >> testDisplayStorypoints [
 	
-	| amountSubmorphsBeforeDisplaying amountSubmorphsAfterDisplaying|
-	
+	| amountSubmorphsBeforeDisplaying amountSubmorphsAfterDisplaying |
 	morph cost: 3.
 	amountSubmorphsBeforeDisplaying := (morph submorphs) size.
 	morph displayStorypoints.
@@ -91,52 +90,48 @@ EPGCostDisplayTests >> testDisplayZeroCostError [
 
 {
 	#category : #initializing,
-	#'squeak_changestamp' : 'HCH 6/15/2024 23:14'
+	#'squeak_changestamp' : 'jmetrikat 6/16/2024 23:26'
 }
 EPGCostDisplayTests >> testInitializeCostDisplayBackend [
 
 	| costDisplayMorph |
-	
 	costDisplayMorph := Morph new
 		extent: self class displayExtent;
 		color: Color white;
 		borderWidth: self class displayBorderWidth;
 		borderColor: Color gray.
 
-	self assert: (costDisplayMorph extent) equals: (morphBack extent).
-	self assert: (costDisplayMorph color) equals: (morphBack color).
-	self assert: (costDisplayMorph borderWidth) equals: (morphBack borderWidth).
-	self assert: (costDisplayMorph borderColor) equals: (morphBack borderColor).
-	
-	self assert: (morphBack storypoint extent) equals: (self class storypointExtent).
-	self assert: (morphBack storypoint color) equals: (Color green).
-	
-	self assert: (morphBack isFrontend) equals: false.
-	self assert: (morphBack isBackend ) equals: true.
+	self
+		assert: (costDisplayMorph extent) equals: (morphBack extent);
+		assert: (costDisplayMorph color) equals: (morphBack color);
+		assert: (costDisplayMorph borderWidth) equals: (morphBack borderWidth);
+		assert: (costDisplayMorph borderColor) equals: (morphBack borderColor);
+		assert: (morphBack storypoint extent) equals: (self class storypointExtent);
+		assert: (morphBack storypoint color) equals: (Color green);
+		assert: (morphBack isFrontend) equals: false;
+		assert: (morphBack isBackend ) equals: true.
 ]
 
 {
 	#category : #initializing,
-	#'squeak_changestamp' : 'HCH 6/12/2024 15:01'
+	#'squeak_changestamp' : 'jmetrikat 6/16/2024 23:26'
 }
 EPGCostDisplayTests >> testInitializeCostDisplayFrontend [
 
 	| costDisplayMorph |
-	
 	costDisplayMorph := Morph new
 		extent: self class displayExtent;
 		color: Color white;
 		borderWidth: self class displayBorderWidth;
 		borderColor: Color gray.
 
-	self assert: (costDisplayMorph extent) equals: (morphFront extent).
-	self assert: (costDisplayMorph color) equals: (morphFront color).
-	self assert: (costDisplayMorph borderWidth) equals: (morphFront borderWidth).
-	self assert: (costDisplayMorph borderColor) equals: (morphFront borderColor).
-	
-	self assert: (morphFront storypoint extent) equals: (self class storypointExtent).
-	self assert: (morphFront storypoint color) equals: (Color green).
-	
-	self assert: (morphFront isFrontend) equals: true.
-	self assert: (morphFront isBackend ) equals: false.
+	self
+		assert: (costDisplayMorph extent) equals: (morphFront extent);
+		assert: (costDisplayMorph color) equals: (morphFront color);
+		assert: (costDisplayMorph borderWidth) equals: (morphFront borderWidth);
+		assert: (costDisplayMorph borderColor) equals: (morphFront borderColor);
+		assert: (morphFront storypoint extent) equals: (self class storypointExtent);
+		assert: (morphFront storypoint color) equals: (Color green);
+		assert: (morphFront isFrontend) equals: true;
+		assert: (morphFront isBackend ) equals: false.
 ]

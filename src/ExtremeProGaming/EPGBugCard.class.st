@@ -116,7 +116,7 @@ EPGBugCard >> isEPGFeatureCard [
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'jmetrikat 6/16/2024 12:40'
+	#'squeak_changestamp' : 'Philipp 6/16/2024 18:31'
 }
 EPGBugCard >> moveToDone [
 

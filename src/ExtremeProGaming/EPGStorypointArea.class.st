@@ -1,19 +1,22 @@
 Class {
 	#name : #EPGStorypointArea,
 	#superclass : #EPGDnDArea,
+	#instVars : [
+		'game'
+	],
 	#category : #ExtremeProGaming
 }
 
 {
 	#category : #features,
-	#'squeak_changestamp' : 'jmetrikat 6/8/2024 17:43'
+	#'squeak_changestamp' : 'Philipp 6/16/2024 18:19'
 }
 EPGStorypointArea >> addStorypoints: aNumber [
 
 	| newStorypoint |
 	aNumber timesRepeat: [
 		newStorypoint := EPGStorypoint new.
-		self gameBoard addDependent: newStorypoint.
+		self game addDependent: newStorypoint.
 		self dropInMorph: newStorypoint]
 ]
 
@@ -28,6 +31,25 @@ EPGStorypointArea >> dropInMorph: aMorph [
 	self addMorphFront: (aMorph position: self position +  ((0 to: range x ) atRandom @ (0 to: range y) atRandom)).
 	self dropped addFirst: aMorph.
 	self removeBorder.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Philipp 6/16/2024 18:37'
+}
+EPGStorypointArea >> game [
+
+	^ game.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Philipp 6/16/2024 18:38'
+}
+EPGStorypointArea >> game: aGame [
+
+	game := aGame.
+	
 ]
 
 {
