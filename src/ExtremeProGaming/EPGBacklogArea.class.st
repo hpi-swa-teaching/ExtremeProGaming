@@ -3,27 +3,27 @@ Class {
 	#superclass : #EPGDnDArea,
 	#instVars : [
 		'image',
-		'amountOfStoryPoints'
+		'amountOfStorypoints'
 	],
 	#category : #ExtremeProGaming
 }
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'jmetrikat 6/8/2024 16:17'
+	#'squeak_changestamp' : 'jmetrikat 6/16/2024 12:38'
 }
-EPGBacklogArea >> amounfOfStoryPoints [
+EPGBacklogArea >> amounfOfStorypoints [
 
-	^ amountOfStoryPoints.
+	^ amountOfStorypoints.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'jmetrikat 6/8/2024 16:17'
+	#'squeak_changestamp' : 'jmetrikat 6/16/2024 12:37'
 }
-EPGBacklogArea >> amountOfStoryPoints: aNumber [
+EPGBacklogArea >> amountOfStorypoints: aNumber [
 
-	amountOfStoryPoints := aNumber.
+	amountOfStorypoints := aNumber.
 ]
 
 {
@@ -50,7 +50,7 @@ EPGBacklogArea >> dropInMorph: aMorph [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/15/2024 22:02'
+	#'squeak_changestamp' : 'jmetrikat 6/16/2024 12:38'
 }
 EPGBacklogArea >> dropInStorypoint: aMorph [
 	
@@ -59,7 +59,7 @@ EPGBacklogArea >> dropInStorypoint: aMorph [
 		(self width / 2 - 10 to: self width / 2 + 10) atRandom @ 
 		((self height / 2 - 10 to: self height / 2 + 10) atRandom).
 	super dropInMorph: aMorph at: randomPosition.
-	self amountOfStoryPoints: self amounfOfStoryPoints + 1.
+	self amountOfStorypoints: self amounfOfStorypoints + 1.
 ]
 
 {
@@ -82,7 +82,7 @@ EPGBacklogArea >> image: anImage [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'HCH 6/15/2024 22:41'
+	#'squeak_changestamp' : 'jmetrikat 6/16/2024 12:37'
 }
 EPGBacklogArea >> initialize [
 
@@ -90,7 +90,7 @@ EPGBacklogArea >> initialize [
 	
 	self
 		extent: 200 @ 250;
-		amountOfStoryPoints: 0;
+		amountOfStorypoints: 0;
 		accepts: #(#EPGBugCard #EPGFeatureCard);
 		initializeVisibleArea.
 		
@@ -108,13 +108,15 @@ EPGBacklogArea >> isEPGBacklogArea [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/15/2024 22:04'
+	#'squeak_changestamp' : 'jmetrikat 6/16/2024 12:38'
 }
 EPGBacklogArea >> pickUpMorph: aMorph [
 	
 	aMorph isEPGBacklogCard ifTrue: [^ nil.].
-	aMorph formerOwner: self.
-	aMorph formerPosition: aMorph position.
+	aMorph isEPGStorypoint ifTrue: [self amountOfStorypoints: self amounfOfStorypoints - 1].
+	aMorph
+		formerOwner: self;
+		formerPosition: aMorph position.
 	self dropped remove: aMorph.
 	^ aMorph.
 ]

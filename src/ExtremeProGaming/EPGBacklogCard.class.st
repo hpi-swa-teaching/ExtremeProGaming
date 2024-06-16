@@ -6,11 +6,11 @@ Class {
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'jmetrikat 6/8/2024 16:17'
+	#'squeak_changestamp' : 'jmetrikat 6/16/2024 12:38'
 }
 EPGBacklogCard >> checkCost: aDebtAmount [
 
-	^ (self cost + (self perTechnicalDebt * aDebtAmount) <= self owner amounfOfStoryPoints)
+	^ (self cost + (self perTechnicalDebt * aDebtAmount) <= self owner amounfOfStorypoints)
 ]
 
 {
@@ -59,7 +59,7 @@ EPGBacklogCard >> process: aDebtArea [
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'jmetrikat 6/9/2024 18:27'
+	#'squeak_changestamp' : 'jmetrikat 6/16/2024 12:38'
 }
 EPGBacklogCard >> processStorypoints [
 	
@@ -71,6 +71,6 @@ EPGBacklogCard >> processStorypoints [
 	
 	regularAreaIndex := self gameBoard class storyPointAreaTypes indexOf: #regular.
 	regularStoryPointArea := (self gameBoard storyPointAreas at: regularAreaIndex).
-	regularStoryPointArea addStorypoints: self owner amounfOfStoryPoints.
-	self owner amountOfStoryPoints: 0.
+	regularStoryPointArea addStorypoints: self owner amounfOfStorypoints.
+	self owner amountOfStorypoints: 0.
 ]
