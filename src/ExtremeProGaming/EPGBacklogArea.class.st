@@ -3,37 +3,63 @@ Class {
 	#superclass : #EPGDnDArea,
 	#instVars : [
 		'image',
-		'amountOfStoryPoints'
+		'amountOfStorypoints'
 	],
 	#category : #ExtremeProGaming
 }
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'jmetrikat 6/8/2024 16:17'
+	#'squeak_changestamp' : 'jmetrikat 6/16/2024 12:38'
 }
-EPGBacklogArea >> amounfOfStoryPoints [
+EPGBacklogArea >> amounfOfStorypoints [
 
-	^ amountOfStoryPoints.
+	^ amountOfStorypoints.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'jmetrikat 6/8/2024 16:17'
+	#'squeak_changestamp' : 'jmetrikat 6/16/2024 12:37'
 }
-EPGBacklogArea >> amountOfStoryPoints: aNumber [
+EPGBacklogArea >> amountOfStorypoints: aNumber [
 
-	amountOfStoryPoints := aNumber.
+	amountOfStorypoints := aNumber.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'jmetrikat 6/8/2024 16:17'
+	#'squeak_changestamp' : 'HCH 6/15/2024 21:53'
+}
+EPGBacklogArea >> dropInCard: aMorph [
+
+	super dropInMorph: aMorph.
+	self accepts: #(#EPGStorypoint).
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/15/2024 21:56'
 }
 EPGBacklogArea >> dropInMorph: aMorph [
 
-	super dropInMorph: aMorph.
-	aMorph isEPGStorypoint ifTrue: [self amountOfStoryPoints: self amounfOfStoryPoints + 1].
+	aMorph isEPGBacklogCard
+		ifTrue: [self dropInCard: aMorph].
+	aMorph isEPGStorypoint 
+		ifTrue: [self dropInStorypoint: aMorph].
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'jmetrikat 6/16/2024 12:38'
+}
+EPGBacklogArea >> dropInStorypoint: aMorph [
+	
+	| randomPosition |
+	randomPosition := 
+		(self width / 2 - 10 to: self width / 2 + 10) atRandom @ 
+		((self height / 2 - 10 to: self height / 2 + 10) atRandom).
+	super dropInMorph: aMorph at: randomPosition.
+	self amountOfStorypoints: self amounfOfStorypoints + 1.
 ]
 
 {
@@ -56,7 +82,7 @@ EPGBacklogArea >> image: anImage [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 6/8/2024 16:17'
+	#'squeak_changestamp' : 'jmetrikat 6/16/2024 12:37'
 }
 EPGBacklogArea >> initialize [
 
@@ -64,8 +90,8 @@ EPGBacklogArea >> initialize [
 	
 	self
 		extent: 200 @ 250;
-		amountOfStoryPoints: 0;
-		accepts: #(#EPGBugCard #EPGFeatureCard #EPGStorypoint);
+		amountOfStorypoints: 0;
+		accepts: #(#EPGBugCard #EPGFeatureCard);
 		initializeVisibleArea.
 		
 	self area color: Color transparent.
@@ -78,4 +104,28 @@ EPGBacklogArea >> initialize [
 EPGBacklogArea >> isEPGBacklogArea [
 
 	^ true.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'jmetrikat 6/16/2024 12:38'
+}
+EPGBacklogArea >> pickUpMorph: aMorph [
+	
+	aMorph isEPGBacklogCard ifTrue: [^ nil.].
+	aMorph isEPGStorypoint ifTrue: [self amountOfStorypoints: self amounfOfStorypoints - 1].
+	aMorph
+		formerOwner: self;
+		formerPosition: aMorph position.
+	self dropped remove: aMorph.
+	^ aMorph.
+]
+
+{
+	#category : #'events-processing',
+	#'squeak_changestamp' : 'HCH 6/15/2024 22:41'
+}
+EPGBacklogArea >> resetAccepts [
+
+	self accepts: #(#EPGBugCard #EPGFeatureCard).
 ]

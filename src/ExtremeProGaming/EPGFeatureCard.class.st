@@ -116,6 +116,21 @@ EPGFeatureCard >> isEPGFeatureCard [
 
 {
 	#category : #'events-processing',
+	#'squeak_changestamp' : 'jmetrikat 6/16/2024 12:40'
+}
+EPGFeatureCard >> moveToDone [
+
+	| doneArea index |
+	index := self gameBoard class doneAreaTypes indexOf: #Feature.
+	doneArea := self gameBoard doneAreas at: index.
+	self removeProperty: #EPGFeatureCard.
+	self setProperty: #EPGFeatureDone toValue: true.
+	doneArea dropInMorph: self.
+	
+]
+
+{
+	#category : #'events-processing',
 	#'squeak_changestamp' : 'Philipp 6/7/2024 17:31'
 }
 EPGFeatureCard >> process: aDebtArea [

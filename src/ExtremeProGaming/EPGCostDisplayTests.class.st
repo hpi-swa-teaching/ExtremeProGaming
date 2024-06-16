@@ -91,7 +91,7 @@ EPGCostDisplayTests >> testDisplayZeroCostError [
 
 {
 	#category : #initializing,
-	#'squeak_changestamp' : 'HCH 6/12/2024 15:00'
+	#'squeak_changestamp' : 'HCH 6/15/2024 23:14'
 }
 EPGCostDisplayTests >> testInitializeCostDisplayBackend [
 
