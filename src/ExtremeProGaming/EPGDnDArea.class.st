@@ -147,6 +147,18 @@ EPGDnDArea >> borderVisible: aBoolean [
 ]
 
 {
+	#category : #'dragging/dropping',
+	#'squeak_changestamp' : 'HCH 6/16/2024 15:18'
+}
+EPGDnDArea >> clearArea [
+
+	self dropped do: [:drop | self removeMorph: drop].
+	self dropped removeAll.
+
+	
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 5/29/2024 00:49'
 }
