@@ -337,7 +337,7 @@ EPGCard >> displayEffect [
 
 {
 	#category : #'mouse events',
-	#'squeak_changestamp' : 'sv 6/17/2024 09:43'
+	#'squeak_changestamp' : 'sv 6/17/2024 09:56'
 }
 EPGCard >> doubleClick: anEvent [
 
@@ -413,7 +413,7 @@ EPGCard >> facing: aSelector [
 
 {
 	#category : #'mouse events',
-	#'squeak_changestamp' : 'sv 6/16/2024 09:50'
+	#'squeak_changestamp' : 'sv 6/17/2024 09:53'
 }
 EPGCard >> focusCard [
 
@@ -422,7 +422,9 @@ EPGCard >> focusCard [
 			self center: self originCenter. 
 			self beUnfocus.]
 		ifFalse: [self originCenter: self center.
-			self owner addMorph: (self extent: self extent * 2; center: self gameBoard boundsInWorld center).
+			self gameBoard addMorphFront: 
+				(self extent: self extent * 2; 
+					center: self gameBoard boundsInWorld center).
 			self beFocus.]
 ]
 
