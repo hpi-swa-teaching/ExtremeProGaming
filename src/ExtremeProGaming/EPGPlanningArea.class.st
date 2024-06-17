@@ -9,18 +9,20 @@ Class {
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 6/1/2024 11:03'
+	#'squeak_changestamp' : 'Philipp 6/16/2024 18:17'
 }
 EPGPlanningArea >> image [
-	^ image
+
+	^ image.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 6/1/2024 11:03'
+	#'squeak_changestamp' : 'Philipp 6/16/2024 18:17'
 }
-EPGPlanningArea >> image: anObject [
-	image := anObject
+EPGPlanningArea >> image: anImage [
+
+	image := anImage.
 ]
 
 {
@@ -37,13 +39,4 @@ EPGPlanningArea >> initialize [
 		initializeVisibleArea.
 		
 	self area color: Color transparent.
-]
-
-{
-	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/31/2024 13:57'
-}
-EPGPlanningArea >> initializeCardStack [
-
-	"TODO"
 ]
