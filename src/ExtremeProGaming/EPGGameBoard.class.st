@@ -75,6 +75,15 @@ EPGGameBoard class >> buttonExtent [
 
 {
 	#category : #constants,
+	#'squeak_changestamp' : 'jmetrikat 6/17/2024 23:09'
+}
+EPGGameBoard class >> defaultAmountOfStorypoints [
+
+	^ 3.
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'Philipp 6/16/2024 17:05'
 }
 EPGGameBoard class >> defaultColor [
@@ -180,30 +189,29 @@ EPGGameBoard >> aboutToBeGrabbedBy: aHand [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 6/17/2024 15:36'
+	#'squeak_changestamp' : 'jmetrikat 6/17/2024 20:26'
 }
 EPGGameBoard >> addBacklogArea [
 
-	
-	self addMorph: self backlogArea fullFrame: (LayoutFrame fractions: ((self class areaExtentRatio at: #backlogBeginn) @ 0 corner: ((self class areaExtentRatio at: #backlogEnd) @ 1)) offsets: (0@0 corner: 0 @ 0)).
+	self addMorph: self backlogArea fullFrame: (LayoutFrame fractions: ((self class areaExtentRatio at: #backlogBeginn) @ 0 corner: ((self class areaExtentRatio at: #backlogEnd) @ 1)) offsets: (0 @ 0 corner: 0 @ 0)).
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 6/17/2024 15:42'
+	#'squeak_changestamp' : 'jmetrikat 6/17/2024 20:26'
 }
 EPGGameBoard >> addPlanningArea [
 
-	self addMorph: self planningArea fullFrame: (LayoutFrame fractions: ((self class areaExtentRatio at: #planningBeginn) @ 0 corner: ((self class areaExtentRatio at: #planningEnd) @ 1)) offsets: (0@0 corner: 0 @ 0)).
+	self addMorph: self planningArea fullFrame: (LayoutFrame fractions: ((self class areaExtentRatio at: #planningBeginn) @ 0 corner: ((self class areaExtentRatio at: #planningEnd) @ 1)) offsets: (0 @ 0 corner: 0 @ 0)).
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 6/17/2024 15:38'
+	#'squeak_changestamp' : 'jmetrikat 6/17/2024 20:26'
 }
 EPGGameBoard >> addReviewArea [
 
-	self addMorph: self reviewArea fullFrame: (LayoutFrame fractions: ((self class areaExtentRatio at: #reviewBeginn) @ 0 corner: ((self class areaExtentRatio at: #reviewEnd) @ 1)) offsets: (0@0 corner: 0 @ 0)).
+	self addMorph: self reviewArea fullFrame: (LayoutFrame fractions: ((self class areaExtentRatio at: #reviewBeginn) @ 0 corner: ((self class areaExtentRatio at: #reviewEnd) @ 1)) offsets: (0 @ 0 corner: 0 @ 0)).
 ]
 
 {
@@ -408,12 +416,11 @@ EPGGameBoard >> initialize [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 6/17/2024 15:30'
+	#'squeak_changestamp' : 'jmetrikat 6/17/2024 23:05'
 }
 EPGGameBoard >> initializeBacklogAreas [
 
 	| area |
-	
 	1 to: 9 do:  [:a | 
 		area := EPGBacklogArea new.
 		area image: (ImageMorph new image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: ('/assets/BacklogAreas/BacklogArea', a, '.png')) scaledToSize: EPGCard cardExtent));
@@ -501,16 +508,14 @@ EPGGameBoard >> initializePlanningAreas [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 6/17/2024 15:43'
+	#'squeak_changestamp' : 'jmetrikat 6/17/2024 20:27'
 }
 EPGGameBoard >> initializeSectionMorphs [
 
 	self
 		planningArea: self createPlanningArea;
 		backlogArea: self createBacklogArea;
-		reviewArea: self createReviewArea.
-		
-	self
+		reviewArea: self createReviewArea;
 		addPlanningArea;
 		addBacklogArea;
 		addReviewArea.
@@ -518,22 +523,21 @@ EPGGameBoard >> initializeSectionMorphs [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 6/17/2024 15:07'
+	#'squeak_changestamp' : 'jmetrikat 6/17/2024 23:08'
 }
 EPGGameBoard >> initializeStorypointAreas [
 
 	| wrapper area |
-		
 	wrapper := self newStorypointWrapper.
 	self planningArea addMorph: wrapper.	
-		
+	
 	self storyPointAreas: OrderedCollection new.
 	3 timesRepeat: [self storyPointAreas add: EPGStorypointArea new].
 	1 to: 3 do: [:a |
 		area := self storyPointAreas at: a.
 		area
 			game: self game;
-			addStorypoints: 3.
+			addStorypoints: self class defaultAmountOfStorypoints.
 		(a == 1) 
 			ifTrue: [area dropEnabled: false.]
 			ifFalse: [area accepts: #(#EPGStorypoint)].

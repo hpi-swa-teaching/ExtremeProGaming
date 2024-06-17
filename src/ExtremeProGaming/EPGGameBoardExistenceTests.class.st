@@ -73,12 +73,11 @@ EPGGameBoardExistenceTests >> testCalculateAreaPosition [
 
 {
 	#category : #'tests - initialization',
-	#'squeak_changestamp' : 'jmetrikat 6/16/2024 23:27'
+	#'squeak_changestamp' : 'jmetrikat 6/17/2024 23:10'
 }
 EPGGameBoardExistenceTests >> testSectionMorphsExistence [
 	
-	self
-		assert: morph planningArea isMorph equals: true;
-		assert: morph backlogArea isMorph equals: true;
-		assert: morph reviewArea isMorph equals: true.
+	self assert: morph planningArea isMorph equals: true.
+	self assert: morph backlogArea isMorph equals: true.
+	self assert: morph reviewArea isMorph equals: true.
 ]
