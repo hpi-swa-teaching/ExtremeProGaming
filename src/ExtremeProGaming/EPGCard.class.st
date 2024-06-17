@@ -337,11 +337,12 @@ EPGCard >> displayEffect [
 
 {
 	#category : #'mouse events',
-	#'squeak_changestamp' : 'sv 6/16/2024 09:35'
+	#'squeak_changestamp' : 'sv 6/17/2024 09:43'
 }
 EPGCard >> doubleClick: anEvent [
 
-	self focusCard.
+	"self focusCard."
+	self turn.
 ]
 
 {
@@ -677,7 +678,7 @@ EPGCard >> lastTimeClicked: aTime [
 
 {
 	#category : #'mouse events',
-	#'squeak_changestamp' : 'sv 6/16/2024 09:35'
+	#'squeak_changestamp' : 'sv 6/17/2024 09:41'
 }
 EPGCard >> mouseDown: anEvent [
 
@@ -687,7 +688,7 @@ EPGCard >> mouseDown: anEvent [
 		ifTrue: [ self click]"
 
 	(self gameBoard backlogArea bounds containsPoint: anEvent position) 
-		ifTrue: [self turn.
+		ifTrue: ["self turn."
 				anEvent hand waitForClicksOrDrag: self event: anEvent].
 		
 	anEvent wasHandled: false.
