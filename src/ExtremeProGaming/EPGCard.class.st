@@ -463,7 +463,7 @@ EPGCard >> frontend: aBoolean [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Philipp 6/7/2024 17:02'
+	#'squeak_changestamp' : 'Philipp 6/16/2024 18:30'
 }
 EPGCard >> gameBoard [
 
@@ -472,7 +472,7 @@ EPGCard >> gameBoard [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Philipp 6/7/2024 17:03'
+	#'squeak_changestamp' : 'Philipp 6/16/2024 18:30'
 }
 EPGCard >> gameBoard: aGameBoard [
 

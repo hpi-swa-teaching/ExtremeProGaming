@@ -2,7 +2,8 @@ Class {
 	#name : #EPGDebt,
 	#superclass : #EPGDnDArea,
 	#instVars : [
-		'image'
+		'image',
+		'game'
 	],
 	#category : #ExtremeProGaming
 }
@@ -18,15 +19,33 @@ EPGDebt >> checkForStorypoint [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 6/8/2024 16:53'
+	#'squeak_changestamp' : 'Philipp 6/16/2024 18:13'
 }
 EPGDebt >> checkIfProcessed [
 
 	(self checkForStorypoint)
 		ifTrue: [
 			self area decrementDebt.
-			self gameBoard removeDependent: self.
+			self game removeDependent: self.
 			self abandon].
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Philipp 6/16/2024 18:36'
+}
+EPGDebt >> game [
+
+	^ game.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Philipp 6/16/2024 18:37'
+}
+EPGDebt >> game: aGame [
+
+	game := aGame.
 ]
 
 {

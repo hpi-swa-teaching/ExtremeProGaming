@@ -12,8 +12,7 @@ Class {
 		'dropEnabled',
 		'accepts',
 		'backgroundMargin',
-		'draggable',
-		'gameBoard'
+		'draggable'
 	],
 	#category : #ExtremeProGaming,
 	#'squeak_changestamp' : 'HCH 5/29/2024 00:29'
@@ -195,11 +194,11 @@ EPGDnDArea >> dropInMorph: aMorph [
 
 {
 	#category : #'dragging/dropping',
-	#'squeak_changestamp' : 'JP 5/27/2024 23:37'
+	#'squeak_changestamp' : 'jmetrikat 6/16/2024 12:40'
 }
 EPGDnDArea >> dropInMorph: aMorph at: aPosition [
 
-	self addMorphFront: (aMorph position:  aPosition).
+	self addMorphFront: (aMorph center: aPosition + self bounds origin).
 	self dropped addFirst: aMorph.
 	self removeBorder.
 ]
@@ -220,24 +219,6 @@ EPGDnDArea >> dropped [
 EPGDnDArea >> dropped: aCollection [
 
 	dropped := aCollection.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'jmetrikat 6/8/2024 17:28'
-}
-EPGDnDArea >> gameBoard [
-
-	^ gameBoard.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'jmetrikat 6/8/2024 17:29'
-}
-EPGDnDArea >> gameBoard: aGameBoard [
-
-	gameBoard := aGameBoard.
 ]
 
 {
@@ -386,7 +367,7 @@ EPGDnDArea >> toggleBorder [
 
 {
 	#category : #'dragging/dropping',
-	#'squeak_changestamp' : 'jmetrikat 6/6/2024 23:06'
+	#'squeak_changestamp' : 'HCH 6/15/2024 22:30'
 }
 EPGDnDArea >> wantsDroppedMorph: aMorph event: evt [
 
