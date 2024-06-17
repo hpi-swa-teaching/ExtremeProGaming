@@ -19,11 +19,11 @@ Class {
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'JA 5/21/2024 16:33'
+	#'squeak_changestamp' : 'JP 6/17/2024 14:02'
 }
 EPGGameBoardTableLayout class >> areaExtentRatio [
 
-	^ Dictionary newFrom: {'planning' -> 0.25. 'backlog' -> 0.5. 'review' -> 0.25}.
+	^ Dictionary newFrom: {#planningBeginn -> 0. #planningEnd -> 0.25. #backlogBeginn -> 0.25. #backlogEnd -> 0.75. #reviewBeginn -> 0.75. #reviewEnd -> 1}.
 ]
 
 {
@@ -59,11 +59,11 @@ EPGGameBoardTableLayout class >> backlogAreaXOffset [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'JP 6/14/2024 14:55'
+	#'squeak_changestamp' : 'JP 6/17/2024 14:28'
 }
 EPGGameBoardTableLayout class >> boardExtent [
 
-	^ 1920 @ 1310.
+	^ 2000 @ 1310.
 ]
 
 {
@@ -225,7 +225,7 @@ EPGGameBoardTableLayout >> cardSource: anEPGJSONParser [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 6/14/2024 11:48'
+	#'squeak_changestamp' : 'JP 6/17/2024 14:01'
 }
 EPGGameBoardTableLayout >> createBacklogArea [
 
@@ -233,13 +233,14 @@ EPGGameBoardTableLayout >> createBacklogArea [
 	sectionMorph := self createSectionMorphFor: 'backlog'.
 	sectionMorph
 		listDirection: #rightToLeft;
-		wrapDirection: #bottomToTop;
 		listCentering: #center;
+		wrapDirection: #bottomToTop;
 		wrapCentering: #center;
 		cellInset: 20.
 
 	self addMorph: sectionMorph fullFrame: (LayoutFrame 
-												  fractions: (0.25@0 corner: 0.75@1)
+												  fractions: ((self class areaExtentRatio at: #backlogBeginn) @ 0 
+														corner: ((self class areaExtentRatio at: #backlogEnd) @ 1))
 												  offsets: (0@0 corner: 0 @ 0)).
 	
 	^ sectionMorph.
@@ -247,7 +248,7 @@ EPGGameBoardTableLayout >> createBacklogArea [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 6/14/2024 11:10'
+	#'squeak_changestamp' : 'JP 6/17/2024 14:01'
 }
 EPGGameBoardTableLayout >> createPlanningArea [
 
@@ -261,7 +262,8 @@ EPGGameBoardTableLayout >> createPlanningArea [
 		layoutInset: 10.
 
 	self addMorph: sectionMorph fullFrame: (LayoutFrame 
-  												fractions: (0@0 corner: 0.25@1)
+  												fractions: ((self class areaExtentRatio at: #planningBeginn) @ 0 
+														corner: ((self class areaExtentRatio at: #planningEnd) @ 1))
  												 offsets: (0@0 corner: 0 @ 0)).
 												
 	^ sectionMorph.
@@ -269,7 +271,7 @@ EPGGameBoardTableLayout >> createPlanningArea [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 6/14/2024 11:10'
+	#'squeak_changestamp' : 'JP 6/17/2024 14:01'
 }
 EPGGameBoardTableLayout >> createReviewArea [
 
@@ -283,7 +285,8 @@ EPGGameBoardTableLayout >> createReviewArea [
 		layoutInset: 10.
 
 	self addMorph: sectionMorph fullFrame: (LayoutFrame 
-									  fractions: (0.75@0 corner: 1@1)
+									  fractions: ((self class areaExtentRatio at: #reviewBeginn) @ 0 
+														corner: ((self class areaExtentRatio at: #reviewEnd) @ 1))
 									  offsets: (0@0 corner: 0 @ 0)).
 
 	^ sectionMorph.
@@ -318,6 +321,16 @@ EPGGameBoardTableLayout >> doneAreas [
 EPGGameBoardTableLayout >> doneAreas: aCollection [
 
 	doneAreas := aCollection.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'JP 6/17/2024 14:33'
+}
+EPGGameBoardTableLayout >> extent: aPoint [
+
+	super extent: (aPoint max: self class boardExtent).
+	(self backlogArea isNil) ifFalse: [self backlogArea extent: 0.5 * self extent]. "Fixes a layouting bug"
 ]
 
 {
@@ -385,7 +398,7 @@ EPGGameBoardTableLayout >> generateFeatureCards [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 6/14/2024 14:54'
+	#'squeak_changestamp' : 'JP 6/17/2024 14:33'
 }
 EPGGameBoardTableLayout >> initialize [
 
@@ -404,6 +417,10 @@ EPGGameBoardTableLayout >> initialize [
 		initializeDebtAreas;
 		initializeDoneAreas;
 		generateCards.
+		
+	self fullBounds. "Fixes a layouting bug"
+	self backlogArea layoutChanged.
+	self fullBounds.
 		
 		
 		
