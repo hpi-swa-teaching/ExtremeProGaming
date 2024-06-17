@@ -15,8 +15,8 @@ Class {
 		'effect',
 		'gameBoard',
 		'focus',
-		'originCenter',
-		'lastTimeClicked'
+		'game',
+		'frozen'
 	],
 	#category : #ExtremeProGaming
 }
@@ -151,6 +151,15 @@ EPGCard >> beFrontend [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'sv 6/17/2024 16:39'
+}
+EPGCard >> beFrozen [
+
+	self frozen: true.
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 6/3/2024 17:03'
 }
 EPGCard >> beNegative [
@@ -174,6 +183,15 @@ EPGCard >> bePositive [
 EPGCard >> beUnfocus [
 
 	focus := false.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'sv 6/17/2024 16:40'
+}
+EPGCard >> beUnfrozen [
+
+	self frozen: false.
 ]
 
 {
@@ -337,12 +355,14 @@ EPGCard >> displayEffect [
 
 {
 	#category : #'mouse events',
-	#'squeak_changestamp' : 'sv 6/17/2024 09:56'
+	#'squeak_changestamp' : 'sv 6/17/2024 14:47'
 }
 EPGCard >> doubleClick: anEvent [
 
-	"self focusCard."
-	self turn.
+	self isFocus 
+		ifTrue: [self focusCard.].
+	
+
 ]
 
 {
@@ -413,15 +433,21 @@ EPGCard >> facing: aSelector [
 
 {
 	#category : #'mouse events',
-	#'squeak_changestamp' : 'sv 6/17/2024 09:53'
+	#'squeak_changestamp' : 'sv 6/17/2024 19:00'
 }
 EPGCard >> focusCard [
 
 	(self isFocus)
 		ifTrue: [self extent: self extent / 2.
-			self center: self originCenter. 
+			self turn.
+			"self game unfreezeCards."
+			self unfreezeDnD.
+			self moveToDone.
 			self beUnfocus.]
-		ifFalse: [self originCenter: self center.
+		ifFalse: [self turn. 
+			"self game freezeCards."
+			self freezeDnD.
+			"self unfreeze."
 			self gameBoard addMorphFront: 
 				(self extent: self extent * 2; 
 					center: self gameBoard boundsInWorld center).
@@ -465,6 +491,30 @@ EPGCard >> formatTask: aText [
 ]
 
 {
+	#category : #'mouse events',
+	#'squeak_changestamp' : 'sv 6/17/2024 16:42'
+}
+EPGCard >> freeze [
+
+	self lock.
+	self beFrozen.
+]
+
+{
+	#category : #'mouse events',
+	#'squeak_changestamp' : 'sv 6/17/2024 19:06'
+}
+EPGCard >> freezeDnD [
+
+	| DnDAreas board |
+	board := self gameBoard.
+	DnDAreas := (board planningAreas), (board storyPointAreas), (board doneAreas).
+	DnDAreas add: board frontendDebtArea;
+		add: (board backendDebtArea).
+	DnDAreas do: [:area | area dropEnabled: false.]. 
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 5/29/2024 20:47'
 }
@@ -502,6 +552,33 @@ EPGCard >> frontend: aBoolean [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'sv 6/17/2024 16:39'
+}
+EPGCard >> frozen: aBoolean [
+
+	frozen := aBoolean.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'sv 6/17/2024 15:28'
+}
+EPGCard >> game [
+
+	^ game.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'sv 6/17/2024 15:28'
+}
+EPGCard >> game: anEPGGame [
+
+	game := anEPGGame.
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'Philipp 6/16/2024 18:30'
 }
 EPGCard >> gameBoard [
@@ -520,11 +597,11 @@ EPGCard >> gameBoard: aGameBoard [
 
 {
 	#category : #'mouse events',
-	#'squeak_changestamp' : 'sv 6/15/2024 18:12'
+	#'squeak_changestamp' : 'sv 6/17/2024 16:43'
 }
 EPGCard >> handlesMouseDown: anEvent [
 
-	^ true.
+	^ self isFrozen not.
 ]
 
 {
@@ -591,7 +668,7 @@ EPGCard >> headerTextCenter [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'sv 6/16/2024 08:42'
+	#'squeak_changestamp' : 'sv 6/17/2024 16:40'
 }
 EPGCard >> initialize [
 
@@ -603,7 +680,8 @@ EPGCard >> initialize [
 		frontBody: (Morph new color: Color transparent);
 		backBody: (Morph new color: Color transparent);
 		facing: #front;
-		beUnfocus.
+		beUnfocus;
+		beUnfrozen.
 ]
 
 {
@@ -662,57 +740,25 @@ EPGCard >> isFrontend [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'sv 6/16/2024 09:25'
+	#'squeak_changestamp' : 'sv 6/17/2024 16:39'
 }
-EPGCard >> lastTimeClicked [
+EPGCard >> isFrozen [
 
-	^ lastTimeClicked.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'sv 6/16/2024 09:25'
-}
-EPGCard >> lastTimeClicked: aTime [
-
-	lastTimeClicked := aTime.
+	^ frozen.
 ]
 
 {
 	#category : #'mouse events',
-	#'squeak_changestamp' : 'sv 6/17/2024 09:41'
+	#'squeak_changestamp' : 'sv 6/17/2024 16:49'
 }
 EPGCard >> mouseDown: anEvent [
 
-	"| timeDifference |
-	timeDifference := Time millisecondClockValue - self lastTimeClicked.
-	timeDifference < self doubleClickThreshold 
-		ifTrue: [ self click]"
-
-	(self gameBoard backlogArea bounds containsPoint: anEvent position) 
-		ifTrue: ["self turn."
-				anEvent hand waitForClicksOrDrag: self event: anEvent].
+	self isFrozen ifFalse: [
+		(self gameBoard backlogArea bounds containsPoint: anEvent position) 
+			ifTrue: [anEvent hand waitForClicksOrDrag: self event: anEvent].
+		anEvent wasHandled: false.
+		super mouseDown: anEvent.]
 		
-	anEvent wasHandled: false.
-	super mouseDown: anEvent.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'sv 6/16/2024 08:46'
-}
-EPGCard >> originCenter [
-
-	^ originCenter.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'sv 6/16/2024 08:46'
-}
-EPGCard >> originCenter: aPoint [
-
-	originCenter := aPoint.
 ]
 
 {
@@ -764,4 +810,28 @@ EPGCard >> turn [
 		ifTrue: [self facing: #back. self changeBody: self backBody. ^ self].
 	self facing = #back
 		ifTrue: [self facing: #front. self changeBody: self frontBody. ^ self].
+]
+
+{
+	#category : #'mouse events',
+	#'squeak_changestamp' : 'sv 6/17/2024 16:42'
+}
+EPGCard >> unfreeze [
+
+	self unlock.
+	self beUnfrozen.
+]
+
+{
+	#category : #'mouse events',
+	#'squeak_changestamp' : 'sv 6/17/2024 19:13'
+}
+EPGCard >> unfreezeDnD [
+
+	| DnDAreas board |
+	board := self gameBoard.
+	DnDAreas := (board planningAreas), (board storyPointAreas), (board doneAreas).
+	DnDAreas add: board frontendDebtArea;
+		add: (board backendDebtArea).
+	DnDAreas do: [:area | area dropEnabled: true.]. 
 ]

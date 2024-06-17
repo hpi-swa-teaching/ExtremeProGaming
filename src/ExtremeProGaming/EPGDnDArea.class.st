@@ -323,14 +323,16 @@ EPGDnDArea >> mouseLeaveDragging: evt [
 
 {
 	#category : #'dragging/dropping',
-	#'squeak_changestamp' : 'HCH 5/29/2024 00:24'
+	#'squeak_changestamp' : 'sv 6/17/2024 19:12'
 }
 EPGDnDArea >> pickUpMorph: aMorph [
 
-	aMorph formerOwner: self.
-	aMorph formerPosition: aMorph position.
-	self dropped remove: aMorph.
-	^ aMorph.
+	self dropEnabled ifTrue: [
+		aMorph formerOwner: self.
+		aMorph formerPosition: aMorph position.
+		self dropped remove: aMorph.
+		^ aMorph.]
+	ifFalse: [^ nil.].
 ]
 
 {
