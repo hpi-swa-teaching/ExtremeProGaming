@@ -702,20 +702,13 @@ EPGCard >> isFrontend [
 
 {
 	#category : #'focus card',
-	#'squeak_changestamp' : 'sv 6/18/2024 10:43'
+	#'squeak_changestamp' : 'sv 6/18/2024 11:39'
 }
 EPGCard >> makeFocusSize [
 
-	| positions |
 	self extent: self extent * 3.
-	positions := OrderedCollection with: (self position)
-				with: (self position + self extent y / 2).
 	self backBody submorphsDo:
-		[:text | 
-			| index |
-        		index := (self backBody submorphs indexOf: text).
-			text extent: text extent * 3
-				"position: (positions at: index)".].
+		[:text | text extent: text extent * 3].
 ]
 
 {

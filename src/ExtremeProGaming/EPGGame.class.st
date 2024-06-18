@@ -5,8 +5,7 @@ Class {
 		'gameBoard',
 		'cardSource',
 		'numOfFeatureCards',
-		'numOfBugCards',
-		'cards'
+		'numOfBugCards'
 	],
 	#category : #ExtremeProGaming
 }
