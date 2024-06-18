@@ -31,6 +31,15 @@ EPGCard class >> backendColor [
 
 {
 	#category : #constants,
+	#'squeak_changestamp' : 'JP 6/13/2024 23:14'
+}
+EPGCard class >> cardExtent [
+
+	^ 200 @ 300.
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'HCH 6/12/2024 14:43'
 }
 EPGCard class >> colorBarHeight [
@@ -649,7 +658,7 @@ EPGCard >> headerTextCenter [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'sv 6/17/2024 16:40'
+	#'squeak_changestamp' : 'sv 6/18/2024 11:30'
 }
 EPGCard >> initialize [
 
@@ -657,7 +666,7 @@ EPGCard >> initialize [
 	
 	self
 		color: Color white;
-		extent: 200 @ 300;
+		extent: EPGCard cardExtent;
 		frontBody: (Morph new color: Color transparent);
 		backBody: (Morph new color: Color transparent);
 		facing: #front;

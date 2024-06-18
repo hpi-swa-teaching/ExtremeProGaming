@@ -15,20 +15,20 @@ EPGGameBoardExistenceTests >> setUp [
 
 {
 	#category : #'tests - initialization',
+	#'squeak_changestamp' : 'JP 6/17/2024 19:10'
+}
+EPGGameBoardExistenceTests >> testBackgroundCorrectExtent [
+	
+	self assert: morph extent equals: 2000 @ 1310.
+]
+
+{
+	#category : #'tests - initialization',
 	#'squeak_changestamp' : 'JA 5/16/2024 10:49'
 }
 EPGGameBoardExistenceTests >> testBackgroundCorrectPosition [
 	
 	self assert: morph position equals: 0 @ 0.
-]
-
-{
-	#category : #'tests - initialization',
-	#'squeak_changestamp' : 'JA 5/16/2024 10:45'
-}
-EPGGameBoardExistenceTests >> testBackgroundCorrectSize [
-	
-	self assert: morph extent equals: 1920 @ 1080.
 ]
 
 {
@@ -51,36 +51,33 @@ EPGGameBoardExistenceTests >> testBackgroundMorphOpened [
 
 {
 	#category : #'tests - initialization',
-	#'squeak_changestamp' : 'jmetrikat 6/16/2024 23:27'
+	#'squeak_changestamp' : 'JP 6/17/2024 19:11'
 }
-EPGGameBoardExistenceTests >> testCalculateAreaExtend [
+EPGGameBoardExistenceTests >> testCalculateAreaExtent [
 	
-	self
-		assert: (morph calculateAreaExtendFor: 'planning') equals: (0.25 * 1920) @ 1080;
-		assert: (morph calculateAreaExtendFor: 'backlog') equals: (0.5 * 1920) @ 1080;
-		assert: (morph calculateAreaExtendFor: 'review') equals: (0.25 * 1920) @ 1080.
+	self assert: (morph planningArea extent) equals: (0.25 * 2000) @ 1310.
+	self assert: (morph backlogArea extent) equals: (0.5 * 2000) @ 1310.
+	self assert: (morph reviewArea extent) equals: (0.25 * 2000) @ 1310.
 ]
 
 {
 	#category : #'tests - initialization',
-	#'squeak_changestamp' : 'jmetrikat 6/16/2024 23:27'
+	#'squeak_changestamp' : 'JP 6/17/2024 19:12'
 }
 EPGGameBoardExistenceTests >> testCalculateAreaPosition [
 	
-	self
-		assert: (morph calculateAreaPositionFor: 'planning') equals: 0 @ 0;
-		assert: (morph calculateAreaPositionFor: 'backlog') equals: (1920 * 0.25) @ 0;
-		assert: (morph calculateAreaPositionFor: 'review') equals: (1920 * 0.75) @ 0.
+	self assert: (morph planningArea position) equals: 0 @ 0.
+	self assert: (morph backlogArea position) equals: (2000*0.25) @ 0.
+	self assert: (morph reviewArea position) equals: (2000*0.75) @ 0.
 ]
 
 {
 	#category : #'tests - initialization',
-	#'squeak_changestamp' : 'jmetrikat 6/16/2024 23:27'
+	#'squeak_changestamp' : 'jmetrikat 6/17/2024 23:10'
 }
 EPGGameBoardExistenceTests >> testSectionMorphsExistence [
 	
-	self
-		assert: morph planningArea isMorph equals: true;
-		assert: morph backlogArea isMorph equals: true;
-		assert: morph reviewArea isMorph equals: true.
+	self assert: morph planningArea isMorph equals: true.
+	self assert: morph backlogArea isMorph equals: true.
+	self assert: morph reviewArea isMorph equals: true.
 ]
