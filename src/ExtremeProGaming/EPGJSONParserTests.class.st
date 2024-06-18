@@ -10,17 +10,18 @@ Class {
 
 {
 	#category : #'initialize-release',
-	#'squeak_changestamp' : 'sv 6/9/2024 15:54'
+	#'squeak_changestamp' : 'jmetrikat 6/16/2024 23:23'
 }
 EPGJSONParserTests >> setUp [
 
-	parser := EPGJSONParser new.
-	board := EPGGameBoard new.
+	board := EPGGame new.
+	parser := board game cardSource.
 
 	"reseting the jsonContent for a indicidual testing file"
-	parser jsonContent: ''.
-	parser assetPath: '/assets/cardsTesting.json'.
-	parser decodeJson.
+	parser
+		jsonContent: '';
+		assetPath: '/assets/cardsTesting.json';
+		decodeJson.
 ]
 
 {
@@ -49,27 +50,27 @@ EPGJSONParserTests >> testBugFrontendCardCreation [
 
 {
 	#category : #'card generation',
-	#'squeak_changestamp' : 'jmetrikat 6/9/2024 18:45'
+	#'squeak_changestamp' : 'jmetrikat 6/17/2024 23:12'
 }
 EPGJSONParserTests >> testCardAmountSetting [
 	"manually set the parser of the board to testing parser"
-	board cardSource: parser.
-	board generateCards.
+	board game cardSource: parser.
+	board game generateCards.
 
-	self assert: 1 equals: board numOfFeatureCards.
-	self assert: 0 equals: board numOfBugCards.
+	self assert: 1 equals: board game numOfFeatureCards.
+	self assert: 0 equals: board game numOfBugCards.
 ]
 
 {
 	#category : #'card generation',
-	#'squeak_changestamp' : 'sv 6/9/2024 16:24'
+	#'squeak_changestamp' : 'jmetrikat 6/17/2024 23:11'
 }
 EPGJSONParserTests >> testCardAmountSettingReal [
 
-	board generateCards.
+	board game generateCards.
 
-	self assert: false equals: board numOfFeatureCards isNil.
-	self assert: false equals: board numOfBugCards isNil.
+	self assert: false equals: board game numOfFeatureCards isNil.
+	self assert: false equals: board game numOfBugCards isNil.
 ]
 
 {
@@ -96,36 +97,36 @@ EPGJSONParserTests >> testCardCollectionElement [
 
 {
 	#category : #'parsing functionality',
-	#'squeak_changestamp' : 'sv 6/8/2024 20:26'
+	#'squeak_changestamp' : 'jmetrikat 6/17/2024 23:12'
 }
 EPGJSONParserTests >> testFeatureBackendCardCreation [
 
 	| mockJSON |
 	mockJSON := Dictionary newFrom: {'type' -> 'Feature'. 'frontend' -> false. 'task' -> ''. 'consequence' -> ''. 'effect' -> ''. 'cost' -> 1. 'techDebt' -> 0. 'positive' -> false}.
-
+	
 	self assert: true equals: (parser createCard: mockJSON) isBackend.
 ]
 
 {
 	#category : #'parsing functionality',
-	#'squeak_changestamp' : 'sv 6/8/2024 20:28'
+	#'squeak_changestamp' : 'jmetrikat 6/17/2024 23:12'
 }
 EPGJSONParserTests >> testFeatureFrontendCardCreation [
 
 	| mockJSON |
 	mockJSON := Dictionary newFrom: {'type' -> 'Feature'. 'frontend' -> true. 'task' -> ''. 'consequence' -> ''. 'effect' -> ''. 'cost' -> 1. 'techDebt' -> 0. 'positive' -> false}.
-
+	
 	self assert: false equals: (parser createCard: mockJSON) isBackend.
 ]
 
 {
 	#category : #'card generation',
-	#'squeak_changestamp' : 'sv 6/9/2024 16:31'
+	#'squeak_changestamp' : 'jmetrikat 6/17/2024 23:11'
 }
 EPGJSONParserTests >> testGenerateCardsSuccessful [
 
-	self assert: false equals: board cardSource featureCards isEmpty.
-	self assert: false equals: board cardSource bugCards isEmpty.
+	self assert: false equals: board game cardSource featureCards isEmpty.
+	self assert: false equals: board game cardSource bugCards isEmpty.
 ]
 
 {
@@ -139,18 +140,18 @@ EPGJSONParserTests >> testJsonContentNotEmpty [
 
 {
 	#category : #'card generation',
-	#'squeak_changestamp' : 'sv 6/9/2024 15:54'
+	#'squeak_changestamp' : 'jmetrikat 6/16/2024 23:21'
 }
 EPGJSONParserTests >> testParserForGameExistence [
 
-	self assert: false equals: board cardSource isNil.
+	self assert: false equals: board game cardSource isNil.
 ]
 
 {
 	#category : #'parsing functionality',
-	#'squeak_changestamp' : 'sv 6/8/2024 20:41'
+	#'squeak_changestamp' : 'jmetrikat 6/16/2024 23:21'
 }
-EPGJSONParserTests >> testtechDebtExistence [
+EPGJSONParserTests >> testTechDebtExistence [
 
 	| mockJSON |
 	mockJSON := Dictionary newFrom: {'type' -> 'Bug'. 'frontend' -> false. 'task' -> 'Challenging task here'. 'consequence' -> ''. 'effect' -> ''. 'cost' -> 1. 'techDebt' -> 3. 'positive' -> false}.

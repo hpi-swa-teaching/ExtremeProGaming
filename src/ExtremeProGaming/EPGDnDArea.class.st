@@ -10,10 +10,10 @@ Class {
 		'dropped',
 		'highlightColor',
 		'dropEnabled',
+		'pickUpEnabled',
 		'accepts',
 		'backgroundMargin',
-		'draggable',
-		'gameBoard'
+		'draggable'
 	],
 	#category : #ExtremeProGaming,
 	#'squeak_changestamp' : 'HCH 5/29/2024 00:29'
@@ -103,11 +103,11 @@ EPGDnDArea >> area: aMorph [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 5/27/2024 22:34'
+	#'squeak_changestamp' : 'JP 6/14/2024 00:33'
 }
 EPGDnDArea >> backgroundExtent [
 
-	^ self extent.
+	^ self extent - self backgroundMargin.
 ]
 
 {
@@ -177,7 +177,7 @@ EPGDnDArea >> draggable: aBoolean [
 ]
 
 {
-	#category : #'dragging/dropping',
+	#category : #accessing,
 	#'squeak_changestamp' : 'JP 5/28/2024 11:43'
 }
 EPGDnDArea >> dropEnabled [
@@ -186,7 +186,7 @@ EPGDnDArea >> dropEnabled [
 ]
 
 {
-	#category : #'dragging/dropping',
+	#category : #accessing,
 	#'squeak_changestamp' : 'JP 5/28/2024 11:34'
 }
 EPGDnDArea >> dropEnabled: aBool [
@@ -235,21 +235,12 @@ EPGDnDArea >> dropped: aCollection [
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'jmetrikat 6/8/2024 17:28'
+	#category : #'dragging/dropping',
+	#'squeak_changestamp' : 'sv 6/18/2024 13:31'
 }
-EPGDnDArea >> gameBoard [
+EPGDnDArea >> freeze [
 
-	^ gameBoard.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'jmetrikat 6/8/2024 17:29'
-}
-EPGDnDArea >> gameBoard: aGameBoard [
-
-	gameBoard := aGameBoard.
+	self pickUpEnabled: false.
 ]
 
 {
@@ -283,7 +274,7 @@ EPGDnDArea >> highlightColor: aColor [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/31/2024 14:10'
+	#'squeak_changestamp' : 'sv 6/18/2024 13:28'
 }
 EPGDnDArea >> initialize [
 
@@ -291,27 +282,29 @@ EPGDnDArea >> initialize [
 	
 	self
 		dropEnabled: true;
+		pickUpEnabled: true;
 		draggable: false;
 		highlightColor: Color green;
 		color: Color transparent;
 		borderVisible: false;
 		dropped: OrderedCollection new;
 		accepts: #();
-		extent: 200 @ 250;
-		backgroundMargin: 15 @ 15.
+		backgroundMargin: 15 @ 15;
+		extent: EPGCard cardExtent + self backgroundMargin.
+		
 
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 5/29/2024 23:11'
+	#'squeak_changestamp' : 'JP 6/14/2024 00:31'
 }
 EPGDnDArea >> initializeVisibleArea [
 
 	self area: Morph new.
 	self area
 		color: Color gray lighter;
-		extent: self backgroundExtent - (self backgroundMargin);
+		extent: self backgroundExtent;
 		center: self center.
 	self addMorph: self area.
 ]
@@ -353,15 +346,35 @@ EPGDnDArea >> mouseLeaveDragging: evt [
 ]
 
 {
+	#category : #accessing,
+	#'squeak_changestamp' : 'sv 6/18/2024 13:27'
+}
+EPGDnDArea >> pickUpEnabled [
+
+	^ pickUpEnabled.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'sv 6/18/2024 13:27'
+}
+EPGDnDArea >> pickUpEnabled: aBoolean [
+
+	pickUpEnabled := aBoolean.
+]
+
+{
 	#category : #'dragging/dropping',
-	#'squeak_changestamp' : 'HCH 5/29/2024 00:24'
+	#'squeak_changestamp' : 'sv 6/18/2024 13:28'
 }
 EPGDnDArea >> pickUpMorph: aMorph [
 
-	aMorph formerOwner: self.
-	aMorph formerPosition: aMorph position.
-	self dropped remove: aMorph.
-	^ aMorph.
+	self pickUpEnabled ifTrue: [
+		aMorph formerOwner: self.
+		aMorph formerPosition: aMorph position.
+		self dropped remove: aMorph.
+		^ aMorph.]
+	ifFalse: [^ nil.].
 ]
 
 {
@@ -393,6 +406,15 @@ EPGDnDArea >> toggleBorder [
 	self borderVisible
 		ifTrue: [self removeBorder. ]
 		ifFalse: [self addBorder. ]
+]
+
+{
+	#category : #'dragging/dropping',
+	#'squeak_changestamp' : 'sv 6/18/2024 13:31'
+}
+EPGDnDArea >> unfreeze [
+
+	self pickUpEnabled: true.
 ]
 
 {

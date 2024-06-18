@@ -1,16 +1,20 @@
 Class {
 	#name : #EPGDnDMorph,
 	#superclass : #Morph,
+	#instVars : [
+		'dropable'
+	],
 	#category : #ExtremeProGaming
 }
 
 {
 	#category : #'dragging/dropping',
-	#'squeak_changestamp' : 'Philipp 6/6/2024 23:39'
+	#'squeak_changestamp' : 'sv 6/17/2024 14:59'
 }
 EPGDnDMorph >> initialize [
 
 	super initialize.
+	self shouldDropOnMouseUp: true.
 ]
 
 {
@@ -24,11 +28,20 @@ EPGDnDMorph >> isEPGDnDMorph [
 
 {
 	#category : #'dragging/dropping',
-	#'squeak_changestamp' : 'HCH 5/27/2024 18:05'
+	#'squeak_changestamp' : 'sv 6/17/2024 14:59'
 }
 EPGDnDMorph >> shouldDropOnMouseUp [
 
-	^ true.
+	^ dropable.
+]
+
+{
+	#category : #'dragging/dropping',
+	#'squeak_changestamp' : 'sv 6/17/2024 15:01'
+}
+EPGDnDMorph >> shouldDropOnMouseUp: aBoolean [
+
+	dropable := aBoolean.
 ]
 
 {
@@ -69,12 +82,12 @@ EPGDnDMorph >> slideBackToFormerSituation: evt [
 
 {
 	#category : #'dragging/dropping',
-	#'squeak_changestamp' : 'Philipp 6/6/2024 23:42'
+	#'squeak_changestamp' : 'sv 6/17/2024 15:26'
 }
 EPGDnDMorph >> update: anAspectSymbol [
 
 	anAspectSymbol = #newRound
-		ifTrue: [self checkIfProcessed].
+		ifTrue: [self checkIfProcessed.].
 ]
 
 {

@@ -1,0 +1,188 @@
+Class {
+	#name : #EPGGame,
+	#superclass : #Object,
+	#instVars : [
+		'gameBoard',
+		'cardSource',
+		'numOfFeatureCards',
+		'numOfBugCards'
+	],
+	#category : #ExtremeProGaming
+}
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Philipp 6/16/2024 17:03'
+}
+EPGGame >> cardSource [
+
+	^ cardSource.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Philipp 6/16/2024 17:03'
+}
+EPGGame >> cardSource: aCardSource [
+
+	cardSource := aCardSource.
+]
+
+{
+	#category : #'card management',
+	#'squeak_changestamp' : 'sv 6/18/2024 13:21'
+}
+EPGGame >> focusCard: anEPGCard [
+	| board |
+	board := self gameBoard.
+	board freezeDnD.
+	board addMorphFront: (anEPGCard center: board boundsInWorld center).
+	
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Philipp 6/16/2024 17:03'
+}
+EPGGame >> gameBoard [
+
+	^ gameBoard.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Philipp 6/16/2024 17:03'
+}
+EPGGame >> gameBoard: aGameBoard [
+
+	gameBoard := aGameBoard.
+	
+]
+
+{
+	#category : #'card management',
+	#'squeak_changestamp' : 'sv 6/18/2024 11:12'
+}
+EPGGame >> generateBugCards [
+
+	| index |
+	index := self gameBoard class planningAreasAcceptance indexOf: #EPGBugCard.
+	self cardSource bugCards do: [:card |
+		card gameBoard: self gameBoard.
+		card game: self.
+		self addDependent: card.
+		(self gameBoard planningAreas at: index) dropInMorph: card].
+]
+
+{
+	#category : #'card management',
+	#'squeak_changestamp' : 'Philipp 6/16/2024 16:51'
+}
+EPGGame >> generateCards [
+
+	| parser |
+	parser := self cardSource.
+	parser createCards.
+	
+	self 
+		numOfFeatureCards: parser featureCards size;
+		numOfBugCards: parser bugCards size;
+		generateFeatureCards;
+		generateBugCards.
+]
+
+{
+	#category : #'card management',
+	#'squeak_changestamp' : 'sv 6/18/2024 11:12'
+}
+EPGGame >> generateFeatureCards [
+
+	| index |
+	index := self gameBoard class planningAreasAcceptance indexOf: #EPGFeatureCard.
+	self cardSource featureCards do: [:card |
+		card gameBoard: self gameBoard.
+		card game: self.
+		self addDependent: card.
+		(self gameBoard planningAreas at: index) dropInMorph: card].
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'sv 6/18/2024 11:12'
+}
+EPGGame >> initialize [
+
+	super initialize.
+	self 
+		gameBoard: (EPGGameBoard newWithGame: self);
+		cardSource: EPGJSONParser new.
+	self initializeDefaultGameState.
+	^ self gameBoard.
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'Philipp 6/16/2024 18:11'
+}
+EPGGame >> initializeDefaultGameState [
+
+	self generateCards.
+	self gameBoard frontendDebtArea addTechnicalDebt.
+	self gameBoard backendDebtArea addTechnicalDebt.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Philipp 6/16/2024 17:03'
+}
+EPGGame >> numOfBugCards [
+
+	^ numOfBugCards.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Philipp 6/16/2024 17:04'
+}
+EPGGame >> numOfBugCards: aNumber [
+
+	numOfBugCards := aNumber.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Philipp 6/16/2024 17:04'
+}
+EPGGame >> numOfFeatureCards [
+
+	^ numOfFeatureCards.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Philipp 6/16/2024 17:04'
+}
+EPGGame >> numOfFeatureCards: aNumber [
+
+	numOfFeatureCards := aNumber.
+]
+
+{
+	#category : #observer,
+	#'squeak_changestamp' : 'Philipp 6/16/2024 16:50'
+}
+EPGGame >> startNewRound [
+
+	self changed: #newRound.
+	
+]
+
+{
+	#category : #'card management',
+	#'squeak_changestamp' : 'sv 6/18/2024 13:22'
+}
+EPGGame >> unfocusCard [
+
+	self gameBoard unfreezeDnD.
+	
+]
