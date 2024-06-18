@@ -170,15 +170,6 @@ EPGCard >> beFrontend [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'sv 6/17/2024 16:39'
-}
-EPGCard >> beFrozen [
-
-	self frozen: true.
-]
-
-{
-	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 6/3/2024 17:03'
 }
 EPGCard >> beNegative [
@@ -202,15 +193,6 @@ EPGCard >> bePositive [
 EPGCard >> beUnfocus [
 
 	focus := false.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'sv 6/17/2024 16:40'
-}
-EPGCard >> beUnfrozen [
-
-	self frozen: false.
 ]
 
 {
@@ -542,15 +524,6 @@ EPGCard >> frontend: aBoolean [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'sv 6/17/2024 16:39'
-}
-EPGCard >> frozen: aBoolean [
-
-	frozen := aBoolean.
-]
-
-{
-	#category : #accessing,
 	#'squeak_changestamp' : 'sv 6/17/2024 15:28'
 }
 EPGCard >> game [
@@ -658,7 +631,7 @@ EPGCard >> headerTextCenter [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'sv 6/18/2024 11:30'
+	#'squeak_changestamp' : 'sv 6/18/2024 11:36'
 }
 EPGCard >> initialize [
 
@@ -670,8 +643,7 @@ EPGCard >> initialize [
 		frontBody: (Morph new color: Color transparent);
 		backBody: (Morph new color: Color transparent);
 		facing: #front;
-		beUnfocus;
-		beUnfrozen.
+		beUnfocus.
 ]
 
 {
@@ -726,15 +698,6 @@ EPGCard >> isFocus [
 EPGCard >> isFrontend [
 
 	^ self frontend.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'sv 6/17/2024 16:39'
-}
-EPGCard >> isFrozen [
-
-	^ frozen.
 ]
 
 {
