@@ -48,11 +48,11 @@ EPGBacklogCard >> moveToDone [
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'sv 6/17/2024 14:51'
+	#'squeak_changestamp' : 'sv 6/18/2024 11:13'
 }
 EPGBacklogCard >> prepareMoveToDone [
 
-	self focusCard.
+	self toggleFocusCard.
 	self updateStoryPoints.
 ]
 

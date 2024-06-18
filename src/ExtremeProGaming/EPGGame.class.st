@@ -31,34 +31,6 @@ EPGGame >> cardSource: aCardSource [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'sv 6/17/2024 15:10'
-}
-EPGGame >> cards [
-
-	^ cards.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'sv 6/17/2024 15:09'
-}
-EPGGame >> cards: aCollection [
-
-	cards := aCollection.
-]
-
-{
-	#category : #nil,
-	#'squeak_changestamp' : 'sv 6/17/2024 15:14'
-}
-EPGGame >> freezeCards [
-
-	self cards do: [:card | 
-		card freeze.]
-]
-
-{
-	#category : #accessing,
 	#'squeak_changestamp' : 'Philipp 6/16/2024 17:03'
 }
 EPGGame >> gameBoard [
@@ -78,7 +50,7 @@ EPGGame >> gameBoard: aGameBoard [
 
 {
 	#category : #'card generation',
-	#'squeak_changestamp' : 'sv 6/17/2024 15:29'
+	#'squeak_changestamp' : 'sv 6/18/2024 11:12'
 }
 EPGGame >> generateBugCards [
 
@@ -86,7 +58,6 @@ EPGGame >> generateBugCards [
 	index := self gameBoard class planningAreasAcceptance indexOf: #EPGBugCard.
 	self cardSource bugCards do: [:card |
 		card gameBoard: self gameBoard.
-		self cards add: card.
 		card game: self.
 		self addDependent: card.
 		(self gameBoard planningAreas at: index) dropInMorph: card].
@@ -111,7 +82,7 @@ EPGGame >> generateCards [
 
 {
 	#category : #'card generation',
-	#'squeak_changestamp' : 'sv 6/17/2024 15:29'
+	#'squeak_changestamp' : 'sv 6/18/2024 11:12'
 }
 EPGGame >> generateFeatureCards [
 
@@ -119,7 +90,6 @@ EPGGame >> generateFeatureCards [
 	index := self gameBoard class planningAreasAcceptance indexOf: #EPGFeatureCard.
 	self cardSource featureCards do: [:card |
 		card gameBoard: self gameBoard.
-		self cards add: card.
 		card game: self.
 		self addDependent: card.
 		(self gameBoard planningAreas at: index) dropInMorph: card].
@@ -127,15 +97,14 @@ EPGGame >> generateFeatureCards [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'sv 6/17/2024 15:11'
+	#'squeak_changestamp' : 'sv 6/18/2024 11:12'
 }
 EPGGame >> initialize [
 
 	super initialize.
 	self 
 		gameBoard: (EPGGameBoard newWithGame: self);
-		cardSource: EPGJSONParser new;
-		cards: OrderedCollection new.
+		cardSource: EPGJSONParser new.
 	self initializeDefaultGameState.
 	^ self gameBoard.
 ]
@@ -195,14 +164,4 @@ EPGGame >> startNewRound [
 
 	self changed: #newRound.
 	
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'sv 6/17/2024 15:14'
-}
-EPGGame >> unfreezeCards [
-
-	self cards do: [:card | 
-		card unfreeze.]
 ]

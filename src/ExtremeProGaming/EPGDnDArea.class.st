@@ -223,6 +223,15 @@ EPGDnDArea >> dropped: aCollection [
 
 {
 	#category : #'dragging/dropping',
+	#'squeak_changestamp' : 'sv 6/18/2024 11:16'
+}
+EPGDnDArea >> freeze [
+
+	self dropEnabled: false.
+]
+
+{
+	#category : #'dragging/dropping',
 	#'squeak_changestamp' : 'HCH 5/27/2024 18:03'
 }
 EPGDnDArea >> handlesMouseOverDragging: anEvent [
@@ -364,6 +373,15 @@ EPGDnDArea >> toggleBorder [
 	self borderVisible
 		ifTrue: [self removeBorder. ]
 		ifFalse: [self addBorder. ]
+]
+
+{
+	#category : #'dragging/dropping',
+	#'squeak_changestamp' : 'sv 6/18/2024 11:16'
+}
+EPGDnDArea >> unfreeze [
+
+	self dropEnabled: true.
 ]
 
 {

@@ -15,8 +15,7 @@ Class {
 		'effect',
 		'gameBoard',
 		'focus',
-		'game',
-		'frozen'
+		'game'
 	],
 	#category : #ExtremeProGaming
 }
@@ -366,12 +365,12 @@ EPGCard >> displayEffect [
 
 {
 	#category : #'mouse events',
-	#'squeak_changestamp' : 'sv 6/17/2024 14:47'
+	#'squeak_changestamp' : 'sv 6/18/2024 11:13'
 }
 EPGCard >> doubleClick: anEvent [
 
 	self isFocus 
-		ifTrue: [self focusCard.].
+		ifTrue: [self toggleFocusCard.].
 	
 
 ]
@@ -443,29 +442,6 @@ EPGCard >> facing: aSelector [
 ]
 
 {
-	#category : #'mouse events',
-	#'squeak_changestamp' : 'sv 6/18/2024 10:24'
-}
-EPGCard >> focusCard [
-
-	(self isFocus)
-		ifTrue: [self extent: self extent / 3.
-			self turn.
-			"self game unfreezeCards."
-			self unfreezeDnD.
-			self moveToDone.
-			self beUnfocus.]
-		ifFalse: [self turn. 
-			"self game freezeCards."
-			self freezeDnD.
-			"self unfreeze."
-			self makeFocusSize.
-			self gameBoard addMorphFront: 
-				(self center: self gameBoard boundsInWorld center).
-			self beFocus.]
-]
-
-{
 	#category : #header,
 	#'squeak_changestamp' : 'HCH 6/3/2024 16:32'
 }
@@ -517,30 +493,6 @@ EPGCard >> formatFrontTask: aText [
 		margins: 10 @ 10;
 		lock;
 		yourself.
-]
-
-{
-	#category : #'mouse events',
-	#'squeak_changestamp' : 'sv 6/17/2024 16:42'
-}
-EPGCard >> freeze [
-
-	self lock.
-	self beFrozen.
-]
-
-{
-	#category : #'mouse events',
-	#'squeak_changestamp' : 'sv 6/17/2024 19:06'
-}
-EPGCard >> freezeDnD [
-
-	| DnDAreas board |
-	board := self gameBoard.
-	DnDAreas := (board planningAreas), (board storyPointAreas), (board doneAreas).
-	DnDAreas add: board frontendDebtArea;
-		add: (board backendDebtArea).
-	DnDAreas do: [:area | area dropEnabled: false.]. 
 ]
 
 {
@@ -626,11 +578,11 @@ EPGCard >> gameBoard: aGameBoard [
 
 {
 	#category : #'mouse events',
-	#'squeak_changestamp' : 'sv 6/17/2024 16:43'
+	#'squeak_changestamp' : 'sv 6/18/2024 11:14'
 }
 EPGCard >> handlesMouseDown: anEvent [
 
-	^ self isFrozen not.
+	^ true.
 ]
 
 {
@@ -777,7 +729,7 @@ EPGCard >> isFrozen [
 ]
 
 {
-	#category : #'mouse events',
+	#category : #'focus card',
 	#'squeak_changestamp' : 'sv 6/18/2024 10:43'
 }
 EPGCard >> makeFocusSize [
@@ -796,16 +748,14 @@ EPGCard >> makeFocusSize [
 
 {
 	#category : #'mouse events',
-	#'squeak_changestamp' : 'sv 6/17/2024 16:49'
+	#'squeak_changestamp' : 'sv 6/18/2024 11:25'
 }
-EPGCard >> mouseDown: anEvent [
+EPGCard >> mouseDown: anEvent [ 
 
-	self isFrozen ifFalse: [
-		(self gameBoard backlogArea bounds containsPoint: anEvent position) 
-			ifTrue: [anEvent hand waitForClicksOrDrag: self event: anEvent].
-		anEvent wasHandled: false.
-		super mouseDown: anEvent.]
-		
+	(self gameBoard backlogArea bounds containsPoint: anEvent position)
+		ifTrue: [anEvent hand waitForClicksOrDrag: self event: anEvent].
+	anEvent wasHandled: false.
+	super mouseDown: anEvent
 ]
 
 {
@@ -848,6 +798,26 @@ EPGCard >> task: aText [
 ]
 
 {
+	#category : #'focus card',
+	#'squeak_changestamp' : 'sv 6/18/2024 11:22'
+}
+EPGCard >> toggleFocusCard [
+
+	(self isFocus)
+		ifFalse: [self turn. 
+			self gameBoard freezeDnD.
+			self makeFocusSize.
+			self gameBoard addMorphFront: 
+				(self center: self gameBoard boundsInWorld center).
+			self beFocus.]
+		ifTrue: [self extent: self extent / 3.
+			self turn.
+			self gameBoard unfreezeDnD.
+			self moveToDone.
+			self beUnfocus.].
+]
+
+{
 	#category : #body,
 	#'squeak_changestamp' : 'sv 6/18/2024 11:07'
 }
@@ -857,28 +827,4 @@ EPGCard >> turn [
 		ifTrue: [self facing: #back. self changeBody: self backBody. ^ self].
 	self facing = #back
 		ifTrue: [self facing: #front. self changeBody: self frontBody. ^ self].
-]
-
-{
-	#category : #'mouse events',
-	#'squeak_changestamp' : 'sv 6/17/2024 16:42'
-}
-EPGCard >> unfreeze [
-
-	self unlock.
-	self beUnfrozen.
-]
-
-{
-	#category : #'mouse events',
-	#'squeak_changestamp' : 'sv 6/17/2024 19:13'
-}
-EPGCard >> unfreezeDnD [
-
-	| DnDAreas board |
-	board := self gameBoard.
-	DnDAreas := (board planningAreas), (board storyPointAreas), (board doneAreas).
-	DnDAreas add: board frontendDebtArea;
-		add: (board backendDebtArea).
-	DnDAreas do: [:area | area dropEnabled: true.]. 
 ]
