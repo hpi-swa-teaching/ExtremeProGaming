@@ -11,6 +11,44 @@ Class {
 }
 
 {
+	#category : #'instance creation',
+	#'squeak_changestamp' : 'HCH 6/18/2024 22:44'
+}
+EPGGame class >> newWithoutReturn [
+
+	^ (self new) game.
+]
+
+{
+	#category : #storypoints,
+	#'squeak_changestamp' : 'HCH 6/18/2024 23:31'
+}
+EPGGame >> addPermanent: aNumber [
+
+	self gameBoard regularStorypointArea addStorypoints: aNumber.
+]
+
+{
+	#category : #storypoints,
+	#'squeak_changestamp' : 'HCH 6/18/2024 23:25'
+}
+EPGGame >> addTemporary: aNumber [
+
+	| area |
+	area := self gameBoard temporaryStorypointArea.
+	aNumber timesRepeat: [area addCustomStorypoint: EPGStorypoint newTemporary].
+]
+
+{
+	#category : #storypoints,
+	#'squeak_changestamp' : 'HCH 6/19/2024 00:07'
+}
+EPGGame >> addUnavailable: aNumber [
+
+	self gameBoard unavailableStorypointArea addStorypoints: aNumber.
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'Philipp 6/16/2024 17:03'
 }
@@ -132,6 +170,18 @@ EPGGame >> initializeDefaultGameState [
 ]
 
 {
+	#category : #storypoints,
+	#'squeak_changestamp' : 'HCH 6/18/2024 22:56'
+}
+EPGGame >> numOfAvailableStorypoints [
+
+	| unavailableArea unavailableCount |
+	unavailableArea := self gameBoard unavailableStorypointArea.
+	unavailableCount := (unavailableArea dropped select: [:drop | drop isEPGStorypoint]) size.
+	^ self numOfStorypoints - unavailableCount.
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'Philipp 6/16/2024 17:03'
 }
@@ -165,6 +215,143 @@ EPGGame >> numOfFeatureCards [
 EPGGame >> numOfFeatureCards: aNumber [
 
 	numOfFeatureCards := aNumber.
+]
+
+{
+	#category : #storypoints,
+	#'squeak_changestamp' : 'HCH 6/18/2024 23:43'
+}
+EPGGame >> numOfPermanentStorypoints [
+
+	^ self numOfAvailableStorypoints - self numOfTemporaryStorypoints.
+]
+
+{
+	#category : #storypoints,
+	#'squeak_changestamp' : 'HCH 6/18/2024 22:45'
+}
+EPGGame >> numOfStorypoints [
+
+	^ (self gameBoard allMorphs select: [:morph | morph isEPGStorypoint]) size.
+]
+
+{
+	#category : #storypoints,
+	#'squeak_changestamp' : 'HCH 6/18/2024 22:56'
+}
+EPGGame >> numOfTemporaryStorypoints [
+
+	| temporaryArea temporaryCount |
+	temporaryArea := self gameBoard temporaryStorypointArea.
+	temporaryCount := (temporaryArea dropped select: [:drop | drop isEPGStorypoint.]) size.
+	^ temporaryCount.
+]
+
+{
+	#category : #storypoints,
+	#'squeak_changestamp' : 'HCH 6/18/2024 22:38'
+}
+EPGGame >> numOfUnavailableStorypoints [
+
+	^ self numOfStorypoints - self numOfAvailableStorypoints.
+]
+
+{
+	#category : #storypoints,
+	#'squeak_changestamp' : 'HCH 6/18/2024 23:25'
+}
+EPGGame >> remove: aStorypoint [
+
+	self gameBoard storyPointAreas do: [:area | 
+		(area dropped includes: aStorypoint)
+			ifTrue: [ area dropped remove: aStorypoint.
+					area removeMorph: aStorypoint.
+					aStorypoint abandon.]].
+]
+
+{
+	#category : #storypoints,
+	#'squeak_changestamp' : 'HCH 6/18/2024 22:45'
+}
+EPGGame >> removeAllAvailableStorypoints [
+
+	| availableAreas |
+	availableAreas := self gameBoard storyPointAreas select: 
+						[:area | area dropEnabled].
+	availableAreas do: [:area | area clearArea].
+]
+
+{
+	#category : #storypoints,
+	#'squeak_changestamp' : 'HCH 6/18/2024 22:45'
+}
+EPGGame >> removeAllStorypoints [
+
+	self gameBoard storyPointAreas do: [:area | area clearArea].
+]
+
+{
+	#category : #storypoints,
+	#'squeak_changestamp' : 'HCH 6/18/2024 22:56'
+}
+EPGGame >> removeAllTemporaryStorypoints [
+
+	| temporaryArea |
+	temporaryArea := self gameBoard temporaryStorypointArea.
+ 	temporaryArea clearArea.
+]
+
+{
+	#category : #storypoints,
+	#'squeak_changestamp' : 'HCH 6/18/2024 22:56'
+}
+EPGGame >> removeAllUnavailableStorypoints [
+
+	| temporaryArea |
+	temporaryArea := self gameBoard unavailableStorypointArea.
+ 	temporaryArea clearArea.
+]
+
+{
+	#category : #storypoints,
+	#'squeak_changestamp' : 'HCH 6/18/2024 23:46'
+}
+EPGGame >> removePermanent: aNumber [
+
+	self numOfAvailableStorypoints - aNumber <= 0
+		ifTrue: [self removeAllAvailableStorypoints. ^ self].
+	aNumber timesRepeat: [
+		self numOfPermanentStorypoints > 0
+			ifTrue: [self removeStorypoint: 
+						self gameBoard regularStorypointArea dropped first.]
+			ifFalse: [self removeStorypoint: 
+						self gameBoard temporaryStorypointArea dropped first]].
+]
+
+{
+	#category : #storypoints,
+	#'squeak_changestamp' : 'HCH 6/18/2024 23:57'
+}
+EPGGame >> removeStorypoint: aStorypoint [
+
+	self gameBoard storyPointAreas do: [:area | 
+		(area dropped includes: aStorypoint)
+			ifTrue: [ area dropped remove: aStorypoint.
+					area removeMorph: aStorypoint]].
+]
+
+{
+	#category : #storypoints,
+	#'squeak_changestamp' : 'HCH 6/19/2024 00:08'
+}
+EPGGame >> removeTemporary: aNumber [
+
+	| area |
+	area := self gameBoard regularStorypointArea.
+	area dropped do: [:storypoint | 
+		[aNumber > 0] or: 
+			[storypoint makeUnavailable. self]]
+	
 ]
 
 {

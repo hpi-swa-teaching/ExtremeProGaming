@@ -1,0 +1,86 @@
+Class {
+	#name : #EPGEffectExecutionTest,
+	#superclass : #TestCase,
+	#instVars : [
+		'effect',
+		'game'
+	],
+	#category : #ExtremeProGaming
+}
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'HCH 6/18/2024 22:43'
+}
+EPGEffectExecutionTest >> setUp [
+	
+	game := EPGGame newWithoutReturn.
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'HCH 6/18/2024 23:32'
+}
+EPGEffectExecutionTest >> testPermanentAddition [
+
+	| oldCount |
+	oldCount := game numOfAvailableStorypoints.
+	effect := EPGPermanentAddition newWithGame: game amount: 3.
+	effect apply.
+	
+	self assert: oldCount + 3 equals: game numOfAvailableStorypoints.
+	game startNewRound.
+	self assert: oldCount + 3 equals: game numOfAvailableStorypoints.
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'HCH 6/18/2024 23:39'
+}
+EPGEffectExecutionTest >> testPermanentRemovalSufficient [
+
+	| oldCount |
+	game addPermanent: 1.
+	oldCount := game numOfAvailableStorypoints.
+	effect := EPGPermanentRemoval newWithGame: game amount: 1. "rm perm 1"
+	effect apply.
+	
+	self assert: oldCount - 1 equals: game numOfAvailableStorypoints.
+	game startNewRound.
+	self assert: oldCount - 1 equals: game numOfAvailableStorypoints.
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'HCH 6/18/2024 23:32'
+}
+EPGEffectExecutionTest >> testTemporaryAddition [
+
+	| oldCount |
+	oldCount := game numOfTemporaryStorypoints.
+	effect := EPGTemporaryAddition newWithGame: game amount: 3.
+	effect apply.
+	
+	self assert: oldCount + 3 equals: game numOfTemporaryStorypoints.
+	game startNewRound.
+	self assert: oldCount equals: game numOfTemporaryStorypoints.
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'HCH 6/18/2024 22:27'
+}
+EPGEffectExecutionTest >> testTemporaryRemoval [
+
+	| oldCountAvailable oldCountUnavailable |
+	oldCountAvailable := game numOfAvailableStorypoints.
+	oldCountUnavailable := game numOfUnavailableStorypoints.
+	effect := EPGTemporaryRemoval new. "tmp -1"
+	effect apply.
+	
+	self assert: oldCountAvailable - 1 equals: game numOfAvailableStorypoints.
+	self assert: oldCountUnavailable + 1 equals: game numOfUnavailableStorypoints.
+	game startNewRound.
+	self assert: oldCountAvailable equals: game numOfAvailableStorypoints.
+	self assert: oldCountUnavailable equals: game numOfUnavailableStorypoints.
+]

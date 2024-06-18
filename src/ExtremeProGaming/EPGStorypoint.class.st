@@ -4,10 +4,92 @@ Class {
 	#instVars : [
 		'timeToLive',
 		'image',
-		'imageBag'
+		'imageBag',
+		'game',
+		'available'
 	],
 	#category : #ExtremeProGaming
 }
+
+{
+	#category : #'instance creation',
+	#'squeak_changestamp' : 'HCH 6/18/2024 23:04'
+}
+EPGStorypoint class >> newTemporary [
+
+	| storypoint |
+	storypoint := self new.
+	storypoint timeToLive: 1.
+	storypoint setProperty: #temporaryAdditional toValue: true.
+	^ storypoint.
+]
+
+{
+	#category : #'instance creation',
+	#'squeak_changestamp' : 'HCH 6/18/2024 23:05'
+}
+EPGStorypoint class >> newTemporaryWithTimeToLive: aNumber [
+
+	| storypoint |
+	storypoint := self new.
+	storypoint timeToLive: aNumber.
+	storypoint setProperty: #temporaryAdditional toValue: true.
+	^ storypoint.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/18/2024 23:55'
+}
+EPGStorypoint >> available [
+
+	^ available.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/18/2024 23:55'
+}
+EPGStorypoint >> available: aBoolean [
+
+	available := aBoolean.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/18/2024 23:55'
+}
+EPGStorypoint >> beAvailable [
+
+	self available: true.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/18/2024 23:55'
+}
+EPGStorypoint >> beUnavailable [
+
+	self available: false.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/18/2024 23:27'
+}
+EPGStorypoint >> game [
+
+	^ game.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/18/2024 23:27'
+}
+EPGStorypoint >> game: aGame [
+
+	game := aGame.
+]
 
 {
 	#category : #accessing,
@@ -47,7 +129,7 @@ EPGStorypoint >> imageBag: aCollection [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 6/8/2024 16:22'
+	#'squeak_changestamp' : 'HCH 6/19/2024 00:01'
 }
 EPGStorypoint >> initialize [
 
@@ -59,6 +141,7 @@ EPGStorypoint >> initialize [
 		initializeImageBag;
 		image: self newStorypointMorph;
 		addMorph: self image;
+		beAvailable;
 		setProperty: #EPGStorypoint toValue: true.
 		
 	self image center: self center.
@@ -82,12 +165,40 @@ EPGStorypoint >> initializeImageBag [
 ]
 
 {
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/18/2024 23:56'
+}
+EPGStorypoint >> isAvailable [
+
+	^ self available.
+]
+
+{
 	#category : #initialization,
 	#'squeak_changestamp' : 'jmetrikat 6/9/2024 17:52'
 }
 EPGStorypoint >> isEPGStorypoint [
 
 	^ true.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/18/2024 23:56'
+}
+EPGStorypoint >> isUnavailable [
+
+	^ self isAvailable not.
+]
+
+{
+	#category : #'events-processing',
+	#'squeak_changestamp' : 'HCH 6/18/2024 23:54'
+}
+EPGStorypoint >> makeUnavailable [
+
+	self beUnavailable.
+	self timeToLive: 1.
 ]
 
 {
@@ -118,7 +229,7 @@ EPGStorypoint >> timeToLive: aTime [
 ]
 
 {
-	#category : #accessing,
+	#category : #'events-processing',
 	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:58'
 }
 EPGStorypoint >> update: anAspectSymbol [
@@ -128,12 +239,15 @@ EPGStorypoint >> update: anAspectSymbol [
 ]
 
 {
-	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 6/8/2024 17:49'
+	#category : #'events-processing',
+	#'squeak_changestamp' : 'HCH 6/19/2024 00:01'
 }
 EPGStorypoint >> updateTimeToLive [
 
 	self timeToLive ifNotNil: [
 		self timeToLive: self timeToLive - 1.
-		(self timeToLive == 0) ifTrue: [self abandon]].
+		(self timeToLive == 0) ifTrue: [
+			self game removeStorypoint: self.
+			self isUnavailable ifTrue: [self game addPermanent: 1].
+			self abandon.]].
 ]

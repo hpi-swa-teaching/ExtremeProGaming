@@ -584,50 +584,6 @@ EPGGameBoard >> newStorypointWrapper [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/16/2024 15:13'
-}
-EPGGameBoard >> numOfAvailableStorypoints [
-
-	| unavailableArea unavailableCount |
-	unavailableArea := self storyPointAreas at: 
-							(self class storyPointAreaTypes indexOf: #temporaryUnavailable).
-	unavailableCount := (unavailableArea dropped select: [:drop | drop isEPGStorypoint]) size.
-	^ self numOfStorypoints - unavailableCount.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/16/2024 15:12'
-}
-EPGGameBoard >> numOfStorypoints [
-
-	^ (self allMorphs select: [:morph | morph isEPGStorypoint]) size.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/16/2024 14:56'
-}
-EPGGameBoard >> numOfTemporaryStorypoints [
-
-	| temporaryArea temporaryCount |
-	temporaryArea := self storyPointAreas at: 
-							(self class storyPointAreaTypes indexOf: #temporaryAdditional).
-	temporaryCount := (temporaryArea dropped select: [:drop | drop isEPGStorypoint.]) size.
-	^ temporaryCount.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/16/2024 15:08'
-}
-EPGGameBoard >> numOfUnavailableStorypoints [
-
-	^ self numOfStorypoints - self numOfAvailableStorypoints.
-]
-
-{
-	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 5/29/2024 01:10'
 }
 EPGGameBoard >> planningArea [
@@ -661,48 +617,13 @@ EPGGameBoard >> planningAreas: anObject [
 ]
 
 {
-	#category : #storypoints,
-	#'squeak_changestamp' : 'HCH 6/16/2024 15:19'
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/18/2024 22:55'
 }
-EPGGameBoard >> removeAllAvailableStorypoints [
+EPGGameBoard >> regularStorypointArea [
 
-	| availableAreas |
-	availableAreas := self storyPointAreas select: 
-						[:area | area dropEnabled].
-	availableAreas do: [:area | area clearArea].
-]
-
-{
-	#category : #storypoints,
-	#'squeak_changestamp' : 'HCH 6/16/2024 15:18'
-}
-EPGGameBoard >> removeAllStorypoints [
-
-	self storyPointAreas do: [:area | area clearArea].
-]
-
-{
-	#category : #storypoints,
-	#'squeak_changestamp' : 'HCH 6/16/2024 15:22'
-}
-EPGGameBoard >> removeAllTemporaryStorypoints [
-
-	| temporaryArea |
-	temporaryArea := self storyPointAreas at: 
-							(self class storyPointAreaTypes indexOf: #temporaryAdditional).
- 	temporaryArea clearArea.
-]
-
-{
-	#category : #storypoints,
-	#'squeak_changestamp' : 'HCH 6/16/2024 15:22'
-}
-EPGGameBoard >> removeAllUnavailableStorypoints [
-
-	| temporaryArea |
-	temporaryArea := self storyPointAreas at: 
-							(self class storyPointAreaTypes indexOf: #temporaryUnavailable).
- 	temporaryArea clearArea.
+	^ self storyPointAreas at: 
+			(self class storyPointAreaTypes indexOf: #regular).
 ]
 
 {
@@ -739,6 +660,26 @@ EPGGameBoard >> storyPointAreas [
 EPGGameBoard >> storyPointAreas: aCollection [
 
 	storyPointAreas := aCollection.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/18/2024 22:55'
+}
+EPGGameBoard >> temporaryStorypointArea [
+
+	^ self storyPointAreas at: 
+			(self class storyPointAreaTypes indexOf: #temporaryAdditional).
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/18/2024 22:55'
+}
+EPGGameBoard >> unavailableStorypointArea [
+
+	^ self storyPointAreas at: 
+			(self class storyPointAreaTypes indexOf: #temporaryUnavailable).
 ]
 
 {
