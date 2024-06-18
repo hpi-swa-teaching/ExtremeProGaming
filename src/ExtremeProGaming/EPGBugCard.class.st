@@ -116,14 +116,13 @@ EPGBugCard >> isEPGFeatureCard [
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'sv 6/17/2024 14:50'
+	#'squeak_changestamp' : 'sv 6/18/2024 11:04'
 }
 EPGBugCard >> moveToDone [
 
 	| doneArea index |
 	index := self gameBoard class doneAreaTypes indexOf: #Bug.
 	doneArea := self gameBoard doneAreas at: index.
-	self turn.
 	self removeProperty: #EPGBugCard.
 	self setProperty: #EPGBugDone toValue: true.
 	doneArea dropInMorph: self.

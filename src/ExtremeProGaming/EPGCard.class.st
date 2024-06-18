@@ -70,9 +70,20 @@ EPGCard class >> headerSymbol [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'HCH 6/12/2024 14:35'
+	#'squeak_changestamp' : 'sv 6/18/2024 10:15'
 }
-EPGCard class >> taskFont [
+EPGCard class >> taskBackFont [
+
+ 	^ TextFontReference  toFont: (StrikeFont familyName: 'Bitmap DejaVu Sans' size: 45).
+
+	
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'sv 6/18/2024 10:15'
+}
+EPGCard class >> taskFrontFont [
 
  	^ TextFontReference  toFont: (StrikeFont familyName: 'Bitmap DejaVu Sans' size: 15).
 
@@ -284,12 +295,12 @@ EPGCard >> colorBarSelector: aSelector [
 
 {
 	#category : #body,
-	#'squeak_changestamp' : 'HCH 6/3/2024 16:24'
+	#'squeak_changestamp' : 'sv 6/18/2024 10:19'
 }
 EPGCard >> consequence: aText [
 
 	| textMorph |
-	textMorph := self formatTask: aText.
+	textMorph := self formatBackTask: aText.
 	self backBody addMorph: textMorph.
 ]
 
@@ -376,13 +387,13 @@ EPGCard >> effect [
 
 {
 	#category : #body,
-	#'squeak_changestamp' : 'HCH 6/6/2024 20:03'
+	#'squeak_changestamp' : 'sv 6/18/2024 10:43'
 }
 EPGCard >> effect: aText [
 
 	| textMorph |
-	textMorph := self formatTask: aText.
-	textMorph position:  (0 @ (self height - textMorph height - self bodyOrigin y)).
+	textMorph := self formatBackTask: aText.
+	textMorph position:  (0 @ (self height * 3 - textMorph height - self bodyOrigin y)).
 	self backBody addMorph: textMorph.
 ]
 
@@ -433,12 +444,12 @@ EPGCard >> facing: aSelector [
 
 {
 	#category : #'mouse events',
-	#'squeak_changestamp' : 'sv 6/17/2024 19:00'
+	#'squeak_changestamp' : 'sv 6/18/2024 10:24'
 }
 EPGCard >> focusCard [
 
 	(self isFocus)
-		ifTrue: [self extent: self extent / 2.
+		ifTrue: [self extent: self extent / 3.
 			self turn.
 			"self game unfreezeCards."
 			self unfreezeDnD.
@@ -448,9 +459,9 @@ EPGCard >> focusCard [
 			"self game freezeCards."
 			self freezeDnD.
 			"self unfreeze."
+			self makeFocusSize.
 			self gameBoard addMorphFront: 
-				(self extent: self extent * 2; 
-					center: self gameBoard boundsInWorld center).
+				(self center: self gameBoard boundsInWorld center).
 			self beFocus.]
 ]
 
@@ -474,12 +485,30 @@ EPGCard >> formatAsTextMorph: aText [
 
 {
 	#category : #body,
-	#'squeak_changestamp' : 'HCH 6/6/2024 20:03'
+	#'squeak_changestamp' : 'sv 6/18/2024 10:19'
 }
-EPGCard >> formatTask: aText [
+EPGCard >> formatBackTask: aText [
 
 	| formattedText |
-	formattedText := (aText asText addAttribute: self class taskFont) addAttribute: TextEmphasis italic.
+	formattedText := (aText asText addAttribute: self class taskBackFont) addAttribute: TextEmphasis italic.
+	^ TextMorph new
+		contents: formattedText;
+		hResizing: #rigid;
+		vResizing: #shrinkWrap;
+		width: self width;
+		margins: 10 @ 10;
+		lock;
+		yourself.
+]
+
+{
+	#category : #body,
+	#'squeak_changestamp' : 'sv 6/18/2024 10:19'
+}
+EPGCard >> formatFrontTask: aText [
+
+	| formattedText |
+	formattedText := (aText asText addAttribute: self class taskFrontFont) addAttribute: TextEmphasis italic.
 	^ TextMorph new
 		contents: formattedText;
 		hResizing: #rigid;
@@ -749,6 +778,24 @@ EPGCard >> isFrozen [
 
 {
 	#category : #'mouse events',
+	#'squeak_changestamp' : 'sv 6/18/2024 10:43'
+}
+EPGCard >> makeFocusSize [
+
+	| positions |
+	self extent: self extent * 3.
+	positions := OrderedCollection with: (self position)
+				with: (self position + self extent y / 2).
+	self backBody submorphsDo:
+		[:text | 
+			| index |
+        		index := (self backBody submorphs indexOf: text).
+			text extent: text extent * 3
+				"position: (positions at: index)".].
+]
+
+{
+	#category : #'mouse events',
 	#'squeak_changestamp' : 'sv 6/17/2024 16:49'
 }
 EPGCard >> mouseDown: anEvent [
@@ -790,19 +837,19 @@ EPGCard >> subHeaderOrigin [
 
 {
 	#category : #body,
-	#'squeak_changestamp' : 'HCH 6/12/2024 14:45'
+	#'squeak_changestamp' : 'sv 6/18/2024 10:19'
 }
 EPGCard >> task: aText [
 
 	| textMorph |
-	textMorph := self formatTask: aText.
+	textMorph := self formatFrontTask: aText.
 	textMorph position: (0 @ (self height - textMorph height - self bodyOrigin y)).
 	self frontBody addMorph: textMorph.
 ]
 
 {
 	#category : #body,
-	#'squeak_changestamp' : 'HCH 5/29/2024 21:04'
+	#'squeak_changestamp' : 'sv 6/18/2024 11:07'
 }
 EPGCard >> turn [
 
