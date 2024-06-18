@@ -29,6 +29,18 @@ EPGGame >> cardSource: aCardSource [
 ]
 
 {
+	#category : #'card management',
+	#'squeak_changestamp' : 'sv 6/18/2024 13:21'
+}
+EPGGame >> focusCard: anEPGCard [
+	| board |
+	board := self gameBoard.
+	board freezeDnD.
+	board addMorphFront: (anEPGCard center: board boundsInWorld center).
+	
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'Philipp 6/16/2024 17:03'
 }
@@ -48,7 +60,7 @@ EPGGame >> gameBoard: aGameBoard [
 ]
 
 {
-	#category : #'card generation',
+	#category : #'card management',
 	#'squeak_changestamp' : 'sv 6/18/2024 11:12'
 }
 EPGGame >> generateBugCards [
@@ -63,7 +75,7 @@ EPGGame >> generateBugCards [
 ]
 
 {
-	#category : #'card generation',
+	#category : #'card management',
 	#'squeak_changestamp' : 'Philipp 6/16/2024 16:51'
 }
 EPGGame >> generateCards [
@@ -80,7 +92,7 @@ EPGGame >> generateCards [
 ]
 
 {
-	#category : #'card generation',
+	#category : #'card management',
 	#'squeak_changestamp' : 'sv 6/18/2024 11:12'
 }
 EPGGame >> generateFeatureCards [
@@ -162,5 +174,15 @@ EPGGame >> numOfFeatureCards: aNumber [
 EPGGame >> startNewRound [
 
 	self changed: #newRound.
+	
+]
+
+{
+	#category : #'card management',
+	#'squeak_changestamp' : 'sv 6/18/2024 13:22'
+}
+EPGGame >> unfocusCard [
+
+	self gameBoard unfreezeDnD.
 	
 ]

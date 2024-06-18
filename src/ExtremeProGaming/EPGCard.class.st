@@ -49,6 +49,15 @@ EPGCard class >> colorBarHeight [
 
 {
 	#category : #constants,
+	#'squeak_changestamp' : 'sv 6/18/2024 13:05'
+}
+EPGCard class >> focusSclaeFactor [
+
+	^ 3.
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'HCH 6/3/2024 17:29'
 }
 EPGCard class >> frontendColor [
@@ -702,25 +711,25 @@ EPGCard >> isFrontend [
 
 {
 	#category : #'focus card',
-	#'squeak_changestamp' : 'sv 6/18/2024 11:39'
+	#'squeak_changestamp' : 'sv 6/18/2024 13:05'
 }
 EPGCard >> makeFocusSize [
 
-	self extent: self extent * 3.
+	self extent: self extent * self class focusSclaeFactor.
 	self backBody submorphsDo:
-		[:text | text extent: text extent * 3].
+		[:text | text extent: text extent * self class focusSclaeFactor.].
 ]
 
 {
 	#category : #'mouse events',
-	#'squeak_changestamp' : 'sv 6/18/2024 11:25'
+	#'squeak_changestamp' : 'sv 6/18/2024 13:05'
 }
 EPGCard >> mouseDown: anEvent [ 
 
 	(self gameBoard backlogArea bounds containsPoint: anEvent position)
 		ifTrue: [anEvent hand waitForClicksOrDrag: self event: anEvent].
 	anEvent wasHandled: false.
-	super mouseDown: anEvent
+	super mouseDown: anEvent.
 ]
 
 {
@@ -739,6 +748,15 @@ EPGCard >> perTechnicalDebt [
 EPGCard >> perTechnicalDebt: aNumber [
 
 	perTechnicalDebt :=  aNumber.
+]
+
+{
+	#category : #'focus card',
+	#'squeak_changestamp' : 'sv 6/18/2024 13:24'
+}
+EPGCard >> revertFocusSize [
+
+	self extent: self extent / self class focusSclaeFactor.
 ]
 
 {
@@ -764,20 +782,18 @@ EPGCard >> task: aText [
 
 {
 	#category : #'focus card',
-	#'squeak_changestamp' : 'sv 6/18/2024 11:22'
+	#'squeak_changestamp' : 'sv 6/18/2024 13:24'
 }
 EPGCard >> toggleFocusCard [
 
 	(self isFocus)
 		ifFalse: [self turn. 
-			self gameBoard freezeDnD.
 			self makeFocusSize.
-			self gameBoard addMorphFront: 
-				(self center: self gameBoard boundsInWorld center).
+			self game focusCard: self.
 			self beFocus.]
-		ifTrue: [self extent: self extent / 3.
-			self turn.
-			self gameBoard unfreezeDnD.
+		ifTrue: [self turn.
+			self revertFocusSize.
+			self game unfocusCard.
 			self moveToDone.
 			self beUnfocus.].
 ]

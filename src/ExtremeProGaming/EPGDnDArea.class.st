@@ -10,6 +10,7 @@ Class {
 		'dropped',
 		'highlightColor',
 		'dropEnabled',
+		'pickUpEnabled',
 		'accepts',
 		'backgroundMargin',
 		'draggable'
@@ -164,7 +165,7 @@ EPGDnDArea >> draggable: aBoolean [
 ]
 
 {
-	#category : #'dragging/dropping',
+	#category : #accessing,
 	#'squeak_changestamp' : 'JP 5/28/2024 11:43'
 }
 EPGDnDArea >> dropEnabled [
@@ -173,7 +174,7 @@ EPGDnDArea >> dropEnabled [
 ]
 
 {
-	#category : #'dragging/dropping',
+	#category : #accessing,
 	#'squeak_changestamp' : 'JP 5/28/2024 11:34'
 }
 EPGDnDArea >> dropEnabled: aBool [
@@ -223,11 +224,11 @@ EPGDnDArea >> dropped: aCollection [
 
 {
 	#category : #'dragging/dropping',
-	#'squeak_changestamp' : 'sv 6/18/2024 11:16'
+	#'squeak_changestamp' : 'sv 6/18/2024 13:31'
 }
 EPGDnDArea >> freeze [
 
-	self dropEnabled: false.
+	self pickUpEnabled: false.
 ]
 
 {
@@ -261,7 +262,7 @@ EPGDnDArea >> highlightColor: aColor [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 6/14/2024 00:31'
+	#'squeak_changestamp' : 'sv 6/18/2024 13:28'
 }
 EPGDnDArea >> initialize [
 
@@ -269,6 +270,7 @@ EPGDnDArea >> initialize [
 	
 	self
 		dropEnabled: true;
+		pickUpEnabled: true;
 		draggable: false;
 		highlightColor: Color green;
 		color: Color transparent;
@@ -332,12 +334,30 @@ EPGDnDArea >> mouseLeaveDragging: evt [
 ]
 
 {
+	#category : #accessing,
+	#'squeak_changestamp' : 'sv 6/18/2024 13:27'
+}
+EPGDnDArea >> pickUpEnabled [
+
+	^ pickUpEnabled.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'sv 6/18/2024 13:27'
+}
+EPGDnDArea >> pickUpEnabled: aBoolean [
+
+	pickUpEnabled := aBoolean.
+]
+
+{
 	#category : #'dragging/dropping',
-	#'squeak_changestamp' : 'sv 6/17/2024 19:12'
+	#'squeak_changestamp' : 'sv 6/18/2024 13:28'
 }
 EPGDnDArea >> pickUpMorph: aMorph [
 
-	self dropEnabled ifTrue: [
+	self pickUpEnabled ifTrue: [
 		aMorph formerOwner: self.
 		aMorph formerPosition: aMorph position.
 		self dropped remove: aMorph.
@@ -378,11 +398,11 @@ EPGDnDArea >> toggleBorder [
 
 {
 	#category : #'dragging/dropping',
-	#'squeak_changestamp' : 'sv 6/18/2024 11:16'
+	#'squeak_changestamp' : 'sv 6/18/2024 13:31'
 }
 EPGDnDArea >> unfreeze [
 
-	self dropEnabled: true.
+	self pickUpEnabled: true.
 ]
 
 {
