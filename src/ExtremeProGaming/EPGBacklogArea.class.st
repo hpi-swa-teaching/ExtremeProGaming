@@ -82,14 +82,13 @@ EPGBacklogArea >> image: anImage [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 6/16/2024 12:37'
+	#'squeak_changestamp' : 'JP 6/17/2024 14:57'
 }
 EPGBacklogArea >> initialize [
 
 	super initialize.
 	
 	self
-		extent: 200 @ 250;
 		amountOfStorypoints: 0;
 		accepts: #(#EPGBugCard #EPGFeatureCard);
 		initializeVisibleArea.
