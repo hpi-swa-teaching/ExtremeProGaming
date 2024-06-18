@@ -29,6 +29,18 @@ EPGGame >> cardSource: aCardSource [
 ]
 
 {
+	#category : #'card management',
+	#'squeak_changestamp' : 'sv 6/18/2024 13:21'
+}
+EPGGame >> focusCard: anEPGCard [
+	| board |
+	board := self gameBoard.
+	board freezeDnD.
+	board addMorphFront: (anEPGCard center: board boundsInWorld center).
+	
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'Philipp 6/16/2024 17:03'
 }
@@ -48,8 +60,8 @@ EPGGame >> gameBoard: aGameBoard [
 ]
 
 {
-	#category : #'card generation',
-	#'squeak_changestamp' : 'Philipp 6/16/2024 16:57'
+	#category : #'card management',
+	#'squeak_changestamp' : 'sv 6/18/2024 11:12'
 }
 EPGGame >> generateBugCards [
 
@@ -57,12 +69,13 @@ EPGGame >> generateBugCards [
 	index := self gameBoard class planningAreasAcceptance indexOf: #EPGBugCard.
 	self cardSource bugCards do: [:card |
 		card gameBoard: self gameBoard.
+		card game: self.
 		self addDependent: card.
 		(self gameBoard planningAreas at: index) dropInMorph: card].
 ]
 
 {
-	#category : #'card generation',
+	#category : #'card management',
 	#'squeak_changestamp' : 'Philipp 6/16/2024 16:51'
 }
 EPGGame >> generateCards [
@@ -79,8 +92,8 @@ EPGGame >> generateCards [
 ]
 
 {
-	#category : #'card generation',
-	#'squeak_changestamp' : 'Philipp 6/16/2024 16:58'
+	#category : #'card management',
+	#'squeak_changestamp' : 'sv 6/18/2024 11:12'
 }
 EPGGame >> generateFeatureCards [
 
@@ -88,13 +101,14 @@ EPGGame >> generateFeatureCards [
 	index := self gameBoard class planningAreasAcceptance indexOf: #EPGFeatureCard.
 	self cardSource featureCards do: [:card |
 		card gameBoard: self gameBoard.
+		card game: self.
 		self addDependent: card.
 		(self gameBoard planningAreas at: index) dropInMorph: card].
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 6/16/2024 23:15'
+	#'squeak_changestamp' : 'sv 6/18/2024 11:12'
 }
 EPGGame >> initialize [
 
@@ -160,5 +174,15 @@ EPGGame >> numOfFeatureCards: aNumber [
 EPGGame >> startNewRound [
 
 	self changed: #newRound.
+	
+]
+
+{
+	#category : #'card management',
+	#'squeak_changestamp' : 'sv 6/18/2024 13:22'
+}
+EPGGame >> unfocusCard [
+
+	self gameBoard unfreezeDnD.
 	
 ]

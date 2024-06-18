@@ -48,13 +48,23 @@ EPGBacklogCard >> moveToDone [
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'HCH 6/15/2024 22:42'
+	#'squeak_changestamp' : 'sv 6/18/2024 11:13'
+}
+EPGBacklogCard >> prepareMoveToDone [
+
+	self toggleFocusCard.
+	self updateStoryPoints.
+]
+
+{
+	#category : #'events-processing',
+	#'squeak_changestamp' : 'sv 6/17/2024 14:45'
 }
 EPGBacklogCard >> process: aDebtArea [
 	
 	self owner dropped remove: self.
 	self owner resetAccepts.
-	self moveToDone.
+	self prepareMoveToDone.
 ]
 
 {
@@ -73,4 +83,13 @@ EPGBacklogCard >> processStorypoints [
 	regularStoryPointArea := (self gameBoard storyPointAreas at: regularAreaIndex).
 	regularStoryPointArea addStorypoints: self owner amounfOfStorypoints.
 	self owner amountOfStorypoints: 0.
+]
+
+{
+	#category : #'events-processing',
+	#'squeak_changestamp' : 'sv 6/17/2024 14:51'
+}
+EPGBacklogCard >> updateStoryPoints [
+
+	"TODO update exisiting/locked storypoints accoring to card"
 ]

@@ -354,6 +354,17 @@ EPGGameBoard >> fixLayout [
 ]
 
 {
+	#category : #areas,
+	#'squeak_changestamp' : 'sv 6/18/2024 11:21'
+}
+EPGGameBoard >> freezeDnD [
+
+	| DnDAreas |
+	DnDAreas := (self planningAreas), (self storyPointAreas), (self doneAreas).
+	DnDAreas do: [:area | area freeze.].
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:47'
 }
@@ -639,4 +650,15 @@ EPGGameBoard >> storyPointAreas [
 EPGGameBoard >> storyPointAreas: aCollection [
 
 	storyPointAreas := aCollection.
+]
+
+{
+	#category : #areas,
+	#'squeak_changestamp' : 'sv 6/18/2024 11:21'
+}
+EPGGameBoard >> unfreezeDnD [
+
+	| DnDAreas |
+	DnDAreas := (self planningAreas), (self storyPointAreas), (self doneAreas).
+	DnDAreas do: [:area | area unfreeze.].
 ]
