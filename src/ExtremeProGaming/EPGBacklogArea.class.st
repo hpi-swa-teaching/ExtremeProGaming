@@ -27,7 +27,7 @@ EPGBacklogArea >> amountOfStorypoints: aNumber [
 ]
 
 {
-	#category : #accessing,
+	#category : #'events-processing',
 	#'squeak_changestamp' : 'HCH 6/15/2024 21:53'
 }
 EPGBacklogArea >> dropInCard: aMorph [
@@ -37,7 +37,7 @@ EPGBacklogArea >> dropInCard: aMorph [
 ]
 
 {
-	#category : #accessing,
+	#category : #'events-processing',
 	#'squeak_changestamp' : 'HCH 6/15/2024 21:56'
 }
 EPGBacklogArea >> dropInMorph: aMorph [
@@ -49,7 +49,7 @@ EPGBacklogArea >> dropInMorph: aMorph [
 ]
 
 {
-	#category : #accessing,
+	#category : #'events-processing',
 	#'squeak_changestamp' : 'jmetrikat 6/16/2024 12:38'
 }
 EPGBacklogArea >> dropInStorypoint: aMorph [
@@ -106,7 +106,7 @@ EPGBacklogArea >> isEPGBacklogArea [
 ]
 
 {
-	#category : #accessing,
+	#category : #'events-processing',
 	#'squeak_changestamp' : 'jmetrikat 6/16/2024 12:38'
 }
 EPGBacklogArea >> pickUpMorph: aMorph [
@@ -122,12 +122,13 @@ EPGBacklogArea >> pickUpMorph: aMorph [
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'JP 6/19/2024 21:08'
+	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:08'
 }
 EPGBacklogArea >> processStorypoints [
 	
-	self removeStorypoints.
-	self returnStorypoints.	
+	self
+		removeStorypoints;
+		returnStorypoints.	
 ]
 
 {
@@ -150,12 +151,11 @@ EPGBacklogArea >> resetAccepts [
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'JP 6/19/2024 21:02'
+	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:15'
 }
 EPGBacklogArea >> returnStorypoints [
 
 	| regularAreaIndex regularStoryPointArea|
-
 	regularAreaIndex := self game gameBoard class storyPointAreaTypes indexOf: #regular.
 	regularStoryPointArea := (self game gameBoard storyPointAreas at: regularAreaIndex).
 	regularStoryPointArea addStorypoints: self amounfOfStorypoints.

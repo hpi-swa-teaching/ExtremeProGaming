@@ -216,7 +216,7 @@ EPGDnDArea >> dropped [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 5/27/2024 18:17'
+	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:27'
 }
 EPGDnDArea >> dropped: aCollection [
 

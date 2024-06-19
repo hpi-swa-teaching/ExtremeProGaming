@@ -6,46 +6,28 @@ Class {
 		'cardSource',
 		'numOfFeatureCards',
 		'numOfBugCards',
-		'blockFrontend',
-		'blockBackend'
+		'frontendIsBlocked',
+		'backendIsBlocked'
 	],
 	#category : #ExtremeProGaming
 }
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 6/19/2024 21:39'
+	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:46'
 }
-EPGGame >> blockBackend [
+EPGGame >> backendIsBlocked [
 
-	^ blockBackend.
+	^ backendIsBlocked.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 6/19/2024 21:40'
+	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:46'
 }
-EPGGame >> blockBackend: anObject [
+EPGGame >> backendIsBlocked: aBoolean [
 
-	blockBackend := anObject.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'JP 6/19/2024 21:40'
-}
-EPGGame >> blockFrontend [
-
-	^ blockFrontend.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'JP 6/19/2024 21:40'
-}
-EPGGame >> blockFrontend: anObject [
-
-	blockFrontend := anObject.
+	backendIsBlocked := aBoolean.
 ]
 
 {
@@ -76,6 +58,24 @@ EPGGame >> focusCard: anEPGCard [
 	board freezeDnD.
 	board addMorphFront: (anEPGCard center: board boundsInWorld center).
 	
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:47'
+}
+EPGGame >> frontendIsBlocked [
+
+	^ frontendIsBlocked.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:47'
+}
+EPGGame >> frontendIsBlocked: aBoolean [
+
+	frontendIsBlocked := aBoolean.
 ]
 
 {
@@ -146,7 +146,7 @@ EPGGame >> generateFeatureCards [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 6/19/2024 19:46'
+	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:47'
 }
 EPGGame >> initialize [
 
@@ -154,8 +154,8 @@ EPGGame >> initialize [
 	self 
 		gameBoard: (EPGGameBoard newWithGame: self);
 		cardSource: EPGJSONParser new;
-		blockFrontend: false;
-		blockBackend: false.		
+		frontendIsBlocked: false;
+		backendIsBlocked: false.		
 	self initializeDefaultGameState.
 	^ self gameBoard.
 ]
@@ -209,22 +209,23 @@ EPGGame >> numOfFeatureCards: aNumber [
 
 {
 	#category : #'game logic',
-	#'squeak_changestamp' : 'JP 6/19/2024 20:18'
+	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:48'
 }
-EPGGame >> resetValues [
+EPGGame >> resetBlockedValues [
 
-	self blockFrontend: false.
-	self blockBackend: false.
+	self
+		frontendIsBlocked: false;
+		backendIsBlocked: false.
 ]
 
 {
 	#category : #'game logic',
-	#'squeak_changestamp' : 'JP 6/19/2024 21:17'
+	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:48'
 }
 EPGGame >> startNewRound [
 
 	self changed: #newRound.
-	self resetValues.
+	self resetBlockedValues.
 	
 ]
 
@@ -240,15 +241,15 @@ EPGGame >> unfocusCard [
 
 {
 	#category : #'game logic',
-	#'squeak_changestamp' : 'JP 6/19/2024 19:47'
+	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:51'
 }
 EPGGame >> update: anAspectSymbol with: aParameter [
 
 	anAspectSymbol = #StorypointDroppedOnDebt
-		ifTrue: [(aParameter = #frontend) ifTrue: [self blockFrontend: true.].
-				(aParameter = #backend) ifTrue: [self blockBackend: true.].].
+		ifTrue: [(aParameter = #frontend) ifTrue: [self frontendIsBlocked: true].
+				(aParameter = #backend) ifTrue: [self backendIsBlocked: true]].
 			
-	anAspectSymbol = #StorypointPickUpOfDebt
-		ifTrue: [(aParameter = #frontend) ifTrue: [self blockFrontend: false.].
-				(aParameter = #backend) ifTrue: [self blockBackend: false.].].
+	anAspectSymbol = #StorypointPickedUpFromDebt
+		ifTrue: [(aParameter = #frontend) ifTrue: [self frontendIsBlocked: false].
+				(aParameter = #backend) ifTrue: [self backendIsBlocked: false]].
 ]
