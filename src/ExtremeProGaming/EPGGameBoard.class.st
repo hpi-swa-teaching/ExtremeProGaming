@@ -534,7 +534,7 @@ EPGGameBoard >> initializeSectionMorphs [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 6/17/2024 23:08'
+	#'squeak_changestamp' : 'JP 6/19/2024 11:18'
 }
 EPGGameBoard >> initializeStorypointAreas [
 
@@ -550,7 +550,7 @@ EPGGameBoard >> initializeStorypointAreas [
 			game: self game;
 			addStorypoints: self class defaultAmountOfStorypoints.
 		(a == 1) 
-			ifTrue: [area dropEnabled: false.]
+			ifTrue: [area dropEnabled: false; pickUpEnabled: false.]
 			ifFalse: [area accepts: #(#EPGStorypoint)].
 		wrapper addMorph: area].
 ]
@@ -568,14 +568,14 @@ EPGGameBoard >> newDoneAreaAccepting: aSelector [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 6/13/2024 23:13'
+	#'squeak_changestamp' : 'JP 6/19/2024 11:18'
 }
 EPGGameBoard >> newStorypointWrapper [
 
 	^ Morph new
 		color: Color transparent;
 		layoutPolicy: TableLayout new;
-		listDirection: #leftToRight;
+		listDirection: #rightToLeft;
 		listCentering: #justified;
 		wrapCentering: #justified;
 		vResizing: #shrinkWrap;
