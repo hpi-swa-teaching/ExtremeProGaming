@@ -14,34 +14,38 @@ Class {
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 6/19/2024 19:45'
+	#'squeak_changestamp' : 'JP 6/19/2024 21:39'
 }
 EPGGame >> blockBackend [
-	^ blockBackend
+
+	^ blockBackend.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 6/19/2024 19:45'
+	#'squeak_changestamp' : 'JP 6/19/2024 21:40'
 }
 EPGGame >> blockBackend: anObject [
-	blockBackend := anObject
+
+	blockBackend := anObject.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 6/19/2024 19:45'
+	#'squeak_changestamp' : 'JP 6/19/2024 21:40'
 }
 EPGGame >> blockFrontend [
-	^ blockFrontend
+
+	^ blockFrontend.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 6/19/2024 19:45'
+	#'squeak_changestamp' : 'JP 6/19/2024 21:40'
 }
 EPGGame >> blockFrontend: anObject [
-	blockFrontend := anObject
+
+	blockFrontend := anObject.
 ]
 
 {
