@@ -6,9 +6,9 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'HCH 6/18/2024 22:26'
+	#'squeak_changestamp' : 'HCH 6/19/2024 17:31'
 }
 EPGTemporaryRemoval >> apply [
 
-	^ nil.
+	self game removeTemporary: self amount.
 ]

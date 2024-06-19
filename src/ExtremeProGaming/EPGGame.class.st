@@ -314,18 +314,13 @@ EPGGame >> removeAllUnavailableStorypoints [
 
 {
 	#category : #storypoints,
-	#'squeak_changestamp' : 'HCH 6/18/2024 23:46'
+	#'squeak_changestamp' : 'HCH 6/19/2024 17:40'
 }
 EPGGame >> removePermanent: aNumber [
 
-	self numOfAvailableStorypoints - aNumber <= 0
-		ifTrue: [self removeAllAvailableStorypoints. ^ self].
-	aNumber timesRepeat: [
-		self numOfPermanentStorypoints > 0
-			ifTrue: [self removeStorypoint: 
-						self gameBoard regularStorypointArea dropped first.]
-			ifFalse: [self removeStorypoint: 
-						self gameBoard temporaryStorypointArea dropped first]].
+	(aNumber min: self numOfAvailableStorypoints)
+		timesRepeat: [self removeStorypoint: 
+			self gameBoard regularStorypointArea dropped first].
 ]
 
 {
@@ -342,15 +337,14 @@ EPGGame >> removeStorypoint: aStorypoint [
 
 {
 	#category : #storypoints,
-	#'squeak_changestamp' : 'HCH 6/19/2024 00:08'
+	#'squeak_changestamp' : 'HCH 6/19/2024 17:36'
 }
 EPGGame >> removeTemporary: aNumber [
 
 	| area |
-	area := self gameBoard regularStorypointArea.
-	area dropped do: [:storypoint | 
-		[aNumber > 0] or: 
-			[storypoint makeUnavailable. self]]
+	area := self gameBoard unavailableStorypointArea.
+	self removePermanent: aNumber.
+	aNumber timesRepeat: [area addCustomStorypoint: EPGStorypoint new makeUnavailable]. 
 	
 ]
 

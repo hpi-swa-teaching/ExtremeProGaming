@@ -68,14 +68,15 @@ EPGEffectExecutionTest >> testTemporaryAddition [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'HCH 6/18/2024 22:27'
+	#'squeak_changestamp' : 'HCH 6/19/2024 17:31'
 }
 EPGEffectExecutionTest >> testTemporaryRemoval [
 
 	| oldCountAvailable oldCountUnavailable |
+	game addPermanent: 1.
 	oldCountAvailable := game numOfAvailableStorypoints.
 	oldCountUnavailable := game numOfUnavailableStorypoints.
-	effect := EPGTemporaryRemoval new. "tmp -1"
+	effect := EPGTemporaryRemoval newWithGame: game amount: 1. "-1 tmp"
 	effect apply.
 	
 	self assert: oldCountAvailable - 1 equals: game numOfAvailableStorypoints.
