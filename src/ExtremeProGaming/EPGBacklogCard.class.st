@@ -6,11 +6,11 @@ Class {
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'HCH 6/19/2024 23:24'
+	#'squeak_changestamp' : 'HCH 6/20/2024 01:26'
 }
 EPGBacklogCard >> canBeProcessed [
 
-	^ self checkCost: self owner amountOfStorypoints.
+	^ self isBlocked not and: [self checkCost: self owner amountOfStorypoints].
 		
 
 
@@ -28,27 +28,12 @@ EPGBacklogCard >> checkCost: aStorypointAmount [
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:37'
-}
-EPGBacklogCard >> checkIfProcessed [
-	
-	| debtArea |
-	debtArea := self frontend
-		ifTrue: [self gameBoard frontendDebtArea]
-		ifFalse: [self gameBoard backendDebtArea].
-
-	((self owner isEPGBacklogArea) and: [self checkCost: debtArea currentDebt])
-		ifTrue: [self owner processStorypoints.
-				self isBlocked ifFalse: [self process: debtArea]].
-]
-
-{
-	#category : #'events-processing',
-	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:47'
+	#'squeak_changestamp' : 'HCH 6/20/2024 01:27'
 }
 EPGBacklogCard >> isBlocked [
 
-	^ (self game frontendIsBlocked and: self isFrontend) or: (self game backendIsBlocked and: self isBackend).
+	^ (self game frontendIsBlocked and: self isFrontend) 
+		or: [self game backendIsBlocked and: self isBackend].
 ]
 
 {
@@ -71,23 +56,21 @@ EPGBacklogCard >> moveToDone [
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'sv 6/18/2024 11:13'
+	#'squeak_changestamp' : 'HCH 6/20/2024 01:04'
 }
 EPGBacklogCard >> prepareMoveToDone [
 
 	self toggleFocusCard.
-	self updateStoryPoints.
 ]
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'JP 6/19/2024 22:39'
+	#'squeak_changestamp' : 'HCH 6/20/2024 00:50'
 }
-EPGBacklogCard >> process: aDebtArea [
+EPGBacklogCard >> process [
 	
 	self owner dropped remove: self.
 	self owner resetAccepts.
-	self prepareMoveToDone.
 ]
 
 {
@@ -103,13 +86,4 @@ EPGBacklogCard >> totalCost [
 	debtAmount := debtArea currentDebt.
 
 	^ self cost + (self perTechnicalDebt * debtAmount).
-]
-
-{
-	#category : #'events-processing',
-	#'squeak_changestamp' : 'sv 6/17/2024 14:51'
-}
-EPGBacklogCard >> updateStoryPoints [
-
-	"TODO update exisiting/locked storypoints accoring to card"
 ]

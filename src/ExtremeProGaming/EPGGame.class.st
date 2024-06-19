@@ -8,9 +8,10 @@ Class {
 		'numOfBugCards',
 		'frontendIsBlocked',
 		'backendIsBlocked',
-		'sprintEffects'
+		'sprintEffects',
+		'focusedCards'
 	],
-	#category : 'ExtremeProGaming'
+	#category : #ExtremeProGaming
 }
 
 {
@@ -82,11 +83,12 @@ EPGGame >> addUnavailable: aNumber [
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'HCH 6/19/2024 22:10'
+	#'squeak_changestamp' : 'HCH 6/20/2024 01:16'
 }
 EPGGame >> applySprintEffects [
 
 	self sprintEffects do: [:effect | effect apply].
+	self sprintEffects removeAll.
 ]
 
 {
@@ -146,11 +148,23 @@ EPGGame >> cardSource: aCardSource [
 ]
 
 {
+	#category : #sprints,
+	#'squeak_changestamp' : 'HCH 6/20/2024 01:22'
+}
+EPGGame >> checkBlockingDebt [
+
+	self frontendIsBlocked: self gameBoard frontendDebtArea isBlocking.
+	self backendIsBlocked: self gameBoard backendDebtArea isBlocking.
+]
+
+{
 	#category : #cards,
-	#'squeak_changestamp' : 'sv 6/18/2024 13:21'
+	#'squeak_changestamp' : 'HCH 6/20/2024 01:00'
 }
 EPGGame >> focusCard: anEPGCard [
+
 	| board |
+	self focusedCards add: anEPGCard.
 	board := self gameBoard.
 	board freezeDnD.
 	board addMorphFront: (anEPGCard center: board boundsInWorld center).
@@ -159,11 +173,29 @@ EPGGame >> focusCard: anEPGCard [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/19/2024 19:56'
+	#'squeak_changestamp' : 'HCH 6/20/2024 00:59'
+}
+EPGGame >> focusedCards [
+
+	^ focusedCards.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/20/2024 00:59'
+}
+EPGGame >> focusedCards: aCollection [
+
+	^ focusedCards := aCollection.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/20/2024 01:19'
 }
 EPGGame >> freeBacklogAreas [
 
-	^ self gameBoard backlogDnDAreas select: [:area | area isFree].
+	^ (self gameBoard backlogDnDAreas select: [:area | area isFree]) reverse.
 ]
 
 {
@@ -249,7 +281,7 @@ EPGGame >> generateFeatureCards [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'HCH 6/20/2024 00:21'
+	#'squeak_changestamp' : 'HCH 6/20/2024 01:04'
 }
 EPGGame >> initialize [
 
@@ -260,7 +292,9 @@ EPGGame >> initialize [
 		frontendIsBlocked: false;
 		backendIsBlocked: false.		
 	self initializeDefaultGameState.
-	self sprintEffects: OrderedCollection new.
+	self 
+		sprintEffects: OrderedCollection new;
+		focusedCards: OrderedCollection new.
 	^ self gameBoard.
 ]
 
@@ -381,19 +415,66 @@ EPGGame >> numOfUnavailableStorypoints [
 ]
 
 {
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/20/2024 00:36'
+}
+EPGGame >> occupiedAreas [
+ 
+	^ self gameBoard backlogDnDAreas 
+			select: [:area | area isFree not.]
+]
+
+{
 	#category : #sprints,
-	#'squeak_changestamp' : 'HCH 6/19/2024 23:27'
+	#'squeak_changestamp' : 'HCH 6/20/2024 01:37'
 }
 EPGGame >> processCards [
 
-	| processableCards |
-	processableCards := 
-		(self gameBoard backlogDnDAreas 
-			select: [:area | area isFree not.]
-			thenCollect: [:area | area card.])
-			select: [:card | card canBeProcessed.].
-	self sprintEffects:( processableCards collect: [:card | card effect.]).
-	processableCards do: [:card | card process.].
+	| processedCards |
+	processedCards := OrderedCollection new.
+	self processableCards do: [:card | 
+			self sprintEffects add: card effect. 
+			card process.
+			processedCards add: card].
+	processedCards do: [:card | card prepareMoveToDone].
+	self processDebt: processedCards.
+	
+	
+]
+
+{
+	#category : #sprints,
+	#'squeak_changestamp' : 'HCH 6/20/2024 01:37'
+}
+EPGGame >> processDebt: aCardCollection [
+
+	| featureCards |
+	featureCards := aCardCollection select: [:card | card isEPGFeatureCard].
+	(featureCards anySatisfy: [:card | card isFrontend] ) 
+		ifTrue: [self gameBoard frontendDebtArea addTechnicalDebt].
+	(featureCards anySatisfy: [:card | card isBackend] ) 
+		ifTrue: [self gameBoard backendDebtArea addTechnicalDebt].
+	
+	
+]
+
+{
+	#category : #sprints,
+	#'squeak_changestamp' : 'HCH 6/20/2024 00:52'
+}
+EPGGame >> processStorypoints [
+
+	self occupiedAreas do: [:area | area processStorypoints].
+	
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/20/2024 01:28'
+}
+EPGGame >> processableCards [
+
+	^ self occupiedAreas collect: [:area | area card] thenSelect: [:card | card canBeProcessed].
 ]
 
 {
@@ -519,39 +600,30 @@ EPGGame >> sprintEffects: aCollection [
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'HCH 6/20/2024 00:25'
+	#'squeak_changestamp' : 'HCH 6/20/2024 01:29'
 }
 EPGGame >> startNewRound [
 
-	self changed: #newRound.
-	self processCards.
-	self resetBlockedValues.
+	self 
+		checkBlockingDebt;
+		processCards;
+		processStorypoints;
+		resetBlockedValues;
+		changed: #newRound.
 	
 ]
 
 {
 	#category : #cards,
-	#'squeak_changestamp' : 'sv 6/18/2024 13:22'
+	#'squeak_changestamp' : 'HCH 6/20/2024 01:33'
 }
-EPGGame >> unfocusCard [
+EPGGame >> unfocusCard: anEPGCard [
 
-	self gameBoard unfreezeDnD.
+	self focusedCards remove: anEPGCard.
+	anEPGCard isEPGFeatureCard ifTrue: [self updateFeatureScore].
+	self focusedCards size = 0
+		ifTrue: [self gameBoard unfreezeDnD. self applySprintEffects.].
 	
-]
-
-{
-	#category : #'game logic',
-	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:51'
-}
-EPGGame >> update: anAspectSymbol with: aParameter [
-
-	anAspectSymbol = #StorypointDroppedOnDebt
-		ifTrue: [(aParameter = #frontend) ifTrue: [self frontendIsBlocked: true].
-				(aParameter = #backend) ifTrue: [self backendIsBlocked: true]].
-			
-	anAspectSymbol = #StorypointPickedUpFromDebt
-		ifTrue: [(aParameter = #frontend) ifTrue: [self frontendIsBlocked: false].
-				(aParameter = #backend) ifTrue: [self backendIsBlocked: false]].
 ]
 
 {

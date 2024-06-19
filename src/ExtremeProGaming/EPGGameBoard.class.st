@@ -217,6 +217,15 @@ EPGGameBoard >> addReviewArea [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/20/2024 01:08'
+}
+EPGGameBoard >> availableStorypointAreas [
+
+	^ {self regularStorypointArea . self temporaryStorypointArea}.
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:15'
 }
 EPGGameBoard >> backendDebtArea [
@@ -745,11 +754,11 @@ EPGGameBoard >> unavailableStorypointArea [
 
 {
 	#category : #areas,
-	#'squeak_changestamp' : 'sv 6/18/2024 11:21'
+	#'squeak_changestamp' : 'HCH 6/20/2024 01:07'
 }
 EPGGameBoard >> unfreezeDnD [
 
 	| DnDAreas |
-	DnDAreas := (self planningAreas), (self storyPointAreas), (self doneAreas).
+	DnDAreas := (self planningAreas), (self availableStorypointAreas), (self doneAreas).
 	DnDAreas do: [:area | area unfreeze.].
 ]

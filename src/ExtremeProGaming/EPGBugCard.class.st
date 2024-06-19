@@ -19,7 +19,7 @@ EPGBugCard class >> headerSymbol [
 
 {
 	#category : #'instance creation',
-	#'squeak_changestamp' : 'HCH 6/3/2024 17:08'
+	#'squeak_changestamp' : 'HCH 6/20/2024 01:13'
 }
 EPGBugCard class >> newBackendWithTask: aTask consequence: aConsequence effect: anEffect cost: aCost perTechnicalDebt: aNumber positive: aBoolean [
 	
@@ -29,8 +29,8 @@ EPGBugCard class >> newBackendWithTask: aTask consequence: aConsequence effect: 
 					initializeHeader: 'Bug';
 					colorBar: self backendColor withLayout: #right;
 					task: aTask;
-					consequence: aConsequence;
-					effect: anEffect;
+					displayConsequenceText: aConsequence;
+					displayEffectText: anEffect;
 					cost: aCost perTechnicalDebt: aNumber.
 	aBoolean 
 		ifTrue: [instance bePositive]
@@ -44,7 +44,7 @@ EPGBugCard class >> newBackendWithTask: aTask consequence: aConsequence effect: 
 
 {
 	#category : #'instance creation',
-	#'squeak_changestamp' : 'HCH 6/3/2024 17:29'
+	#'squeak_changestamp' : 'HCH 6/20/2024 01:13'
 }
 EPGBugCard class >> newFrontendWithTask: aTask consequence: aConsequence effect: anEffect cost: aCost perTechnicalDebt: aNumber positive: aBoolean [
 	
@@ -54,8 +54,8 @@ EPGBugCard class >> newFrontendWithTask: aTask consequence: aConsequence effect:
 					initializeHeader: 'Bug';
 					colorBar: self frontendColor withLayout: #left;
 					task: aTask;
-					consequence: aConsequence;
-					effect: anEffect;
+					displayConsequenceText: aConsequence;
+					displayEffectText: anEffect;
 					cost: aCost perTechnicalDebt: aNumber.
 	aBoolean 
 		ifTrue: [instance bePositive]

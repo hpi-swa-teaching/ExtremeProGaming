@@ -31,16 +31,6 @@ EPGDebt >> checkIfProcessed [
 ]
 
 {
-	#category : #initialization,
-	#'squeak_changestamp' : 'JP 6/19/2024 19:50'
-}
-EPGDebt >> dropInMorph: aMorph [
-
-	super dropInMorph: aMorph.
-	self changed: #StorypointDroppedOnDebt with: self type.
-]
-
-{
 	#category : #accessing,
 	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:22'
 }
@@ -81,21 +71,6 @@ EPGDebt >> initialize [
 EPGDebt >> mouseEnterDragging: evt [
 
 	(self dropEnabled and: [self checkForStorypoint not]) ifTrue: [self addBorder].
-]
-
-{
-	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:51'
-}
-EPGDebt >> pickUpMorph: aMorph [
-
-	self pickUpEnabled ifTrue: [
-		aMorph formerOwner: self.
-		aMorph formerPosition: aMorph position.
-		self dropped remove: aMorph.
-		self update: #StorypointPickedUpFromDebt with: self type.
-		^ aMorph.]
-	ifFalse: [^ nil.].
 ]
 
 {

@@ -294,17 +294,6 @@ EPGCard >> colorBarSelector: aSelector [
 ]
 
 {
-	#category : #body,
-	#'squeak_changestamp' : 'sv 6/18/2024 10:19'
-}
-EPGCard >> consequence: aText [
-
-	| textMorph |
-	textMorph := self formatBackTask: aText.
-	self backBody addMorph: textMorph.
-]
-
-{
 	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 6/3/2024 09:49'
 }
@@ -336,6 +325,17 @@ EPGCard >> cost: aCost perTechnicalDebt: aNumber [
 
 {
 	#category : #body,
+	#'squeak_changestamp' : 'HCH 6/20/2024 01:12'
+}
+EPGCard >> displayConsequenceText: aText [
+
+	| textMorph |
+	textMorph := self formatBackTask: aText.
+	self backBody addMorph: textMorph.
+]
+
+{
+	#category : #body,
 	#'squeak_changestamp' : 'HCH 6/12/2024 14:44'
 }
 EPGCard >> displayCost [
@@ -350,18 +350,30 @@ EPGCard >> displayCost [
 
 {
 	#category : #body,
-	#'squeak_changestamp' : 'HCH 6/19/2024 22:03'
+	#'squeak_changestamp' : 'HCH 6/20/2024 01:09'
 }
 EPGCard >> displayEffect [
 
 	| arrow |
 	arrow := ImageMorph new.
-	self effectText = #positive
+	self effectSelector = #positive
 		ifTrue: [arrow image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: '/assets/ArrowUp.png') scaledToSize: self effectSize)].
-	self effectText = #negative
+	self effectSelector = #negative
 		ifTrue: [arrow image:( ((GitAssetLoader for: 'ExtremeProGaming') loadAsset: '/assets/ArrowDown.png') scaledToSize: self effectSize)].
 	arrow center: self bodyOrigin + (self width / 2 @ 50).
 	self frontBody addMorph: arrow.
+]
+
+{
+	#category : #body,
+	#'squeak_changestamp' : 'HCH 6/20/2024 01:12'
+}
+EPGCard >> displayEffectText: aText [
+
+| textMorph |
+	textMorph := self formatBackTask: aText.
+	textMorph position:  (0 @ (self height * 3 - textMorph height - self bodyOrigin y)).
+	self backBody addMorph: textMorph.
 ]
 
 {
@@ -428,6 +440,15 @@ EPGCard >> effectSize [
 EPGCard >> effectText [
 
 	^ effectText.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/20/2024 01:05'
+}
+EPGCard >> effectText: aText [
+
+	effectText := aText.
 ]
 
 {
@@ -789,7 +810,7 @@ EPGCard >> task: aText [
 
 {
 	#category : #'focus card',
-	#'squeak_changestamp' : 'sv 6/18/2024 13:24'
+	#'squeak_changestamp' : 'HCH 6/20/2024 01:00'
 }
 EPGCard >> toggleFocusCard [
 
@@ -800,7 +821,7 @@ EPGCard >> toggleFocusCard [
 			self beFocus.]
 		ifTrue: [self turn.
 			self revertFocusSize.
-			self game unfocusCard.
+			self game unfocusCard: self.
 			self moveToDone.
 			self beUnfocus.].
 ]

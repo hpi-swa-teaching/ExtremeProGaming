@@ -99,6 +99,15 @@ EPGDebtArea >> initialize [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/20/2024 01:23'
+}
+EPGDebtArea >> isBlocking [
+
+	^ self submorphs anySatisfy: [:debt | debt checkForStorypoint].
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:02'
 }
 EPGDebtArea >> randomPositionFor: aMorph [

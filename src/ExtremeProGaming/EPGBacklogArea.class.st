@@ -169,12 +169,12 @@ EPGBacklogArea >> resetAccepts [
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:57'
+	#'squeak_changestamp' : 'HCH 6/20/2024 00:32'
 }
 EPGBacklogArea >> returnStorypoints [
 
 	| regularAreaIndex regularStoryPointArea|
 	regularAreaIndex := self game gameBoard class storyPointAreaTypes indexOf: #regular.
 	regularStoryPointArea := (self game gameBoard storyPointAreas at: regularAreaIndex).
-	regularStoryPointArea addStorypoints: self amounfOfStorypoints.
+	regularStoryPointArea addStorypoints: self amountOfStorypoints.
 ]
