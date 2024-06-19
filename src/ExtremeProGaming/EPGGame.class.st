@@ -215,12 +215,11 @@ EPGGame >> resetValues [
 
 {
 	#category : #observer,
-	#'squeak_changestamp' : 'JP 6/19/2024 20:18'
+	#'squeak_changestamp' : 'JP 6/19/2024 21:17'
 }
 EPGGame >> startNewRound [
 
 	self changed: #newRound.
-	self updateBacklogCards.
 	self resetValues.
 	
 ]
@@ -248,14 +247,4 @@ EPGGame >> update: anAspectSymbol with: aParameter [
 	anAspectSymbol = #StorypointPickUpOfDebt
 		ifTrue: [(aParameter = #frontend) ifTrue: [self blockFrontend: false.].
 				(aParameter = #backend) ifTrue: [self blockBackend: false.].].
-]
-
-{
-	#category : #observer,
-	#'squeak_changestamp' : 'JP 6/19/2024 20:11'
-}
-EPGGame >> updateBacklogCards [
-
-	self blockFrontend ifFalse:[self changed: #updateCards with: #frontend].
-	self blockBackend ifFalse:[self changed: #updateCards with: #backend].
 ]

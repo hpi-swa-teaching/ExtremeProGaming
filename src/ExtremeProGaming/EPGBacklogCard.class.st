@@ -15,7 +15,7 @@ EPGBacklogCard >> checkCost: aDebtAmount [
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'Philipp 6/16/2024 18:31'
+	#'squeak_changestamp' : 'JP 6/19/2024 21:28'
 }
 EPGBacklogCard >> checkIfProcessed [
 	
@@ -25,7 +25,8 @@ EPGBacklogCard >> checkIfProcessed [
 		ifFalse: [self gameBoard backendDebtArea].
 
 	((self owner isEPGBacklogArea) and: [self checkCost: debtArea currentDebt])
-		ifTrue: [self processStorypoints. self process: debtArea].
+		ifTrue: [self notBlocked ifTrue:[self owner processStorypoints. self process: debtArea]
+								 ifFalse:[self owner processStorypoints.].].
 ]
 
 {
@@ -48,6 +49,17 @@ EPGBacklogCard >> moveToDone [
 
 {
 	#category : #'events-processing',
+	#'squeak_changestamp' : 'JP 6/19/2024 21:20'
+}
+EPGBacklogCard >> notBlocked [
+
+	(self game blockFrontend and: self isFrontend) ifTrue:[^ false.].
+	(self game blockBackend and: self isBackend) ifTrue:[^false.].
+	^ true.
+]
+
+{
+	#category : #'events-processing',
 	#'squeak_changestamp' : 'sv 6/18/2024 11:13'
 }
 EPGBacklogCard >> prepareMoveToDone [
@@ -65,42 +77,6 @@ EPGBacklogCard >> process: aDebtArea [
 	self owner dropped remove: self.
 	self owner resetAccepts.
 	self prepareMoveToDone.
-]
-
-{
-	#category : #'events-processing',
-	#'squeak_changestamp' : 'Philipp 6/16/2024 18:31'
-}
-EPGBacklogCard >> processStorypoints [
-	
-	| submorphsToRemove regularStoryPointArea regularAreaIndex |
-	self owner dropped removeAllSuchThat: [:morph | morph isEPGStorypoint].
-	
-	submorphsToRemove := (owner submorphs select: [:morph | morph isKindOf: EPGStorypoint]).
-	submorphsToRemove do: [:morph | self owner removeMorph: morph].
-	
-	regularAreaIndex := self gameBoard class storyPointAreaTypes indexOf: #regular.
-	regularStoryPointArea := (self gameBoard storyPointAreas at: regularAreaIndex).
-	regularStoryPointArea addStorypoints: self owner amounfOfStorypoints.
-	self owner amountOfStorypoints: 0.
-]
-
-{
-	#category : #'events-processing',
-	#'squeak_changestamp' : 'JP 6/19/2024 20:16'
-}
-EPGBacklogCard >> update: anAspectSymbol [
-]
-
-{
-	#category : #'events-processing',
-	#'squeak_changestamp' : 'JP 6/19/2024 20:14'
-}
-EPGBacklogCard >> update: anAspectSymbol with: aParameter [
-
-	anAspectSymbol = #updateCards
-		ifTrue: [(aParameter = #frontend and: self isFrontend) ifTrue:[self checkIfProcessed.].
-				(aParameter = #backend and: self isBackend) ifTrue:[self checkIfProcessed.].].
 ]
 
 {

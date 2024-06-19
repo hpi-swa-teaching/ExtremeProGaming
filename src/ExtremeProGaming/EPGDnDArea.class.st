@@ -5,6 +5,7 @@ Class {
 	#name : #EPGDnDArea,
 	#superclass : #Morph,
 	#instVars : [
+		'game',
 		'area',
 		'borderVisible',
 		'dropped',
@@ -229,6 +230,24 @@ EPGDnDArea >> dropped: aCollection [
 EPGDnDArea >> freeze [
 
 	self pickUpEnabled: false.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'JP 6/19/2024 21:05'
+}
+EPGDnDArea >> game [
+
+	^ game.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'JP 6/19/2024 21:06'
+}
+EPGDnDArea >> game: aGame [
+
+	game := aGame.
 ]
 
 {

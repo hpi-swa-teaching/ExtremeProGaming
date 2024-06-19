@@ -3,7 +3,6 @@ Class {
 	#superclass : #EPGDnDArea,
 	#instVars : [
 		'image',
-		'game',
 		'type'
 	],
 	#category : #ExtremeProGaming
@@ -39,24 +38,6 @@ EPGDebt >> dropInMorph: aMorph [
 
 	super dropInMorph: aMorph.
 	self changed: #StorypointDroppedOnDebt with: self type.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'Philipp 6/16/2024 18:36'
-}
-EPGDebt >> game [
-
-	^ game.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'Philipp 6/16/2024 18:37'
-}
-EPGDebt >> game: aGame [
-
-	game := aGame.
 ]
 
 {
