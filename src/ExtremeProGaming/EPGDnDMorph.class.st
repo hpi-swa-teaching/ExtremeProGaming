@@ -2,7 +2,7 @@ Class {
 	#name : #EPGDnDMorph,
 	#superclass : #Morph,
 	#instVars : [
-		'dropable'
+		'droppable'
 	],
 	#category : #ExtremeProGaming
 }
@@ -28,20 +28,20 @@ EPGDnDMorph >> isEPGDnDMorph [
 
 {
 	#category : #'dragging/dropping',
-	#'squeak_changestamp' : 'sv 6/17/2024 14:59'
+	#'squeak_changestamp' : 'JP 6/19/2024 21:35'
 }
 EPGDnDMorph >> shouldDropOnMouseUp [
 
-	^ dropable.
+	^ droppable.
 ]
 
 {
 	#category : #'dragging/dropping',
-	#'squeak_changestamp' : 'sv 6/17/2024 15:01'
+	#'squeak_changestamp' : 'JP 6/19/2024 21:35'
 }
 EPGDnDMorph >> shouldDropOnMouseUp: aBoolean [
 
-	dropable := aBoolean.
+	droppable := aBoolean.
 ]
 
 {

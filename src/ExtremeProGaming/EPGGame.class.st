@@ -204,7 +204,7 @@ EPGGame >> numOfFeatureCards: aNumber [
 ]
 
 {
-	#category : #observer,
+	#category : #'game logic',
 	#'squeak_changestamp' : 'JP 6/19/2024 20:18'
 }
 EPGGame >> resetValues [
@@ -214,7 +214,7 @@ EPGGame >> resetValues [
 ]
 
 {
-	#category : #observer,
+	#category : #'game logic',
 	#'squeak_changestamp' : 'JP 6/19/2024 21:17'
 }
 EPGGame >> startNewRound [
@@ -235,7 +235,7 @@ EPGGame >> unfocusCard [
 ]
 
 {
-	#category : #observer,
+	#category : #'game logic',
 	#'squeak_changestamp' : 'JP 6/19/2024 19:47'
 }
 EPGGame >> update: anAspectSymbol with: aParameter [

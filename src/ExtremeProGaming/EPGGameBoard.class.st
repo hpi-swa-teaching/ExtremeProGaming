@@ -2,6 +2,7 @@ Class {
 	#name : #EPGGameBoard,
 	#superclass : #Morph,
 	#instVars : [
+		'game',
 		'planningArea',
 		'backlogArea',
 		'reviewArea',
@@ -9,8 +10,7 @@ Class {
 		'backendDebtArea',
 		'storyPointAreas',
 		'planningAreas',
-		'doneAreas',
-		'game'
+		'doneAreas'
 	],
 	#category : #ExtremeProGaming
 }
