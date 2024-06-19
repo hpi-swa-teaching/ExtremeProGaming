@@ -82,16 +82,6 @@ EPGDnDMorph >> slideBackToFormerSituation: evt [
 
 {
 	#category : #'dragging/dropping',
-	#'squeak_changestamp' : 'sv 6/17/2024 15:26'
-}
-EPGDnDMorph >> update: anAspectSymbol [
-
-	anAspectSymbol = #newRound
-		ifTrue: [self checkIfProcessed.].
-]
-
-{
-	#category : #'dragging/dropping',
 	#'squeak_changestamp' : 'HCH 5/27/2024 17:57'
 }
 EPGDnDMorph >> wantsToBeDroppedInto: aMorph [

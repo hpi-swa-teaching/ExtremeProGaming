@@ -89,17 +89,20 @@ EPGJSONParser >> createBugFrontendCard: aCardJsonFormatted [
 
 {
 	#category : #'card creation',
-	#'squeak_changestamp' : 'sv 6/8/2024 19:50'
+	#'squeak_changestamp' : 'HCH 6/19/2024 22:06'
 }
 EPGJSONParser >> createCard: aCardJsonFormatted [
 
-	| cardType |
+	| cardType effect card |
 	cardType := aCardJsonFormatted at: 'type'.
+	effect := self createEffect: aCardJsonFormatted.
 	cardType = 'Feature'
-    		ifTrue: [^ self createFeatureCard: aCardJsonFormatted]
+    		ifTrue: [card := self createFeatureCard: aCardJsonFormatted]
    	 	ifFalse: [cardType = 'Bug'
-        		ifTrue: [^ self createBugCard: aCardJsonFormatted]
+        		ifTrue: [card := self createBugCard: aCardJsonFormatted]
         		ifFalse: [Error new: 'Unkown card type: ', cardType, '. Please check JSON file for card creation'; signal]].
+	card effect: effect.
+	^ card.
 
 ]
 
@@ -114,6 +117,25 @@ EPGJSONParser >> createCards [
 		self createCard: card]).
 	self featureCards: (cards select: [:card | card isEPGFeatureCard]).
 	self bugCards: (cards select: [:card | card isEPGBugCard]).
+]
+
+{
+	#category : #'card creation',
+	#'squeak_changestamp' : 'HCH 6/19/2024 22:05'
+}
+EPGJSONParser >> createEffect: aJSONCardFormatted [
+
+	| effectClass |
+	(aJSONCardFormatted at: 'effectType') caseOf: {
+		['newFeature'] -> [effectClass := EPGExtraFeature].
+		['newBug'] -> [effectClass := EPGExtraBug].
+		['addTemporary'] -> [effectClass := EPGTemporaryAddition].
+		['addPermanent'] -> [effectClass := EPGPermanentAddition].
+		['removeTemporary'] -> [effectClass := EPGTemporaryRemoval].
+		['removePermanent'] -> [effectClass := EPGPermanentRemoval]}
+	otherwise: [self error: 'Unknown effect type'].
+	
+	^ effectClass newFromJSON: aJSONCardFormatted.
 ]
 
 {

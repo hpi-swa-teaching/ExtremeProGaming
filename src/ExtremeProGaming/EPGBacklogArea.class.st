@@ -10,9 +10,9 @@ Class {
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'jmetrikat 6/16/2024 12:38'
+	#'squeak_changestamp' : 'HCH 6/19/2024 23:24'
 }
-EPGBacklogArea >> amounfOfStorypoints [
+EPGBacklogArea >> amountOfStorypoints [
 
 	^ amountOfStorypoints.
 ]
@@ -59,7 +59,7 @@ EPGBacklogArea >> dropInMorph: aMorph [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'jmetrikat 6/16/2024 12:38'
+	#'squeak_changestamp' : 'HCH 6/19/2024 23:24'
 }
 EPGBacklogArea >> dropInStorypoint: aMorph [
 	
@@ -68,7 +68,7 @@ EPGBacklogArea >> dropInStorypoint: aMorph [
 		(self width / 2 - 10 to: self width / 2 + 10) atRandom @ 
 		((self height / 2 - 10 to: self height / 2 + 10) atRandom).
 	super dropInMorph: aMorph at: randomPosition.
-	self amountOfStorypoints: self amounfOfStorypoints + 1.
+	self amountOfStorypoints: self amountOfStorypoints + 1.
 ]
 
 {
@@ -125,12 +125,12 @@ EPGBacklogArea >> isFree [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'jmetrikat 6/16/2024 12:38'
+	#'squeak_changestamp' : 'HCH 6/19/2024 23:24'
 }
 EPGBacklogArea >> pickUpMorph: aMorph [
 	
 	aMorph isEPGBacklogCard ifTrue: [^ nil.].
-	aMorph isEPGStorypoint ifTrue: [self amountOfStorypoints: self amounfOfStorypoints - 1].
+	aMorph isEPGStorypoint ifTrue: [self amountOfStorypoints: self amountOfStorypoints - 1].
 	aMorph
 		formerOwner: self;
 		formerPosition: aMorph position.

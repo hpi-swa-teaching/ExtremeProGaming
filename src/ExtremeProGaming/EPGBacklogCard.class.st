@@ -6,11 +6,24 @@ Class {
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'jmetrikat 6/16/2024 12:38'
+	#'squeak_changestamp' : 'HCH 6/19/2024 23:24'
 }
-EPGBacklogCard >> checkCost: aDebtAmount [
+EPGBacklogCard >> canBeProcessed [
 
-	^ (self cost + (self perTechnicalDebt * aDebtAmount) <= self owner amounfOfStorypoints)
+	^ self checkCost: self owner amountOfStorypoints.
+		
+
+
+
+]
+
+{
+	#category : #'events-processing',
+	#'squeak_changestamp' : 'HCH 6/19/2024 23:21'
+}
+EPGBacklogCard >> checkCost: aStorypointAmount [
+
+	^ self totalCost <= aStorypointAmount.
 ]
 
 {
@@ -69,7 +82,7 @@ EPGBacklogCard >> process: aDebtArea [
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'Philipp 6/16/2024 18:31'
+	#'squeak_changestamp' : 'HCH 6/19/2024 23:24'
 }
 EPGBacklogCard >> processStorypoints [
 	
@@ -81,8 +94,23 @@ EPGBacklogCard >> processStorypoints [
 	
 	regularAreaIndex := self gameBoard class storyPointAreaTypes indexOf: #regular.
 	regularStoryPointArea := (self gameBoard storyPointAreas at: regularAreaIndex).
-	regularStoryPointArea addStorypoints: self owner amounfOfStorypoints.
+	regularStoryPointArea addStorypoints: self owner amountOfStorypoints.
 	self owner amountOfStorypoints: 0.
+]
+
+{
+	#category : #'events-processing',
+	#'squeak_changestamp' : 'HCH 6/19/2024 23:21'
+}
+EPGBacklogCard >> totalCost [
+
+	| debtArea debtAmount |
+	debtArea := self frontend
+		ifTrue: [self gameBoard frontendDebtArea]
+		ifFalse: [self gameBoard backendDebtArea].
+	debtAmount := debtArea currentDebt.
+
+	^ self cost + (self perTechnicalDebt * debtAmount).
 ]
 
 {

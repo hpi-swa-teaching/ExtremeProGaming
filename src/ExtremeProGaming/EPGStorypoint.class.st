@@ -240,13 +240,13 @@ EPGStorypoint >> update: anAspectSymbol [
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'HCH 6/19/2024 00:01'
+	#'squeak_changestamp' : 'HCH 6/19/2024 22:55'
 }
 EPGStorypoint >> updateTimeToLive [
 
 	self timeToLive ifNotNil: [
 		self timeToLive: self timeToLive - 1.
-		(self timeToLive == 0) ifTrue: [
+		(self timeToLive = 0) ifTrue: [
 			self game removeStorypoint: self.
 			self isUnavailable ifTrue: [self game addPermanent: 1].
 			self abandon.]].

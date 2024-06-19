@@ -12,10 +12,11 @@ Class {
 		'cost',
 		'perTechnicalDebt',
 		'frontend',
-		'effect',
 		'gameBoard',
 		'focus',
-		'game'
+		'game',
+		'effectText',
+		'effect'
 	],
 	#category : #ExtremeProGaming
 }
@@ -349,15 +350,15 @@ EPGCard >> displayCost [
 
 {
 	#category : #body,
-	#'squeak_changestamp' : 'HCH 6/12/2024 14:44'
+	#'squeak_changestamp' : 'HCH 6/19/2024 22:03'
 }
 EPGCard >> displayEffect [
 
 	| arrow |
 	arrow := ImageMorph new.
-	self effect = #positive
+	self effectText = #positive
 		ifTrue: [arrow image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: '/assets/ArrowUp.png') scaledToSize: self effectSize)].
-	self effect = #negative
+	self effectText = #negative
 		ifTrue: [arrow image:( ((GitAssetLoader for: 'ExtremeProGaming') loadAsset: '/assets/ArrowDown.png') scaledToSize: self effectSize)].
 	arrow center: self bodyOrigin + (self width / 2 @ 50).
 	self frontBody addMorph: arrow.
@@ -365,7 +366,7 @@ EPGCard >> displayEffect [
 
 {
 	#category : #'mouse events',
-	#'squeak_changestamp' : 'sv 6/18/2024 11:13'
+	#'squeak_changestamp' : 'HCH 6/19/2024 22:43'
 }
 EPGCard >> doubleClick: anEvent [
 
@@ -377,7 +378,7 @@ EPGCard >> doubleClick: anEvent [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/6/2024 20:03'
+	#'squeak_changestamp' : 'HCH 6/19/2024 22:04'
 }
 EPGCard >> effect [
 
@@ -385,33 +386,30 @@ EPGCard >> effect [
 ]
 
 {
-	#category : #body,
-	#'squeak_changestamp' : 'sv 6/18/2024 10:43'
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/19/2024 22:04'
 }
-EPGCard >> effect: aText [
+EPGCard >> effect: anEPGEffect [
 
-	| textMorph |
-	textMorph := self formatBackTask: aText.
-	textMorph position:  (0 @ (self height * 3 - textMorph height - self bodyOrigin y)).
-	self backBody addMorph: textMorph.
+	effect := anEPGEffect.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/3/2024 10:37'
+	#'squeak_changestamp' : 'HCH 6/19/2024 22:03'
 }
 EPGCard >> effectSelector [
 
-	^ effect.
+	^ effectText.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/3/2024 10:37'
+	#'squeak_changestamp' : 'HCH 6/19/2024 22:03'
 }
 EPGCard >> effectSelector: aSelector [
 
-	effect := aSelector.
+	effectText := aSelector.
 ]
 
 {
@@ -421,6 +419,15 @@ EPGCard >> effectSelector: aSelector [
 EPGCard >> effectSize [
 
 	^ self width / 6. 
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/19/2024 22:03'
+}
+EPGCard >> effectText [
+
+	^ effectText.
 ]
 
 {

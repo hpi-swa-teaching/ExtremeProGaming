@@ -9,7 +9,7 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
+	#category : #'initialize-release',
 	#'squeak_changestamp' : 'HCH 6/18/2024 22:43'
 }
 EPGEffectExecutionTest >> setUp [
@@ -18,7 +18,7 @@ EPGEffectExecutionTest >> setUp [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #tests,
 	#'squeak_changestamp' : 'HCH 6/19/2024 20:13'
 }
 EPGEffectExecutionTest >> testBugAddition [
@@ -32,7 +32,7 @@ EPGEffectExecutionTest >> testBugAddition [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #tests,
 	#'squeak_changestamp' : 'HCH 6/19/2024 20:13'
 }
 EPGEffectExecutionTest >> testFeatureAddition [
@@ -46,7 +46,7 @@ EPGEffectExecutionTest >> testFeatureAddition [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #tests,
 	#'squeak_changestamp' : 'HCH 6/18/2024 23:32'
 }
 EPGEffectExecutionTest >> testPermanentAddition [
@@ -62,7 +62,7 @@ EPGEffectExecutionTest >> testPermanentAddition [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #tests,
 	#'squeak_changestamp' : 'HCH 6/18/2024 23:39'
 }
 EPGEffectExecutionTest >> testPermanentRemovalSufficient [
@@ -79,7 +79,7 @@ EPGEffectExecutionTest >> testPermanentRemovalSufficient [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #tests,
 	#'squeak_changestamp' : 'HCH 6/18/2024 23:32'
 }
 EPGEffectExecutionTest >> testTemporaryAddition [
@@ -95,7 +95,7 @@ EPGEffectExecutionTest >> testTemporaryAddition [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #tests,
 	#'squeak_changestamp' : 'HCH 6/19/2024 17:31'
 }
 EPGEffectExecutionTest >> testTemporaryRemoval [

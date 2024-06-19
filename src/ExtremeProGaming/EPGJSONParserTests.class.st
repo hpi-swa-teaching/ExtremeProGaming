@@ -26,24 +26,24 @@ EPGJSONParserTests >> setUp [
 
 {
 	#category : #'parsing functionality',
-	#'squeak_changestamp' : 'sv 6/8/2024 20:30'
+	#'squeak_changestamp' : 'HCH 6/19/2024 21:18'
 }
 EPGJSONParserTests >> testBugBackendCardCreation [
 
 	| mockJSON |
-	mockJSON := Dictionary newFrom: {'type' -> 'Bug'. 'frontend' -> false. 'task' -> ''. 'consequence' -> ''. 'effect' -> ''. 'cost' -> 1. 'techDebt' -> 0. 'positive' -> false}.
+	mockJSON := Dictionary newFrom: {'type' -> 'Bug'. 'frontend' -> false. 'task' -> ''. 'consequence' -> ''. 'effect' -> ''. 'cost' -> 1. 'techDebt' -> 0. 'positive' -> false . 'effectType' -> 'newBug'}.
 
 	self assert: true equals: (parser createCard: mockJSON) isBackend.
 ]
 
 {
 	#category : #'parsing functionality',
-	#'squeak_changestamp' : 'sv 6/8/2024 20:28'
+	#'squeak_changestamp' : 'HCH 6/19/2024 21:18'
 }
 EPGJSONParserTests >> testBugFrontendCardCreation [
 
 	| mockJSON |
-	mockJSON := Dictionary newFrom: {'type' -> 'Bug'. 'frontend' -> true. 'task' -> ''. 'consequence' -> ''. 'effect' -> ''. 'cost' -> 1. 'techDebt' -> 0. 'positive' -> false}.
+	mockJSON := Dictionary newFrom: {'type' -> 'Bug'. 'frontend' -> true. 'task' -> ''. 'consequence' -> ''. 'effect' -> ''. 'cost' -> 1. 'techDebt' -> 0. 'positive' -> false . 'effectType' -> 'newBug'}.
 
 	self assert: false equals: (parser createCard: mockJSON) isBackend.
 ]
@@ -97,24 +97,24 @@ EPGJSONParserTests >> testCardCollectionElement [
 
 {
 	#category : #'parsing functionality',
-	#'squeak_changestamp' : 'jmetrikat 6/17/2024 23:12'
+	#'squeak_changestamp' : 'HCH 6/19/2024 21:18'
 }
 EPGJSONParserTests >> testFeatureBackendCardCreation [
 
 	| mockJSON |
-	mockJSON := Dictionary newFrom: {'type' -> 'Feature'. 'frontend' -> false. 'task' -> ''. 'consequence' -> ''. 'effect' -> ''. 'cost' -> 1. 'techDebt' -> 0. 'positive' -> false}.
+	mockJSON := Dictionary newFrom: {'type' -> 'Feature'. 'frontend' -> false. 'task' -> ''. 'consequence' -> ''. 'effect' -> ''. 'cost' -> 1. 'techDebt' -> 0. 'positive' -> false .  'effectType' -> 'newBug'}.
 	
 	self assert: true equals: (parser createCard: mockJSON) isBackend.
 ]
 
 {
 	#category : #'parsing functionality',
-	#'squeak_changestamp' : 'jmetrikat 6/17/2024 23:12'
+	#'squeak_changestamp' : 'HCH 6/19/2024 21:18'
 }
 EPGJSONParserTests >> testFeatureFrontendCardCreation [
 
 	| mockJSON |
-	mockJSON := Dictionary newFrom: {'type' -> 'Feature'. 'frontend' -> true. 'task' -> ''. 'consequence' -> ''. 'effect' -> ''. 'cost' -> 1. 'techDebt' -> 0. 'positive' -> false}.
+	mockJSON := Dictionary newFrom: {'type' -> 'Feature'. 'frontend' -> true. 'task' -> ''. 'consequence' -> ''. 'effect' -> ''. 'cost' -> 1. 'techDebt' -> 0. 'positive' -> false .  'effectType' -> 'newBug'}.
 	
 	self assert: false equals: (parser createCard: mockJSON) isBackend.
 ]
@@ -149,12 +149,12 @@ EPGJSONParserTests >> testParserForGameExistence [
 
 {
 	#category : #'parsing functionality',
-	#'squeak_changestamp' : 'jmetrikat 6/16/2024 23:21'
+	#'squeak_changestamp' : 'HCH 6/19/2024 21:19'
 }
 EPGJSONParserTests >> testTechDebtExistence [
 
 	| mockJSON |
-	mockJSON := Dictionary newFrom: {'type' -> 'Bug'. 'frontend' -> false. 'task' -> 'Challenging task here'. 'consequence' -> ''. 'effect' -> ''. 'cost' -> 1. 'techDebt' -> 3. 'positive' -> false}.
+	mockJSON := Dictionary newFrom: {'type' -> 'Bug'. 'frontend' -> false. 'task' -> 'Challenging task here'. 'consequence' -> ''. 'effect' -> ''. 'cost' -> 1. 'techDebt' -> 3. 'positive' -> false .  'effectType' -> 'newBug'}.
 
 	self assert: 3 equals: (parser createCard: mockJSON) perTechnicalDebt.
 ]

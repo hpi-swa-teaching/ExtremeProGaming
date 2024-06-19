@@ -6,6 +6,15 @@ Class {
 
 {
 	#category : #'instance creation',
+	#'squeak_changestamp' : 'HCH 6/19/2024 21:45'
+}
+EPGExtraBug class >> newFromJSON: aJSONCardFormatted [
+
+	^ self new.
+]
+
+{
+	#category : #'instance creation',
 	#'squeak_changestamp' : 'HCH 6/19/2024 19:06'
 }
 EPGExtraBug class >> newWithGame: aGame [

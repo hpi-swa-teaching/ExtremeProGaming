@@ -10,7 +10,16 @@ Class {
 
 {
 	#category : #'instance creation',
-	#'squeak_changestamp' : 'HCH 6/18/2024 23:08'
+	#'squeak_changestamp' : 'HCH 6/19/2024 21:41'
+}
+EPGEffect class >> newFromJSON: aJSONFormattedCard [
+
+	^ self new amount: (aJSONFormattedCard at: 'effectAmount').
+]
+
+{
+	#category : #'instance creation',
+	#'squeak_changestamp' : 'HCH 6/19/2024 21:52'
 }
 EPGEffect class >> newWithGame: aGame [
 

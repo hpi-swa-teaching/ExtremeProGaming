@@ -5,7 +5,8 @@ Class {
 		'gameBoard',
 		'cardSource',
 		'numOfFeatureCards',
-		'numOfBugCards'
+		'numOfBugCards',
+		'sprintEffects'
 	],
 	#category : #ExtremeProGaming
 }
@@ -20,7 +21,7 @@ EPGGame class >> newWithoutReturn [
 ]
 
 {
-	#category : #'card management',
+	#category : #cards,
 	#'squeak_changestamp' : 'HCH 6/19/2024 19:53'
 }
 EPGGame >> addBugCard [
@@ -29,7 +30,7 @@ EPGGame >> addBugCard [
 ]
 
 {
-	#category : #'card management',
+	#category : #cards,
 	#'squeak_changestamp' : 'HCH 6/19/2024 20:20'
 }
 EPGGame >> addCard: aBacklogCard [
@@ -40,7 +41,7 @@ EPGGame >> addCard: aBacklogCard [
 ]
 
 {
-	#category : #'card management',
+	#category : #cards,
 	#'squeak_changestamp' : 'HCH 6/19/2024 19:54'
 }
 EPGGame >> addFeatureCard [
@@ -75,6 +76,15 @@ EPGGame >> addTemporary: aNumber [
 EPGGame >> addUnavailable: aNumber [
 
 	self gameBoard unavailableStorypointArea addStorypoints: aNumber.
+]
+
+{
+	#category : #sprints,
+	#'squeak_changestamp' : 'HCH 6/19/2024 22:10'
+}
+EPGGame >> applySprintEffects [
+
+	self sprintEffects do: [:effect | effect apply].
 ]
 
 {
@@ -116,7 +126,7 @@ EPGGame >> cardSource: aCardSource [
 ]
 
 {
-	#category : #'card management',
+	#category : #cards,
 	#'squeak_changestamp' : 'sv 6/18/2024 13:21'
 }
 EPGGame >> focusCard: anEPGCard [
@@ -156,20 +166,20 @@ EPGGame >> gameBoard: aGameBoard [
 ]
 
 {
-	#category : #'card management',
-	#'squeak_changestamp' : 'HCH 6/19/2024 19:42'
+	#category : #'card generation',
+	#'squeak_changestamp' : 'HCH 6/19/2024 22:56'
 }
 EPGGame >> generateBugCards [
 
 	self cardSource bugCards do: [:card |
 		card gameBoard: self gameBoard.
 		card game: self.
-		self addDependent: card.
+		card effect game: self.
 		(self gameBoard bugArea) dropInMorph: card].
 ]
 
 {
-	#category : #'card management',
+	#category : #'card generation',
 	#'squeak_changestamp' : 'Philipp 6/16/2024 16:51'
 }
 EPGGame >> generateCards [
@@ -186,21 +196,22 @@ EPGGame >> generateCards [
 ]
 
 {
-	#category : #'card management',
-	#'squeak_changestamp' : 'HCH 6/19/2024 19:45'
+	#category : #'card generation',
+	#'squeak_changestamp' : 'HCH 6/19/2024 22:56'
 }
 EPGGame >> generateFeatureCards [
 
 	self cardSource featureCards do: [:card |
-		card gameBoard: self gameBoard.
-		card game: self.
-		self addDependent: card.
+		card 
+			gameBoard: self gameBoard;
+			game: self.
+		card effect game: self.
 		(self gameBoard featureArea) dropInMorph: card].
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'sv 6/18/2024 11:12'
+	#'squeak_changestamp' : 'HCH 6/19/2024 22:20'
 }
 EPGGame >> initialize [
 
@@ -209,6 +220,7 @@ EPGGame >> initialize [
 		gameBoard: (EPGGameBoard newWithGame: self);
 		cardSource: EPGJSONParser new.
 	self initializeDefaultGameState.
+	self sprintEffects: OrderedCollection new.
 	^ self gameBoard.
 ]
 
@@ -329,6 +341,22 @@ EPGGame >> numOfUnavailableStorypoints [
 ]
 
 {
+	#category : #sprints,
+	#'squeak_changestamp' : 'HCH 6/19/2024 23:27'
+}
+EPGGame >> processCards [
+
+	| processableCards |
+	processableCards := 
+		(self gameBoard backlogDnDAreas 
+			select: [:area | area isFree not.]
+			thenCollect: [:area | area card.])
+			select: [:card | card canBeProcessed.].
+	self sprintEffects:( processableCards collect: [:card | card effect.]).
+	processableCards do: [:card | card process.].
+]
+
+{
 	#category : #storypoints,
 	#'squeak_changestamp' : 'HCH 6/18/2024 23:25'
 }
@@ -421,17 +449,36 @@ EPGGame >> removeTemporary: aNumber [
 ]
 
 {
-	#category : #observer,
-	#'squeak_changestamp' : 'Philipp 6/16/2024 16:50'
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/19/2024 22:09'
+}
+EPGGame >> sprintEffects [
+
+	^ sprintEffects.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/19/2024 22:09'
+}
+EPGGame >> sprintEffects: aCollection [
+
+	sprintEffects := aCollection.
+]
+
+{
+	#category : #sprints,
+	#'squeak_changestamp' : 'HCH 6/19/2024 22:44'
 }
 EPGGame >> startNewRound [
 
 	self changed: #newRound.
+	self processCards.
 	
 ]
 
 {
-	#category : #'card management',
+	#category : #cards,
 	#'squeak_changestamp' : 'sv 6/18/2024 13:22'
 }
 EPGGame >> unfocusCard [
