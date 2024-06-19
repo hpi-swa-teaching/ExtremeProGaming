@@ -2,6 +2,7 @@ Class {
 	#name : #EPGGameBoard,
 	#superclass : #Morph,
 	#instVars : [
+		'game',
 		'planningArea',
 		'backlogArea',
 		'reviewArea',
@@ -9,8 +10,8 @@ Class {
 		'backendDebtArea',
 		'storyPointAreas',
 		'planningAreas',
-		'doneAreas',
-		'game'
+		'featureScore',
+		'doneAreas'
 	],
 	#category : #ExtremeProGaming
 }
@@ -188,7 +189,7 @@ EPGGameBoard >> aboutToBeGrabbedBy: aHand [
 ]
 
 {
-	#category : #accessing,
+	#category : #layouting,
 	#'squeak_changestamp' : 'jmetrikat 6/17/2024 20:26'
 }
 EPGGameBoard >> addBacklogArea [
@@ -197,7 +198,7 @@ EPGGameBoard >> addBacklogArea [
 ]
 
 {
-	#category : #accessing,
+	#category : #layouting,
 	#'squeak_changestamp' : 'jmetrikat 6/17/2024 20:26'
 }
 EPGGameBoard >> addPlanningArea [
@@ -206,7 +207,7 @@ EPGGameBoard >> addPlanningArea [
 ]
 
 {
-	#category : #accessing,
+	#category : #layouting,
 	#'squeak_changestamp' : 'jmetrikat 6/17/2024 20:26'
 }
 EPGGameBoard >> addReviewArea [
@@ -269,7 +270,7 @@ EPGGameBoard >> bugArea [
 ]
 
 {
-	#category : #accessing,
+	#category : #layouting,
 	#'squeak_changestamp' : 'JP 6/17/2024 15:35'
 }
 EPGGameBoard >> createBacklogArea [
@@ -286,7 +287,7 @@ EPGGameBoard >> createBacklogArea [
 ]
 
 {
-	#category : #accessing,
+	#category : #layouting,
 	#'squeak_changestamp' : 'JP 6/17/2024 15:41'
 }
 EPGGameBoard >> createPlanningArea [
@@ -303,7 +304,7 @@ EPGGameBoard >> createPlanningArea [
 ]
 
 {
-	#category : #accessing,
+	#category : #layouting,
 	#'squeak_changestamp' : 'JP 6/17/2024 15:38'
 }
 EPGGameBoard >> createReviewArea [
@@ -320,7 +321,7 @@ EPGGameBoard >> createReviewArea [
 ]
 
 {
-	#category : #accessing,
+	#category : #layouting,
 	#'squeak_changestamp' : 'JP 6/17/2024 15:21'
 }
 EPGGameBoard >> createSectionMorphFor: aName [
@@ -370,7 +371,25 @@ EPGGameBoard >> featureArea [
 ]
 
 {
-	#category : #initialization,
+	#category : #accessing,
+	#'squeak_changestamp' : 'JP 6/19/2024 23:36'
+}
+EPGGameBoard >> featureScore [
+
+	^ featureScore.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'JP 6/19/2024 23:36'
+}
+EPGGameBoard >> featureScore: aScore [
+
+	featureScore := aScore.
+]
+
+{
+	#category : #layouting,
 	#'squeak_changestamp' : 'JP 6/17/2024 15:23'
 }
 EPGGameBoard >> fixLayout [
@@ -429,7 +448,7 @@ EPGGameBoard >> game: aGame [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 6/17/2024 15:23'
+	#'squeak_changestamp' : 'JP 6/19/2024 22:06'
 }
 EPGGameBoard >> initialize [
 
@@ -445,6 +464,7 @@ EPGGameBoard >> initialize [
 		initializeBacklogAreas;
 		initializeButton;
 		initializeDebtAreas;
+		initializeFeatureScore;
 		initializeDoneAreas;
 		fixLayout.
 		
@@ -454,7 +474,7 @@ EPGGameBoard >> initialize [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 6/17/2024 23:05'
+	#'squeak_changestamp' : 'JP 6/19/2024 21:05'
 }
 EPGGameBoard >> initializeBacklogAreas [
 
@@ -462,7 +482,8 @@ EPGGameBoard >> initializeBacklogAreas [
 	1 to: 9 do:  [:a | 
 		area := EPGBacklogArea new.
 		area image: (ImageMorph new image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: ('/assets/BacklogAreas/BacklogArea', a, '.png')) scaledToSize: EPGCard cardExtent));
-			addMorph: area image.
+			addMorph: area image;
+			game: self game.
 		area image center: area center.
 		self  backlogArea addMorph: area].
 ]
@@ -508,18 +529,31 @@ EPGGameBoard >> initializeDebtAreas [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 6/17/2024 15:12'
+	#'squeak_changestamp' : 'JP 6/19/2024 22:44'
 }
 EPGGameBoard >> initializeDoneAreas [	
 	
-	| featureArea bugArea |
+	| wrapper featureArea bugArea |
+	wrapper := self newWrapper.
+	self reviewArea addMorph: wrapper.
+	
 	featureArea := self newDoneAreaAccepting: #EPGFeatureDone.
-	self reviewArea addMorph: featureArea.
+	wrapper addMorph: featureArea.
 	
 	bugArea :=  self newDoneAreaAccepting: #EPGBugDone.
-	self reviewArea addMorph: bugArea.
+	wrapper addMorph: bugArea.
 	
 	self doneAreas: (OrderedCollection with: featureArea with: bugArea).
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'JP 6/19/2024 22:37'
+}
+EPGGameBoard >> initializeFeatureScore [
+	
+	self featureScore: EPGFeatureScore new.
+	self reviewArea addMorph: self featureScore.
 ]
 
 {
@@ -561,12 +595,12 @@ EPGGameBoard >> initializeSectionMorphs [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 6/17/2024 23:08'
+	#'squeak_changestamp' : 'JP 6/19/2024 22:43'
 }
 EPGGameBoard >> initializeStorypointAreas [
 
 	| wrapper area |
-	wrapper := self newStorypointWrapper.
+	wrapper := self newWrapper.
 	self planningArea addMorph: wrapper.	
 	
 	self storyPointAreas: OrderedCollection new.
@@ -577,13 +611,13 @@ EPGGameBoard >> initializeStorypointAreas [
 			game: self game;
 			addStorypoints: self class defaultAmountOfStorypoints.
 		(a == 1) 
-			ifTrue: [area dropEnabled: false.]
+			ifTrue: [area dropEnabled: false; pickUpEnabled: false.]
 			ifFalse: [area accepts: #(#EPGStorypoint)].
 		wrapper addMorph: area].
 ]
 
 {
-	#category : #initialization,
+	#category : #layouting,
 	#'squeak_changestamp' : 'HCH 6/15/2024 22:31'
 }
 EPGGameBoard >> newDoneAreaAccepting: aSelector [
@@ -594,15 +628,15 @@ EPGGameBoard >> newDoneAreaAccepting: aSelector [
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'JP 6/13/2024 23:13'
+	#category : #layouting,
+	#'squeak_changestamp' : 'JP 6/19/2024 22:43'
 }
-EPGGameBoard >> newStorypointWrapper [
+EPGGameBoard >> newWrapper [
 
 	^ Morph new
 		color: Color transparent;
 		layoutPolicy: TableLayout new;
-		listDirection: #leftToRight;
+		listDirection: #rightToLeft;
 		listCentering: #justified;
 		wrapCentering: #justified;
 		vResizing: #shrinkWrap;

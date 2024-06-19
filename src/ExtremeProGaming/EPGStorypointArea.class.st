@@ -1,9 +1,6 @@
 Class {
 	#name : #EPGStorypointArea,
 	#superclass : #EPGDnDArea,
-	#instVars : [
-		'game'
-	],
 	#category : #ExtremeProGaming
 }
 
@@ -43,25 +40,6 @@ EPGStorypointArea >> dropInMorph: aMorph [
 	self addMorphFront: (aMorph position: self position +  ((0 to: range x ) atRandom @ (0 to: range y) atRandom)).
 	self dropped addFirst: aMorph.
 	self removeBorder.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'Philipp 6/16/2024 18:37'
-}
-EPGStorypointArea >> game [
-
-	^ game.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'Philipp 6/16/2024 18:38'
-}
-EPGStorypointArea >> game: aGame [
-
-	game := aGame.
-	
 ]
 
 {

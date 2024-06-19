@@ -28,7 +28,7 @@ EPGBacklogCard >> checkCost: aStorypointAmount [
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'Philipp 6/16/2024 18:31'
+	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:37'
 }
 EPGBacklogCard >> checkIfProcessed [
 	
@@ -38,7 +38,17 @@ EPGBacklogCard >> checkIfProcessed [
 		ifFalse: [self gameBoard backendDebtArea].
 
 	((self owner isEPGBacklogArea) and: [self checkCost: debtArea currentDebt])
-		ifTrue: [self processStorypoints. self process: debtArea].
+		ifTrue: [self owner processStorypoints.
+				self isBlocked ifFalse: [self process: debtArea]].
+]
+
+{
+	#category : #'events-processing',
+	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:47'
+}
+EPGBacklogCard >> isBlocked [
+
+	^ (self game frontendIsBlocked and: self isFrontend) or: (self game backendIsBlocked and: self isBackend).
 ]
 
 {
@@ -71,31 +81,13 @@ EPGBacklogCard >> prepareMoveToDone [
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'sv 6/17/2024 14:45'
+	#'squeak_changestamp' : 'JP 6/19/2024 22:39'
 }
 EPGBacklogCard >> process: aDebtArea [
 	
 	self owner dropped remove: self.
 	self owner resetAccepts.
 	self prepareMoveToDone.
-]
-
-{
-	#category : #'events-processing',
-	#'squeak_changestamp' : 'HCH 6/19/2024 23:24'
-}
-EPGBacklogCard >> processStorypoints [
-	
-	| submorphsToRemove regularStoryPointArea regularAreaIndex |
-	self owner dropped removeAllSuchThat: [:morph | morph isEPGStorypoint].
-	
-	submorphsToRemove := (owner submorphs select: [:morph | morph isKindOf: EPGStorypoint]).
-	submorphsToRemove do: [:morph | self owner removeMorph: morph].
-	
-	regularAreaIndex := self gameBoard class storyPointAreaTypes indexOf: #regular.
-	regularStoryPointArea := (self gameBoard storyPointAreas at: regularAreaIndex).
-	regularStoryPointArea addStorypoints: self owner amountOfStorypoints.
-	self owner amountOfStorypoints: 0.
 ]
 
 {

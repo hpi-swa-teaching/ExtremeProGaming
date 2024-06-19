@@ -6,9 +6,11 @@ Class {
 		'cardSource',
 		'numOfFeatureCards',
 		'numOfBugCards',
+		'frontendIsBlocked',
+		'backendIsBlocked',
 		'sprintEffects'
 	],
-	#category : #ExtremeProGaming
+	#category : 'ExtremeProGaming'
 }
 
 {
@@ -89,6 +91,24 @@ EPGGame >> applySprintEffects [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:46'
+}
+EPGGame >> backendIsBlocked [
+
+	^ backendIsBlocked.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:46'
+}
+EPGGame >> backendIsBlocked: aBoolean [
+
+	backendIsBlocked := aBoolean.
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 6/19/2024 20:14'
 }
 EPGGame >> backlogAreasWithBugCards [
@@ -144,6 +164,24 @@ EPGGame >> focusCard: anEPGCard [
 EPGGame >> freeBacklogAreas [
 
 	^ self gameBoard backlogDnDAreas select: [:area | area isFree].
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:47'
+}
+EPGGame >> frontendIsBlocked [
+
+	^ frontendIsBlocked.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:47'
+}
+EPGGame >> frontendIsBlocked: aBoolean [
+
+	frontendIsBlocked := aBoolean.
 ]
 
 {
@@ -211,14 +249,16 @@ EPGGame >> generateFeatureCards [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'HCH 6/19/2024 22:20'
+	#'squeak_changestamp' : 'HCH 6/20/2024 00:21'
 }
 EPGGame >> initialize [
 
 	super initialize.
 	self 
 		gameBoard: (EPGGameBoard newWithGame: self);
-		cardSource: EPGJSONParser new.
+		cardSource: EPGJSONParser new;
+		frontendIsBlocked: false;
+		backendIsBlocked: false.		
 	self initializeDefaultGameState.
 	self sprintEffects: OrderedCollection new.
 	^ self gameBoard.
@@ -449,6 +489,17 @@ EPGGame >> removeTemporary: aNumber [
 ]
 
 {
+	#category : #'game logic',
+	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:48'
+}
+EPGGame >> resetBlockedValues [
+
+	self
+		frontendIsBlocked: false;
+		backendIsBlocked: false.
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 6/19/2024 22:09'
 }
@@ -468,12 +519,13 @@ EPGGame >> sprintEffects: aCollection [
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'HCH 6/19/2024 22:44'
+	#'squeak_changestamp' : 'HCH 6/20/2024 00:25'
 }
 EPGGame >> startNewRound [
 
 	self changed: #newRound.
 	self processCards.
+	self resetBlockedValues.
 	
 ]
 
@@ -485,4 +537,28 @@ EPGGame >> unfocusCard [
 
 	self gameBoard unfreezeDnD.
 	
+]
+
+{
+	#category : #'game logic',
+	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:51'
+}
+EPGGame >> update: anAspectSymbol with: aParameter [
+
+	anAspectSymbol = #StorypointDroppedOnDebt
+		ifTrue: [(aParameter = #frontend) ifTrue: [self frontendIsBlocked: true].
+				(aParameter = #backend) ifTrue: [self backendIsBlocked: true]].
+			
+	anAspectSymbol = #StorypointPickedUpFromDebt
+		ifTrue: [(aParameter = #frontend) ifTrue: [self frontendIsBlocked: false].
+				(aParameter = #backend) ifTrue: [self backendIsBlocked: false]].
+]
+
+{
+	#category : #'card management',
+	#'squeak_changestamp' : 'JP 6/19/2024 22:38'
+}
+EPGGame >> updateFeatureScore [
+
+	self gameBoard featureScore updateScore.
 ]
