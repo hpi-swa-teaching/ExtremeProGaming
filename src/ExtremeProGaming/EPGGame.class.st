@@ -13,6 +13,15 @@ Class {
 }
 
 {
+	#category : #'instance creation',
+	#'squeak_changestamp' : 'jmetrikat 6/20/2024 00:20'
+}
+EPGGame class >> open [
+
+	^ EPGGame new openInWorld.
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:46'
 }

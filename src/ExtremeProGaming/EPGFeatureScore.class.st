@@ -8,7 +8,7 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
+	#category : #constants,
 	#'squeak_changestamp' : 'JP 6/19/2024 22:24'
 }
 EPGFeatureScore class >> defaultFont [
@@ -47,11 +47,11 @@ EPGFeatureScore >> score [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 6/19/2024 22:32'
+	#'squeak_changestamp' : 'jmetrikat 6/20/2024 00:29'
 }
-EPGFeatureScore >> score: anObject [
+EPGFeatureScore >> score: aScore [
 
-	score := anObject.
+	score := aScore.
 ]
 
 {
@@ -66,10 +66,11 @@ EPGFeatureScore >> setTextWithScore: aNumber [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 6/19/2024 23:37'
+	#'squeak_changestamp' : 'jmetrikat 6/20/2024 00:29'
 }
 EPGFeatureScore >> updateScore [
 
-	self score: self score + 1;
+	self
+		score: self score + 1;
 		setTextWithScore: self score.
 ]
