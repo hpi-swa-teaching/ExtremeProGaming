@@ -5,7 +5,7 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
+	#category : #effect,
 	#'squeak_changestamp' : 'HCH 6/19/2024 17:31'
 }
 EPGTemporaryRemoval >> apply [

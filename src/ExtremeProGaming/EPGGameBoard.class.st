@@ -252,6 +252,24 @@ EPGGameBoard >> backlogArea: aMorph [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/19/2024 19:56'
+}
+EPGGameBoard >> backlogDnDAreas [
+
+	^ self backlogArea submorphs select: [:sub | sub isEPGDnDArea].
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/19/2024 19:45'
+}
+EPGGameBoard >> bugArea [
+
+	^ self planningAreas at: (self class planningAreasAcceptance indexOf: #EPGBugCard).
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'JP 6/17/2024 15:35'
 }
 EPGGameBoard >> createBacklogArea [
@@ -340,6 +358,15 @@ EPGGameBoard >> extent: aPoint [
 
 	super extent: (aPoint max: self class boardExtent).
 	(self backlogArea isNil) ifFalse: [self backlogArea extent: 0.5 * self extent]. "Fixes a layouting bug"
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/19/2024 19:45'
+}
+EPGGameBoard >> featureArea [
+
+	^ self planningAreas at: (self class planningAreasAcceptance indexOf: #EPGFeatureCard).
 ]
 
 {

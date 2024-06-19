@@ -20,6 +20,35 @@ EPGGame class >> newWithoutReturn [
 ]
 
 {
+	#category : #'card management',
+	#'squeak_changestamp' : 'HCH 6/19/2024 19:53'
+}
+EPGGame >> addBugCard [
+
+	self addCard: self gameBoard bugArea pickUpTopCard.
+]
+
+{
+	#category : #'card management',
+	#'squeak_changestamp' : 'HCH 6/19/2024 20:20'
+}
+EPGGame >> addCard: aBacklogCard [
+
+	(self freeBacklogAreas size = 0) ifTrue: [self error: 'Cannot place more cards on board'].
+	self freeBacklogAreas first dropInCard: aBacklogCard.
+	
+]
+
+{
+	#category : #'card management',
+	#'squeak_changestamp' : 'HCH 6/19/2024 19:54'
+}
+EPGGame >> addFeatureCard [
+
+	self addCard: self gameBoard featureArea pickUpTopCard.
+]
+
+{
 	#category : #storypoints,
 	#'squeak_changestamp' : 'HCH 6/18/2024 23:31'
 }
@@ -46,6 +75,26 @@ EPGGame >> addTemporary: aNumber [
 EPGGame >> addUnavailable: aNumber [
 
 	self gameBoard unavailableStorypointArea addStorypoints: aNumber.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/19/2024 20:14'
+}
+EPGGame >> backlogAreasWithBugCards [
+
+	^ self gameBoard backlogDnDAreas 
+		select: [:area | area isFree not and: [area card isEPGBugCard]].
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/19/2024 20:21'
+}
+EPGGame >> backlogAreasWithFeatureCards [
+
+	^ self gameBoard backlogDnDAreas 
+			select: [:area | area isFree not and: [area card isEPGFeatureCard]].
 ]
 
 {
@@ -80,6 +129,15 @@ EPGGame >> focusCard: anEPGCard [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/19/2024 19:56'
+}
+EPGGame >> freeBacklogAreas [
+
+	^ self gameBoard backlogDnDAreas select: [:area | area isFree].
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'Philipp 6/16/2024 17:03'
 }
 EPGGame >> gameBoard [
@@ -99,17 +157,15 @@ EPGGame >> gameBoard: aGameBoard [
 
 {
 	#category : #'card management',
-	#'squeak_changestamp' : 'sv 6/18/2024 11:12'
+	#'squeak_changestamp' : 'HCH 6/19/2024 19:42'
 }
 EPGGame >> generateBugCards [
 
-	| index |
-	index := self gameBoard class planningAreasAcceptance indexOf: #EPGBugCard.
 	self cardSource bugCards do: [:card |
 		card gameBoard: self gameBoard.
 		card game: self.
 		self addDependent: card.
-		(self gameBoard planningAreas at: index) dropInMorph: card].
+		(self gameBoard bugArea) dropInMorph: card].
 ]
 
 {
@@ -131,17 +187,15 @@ EPGGame >> generateCards [
 
 {
 	#category : #'card management',
-	#'squeak_changestamp' : 'sv 6/18/2024 11:12'
+	#'squeak_changestamp' : 'HCH 6/19/2024 19:45'
 }
 EPGGame >> generateFeatureCards [
 
-	| index |
-	index := self gameBoard class planningAreasAcceptance indexOf: #EPGFeatureCard.
 	self cardSource featureCards do: [:card |
 		card gameBoard: self gameBoard.
 		card game: self.
 		self addDependent: card.
-		(self gameBoard planningAreas at: index) dropInMorph: card].
+		(self gameBoard featureArea) dropInMorph: card].
 ]
 
 {
@@ -201,6 +255,15 @@ EPGGame >> numOfBugCards: aNumber [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/19/2024 20:13'
+}
+EPGGame >> numOfBugCardsInGame [
+
+	^ self backlogAreasWithBugCards size.
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'Philipp 6/16/2024 17:04'
 }
 EPGGame >> numOfFeatureCards [
@@ -215,6 +278,15 @@ EPGGame >> numOfFeatureCards [
 EPGGame >> numOfFeatureCards: aNumber [
 
 	numOfFeatureCards := aNumber.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/19/2024 20:13'
+}
+EPGGame >> numOfFeatureCardsInGame [
+
+	^ self backlogAreasWithFeatureCards size.
 ]
 
 {

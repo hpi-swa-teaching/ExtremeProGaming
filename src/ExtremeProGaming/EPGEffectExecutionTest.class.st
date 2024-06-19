@@ -19,6 +19,34 @@ EPGEffectExecutionTest >> setUp [
 
 {
 	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'HCH 6/19/2024 20:13'
+}
+EPGEffectExecutionTest >> testBugAddition [
+
+	| oldCount |
+	oldCount := game numOfBugCardsInGame.
+	effect := EPGExtraBug newWithGame: game.
+	effect apply.
+	
+	self assert: oldCount + 1 equals: game numOfBugCardsInGame.
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'HCH 6/19/2024 20:13'
+}
+EPGEffectExecutionTest >> testFeatureAddition [
+
+	| oldCount |
+	oldCount := game numOfFeatureCardsInGame.
+	effect := EPGExtraFeature newWithGame: game.
+	effect apply.
+	
+	self assert: oldCount + 1 equals: game numOfFeatureCardsInGame.
+]
+
+{
+	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'HCH 6/18/2024 23:32'
 }
 EPGEffectExecutionTest >> testPermanentAddition [

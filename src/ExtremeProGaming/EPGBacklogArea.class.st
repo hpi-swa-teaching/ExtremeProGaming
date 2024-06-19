@@ -28,6 +28,15 @@ EPGBacklogArea >> amountOfStorypoints: aNumber [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/19/2024 20:12'
+}
+EPGBacklogArea >> card [
+
+	^ (self dropped select: [:drop | drop isEPGBacklogCard]) first.
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 6/15/2024 21:53'
 }
 EPGBacklogArea >> dropInCard: aMorph [
@@ -103,6 +112,15 @@ EPGBacklogArea >> initialize [
 EPGBacklogArea >> isEPGBacklogArea [
 
 	^ true.
+]
+
+{
+	#category : #testing,
+	#'squeak_changestamp' : 'HCH 6/19/2024 19:55'
+}
+EPGBacklogArea >> isFree [
+
+	^ self dropped size = 0.
 ]
 
 {
