@@ -131,11 +131,12 @@ EPGFeatureCard >> moveToDone [
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'Philipp 6/7/2024 17:31'
+	#'squeak_changestamp' : 'JP 6/19/2024 22:39'
 }
 EPGFeatureCard >> process: aDebtArea [
 
 	aDebtArea addTechnicalDebt.
+	self game updateFeatureScore.
 	super process: aDebtArea.
 	
 ]

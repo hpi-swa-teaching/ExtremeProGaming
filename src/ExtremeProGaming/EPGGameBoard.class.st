@@ -2,6 +2,7 @@ Class {
 	#name : #EPGGameBoard,
 	#superclass : #Morph,
 	#instVars : [
+		'game',
 		'planningArea',
 		'backlogArea',
 		'reviewArea',
@@ -9,8 +10,8 @@ Class {
 		'backendDebtArea',
 		'storyPointAreas',
 		'planningAreas',
-		'doneAreas',
-		'game'
+		'featureScore',
+		'doneAreas'
 	],
 	#category : #ExtremeProGaming
 }
@@ -343,6 +344,22 @@ EPGGameBoard >> extent: aPoint [
 ]
 
 {
+	#category : #accessing,
+	#'squeak_changestamp' : 'JP 6/19/2024 22:37'
+}
+EPGGameBoard >> featureScore [
+	^ featureScore
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'JP 6/19/2024 22:37'
+}
+EPGGameBoard >> featureScore: anObject [
+	featureScore := anObject
+]
+
+{
 	#category : #initialization,
 	#'squeak_changestamp' : 'JP 6/17/2024 15:23'
 }
@@ -402,7 +419,7 @@ EPGGameBoard >> game: aGame [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 6/17/2024 15:23'
+	#'squeak_changestamp' : 'JP 6/19/2024 22:06'
 }
 EPGGameBoard >> initialize [
 
@@ -418,6 +435,7 @@ EPGGameBoard >> initialize [
 		initializeBacklogAreas;
 		initializeButton;
 		initializeDebtAreas;
+		initializeFeatureScore;
 		initializeDoneAreas;
 		fixLayout.
 		
@@ -493,6 +511,16 @@ EPGGameBoard >> initializeDoneAreas [
 	self reviewArea addMorph: bugArea.
 	
 	self doneAreas: (OrderedCollection with: featureArea with: bugArea).
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'JP 6/19/2024 22:37'
+}
+EPGGameBoard >> initializeFeatureScore [
+	
+	self featureScore: EPGFeatureScore new.
+	self reviewArea addMorph: self featureScore.
 ]
 
 {

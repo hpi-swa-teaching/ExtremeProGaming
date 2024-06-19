@@ -98,11 +98,11 @@ EPGCard class >> taskBackFont [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'sv 6/18/2024 10:15'
+	#'squeak_changestamp' : 'JP 6/19/2024 22:19'
 }
 EPGCard class >> taskFrontFont [
 
- 	^ TextFontReference  toFont: (StrikeFont familyName: 'Bitmap DejaVu Sans' size: 15).
+ 	^ TextFontReference toFont: (StrikeFont familyName: 'Bitmap DejaVu Sans' size: 15).
 
 	
 ]

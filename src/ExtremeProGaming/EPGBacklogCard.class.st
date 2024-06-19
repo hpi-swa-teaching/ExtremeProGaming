@@ -58,7 +58,7 @@ EPGBacklogCard >> prepareMoveToDone [
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'sv 6/17/2024 14:45'
+	#'squeak_changestamp' : 'JP 6/19/2024 22:39'
 }
 EPGBacklogCard >> process: aDebtArea [
 	
