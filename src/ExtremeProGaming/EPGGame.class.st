@@ -253,3 +253,12 @@ EPGGame >> update: anAspectSymbol with: aParameter [
 		ifTrue: [(aParameter = #frontend) ifTrue: [self frontendIsBlocked: false].
 				(aParameter = #backend) ifTrue: [self backendIsBlocked: false]].
 ]
+
+{
+	#category : #'card management',
+	#'squeak_changestamp' : 'JP 6/19/2024 22:38'
+}
+EPGGame >> updateFeatureScore [
+
+	self gameBoard featureScore updateScore.
+]
