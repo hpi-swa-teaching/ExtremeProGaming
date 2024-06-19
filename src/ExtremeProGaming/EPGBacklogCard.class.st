@@ -87,6 +87,24 @@ EPGBacklogCard >> processStorypoints [
 
 {
 	#category : #'events-processing',
+	#'squeak_changestamp' : 'JP 6/19/2024 20:16'
+}
+EPGBacklogCard >> update: anAspectSymbol [
+]
+
+{
+	#category : #'events-processing',
+	#'squeak_changestamp' : 'JP 6/19/2024 20:14'
+}
+EPGBacklogCard >> update: anAspectSymbol with: aParameter [
+
+	anAspectSymbol = #updateCards
+		ifTrue: [(aParameter = #frontend and: self isFrontend) ifTrue:[self checkIfProcessed.].
+				(aParameter = #backend and: self isBackend) ifTrue:[self checkIfProcessed.].].
+]
+
+{
+	#category : #'events-processing',
 	#'squeak_changestamp' : 'sv 6/17/2024 14:51'
 }
 EPGBacklogCard >> updateStoryPoints [

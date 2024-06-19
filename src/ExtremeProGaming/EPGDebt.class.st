@@ -3,7 +3,8 @@ Class {
 	#superclass : #EPGDnDArea,
 	#instVars : [
 		'image',
-		'game'
+		'game',
+		'type'
 	],
 	#category : #ExtremeProGaming
 }
@@ -28,6 +29,16 @@ EPGDebt >> checkIfProcessed [
 			self area decrementDebt.
 			self game removeDependent: self.
 			self abandon].
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'JP 6/19/2024 19:50'
+}
+EPGDebt >> dropInMorph: aMorph [
+
+	super dropInMorph: aMorph.
+	self changed: #StorypointDroppedOnDebt with: self type.
 ]
 
 {
@@ -92,8 +103,23 @@ EPGDebt >> mouseEnterDragging: evt [
 ]
 
 {
+	#category : #initialization,
+	#'squeak_changestamp' : 'JP 6/19/2024 19:49'
+}
+EPGDebt >> pickUpMorph: aMorph [
+
+	self pickUpEnabled ifTrue: [
+		aMorph formerOwner: self.
+		aMorph formerPosition: aMorph position.
+		self dropped remove: aMorph.
+		self update: #StorypointPickUpOfDebt with: self type.
+		^ aMorph.]
+	ifFalse: [^ nil.].
+]
+
+{
 	#category : #typesetting,
-	#'squeak_changestamp' : 'Philipp 6/7/2024 16:20'
+	#'squeak_changestamp' : 'JP 6/19/2024 19:34'
 }
 EPGDebt >> setType: aType [
 
@@ -110,6 +136,23 @@ EPGDebt >> setType: aType [
 		addMorph: self image.
 
 	self image center: self center.
+	self type: aType.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'JP 6/19/2024 19:34'
+}
+EPGDebt >> type [
+	^ type
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'JP 6/19/2024 19:34'
+}
+EPGDebt >> type: anObject [
+	type := anObject
 ]
 
 {

@@ -5,10 +5,44 @@ Class {
 		'gameBoard',
 		'cardSource',
 		'numOfFeatureCards',
-		'numOfBugCards'
+		'numOfBugCards',
+		'blockFrontend',
+		'blockBackend'
 	],
 	#category : #ExtremeProGaming
 }
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'JP 6/19/2024 19:45'
+}
+EPGGame >> blockBackend [
+	^ blockBackend
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'JP 6/19/2024 19:45'
+}
+EPGGame >> blockBackend: anObject [
+	blockBackend := anObject
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'JP 6/19/2024 19:45'
+}
+EPGGame >> blockFrontend [
+	^ blockFrontend
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'JP 6/19/2024 19:45'
+}
+EPGGame >> blockFrontend: anObject [
+	blockFrontend := anObject
+]
 
 {
 	#category : #accessing,
@@ -108,14 +142,16 @@ EPGGame >> generateFeatureCards [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'sv 6/18/2024 11:12'
+	#'squeak_changestamp' : 'JP 6/19/2024 19:46'
 }
 EPGGame >> initialize [
 
 	super initialize.
 	self 
 		gameBoard: (EPGGameBoard newWithGame: self);
-		cardSource: EPGJSONParser new.
+		cardSource: EPGJSONParser new;
+		blockFrontend: false;
+		blockBackend: false.		
 	self initializeDefaultGameState.
 	^ self gameBoard.
 ]
@@ -169,11 +205,23 @@ EPGGame >> numOfFeatureCards: aNumber [
 
 {
 	#category : #observer,
-	#'squeak_changestamp' : 'Philipp 6/16/2024 16:50'
+	#'squeak_changestamp' : 'JP 6/19/2024 20:18'
+}
+EPGGame >> resetValues [
+
+	self blockFrontend: false.
+	self blockBackend: false.
+]
+
+{
+	#category : #observer,
+	#'squeak_changestamp' : 'JP 6/19/2024 20:18'
 }
 EPGGame >> startNewRound [
 
 	self changed: #newRound.
+	self updateBacklogCards.
+	self resetValues.
 	
 ]
 
@@ -185,4 +233,29 @@ EPGGame >> unfocusCard [
 
 	self gameBoard unfreezeDnD.
 	
+]
+
+{
+	#category : #observer,
+	#'squeak_changestamp' : 'JP 6/19/2024 19:47'
+}
+EPGGame >> update: anAspectSymbol with: aParameter [
+
+	anAspectSymbol = #StorypointDroppedOnDebt
+		ifTrue: [(aParameter = #frontend) ifTrue: [self blockFrontend: true.].
+				(aParameter = #backend) ifTrue: [self blockBackend: true.].].
+			
+	anAspectSymbol = #StorypointPickUpOfDebt
+		ifTrue: [(aParameter = #frontend) ifTrue: [self blockFrontend: false.].
+				(aParameter = #backend) ifTrue: [self blockBackend: false.].].
+]
+
+{
+	#category : #observer,
+	#'squeak_changestamp' : 'JP 6/19/2024 20:11'
+}
+EPGGame >> updateBacklogCards [
+
+	self blockFrontend ifFalse:[self changed: #updateCards with: #frontend].
+	self blockBackend ifFalse:[self changed: #updateCards with: #backend].
 ]
