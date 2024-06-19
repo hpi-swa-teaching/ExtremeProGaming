@@ -66,10 +66,10 @@ EPGFeatureScore >> setTextWithScore: aNumber [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 6/19/2024 22:32'
+	#'squeak_changestamp' : 'JP 6/19/2024 23:37'
 }
 EPGFeatureScore >> updateScore [
 
-	self score: self score + 1.
-	self setTextWithScore: self score.
+	self score: self score + 1;
+		setTextWithScore: self score.
 ]

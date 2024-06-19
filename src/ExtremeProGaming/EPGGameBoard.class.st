@@ -345,18 +345,20 @@ EPGGameBoard >> extent: aPoint [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 6/19/2024 22:37'
+	#'squeak_changestamp' : 'JP 6/19/2024 23:36'
 }
 EPGGameBoard >> featureScore [
-	^ featureScore
+
+	^ featureScore.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 6/19/2024 22:37'
+	#'squeak_changestamp' : 'JP 6/19/2024 23:36'
 }
-EPGGameBoard >> featureScore: anObject [
-	featureScore := anObject
+EPGGameBoard >> featureScore: aScore [
+
+	featureScore := aScore.
 ]
 
 {
