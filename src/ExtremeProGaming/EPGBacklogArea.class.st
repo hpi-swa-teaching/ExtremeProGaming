@@ -122,12 +122,12 @@ EPGBacklogArea >> pickUpMorph: aMorph [
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'JP 6/19/2024 21:08'
+	#'squeak_changestamp' : 'JP 6/19/2024 23:54'
 }
 EPGBacklogArea >> processStorypoints [
 	
-	self removeStorypoints.
 	self returnStorypoints.	
+	self removeStorypoints.
 ]
 
 {
@@ -150,7 +150,7 @@ EPGBacklogArea >> resetAccepts [
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'JP 6/19/2024 21:02'
+	#'squeak_changestamp' : 'JP 6/19/2024 23:54'
 }
 EPGBacklogArea >> returnStorypoints [
 
@@ -159,5 +159,4 @@ EPGBacklogArea >> returnStorypoints [
 	regularAreaIndex := self game gameBoard class storyPointAreaTypes indexOf: #regular.
 	regularStoryPointArea := (self game gameBoard storyPointAreas at: regularAreaIndex).
 	regularStoryPointArea addStorypoints: self amounfOfStorypoints.
-	self amountOfStorypoints: 0.
 ]
