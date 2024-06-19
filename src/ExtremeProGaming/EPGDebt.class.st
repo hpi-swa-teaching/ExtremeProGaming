@@ -85,7 +85,7 @@ EPGDebt >> mouseEnterDragging: evt [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 6/19/2024 19:49'
+	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:51'
 }
 EPGDebt >> pickUpMorph: aMorph [
 
@@ -93,7 +93,7 @@ EPGDebt >> pickUpMorph: aMorph [
 		aMorph formerOwner: self.
 		aMorph formerPosition: aMorph position.
 		self dropped remove: aMorph.
-		self update: #StorypointPickUpOfDebt with: self type.
+		self update: #StorypointPickedUpFromDebt with: self type.
 		^ aMorph.]
 	ifFalse: [^ nil.].
 ]
@@ -122,18 +122,20 @@ EPGDebt >> setType: aType [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 6/19/2024 19:34'
+	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:44'
 }
 EPGDebt >> type [
-	^ type
+
+	^ type.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 6/19/2024 19:34'
+	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:44'
 }
-EPGDebt >> type: anObject [
-	type := anObject
+EPGDebt >> type: aType [
+
+	type := aType.
 ]
 
 {
