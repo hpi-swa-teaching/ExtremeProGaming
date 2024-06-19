@@ -15,7 +15,7 @@ EPGBacklogCard >> checkCost: aDebtAmount [
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'JP 6/19/2024 21:28'
+	#'squeak_changestamp' : 'JP 6/20/2024 00:04'
 }
 EPGBacklogCard >> checkIfProcessed [
 	
@@ -25,8 +25,17 @@ EPGBacklogCard >> checkIfProcessed [
 		ifFalse: [self gameBoard backendDebtArea].
 
 	((self owner isEPGBacklogArea) and: [self checkCost: debtArea currentDebt])
-		ifTrue: [self notBlocked ifTrue:[self owner processStorypoints. self process: debtArea]
+		ifTrue: [self isBlocked not ifTrue:[self owner processStorypoints. self process: debtArea]
 								 ifFalse:[self owner processStorypoints.].].
+]
+
+{
+	#category : #'events-processing',
+	#'squeak_changestamp' : 'JP 6/20/2024 00:05'
+}
+EPGBacklogCard >> isBlocked [
+
+	^ (self game blockFrontend and: self isFrontend) or: (self game blockBackend and: self isBackend).
 ]
 
 {
@@ -45,17 +54,6 @@ EPGBacklogCard >> isEPGBacklogCard [
 EPGBacklogCard >> moveToDone [
 
 	^ self subclassResponsibility.
-]
-
-{
-	#category : #'events-processing',
-	#'squeak_changestamp' : 'JP 6/19/2024 21:20'
-}
-EPGBacklogCard >> notBlocked [
-
-	(self game blockFrontend and: self isFrontend) ifTrue:[^ false.].
-	(self game blockBackend and: self isBackend) ifTrue:[^false.].
-	^ true.
 ]
 
 {
