@@ -11,7 +11,7 @@ Class {
 
 {
 	#category : #features,
-	#'squeak_changestamp' : 'JP 6/17/2024 15:16'
+	#'squeak_changestamp' : 'JP 6/19/2024 19:51'
 }
 EPGDebtArea >> addTechnicalDebt [
 
@@ -21,6 +21,7 @@ EPGDebtArea >> addTechnicalDebt [
 		setType: self type;
 		area: self;
 		game: self game;
+		addDependent: self game;
 		position: (self randomPositionFor: newDebt).
 
 	self addMorph: newDebt.

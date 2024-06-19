@@ -2,6 +2,7 @@ Class {
 	#name : #EPGCard,
 	#superclass : #EPGDnDMorph,
 	#instVars : [
+		'game',
 		'facing',
 		'body',
 		'frontBody',
@@ -14,8 +15,7 @@ Class {
 		'frontend',
 		'effect',
 		'gameBoard',
-		'focus',
-		'game'
+		'focus'
 	],
 	#category : #ExtremeProGaming
 }

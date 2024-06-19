@@ -447,7 +447,7 @@ EPGGameBoard >> initialize [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 6/17/2024 23:05'
+	#'squeak_changestamp' : 'JP 6/19/2024 21:05'
 }
 EPGGameBoard >> initializeBacklogAreas [
 
@@ -455,7 +455,8 @@ EPGGameBoard >> initializeBacklogAreas [
 	1 to: 9 do:  [:a | 
 		area := EPGBacklogArea new.
 		area image: (ImageMorph new image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: ('/assets/BacklogAreas/BacklogArea', a, '.png')) scaledToSize: EPGCard cardExtent));
-			addMorph: area image.
+			addMorph: area image;
+			game: self game.
 		area image center: area center.
 		self  backlogArea addMorph: area].
 ]
