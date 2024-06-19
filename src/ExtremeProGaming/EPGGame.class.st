@@ -24,6 +24,15 @@ EPGGame class >> newWithoutReturn [
 ]
 
 {
+	#category : #'instance creation',
+	#'squeak_changestamp' : 'jmetrikat 6/20/2024 00:20'
+}
+EPGGame class >> open [
+
+	^ EPGGame new openInWorld.
+]
+
+{
 	#category : #cards,
 	#'squeak_changestamp' : 'HCH 6/19/2024 19:53'
 }
