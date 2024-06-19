@@ -186,3 +186,12 @@ EPGGame >> unfocusCard [
 	self gameBoard unfreezeDnD.
 	
 ]
+
+{
+	#category : #'card management',
+	#'squeak_changestamp' : 'JP 6/19/2024 22:38'
+}
+EPGGame >> updateFeatureScore [
+
+	self gameBoard featureScore updateScore.
+]
