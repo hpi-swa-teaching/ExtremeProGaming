@@ -19,7 +19,7 @@ EPGFeatureCard class >> headerSymbol [
 
 {
 	#category : #'instance creation',
-	#'squeak_changestamp' : 'HCH 6/3/2024 17:30'
+	#'squeak_changestamp' : 'HCH 6/20/2024 20:06'
 }
 EPGFeatureCard class >> newBackendWithTask: aTask consequence: aConsequence effect: anEffect cost: aCost perTechnicalDebt: aNumber positive: aBoolean [
 	
@@ -27,10 +27,10 @@ EPGFeatureCard class >> newBackendWithTask: aTask consequence: aConsequence effe
 	instance := self new
 					beBackend;
 					initializeHeader: 'Feature';
-					colorBar: self backendColor withLayout: #right;
+					colorBar: self backendColor withLayout: self backendLayout;
 					task: aTask;
-					consequence: aConsequence;
-					effect: anEffect;
+					displayConsequenceText: aConsequence;
+					displayEffectText: anEffect;
 					cost: aCost perTechnicalDebt: aNumber.
 	aBoolean 
 		ifTrue: [instance bePositive]
@@ -44,7 +44,7 @@ EPGFeatureCard class >> newBackendWithTask: aTask consequence: aConsequence effe
 
 {
 	#category : #'instance creation',
-	#'squeak_changestamp' : 'HCH 6/3/2024 17:30'
+	#'squeak_changestamp' : 'HCH 6/20/2024 20:06'
 }
 EPGFeatureCard class >> newFrontendWithTask: aTask consequence: aConsequence effect: anEffect cost: aCost perTechnicalDebt: aNumber positive: aBoolean [
 	
@@ -52,10 +52,10 @@ EPGFeatureCard class >> newFrontendWithTask: aTask consequence: aConsequence eff
 	instance := self new
 					beFrontend;
 					initializeHeader: 'Feature';
-					colorBar: self frontendColor withLayout: #left;
+					colorBar: self frontendColor withLayout: self frontendLayout;
 					task: aTask;
-					consequence: aConsequence;
-					effect: anEffect;
+					displayConsequenceText: aConsequence;
+					displayEffectText: anEffect;
 					cost: aCost perTechnicalDebt: aNumber.
 	aBoolean 
 		ifTrue: [instance bePositive]

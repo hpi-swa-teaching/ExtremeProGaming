@@ -217,6 +217,15 @@ EPGGameBoard >> addReviewArea [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/20/2024 19:51'
+}
+EPGGameBoard >> availableStorypointAreas [
+
+	^ { self regularStorypointArea . self temporaryStorypointArea }.
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:15'
 }
 EPGGameBoard >> backendDebtArea [
@@ -249,6 +258,24 @@ EPGGameBoard >> backlogArea [
 EPGGameBoard >> backlogArea: aMorph [
 
 	backlogArea := aMorph.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/19/2024 19:56'
+}
+EPGGameBoard >> backlogDnDAreas [
+
+	^ self backlogArea submorphs select: [:sub | sub isEPGDnDArea].
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/19/2024 19:45'
+}
+EPGGameBoard >> bugArea [
+
+	^ self planningAreas at: (self class planningAreasAcceptance indexOf: #EPGBugCard).
 ]
 
 {
@@ -341,6 +368,15 @@ EPGGameBoard >> extent: aPoint [
 
 	super extent: (aPoint max: self class boardExtent).
 	(self backlogArea isNil) ifFalse: [self backlogArea extent: 0.5 * self extent]. "Fixes a layouting bug"
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/19/2024 19:45'
+}
+EPGGameBoard >> featureArea [
+
+	^ self planningAreas at: (self class planningAreasAcceptance indexOf: #EPGFeatureCard).
 ]
 
 {
@@ -652,6 +688,16 @@ EPGGameBoard >> planningAreas: anObject [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/18/2024 22:55'
+}
+EPGGameBoard >> regularStorypointArea [
+
+	^ self storyPointAreas at: 
+			(self class storyPointAreaTypes indexOf: #regular).
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 5/29/2024 01:11'
 }
 EPGGameBoard >> reviewArea [
@@ -687,12 +733,32 @@ EPGGameBoard >> storyPointAreas: aCollection [
 ]
 
 {
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/18/2024 22:55'
+}
+EPGGameBoard >> temporaryStorypointArea [
+
+	^ self storyPointAreas at: 
+			(self class storyPointAreaTypes indexOf: #temporaryAdditional).
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/18/2024 22:55'
+}
+EPGGameBoard >> unavailableStorypointArea [
+
+	^ self storyPointAreas at: 
+			(self class storyPointAreaTypes indexOf: #temporaryUnavailable).
+]
+
+{
 	#category : #areas,
-	#'squeak_changestamp' : 'sv 6/18/2024 11:21'
+	#'squeak_changestamp' : 'HCH 6/20/2024 01:07'
 }
 EPGGameBoard >> unfreezeDnD [
 
 	| DnDAreas |
-	DnDAreas := (self planningAreas), (self storyPointAreas), (self doneAreas).
+	DnDAreas := (self planningAreas), (self availableStorypointAreas), (self doneAreas).
 	DnDAreas do: [:area | area unfreeze.].
 ]

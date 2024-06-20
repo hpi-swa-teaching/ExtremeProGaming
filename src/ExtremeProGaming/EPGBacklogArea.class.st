@@ -10,9 +10,9 @@ Class {
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'jmetrikat 6/16/2024 12:38'
+	#'squeak_changestamp' : 'HCH 6/19/2024 23:24'
 }
-EPGBacklogArea >> amounfOfStorypoints [
+EPGBacklogArea >> amountOfStorypoints [
 
 	^ amountOfStorypoints.
 ]
@@ -24,6 +24,15 @@ EPGBacklogArea >> amounfOfStorypoints [
 EPGBacklogArea >> amountOfStorypoints: aNumber [
 
 	amountOfStorypoints := aNumber.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/19/2024 20:12'
+}
+EPGBacklogArea >> card [
+
+	^ (self dropped select: [:drop | drop isEPGBacklogCard]) first.
 ]
 
 {
@@ -50,7 +59,7 @@ EPGBacklogArea >> dropInMorph: aMorph [
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'jmetrikat 6/16/2024 12:38'
+	#'squeak_changestamp' : 'HCH 6/19/2024 23:24'
 }
 EPGBacklogArea >> dropInStorypoint: aMorph [
 	
@@ -59,7 +68,7 @@ EPGBacklogArea >> dropInStorypoint: aMorph [
 		(self width / 2 - 10 to: self width / 2 + 10) atRandom @ 
 		((self height / 2 - 10 to: self height / 2 + 10) atRandom).
 	super dropInMorph: aMorph at: randomPosition.
-	self amountOfStorypoints: self amounfOfStorypoints + 1.
+	self amountOfStorypoints: self amountOfStorypoints + 1.
 ]
 
 {
@@ -106,13 +115,22 @@ EPGBacklogArea >> isEPGBacklogArea [
 ]
 
 {
+	#category : #testing,
+	#'squeak_changestamp' : 'HCH 6/19/2024 19:55'
+}
+EPGBacklogArea >> isFree [
+
+	^ self dropped size = 0.
+]
+
+{
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'jmetrikat 6/16/2024 12:38'
+	#'squeak_changestamp' : 'HCH 6/19/2024 23:24'
 }
 EPGBacklogArea >> pickUpMorph: aMorph [
 	
 	aMorph isEPGBacklogCard ifTrue: [^ nil.].
-	aMorph isEPGStorypoint ifTrue: [self amountOfStorypoints: self amounfOfStorypoints - 1].
+	aMorph isEPGStorypoint ifTrue: [self amountOfStorypoints: self amountOfStorypoints - 1].
 	aMorph
 		formerOwner: self;
 		formerPosition: aMorph position.
@@ -122,22 +140,27 @@ EPGBacklogArea >> pickUpMorph: aMorph [
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:59'
+	#'squeak_changestamp' : 'HCH 6/20/2024 20:08'
 }
 EPGBacklogArea >> processStorypoints [
 	
 	self
-		returnStorypoints;
 		removeStorypoints.
 ]
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'JP 6/19/2024 21:15'
+	#'squeak_changestamp' : 'HCH 6/20/2024 01:55'
 }
 EPGBacklogArea >> removeStorypoints [
 	
-	self dropped select: [:morph | morph isEPGStorypoint] thenDo: [:morph | self pickUpMorph: morph abandon.].
+	self dropped select: [:morph | morph isEPGStorypoint] 
+	thenDo: [:morph | 
+		|storypoint|
+		storypoint := self pickUpMorph: morph.
+		(storypoint hasProperty: #temporaryAdditional)
+			ifTrue: [self game gameBoard temporaryStorypointArea dropInMorph: storypoint]
+			ifFalse: [self game gameBoard regularStorypointArea dropInMorph: storypoint]].
 ]
 
 {
@@ -151,12 +174,12 @@ EPGBacklogArea >> resetAccepts [
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:57'
+	#'squeak_changestamp' : 'HCH 6/20/2024 00:32'
 }
 EPGBacklogArea >> returnStorypoints [
 
 	| regularAreaIndex regularStoryPointArea|
 	regularAreaIndex := self game gameBoard class storyPointAreaTypes indexOf: #regular.
 	regularStoryPointArea := (self game gameBoard storyPointAreas at: regularAreaIndex).
-	regularStoryPointArea addStorypoints: self amounfOfStorypoints.
+	regularStoryPointArea addStorypoints: self amountOfStorypoints.
 ]

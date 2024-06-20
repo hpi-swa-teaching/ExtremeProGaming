@@ -6,7 +6,18 @@ Class {
 
 {
 	#category : #features,
-	#'squeak_changestamp' : 'Philipp 6/16/2024 18:19'
+	#'squeak_changestamp' : 'HCH 6/18/2024 23:27'
+}
+EPGStorypointArea >> addCustomStorypoint: aStorypoint [
+
+	self game addDependent: aStorypoint.
+	aStorypoint game: self game.
+	self dropInMorph: aStorypoint.
+]
+
+{
+	#category : #features,
+	#'squeak_changestamp' : 'HCH 6/18/2024 23:27'
 }
 EPGStorypointArea >> addStorypoints: aNumber [
 
@@ -14,7 +25,8 @@ EPGStorypointArea >> addStorypoints: aNumber [
 	aNumber timesRepeat: [
 		newStorypoint := EPGStorypoint new.
 		self game addDependent: newStorypoint.
-		self dropInMorph: newStorypoint]
+		newStorypoint game: self game.
+		self dropInMorph: newStorypoint].
 ]
 
 {

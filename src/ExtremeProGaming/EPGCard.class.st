@@ -13,9 +13,10 @@ Class {
 		'cost',
 		'perTechnicalDebt',
 		'frontend',
-		'effect',
 		'gameBoard',
-		'focus'
+		'focus',
+		'effectText',
+		'effect'
 	],
 	#category : #ExtremeProGaming
 }
@@ -27,6 +28,15 @@ Class {
 EPGCard class >> backendColor [
 
 	^ Color fromString: '#5f4dfa'.
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'HCH 6/20/2024 20:05'
+}
+EPGCard class >> backendLayout [
+
+	^ #right.
 ]
 
 {
@@ -63,6 +73,15 @@ EPGCard class >> focusSclaeFactor [
 EPGCard class >> frontendColor [
 
 	^ Color fromString: '#fc5d5d'.
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'HCH 6/20/2024 20:05'
+}
+EPGCard class >> frontendLayout [
+
+	^ #left.
 ]
 
 {
@@ -293,17 +312,6 @@ EPGCard >> colorBarSelector: aSelector [
 ]
 
 {
-	#category : #body,
-	#'squeak_changestamp' : 'sv 6/18/2024 10:19'
-}
-EPGCard >> consequence: aText [
-
-	| textMorph |
-	textMorph := self formatBackTask: aText.
-	self backBody addMorph: textMorph.
-]
-
-{
 	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 6/3/2024 09:49'
 }
@@ -335,6 +343,17 @@ EPGCard >> cost: aCost perTechnicalDebt: aNumber [
 
 {
 	#category : #body,
+	#'squeak_changestamp' : 'HCH 6/20/2024 01:12'
+}
+EPGCard >> displayConsequenceText: aText [
+
+	| textMorph |
+	textMorph := self formatBackTask: aText.
+	self backBody addMorph: textMorph.
+]
+
+{
+	#category : #body,
 	#'squeak_changestamp' : 'HCH 6/12/2024 14:44'
 }
 EPGCard >> displayCost [
@@ -349,23 +368,35 @@ EPGCard >> displayCost [
 
 {
 	#category : #body,
-	#'squeak_changestamp' : 'HCH 6/12/2024 14:44'
+	#'squeak_changestamp' : 'HCH 6/20/2024 01:09'
 }
 EPGCard >> displayEffect [
 
 	| arrow |
 	arrow := ImageMorph new.
-	self effect = #positive
+	self effectSelector = #positive
 		ifTrue: [arrow image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: '/assets/ArrowUp.png') scaledToSize: self effectSize)].
-	self effect = #negative
+	self effectSelector = #negative
 		ifTrue: [arrow image:( ((GitAssetLoader for: 'ExtremeProGaming') loadAsset: '/assets/ArrowDown.png') scaledToSize: self effectSize)].
 	arrow center: self bodyOrigin + (self width / 2 @ 50).
 	self frontBody addMorph: arrow.
 ]
 
 {
+	#category : #body,
+	#'squeak_changestamp' : 'HCH 6/20/2024 01:12'
+}
+EPGCard >> displayEffectText: aText [
+
+| textMorph |
+	textMorph := self formatBackTask: aText.
+	textMorph position:  (0 @ (self height * 3 - textMorph height - self bodyOrigin y)).
+	self backBody addMorph: textMorph.
+]
+
+{
 	#category : #'mouse events',
-	#'squeak_changestamp' : 'sv 6/18/2024 11:13'
+	#'squeak_changestamp' : 'HCH 6/19/2024 22:43'
 }
 EPGCard >> doubleClick: anEvent [
 
@@ -377,7 +408,7 @@ EPGCard >> doubleClick: anEvent [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/6/2024 20:03'
+	#'squeak_changestamp' : 'HCH 6/19/2024 22:04'
 }
 EPGCard >> effect [
 
@@ -385,33 +416,30 @@ EPGCard >> effect [
 ]
 
 {
-	#category : #body,
-	#'squeak_changestamp' : 'sv 6/18/2024 10:43'
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/19/2024 22:04'
 }
-EPGCard >> effect: aText [
+EPGCard >> effect: anEPGEffect [
 
-	| textMorph |
-	textMorph := self formatBackTask: aText.
-	textMorph position:  (0 @ (self height * 3 - textMorph height - self bodyOrigin y)).
-	self backBody addMorph: textMorph.
+	effect := anEPGEffect.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/3/2024 10:37'
+	#'squeak_changestamp' : 'HCH 6/19/2024 22:03'
 }
 EPGCard >> effectSelector [
 
-	^ effect.
+	^ effectText.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/3/2024 10:37'
+	#'squeak_changestamp' : 'HCH 6/19/2024 22:03'
 }
 EPGCard >> effectSelector: aSelector [
 
-	effect := aSelector.
+	effectText := aSelector.
 ]
 
 {
@@ -421,6 +449,24 @@ EPGCard >> effectSelector: aSelector [
 EPGCard >> effectSize [
 
 	^ self width / 6. 
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/19/2024 22:03'
+}
+EPGCard >> effectText [
+
+	^ effectText.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/20/2024 01:05'
+}
+EPGCard >> effectText: aText [
+
+	effectText := aText.
 ]
 
 {
@@ -782,7 +828,7 @@ EPGCard >> task: aText [
 
 {
 	#category : #'focus card',
-	#'squeak_changestamp' : 'sv 6/18/2024 13:24'
+	#'squeak_changestamp' : 'HCH 6/20/2024 01:00'
 }
 EPGCard >> toggleFocusCard [
 
@@ -793,7 +839,7 @@ EPGCard >> toggleFocusCard [
 			self beFocus.]
 		ifTrue: [self turn.
 			self revertFocusSize.
-			self game unfocusCard.
+			self game unfocusCard: self.
 			self moveToDone.
 			self beUnfocus.].
 ]

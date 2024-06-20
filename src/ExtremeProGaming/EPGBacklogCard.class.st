@@ -6,36 +6,30 @@ Class {
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'jmetrikat 6/16/2024 12:38'
+	#'squeak_changestamp' : 'HCH 6/20/2024 19:50'
 }
-EPGBacklogCard >> checkCost: aDebtAmount [
+EPGBacklogCard >> canBeProcessed [
 
-	^ (self cost + (self perTechnicalDebt * aDebtAmount) <= self owner amounfOfStorypoints)
+	^ self isBlocked not and: [self checkCost: self owner amountOfStorypoints].
 ]
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:37'
+	#'squeak_changestamp' : 'HCH 6/19/2024 23:21'
 }
-EPGBacklogCard >> checkIfProcessed [
-	
-	| debtArea |
-	debtArea := self frontend
-		ifTrue: [self gameBoard frontendDebtArea]
-		ifFalse: [self gameBoard backendDebtArea].
+EPGBacklogCard >> checkCost: aStorypointAmount [
 
-	((self owner isEPGBacklogArea) and: [self checkCost: debtArea currentDebt])
-		ifTrue: [self owner processStorypoints.
-				self isBlocked ifFalse: [self process: debtArea]].
+	^ self totalCost <= aStorypointAmount.
 ]
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:47'
+	#'squeak_changestamp' : 'HCH 6/20/2024 01:27'
 }
 EPGBacklogCard >> isBlocked [
 
-	^ (self game frontendIsBlocked and: self isFrontend) or: (self game backendIsBlocked and: self isBackend).
+	^ (self game frontendIsBlocked and: self isFrontend) 
+		or: [self game backendIsBlocked and: self isBackend].
 ]
 
 {
@@ -58,30 +52,34 @@ EPGBacklogCard >> moveToDone [
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'sv 6/18/2024 11:13'
+	#'squeak_changestamp' : 'HCH 6/20/2024 01:04'
 }
 EPGBacklogCard >> prepareMoveToDone [
 
 	self toggleFocusCard.
-	self updateStoryPoints.
 ]
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'JP 6/19/2024 22:39'
+	#'squeak_changestamp' : 'HCH 6/20/2024 00:50'
 }
-EPGBacklogCard >> process: aDebtArea [
+EPGBacklogCard >> process [
 	
 	self owner dropped remove: self.
 	self owner resetAccepts.
-	self prepareMoveToDone.
 ]
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'sv 6/17/2024 14:51'
+	#'squeak_changestamp' : 'HCH 6/19/2024 23:21'
 }
-EPGBacklogCard >> updateStoryPoints [
+EPGBacklogCard >> totalCost [
 
-	"TODO update exisiting/locked storypoints accoring to card"
+	| debtArea debtAmount |
+	debtArea := self frontend
+		ifTrue: [self gameBoard frontendDebtArea]
+		ifFalse: [self gameBoard backendDebtArea].
+	debtAmount := debtArea currentDebt.
+
+	^ self cost + (self perTechnicalDebt * debtAmount).
 ]
