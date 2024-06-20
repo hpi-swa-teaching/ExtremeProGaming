@@ -2,10 +2,10 @@ Class {
 	#name : #EPGStorypoint,
 	#superclass : #EPGDnDMorph,
 	#instVars : [
+		'game',
 		'timeToLive',
 		'image',
 		'imageBag',
-		'game',
 		'available'
 	],
 	#category : #ExtremeProGaming
@@ -13,28 +13,26 @@ Class {
 
 {
 	#category : #'instance creation',
-	#'squeak_changestamp' : 'HCH 6/18/2024 23:04'
+	#'squeak_changestamp' : 'HCH 6/20/2024 19:52'
 }
 EPGStorypoint class >> newTemporary [
 
-	| storypoint |
-	storypoint := self new.
-	storypoint timeToLive: 1.
-	storypoint setProperty: #temporaryAdditional toValue: true.
-	^ storypoint.
+	^ self new
+		timeToLive: 1;
+		setProperty: #temporaryAdditional toValue: true;
+		yourself.
 ]
 
 {
 	#category : #'instance creation',
-	#'squeak_changestamp' : 'HCH 6/18/2024 23:05'
+	#'squeak_changestamp' : 'HCH 6/20/2024 19:53'
 }
 EPGStorypoint class >> newTemporaryWithTimeToLive: aNumber [
 
-	| storypoint |
-	storypoint := self new.
-	storypoint timeToLive: aNumber.
-	storypoint setProperty: #temporaryAdditional toValue: true.
-	^ storypoint.
+	^ self new;
+		timeToLive: aNumber;
+		setProperty: #temporaryAdditional toValue: true;
+		yourself.
 ]
 
 {

@@ -43,13 +43,12 @@ EPGGame >> addBugCard [
 
 {
 	#category : #cards,
-	#'squeak_changestamp' : 'HCH 6/19/2024 20:20'
+	#'squeak_changestamp' : 'HCH 6/20/2024 19:54'
 }
 EPGGame >> addCard: aBacklogCard [
 
 	(self freeBacklogAreas size = 0) ifTrue: [self error: 'Cannot place more cards on board'].
 	self freeBacklogAreas first dropInCard: aBacklogCard.
-	
 ]
 
 {
@@ -72,7 +71,7 @@ EPGGame >> addPermanent: aNumber [
 
 {
 	#category : #storypoints,
-	#'squeak_changestamp' : 'HCH 6/18/2024 23:25'
+	#'squeak_changestamp' : 'HCH 6/20/2024 01:57'
 }
 EPGGame >> addTemporary: aNumber [
 
@@ -120,12 +119,12 @@ EPGGame >> backendIsBlocked: aBoolean [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/19/2024 20:14'
+	#'squeak_changestamp' : 'HCH 6/20/2024 19:56'
 }
 EPGGame >> backlogAreasWithBugCards [
 
 	^ self gameBoard backlogDnDAreas 
-		select: [:area | area isFree not and: [area card isEPGBugCard]].
+			select: [:area | area isFree not and: [area card isEPGBugCard]].
 ]
 
 {
@@ -435,7 +434,7 @@ EPGGame >> occupiedAreas [
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'HCH 6/20/2024 01:37'
+	#'squeak_changestamp' : 'HCH 6/20/2024 19:54'
 }
 EPGGame >> processCards [
 
@@ -447,34 +446,29 @@ EPGGame >> processCards [
 			processedCards add: card].
 	processedCards do: [:card | card prepareMoveToDone].
 	self processDebt: processedCards.
-	
-	
 ]
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'HCH 6/20/2024 01:37'
+	#'squeak_changestamp' : 'HCH 6/20/2024 19:55'
 }
 EPGGame >> processDebt: aCardCollection [
 
 	| featureCards |
 	featureCards := aCardCollection select: [:card | card isEPGFeatureCard].
-	(featureCards anySatisfy: [:card | card isFrontend] ) 
+	(featureCards anySatisfy: [:card | card isFrontend]) 
 		ifTrue: [self gameBoard frontendDebtArea addTechnicalDebt].
-	(featureCards anySatisfy: [:card | card isBackend] ) 
+	(featureCards anySatisfy: [:card | card isBackend]) 
 		ifTrue: [self gameBoard backendDebtArea addTechnicalDebt].
-	
-	
 ]
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'HCH 6/20/2024 00:52'
+	#'squeak_changestamp' : 'HCH 6/20/2024 19:55'
 }
 EPGGame >> processStorypoints [
 
 	self occupiedAreas do: [:area | area processStorypoints].
-	
 ]
 
 {
@@ -488,27 +482,11 @@ EPGGame >> processableCards [
 
 {
 	#category : #storypoints,
-	#'squeak_changestamp' : 'HCH 6/18/2024 23:25'
-}
-EPGGame >> remove: aStorypoint [
-
-	self gameBoard storyPointAreas do: [:area | 
-		(area dropped includes: aStorypoint)
-			ifTrue: [ area dropped remove: aStorypoint.
-					area removeMorph: aStorypoint.
-					aStorypoint abandon.]].
-]
-
-{
-	#category : #storypoints,
-	#'squeak_changestamp' : 'HCH 6/18/2024 22:45'
+	#'squeak_changestamp' : 'HCH 6/20/2024 20:10'
 }
 EPGGame >> removeAllAvailableStorypoints [
 
-	| availableAreas |
-	availableAreas := self gameBoard storyPointAreas select: 
-						[:area | area dropEnabled].
-	availableAreas do: [:area | area clearArea].
+	self gameBoard availableStorypointAreas do: [:area | area clearArea].
 ]
 
 {
@@ -567,7 +545,7 @@ EPGGame >> removeStorypoint: aStorypoint [
 
 {
 	#category : #storypoints,
-	#'squeak_changestamp' : 'HCH 6/19/2024 17:36'
+	#'squeak_changestamp' : 'HCH 6/20/2024 20:04'
 }
 EPGGame >> removeTemporary: aNumber [
 
@@ -575,7 +553,6 @@ EPGGame >> removeTemporary: aNumber [
 	area := self gameBoard unavailableStorypointArea.
 	self removePermanent: aNumber.
 	aNumber timesRepeat: [area addCustomStorypoint: EPGStorypoint new makeUnavailable]. 
-	
 ]
 
 {
@@ -609,7 +586,7 @@ EPGGame >> sprintEffects: aCollection [
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'HCH 6/20/2024 01:29'
+	#'squeak_changestamp' : 'HCH 6/20/2024 20:04'
 }
 EPGGame >> startNewRound [
 
@@ -619,7 +596,6 @@ EPGGame >> startNewRound [
 		processStorypoints;
 		resetBlockedValues;
 		changed: #newRound.
-	
 ]
 
 {

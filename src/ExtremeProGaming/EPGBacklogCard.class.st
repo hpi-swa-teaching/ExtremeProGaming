@@ -6,15 +6,11 @@ Class {
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'HCH 6/20/2024 01:26'
+	#'squeak_changestamp' : 'HCH 6/20/2024 19:50'
 }
 EPGBacklogCard >> canBeProcessed [
 
 	^ self isBlocked not and: [self checkCost: self owner amountOfStorypoints].
-		
-
-
-
 ]
 
 {

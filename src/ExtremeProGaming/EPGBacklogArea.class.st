@@ -140,22 +140,27 @@ EPGBacklogArea >> pickUpMorph: aMorph [
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:59'
+	#'squeak_changestamp' : 'HCH 6/20/2024 20:08'
 }
 EPGBacklogArea >> processStorypoints [
 	
 	self
-		returnStorypoints;
 		removeStorypoints.
 ]
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'JP 6/19/2024 21:15'
+	#'squeak_changestamp' : 'HCH 6/20/2024 01:55'
 }
 EPGBacklogArea >> removeStorypoints [
 	
-	self dropped select: [:morph | morph isEPGStorypoint] thenDo: [:morph | self pickUpMorph: morph abandon.].
+	self dropped select: [:morph | morph isEPGStorypoint] 
+	thenDo: [:morph | 
+		|storypoint|
+		storypoint := self pickUpMorph: morph.
+		(storypoint hasProperty: #temporaryAdditional)
+			ifTrue: [self game gameBoard temporaryStorypointArea dropInMorph: storypoint]
+			ifFalse: [self game gameBoard regularStorypointArea dropInMorph: storypoint]].
 ]
 
 {

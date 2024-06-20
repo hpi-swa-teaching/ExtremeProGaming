@@ -2,6 +2,7 @@ Class {
 	#name : #EPGCard,
 	#superclass : #EPGDnDMorph,
 	#instVars : [
+		'game',
 		'facing',
 		'body',
 		'frontBody',
@@ -14,7 +15,6 @@ Class {
 		'frontend',
 		'gameBoard',
 		'focus',
-		'game',
 		'effectText',
 		'effect'
 	],
@@ -28,6 +28,15 @@ Class {
 EPGCard class >> backendColor [
 
 	^ Color fromString: '#5f4dfa'.
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'HCH 6/20/2024 20:05'
+}
+EPGCard class >> backendLayout [
+
+	^ #right.
 ]
 
 {
@@ -64,6 +73,15 @@ EPGCard class >> focusSclaeFactor [
 EPGCard class >> frontendColor [
 
 	^ Color fromString: '#fc5d5d'.
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'HCH 6/20/2024 20:05'
+}
+EPGCard class >> frontendLayout [
+
+	^ #left.
 ]
 
 {

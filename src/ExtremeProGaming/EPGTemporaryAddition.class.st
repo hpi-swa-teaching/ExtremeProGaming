@@ -6,7 +6,7 @@ Class {
 
 {
 	#category : #effect,
-	#'squeak_changestamp' : 'HCH 6/18/2024 23:06'
+	#'squeak_changestamp' : 'HCH 6/20/2024 01:56'
 }
 EPGTemporaryAddition >> apply [
 

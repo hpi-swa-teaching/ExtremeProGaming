@@ -217,11 +217,11 @@ EPGGameBoard >> addReviewArea [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/20/2024 01:08'
+	#'squeak_changestamp' : 'HCH 6/20/2024 19:51'
 }
 EPGGameBoard >> availableStorypointAreas [
 
-	^ {self regularStorypointArea . self temporaryStorypointArea}.
+	^ { self regularStorypointArea . self temporaryStorypointArea }.
 ]
 
 {
