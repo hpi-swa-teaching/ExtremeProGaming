@@ -457,7 +457,7 @@ EPGGameBoard >> game: aGame [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 6/19/2024 22:06'
+	#'squeak_changestamp' : 'Philipp 6/21/2024 02:44'
 }
 EPGGameBoard >> initialize [
 
@@ -600,6 +600,15 @@ EPGGameBoard >> initializeSectionMorphs [
 		addPlanningArea;
 		addBacklogArea;
 		addReviewArea.
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'Philipp 6/21/2024 02:37'
+}
+EPGGameBoard >> initializeStartScreen [
+	
+	self addMorph: (EPGStartScreen newWithScore: self game class highScore)
 ]
 
 {
