@@ -46,11 +46,11 @@ EPGGame class >> newWithoutReturn [
 
 {
 	#category : #'instance creation',
-	#'squeak_changestamp' : 'jmetrikat 6/20/2024 00:20'
+	#'squeak_changestamp' : 'jmetrikat 6/21/2024 09:24'
 }
 EPGGame class >> open [
 
-	^ EPGGame new openInWorld.
+	EPGStartScreen new openInWorld.
 ]
 
 {
@@ -354,11 +354,14 @@ EPGGame >> initializeDefaultGameState [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'Philipp 6/21/2024 02:49'
+	#'squeak_changestamp' : 'jmetrikat 6/21/2024 09:35'
 }
 EPGGame >> initializeEndScreen: score [
 	
-	((EPGEndScreen newWithScore: score) game: self) openInWorld.
+	(EPGEndScreen newWithScore: score)
+		game: self;
+		center: self gameBoard center;
+		openInWorld.
 ]
 
 {

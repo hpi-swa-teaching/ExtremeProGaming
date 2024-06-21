@@ -5,15 +5,17 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Philipp 6/21/2024 02:44'
+	#category : #initialization,
+	#'squeak_changestamp' : 'jmetrikat 6/21/2024 09:25'
 }
 EPGStartScreen >> initialize [
 
 	super initialize.
+	
 	self
+		center: World center;
 		score: EPGGame highScore;
-		initializeStartButton: 'start Game';
+		initializeStartButton: 'Start Game';
 		initializeScoreDisplay: 'Highscore: '.
 	
 	

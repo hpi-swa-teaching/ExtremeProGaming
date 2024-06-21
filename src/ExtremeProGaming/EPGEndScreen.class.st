@@ -5,14 +5,15 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Philipp 6/21/2024 02:12'
+	#category : #initialization,
+	#'squeak_changestamp' : 'jmetrikat 6/21/2024 09:32'
 }
 EPGEndScreen >> initialize [
 
 	super initialize.
+	
 	self
-		initializeStartButton: 'restart Game';
+		initializeStartButton: 'Restart Game';
 		initializeScoreDisplay: 'Your Score: '.
 	
 	

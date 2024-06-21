@@ -9,7 +9,7 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
+	#category : #constants,
 	#'squeak_changestamp' : 'Philipp 6/21/2024 02:18'
 }
 EPGOverlay class >> buttonExtent [
@@ -18,19 +18,19 @@ EPGOverlay class >> buttonExtent [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Philipp 6/21/2024 02:38'
+	#category : #'class initialization',
+	#'squeak_changestamp' : 'jmetrikat 6/21/2024 09:31'
 }
 EPGOverlay class >> newWithScore: aNumber [
 
-	^self basicNew
+	^ self basicNew
 			score: aNumber;
 			initialize.
 		
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #constants,
 	#'squeak_changestamp' : 'Philipp 6/21/2024 01:29'
 }
 EPGOverlay class >> overlayColor [
@@ -39,7 +39,7 @@ EPGOverlay class >> overlayColor [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #constants,
 	#'squeak_changestamp' : 'Philipp 6/21/2024 01:26'
 }
 EPGOverlay class >> overlayExtent [
@@ -66,23 +66,23 @@ EPGOverlay >> game: aGame [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Philipp 6/21/2024 01:29'
+	#category : #initialization,
+	#'squeak_changestamp' : 'jmetrikat 6/21/2024 09:22'
 }
 EPGOverlay >> initialize [
 
 	super initialize.
+	
 	self
 		extent: self class overlayExtent;
 		color: self class overlayColor.
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Philipp 6/21/2024 02:10'
+	#category : #initialization,
+	#'squeak_changestamp' : 'jmetrikat 6/21/2024 09:23'
 }
 EPGOverlay >> initializeScoreDisplay: label [
-	
 	
 	self addMorph: (TextMorph new
 		position: self center - (250 @ 200);
@@ -99,7 +99,7 @@ EPGOverlay >> initializeScoreDisplay: label [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #initialization,
 	#'squeak_changestamp' : 'Philipp 6/21/2024 02:11'
 }
 EPGOverlay >> initializeStartButton: label [
@@ -136,10 +136,11 @@ EPGOverlay >> score: aNumber [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Philipp 6/21/2024 02:52'
+	#'squeak_changestamp' : 'jmetrikat 6/21/2024 09:26'
 }
 EPGOverlay >> startGame [
-	EPGGame new openInWorld.
+
+	(EPGGame new center: self center) openInWorld.
 	self abandon.
 	
 ]
