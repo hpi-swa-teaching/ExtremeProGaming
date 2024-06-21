@@ -11,8 +11,29 @@ Class {
 		'sprintEffects',
 		'focusedCards'
 	],
+	#classVars : [
+		'HighScore'
+	],
 	#category : #ExtremeProGaming
 }
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Philipp 6/21/2024 01:50'
+}
+EPGGame class >> highScore [
+
+	^ HighScore.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Philipp 6/21/2024 01:51'
+}
+EPGGame class >> highScore: aNumber [
+
+	HighScore := aNumber.
+]
 
 {
 	#category : #'instance creation',
@@ -166,6 +187,20 @@ EPGGame >> checkBlockingDebt [
 ]
 
 {
+	#category : #'game logic',
+	#'squeak_changestamp' : 'Philipp 6/21/2024 02:48'
+}
+EPGGame >> endGame [
+
+	| score |
+	score := self gameBoard featureScore score.
+	self initializeEndScreen: score.
+	self class highScore: (score max: (self class highScore ifNil: [0])).
+	self gameBoard abandon.
+	
+]
+
+{
 	#category : #cards,
 	#'squeak_changestamp' : 'HCH 6/20/2024 01:00'
 }
@@ -315,6 +350,15 @@ EPGGame >> initializeDefaultGameState [
 	self generateCards.
 	self gameBoard frontendDebtArea addTechnicalDebt.
 	self gameBoard backendDebtArea addTechnicalDebt.
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'Philipp 6/21/2024 02:49'
+}
+EPGGame >> initializeEndScreen: score [
+	
+	((EPGEndScreen newWithScore: score) game: self) openInWorld.
 ]
 
 {
