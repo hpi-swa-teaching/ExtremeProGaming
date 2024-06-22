@@ -254,7 +254,7 @@ EPGCard >> bodyOrigin [
 
 {
 	#category : #body,
-	#'squeak_changestamp' : 'HCH 5/31/2024 12:04'
+	#'squeak_changestamp' : 'sv 6/22/2024 14:46'
 }
 EPGCard >> changeBody: aMorph [
 
@@ -368,7 +368,7 @@ EPGCard >> displayCost [
 
 {
 	#category : #body,
-	#'squeak_changestamp' : 'HCH 6/20/2024 01:09'
+	#'squeak_changestamp' : 'sv 6/22/2024 14:46'
 }
 EPGCard >> displayEffect [
 
@@ -384,7 +384,7 @@ EPGCard >> displayEffect [
 
 {
 	#category : #body,
-	#'squeak_changestamp' : 'HCH 6/20/2024 01:12'
+	#'squeak_changestamp' : 'sv 6/22/2024 14:46'
 }
 EPGCard >> displayEffectText: aText [
 
@@ -816,7 +816,7 @@ EPGCard >> subHeaderOrigin [
 
 {
 	#category : #body,
-	#'squeak_changestamp' : 'sv 6/18/2024 10:19'
+	#'squeak_changestamp' : 'sv 6/22/2024 14:46'
 }
 EPGCard >> task: aText [
 
@@ -828,11 +828,11 @@ EPGCard >> task: aText [
 
 {
 	#category : #'focus card',
-	#'squeak_changestamp' : 'HCH 6/20/2024 01:00'
+	#'squeak_changestamp' : 'sv 6/22/2024 14:18'
 }
 EPGCard >> toggleFocusCard [
 
-	(self isFocus)
+	self isFocus
 		ifFalse: [self turn. 
 			self makeFocusSize.
 			self game focusCard: self.
