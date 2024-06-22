@@ -44,13 +44,6 @@ EPGCardTests >> setUp [
 
 {
 	#category : #tests,
-	#'squeak_changestamp' : 'sv 6/22/2024 14:23'
-}
-EPGCardTests >> testBlockedness [
-]
-
-{
-	#category : #tests,
 	#'squeak_changestamp' : 'sv 6/22/2024 14:25'
 }
 EPGCardTests >> testBlockedness01 [
