@@ -384,14 +384,14 @@ EPGCard >> displayEffect [
 
 {
 	#category : #body,
-	#'squeak_changestamp' : 'sv 6/22/2024 14:46'
+	#'squeak_changestamp' : 'sv 6/22/2024 20:16'
 }
 EPGCard >> displayEffectText: aText [
 
 | textMorph |
 	textMorph := self formatBackTask: aText.
-	textMorph position:  (0 @ (self height * 3 - textMorph height - self bodyOrigin y)).
 	self backBody addMorph: textMorph.
+	textMorph position: textMorph position + (0 @ self height * 3 / 2).
 ]
 
 {
