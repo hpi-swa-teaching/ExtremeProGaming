@@ -8,7 +8,7 @@ Class {
 		'imageBag',
 		'available'
 	],
-	#category : #ExtremeProGaming
+	#category : #'ExtremeProGaming-UI'
 }
 
 {

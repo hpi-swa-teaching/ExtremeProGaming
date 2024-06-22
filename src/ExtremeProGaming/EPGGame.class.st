@@ -14,7 +14,7 @@ Class {
 	#classVars : [
 		'HighScore'
 	],
-	#category : #ExtremeProGaming
+	#category : #'ExtremeProGaming-Core'
 }
 
 {

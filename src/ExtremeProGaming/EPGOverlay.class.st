@@ -5,7 +5,7 @@ Class {
 		'score',
 		'game'
 	],
-	#category : #ExtremeProGaming
+	#category : #'ExtremeProGaming-UI'
 }
 
 {

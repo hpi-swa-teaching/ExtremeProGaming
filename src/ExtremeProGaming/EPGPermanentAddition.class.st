@@ -1,7 +1,7 @@
 Class {
 	#name : #EPGPermanentAddition,
 	#superclass : #EPGEffect,
-	#category : #ExtremeProGaming
+	#category : #'ExtremeProGaming-Core'
 }
 
 {

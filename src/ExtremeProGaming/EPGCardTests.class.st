@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'game'
 	],
-	#category : #ExtremeProGaming
+	#category : #'ExtremeProGaming-Tests'
 }
 
 {

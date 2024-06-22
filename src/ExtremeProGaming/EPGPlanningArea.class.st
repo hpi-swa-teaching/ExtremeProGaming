@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'image'
 	],
-	#category : #ExtremeProGaming
+	#category : #'ExtremeProGaming-UI'
 }
 
 {

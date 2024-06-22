@@ -1,7 +1,7 @@
 Class {
 	#name : #EPGEndScreen,
 	#superclass : #EPGOverlay,
-	#category : #ExtremeProGaming
+	#category : #'ExtremeProGaming-UI'
 }
 
 {

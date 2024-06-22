@@ -5,7 +5,7 @@ Class {
 		'effect',
 		'game'
 	],
-	#category : #ExtremeProGaming
+	#category : #'ExtremeProGaming-Tests'
 }
 
 {

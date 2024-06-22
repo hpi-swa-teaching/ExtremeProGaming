@@ -5,7 +5,7 @@ Class {
 		'image',
 		'type'
 	],
-	#category : #ExtremeProGaming
+	#category : #'ExtremeProGaming-UI'
 }
 
 {

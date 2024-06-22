@@ -13,7 +13,7 @@ Class {
 		'featureScore',
 		'doneAreas'
 	],
-	#category : #ExtremeProGaming
+	#category : #'ExtremeProGaming-UI'
 }
 
 {

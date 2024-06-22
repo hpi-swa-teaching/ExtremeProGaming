@@ -1,7 +1,7 @@
 Class {
 	#name : #EPGStorypointArea,
 	#superclass : #EPGDnDArea,
-	#category : #ExtremeProGaming
+	#category : #'ExtremeProGaming-UI'
 }
 
 {

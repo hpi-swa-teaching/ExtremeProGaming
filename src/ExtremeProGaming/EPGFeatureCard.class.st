@@ -1,7 +1,7 @@
 Class {
 	#name : #EPGFeatureCard,
 	#superclass : #EPGBacklogCard,
-	#category : #ExtremeProGaming
+	#category : #'ExtremeProGaming-UI'
 }
 
 {

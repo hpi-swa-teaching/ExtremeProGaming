@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'droppable'
 	],
-	#category : #ExtremeProGaming
+	#category : #'ExtremeProGaming-UI'
 }
 
 {

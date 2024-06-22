@@ -1,7 +1,7 @@
 Class {
 	#name : #EPGPermanentRemoval,
 	#superclass : #EPGEffect,
-	#category : #ExtremeProGaming
+	#category : #'ExtremeProGaming-Core'
 }
 
 {

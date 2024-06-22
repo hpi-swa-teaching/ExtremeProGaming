@@ -7,7 +7,7 @@ Class {
 		'bugCards',
 		'featureCards'
 	],
-	#category : #ExtremeProGaming
+	#category : #'ExtremeProGaming-Core'
 }
 
 {

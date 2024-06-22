@@ -18,7 +18,7 @@ Class {
 		'effectText',
 		'effect'
 	],
-	#category : #ExtremeProGaming
+	#category : #'ExtremeProGaming-UI'
 }
 
 {

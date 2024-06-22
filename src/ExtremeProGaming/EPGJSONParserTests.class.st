@@ -5,7 +5,7 @@ Class {
 		'parser',
 		'board'
 	],
-	#category : #ExtremeProGaming
+	#category : #'ExtremeProGaming-Tests'
 }
 
 {

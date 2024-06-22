@@ -1,7 +1,7 @@
 Class {
 	#name : #EPGGameBoardExistenceTests,
 	#superclass : #MorphTest,
-	#category : #ExtremeProGaming
+	#category : #'ExtremeProGaming-Tests'
 }
 
 {

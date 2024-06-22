@@ -5,7 +5,7 @@ Class {
 		'morphFront',
 		'morphBack'
 	],
-	#category : #ExtremeProGaming
+	#category : #'ExtremeProGaming-Tests'
 }
 
 {

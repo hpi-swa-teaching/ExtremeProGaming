@@ -5,7 +5,7 @@ Class {
 		'image',
 		'amountOfStorypoints'
 	],
-	#category : #ExtremeProGaming
+	#category : #'ExtremeProGaming-UI'
 }
 
 {

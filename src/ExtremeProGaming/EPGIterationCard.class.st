@@ -1,7 +1,7 @@
 Class {
 	#name : #EPGIterationCard,
 	#superclass : #EPGCard,
-	#category : #ExtremeProGaming
+	#category : #'ExtremeProGaming-UI'
 }
 
 {

@@ -7,7 +7,7 @@ Class {
 		'perTechnicalDebt',
 		'storypoint'
 	],
-	#category : #ExtremeProGaming
+	#category : #'ExtremeProGaming-UI'
 }
 
 {

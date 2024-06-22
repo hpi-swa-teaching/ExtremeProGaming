@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'score'
 	],
-	#category : #ExtremeProGaming
+	#category : #'ExtremeProGaming-UI'
 }
 
 {

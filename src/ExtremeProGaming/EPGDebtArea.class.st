@@ -6,7 +6,7 @@ Class {
 		'type',
 		'currentDebt'
 	],
-	#category : #ExtremeProGaming
+	#category : #'ExtremeProGaming-UI'
 }
 
 {

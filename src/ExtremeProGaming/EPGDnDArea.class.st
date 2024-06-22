@@ -16,7 +16,7 @@ Class {
 		'backgroundMargin',
 		'draggable'
 	],
-	#category : #ExtremeProGaming,
+	#category : #'ExtremeProGaming-UI',
 	#'squeak_changestamp' : 'HCH 5/29/2024 00:29'
 }
 

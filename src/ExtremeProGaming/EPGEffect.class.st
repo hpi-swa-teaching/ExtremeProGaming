@@ -5,7 +5,7 @@ Class {
 		'game',
 		'amount'
 	],
-	#category : #ExtremeProGaming
+	#category : #'ExtremeProGaming-Core'
 }
 
 {
