@@ -74,6 +74,19 @@ EPGDebt >> mouseEnterDragging: evt [
 ]
 
 {
+	#category : #'event-processing',
+	#'squeak_changestamp' : 'sv 6/22/2024 20:51'
+}
+EPGDebt >> returnStorypoints [
+	
+	self dropped select: [:morph | morph isEPGStorypoint] 
+	thenDo: [:morph | 
+		|storypoint|
+		storypoint := self pickUpMorph: morph.
+		self game gameBoard regularStorypointArea dropInMorph: storypoint.].
+]
+
+{
 	#category : #typesetting,
 	#'squeak_changestamp' : 'JP 6/19/2024 19:34'
 }

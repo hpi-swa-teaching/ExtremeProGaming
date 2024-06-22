@@ -10,13 +10,13 @@ Class {
 
 {
 	#category : #assist,
-	#'squeak_changestamp' : 'sv 6/22/2024 14:43'
+	#'squeak_changestamp' : 'sv 6/22/2024 20:44'
 }
 EPGCardTests >> blockFrontend [
 
 	game gameBoard frontendDebtArea incrementDebt.
 	game gameBoard frontendDebtArea submorphsDo: [:debt | debt dropped add: EPGStorypoint new.].
-	game checkBlockingDebt.
+	game processDebtAreaStorypoints.
 ]
 
 {

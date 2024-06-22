@@ -118,6 +118,15 @@ EPGDebtArea >> randomPositionFor: aMorph [
 ]
 
 {
+	#category : #features,
+	#'squeak_changestamp' : 'sv 6/22/2024 20:50'
+}
+EPGDebtArea >> returnStorypoints [
+
+	self submorphs do: [:debt | debt returnStorypoints.].
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:02'
 }

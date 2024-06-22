@@ -140,27 +140,12 @@ EPGBacklogArea >> pickUpMorph: aMorph [
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'HCH 6/20/2024 20:08'
+	#'squeak_changestamp' : 'sv 6/22/2024 20:44'
 }
-EPGBacklogArea >> processStorypoints [
+EPGBacklogArea >> processBacklogAreaStorypoints [
 	
 	self
-		removeStorypoints.
-]
-
-{
-	#category : #'events-processing',
-	#'squeak_changestamp' : 'HCH 6/20/2024 01:55'
-}
-EPGBacklogArea >> removeStorypoints [
-	
-	self dropped select: [:morph | morph isEPGStorypoint] 
-	thenDo: [:morph | 
-		|storypoint|
-		storypoint := self pickUpMorph: morph.
-		(storypoint hasProperty: #temporaryAdditional)
-			ifTrue: [self game gameBoard temporaryStorypointArea dropInMorph: storypoint]
-			ifFalse: [self game gameBoard regularStorypointArea dropInMorph: storypoint]].
+		returnStorypoints.
 ]
 
 {
@@ -174,12 +159,15 @@ EPGBacklogArea >> resetAccepts [
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'HCH 6/20/2024 00:32'
+	#'squeak_changestamp' : 'sv 6/22/2024 20:36'
 }
 EPGBacklogArea >> returnStorypoints [
-
-	| regularAreaIndex regularStoryPointArea|
-	regularAreaIndex := self game gameBoard class storyPointAreaTypes indexOf: #regular.
-	regularStoryPointArea := (self game gameBoard storyPointAreas at: regularAreaIndex).
-	regularStoryPointArea addStorypoints: self amountOfStorypoints.
+	
+	self dropped select: [:morph | morph isEPGStorypoint] 
+	thenDo: [:morph | 
+		|storypoint|
+		storypoint := self pickUpMorph: morph.
+		(storypoint hasProperty: #temporaryAdditional)
+			ifTrue: [self game gameBoard temporaryStorypointArea dropInMorph: storypoint]
+			ifFalse: [self game gameBoard regularStorypointArea dropInMorph: storypoint]].
 ]

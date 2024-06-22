@@ -122,11 +122,11 @@ EPGGame >> applySprintEffects [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:46'
+	#'squeak_changestamp' : 'sv 6/22/2024 20:39'
 }
 EPGGame >> backendIsBlocked [
 
-	^ backendIsBlocked.
+	^ self gameBoard backendDebtArea isBlocking.
 ]
 
 {
@@ -174,16 +174,6 @@ EPGGame >> cardSource [
 EPGGame >> cardSource: aCardSource [
 
 	cardSource := aCardSource.
-]
-
-{
-	#category : #sprints,
-	#'squeak_changestamp' : 'HCH 6/20/2024 01:22'
-}
-EPGGame >> checkBlockingDebt [
-
-	self frontendIsBlocked: self gameBoard frontendDebtArea isBlocking.
-	self backendIsBlocked: self gameBoard backendDebtArea isBlocking.
 ]
 
 {
@@ -243,11 +233,11 @@ EPGGame >> freeBacklogAreas [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:47'
+	#'squeak_changestamp' : 'sv 6/22/2024 20:39'
 }
 EPGGame >> frontendIsBlocked [
 
-	^ frontendIsBlocked.
+	^ self gameBoard frontendDebtArea isBlocking.
 ]
 
 {
@@ -481,7 +471,16 @@ EPGGame >> occupiedAreas [
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'HCH 6/20/2024 19:54'
+	#'squeak_changestamp' : 'sv 6/22/2024 20:44'
+}
+EPGGame >> processBacklogAreaStorypoints [
+
+	self occupiedAreas do: [:area | area processBacklogAreaStorypoints].
+]
+
+{
+	#category : #sprints,
+	#'squeak_changestamp' : 'sv 6/22/2024 20:43'
 }
 EPGGame >> processCards [
 
@@ -492,14 +491,24 @@ EPGGame >> processCards [
 			card process.
 			processedCards add: card].
 	processedCards do: [:card | card prepareMoveToDone].
-	self processDebt: processedCards.
+	self processDebtToAdd: processedCards.
 ]
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'HCH 6/20/2024 19:55'
+	#'squeak_changestamp' : 'sv 6/22/2024 20:44'
 }
-EPGGame >> processDebt: aCardCollection [
+EPGGame >> processDebtAreaStorypoints [
+
+	self gameBoard frontendDebtArea returnStorypoints.
+	self gameBoard backendDebtArea returnStorypoints.
+]
+
+{
+	#category : #sprints,
+	#'squeak_changestamp' : 'sv 6/22/2024 20:43'
+}
+EPGGame >> processDebtToAdd: aCardCollection [
 
 	| featureCards |
 	featureCards := aCardCollection select: [:card | card isEPGFeatureCard].
@@ -507,15 +516,6 @@ EPGGame >> processDebt: aCardCollection [
 		ifTrue: [self gameBoard frontendDebtArea addTechnicalDebt].
 	(featureCards anySatisfy: [:card | card isBackend]) 
 		ifTrue: [self gameBoard backendDebtArea addTechnicalDebt].
-]
-
-{
-	#category : #sprints,
-	#'squeak_changestamp' : 'HCH 6/20/2024 19:55'
-}
-EPGGame >> processStorypoints [
-
-	self occupiedAreas do: [:area | area processStorypoints].
 ]
 
 {
@@ -633,14 +633,14 @@ EPGGame >> sprintEffects: aCollection [
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'HCH 6/20/2024 20:04'
+	#'squeak_changestamp' : 'sv 6/22/2024 20:45'
 }
 EPGGame >> startNewRound [
 
 	self 
-		checkBlockingDebt;
 		processCards;
-		processStorypoints;
+		processDebtAreaStorypoints;
+		processBacklogAreaStorypoints;
 		resetBlockedValues;
 		changed: #newRound.
 ]
