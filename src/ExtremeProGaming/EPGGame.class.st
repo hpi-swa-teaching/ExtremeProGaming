@@ -202,7 +202,7 @@ EPGGame >> endGame [
 
 {
 	#category : #cards,
-	#'squeak_changestamp' : 'HCH 6/20/2024 01:00'
+	#'squeak_changestamp' : 'sv 6/22/2024 14:03'
 }
 EPGGame >> focusCard: anEPGCard [
 
