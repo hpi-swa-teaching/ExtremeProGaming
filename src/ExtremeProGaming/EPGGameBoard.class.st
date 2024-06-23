@@ -94,6 +94,15 @@ EPGGameBoard class >> defaultColor [
 
 {
 	#category : #constants,
+	#'squeak_changestamp' : 'jmetrikat 6/23/2024 16:19'
+}
+EPGGameBoard class >> defaultFont [
+
+	^ StrikeFont familyName: 'Bitmap DejaVu Sans' size: 30.
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'jmetrikat 6/9/2024 18:24'
 }
 EPGGameBoard class >> doneAreaTypes [
@@ -114,11 +123,11 @@ EPGGameBoard class >> newWithGame: aGame [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'sv 6/9/2024 16:34'
+	#'squeak_changestamp' : 'HCH 6/23/2024 14:32'
 }
 EPGGameBoard class >> planningAreasAcceptance [
 
-	^ #(#EPGIterationCard #EPGFeatureCard #EPGBugCard).
+	^ #(#EPGEventCard #EPGFeatureCard #EPGBugCard).
 ]
 
 {
@@ -362,6 +371,15 @@ EPGGameBoard >> doneAreas: aCollection [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/23/2024 14:33'
+}
+EPGGameBoard >> eventArea [
+
+	^ self planningAreas at: (self class planningAreasAcceptance indexOf: #EPGEventCard).
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'JP 6/17/2024 14:33'
 }
 EPGGameBoard >> extent: aPoint [
@@ -457,7 +475,7 @@ EPGGameBoard >> game: aGame [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'Philipp 6/21/2024 02:44'
+	#'squeak_changestamp' : 'HCH 6/23/2024 14:54'
 }
 EPGGameBoard >> initialize [
 
@@ -499,14 +517,14 @@ EPGGameBoard >> initializeBacklogAreas [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 6/17/2024 15:17'
+	#'squeak_changestamp' : 'jmetrikat 6/23/2024 16:18'
 }
 EPGGameBoard >> initializeButton [
 
 	| button |
 	button := SimpleButtonMorph new
 			useRoundedCorners;
-			label: 'next round';
+			label: 'Next Round' font: self class defaultFont;
 			extent: self class buttonExtent;
 			color: self class defaultColor;
 			target: [self game startNewRound];
@@ -567,7 +585,7 @@ EPGGameBoard >> initializeFeatureScore [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 6/17/2024 15:06'
+	#'squeak_changestamp' : 'HCH 6/23/2024 16:40'
 }
 EPGGameBoard >> initializePlanningAreas [
 
@@ -584,6 +602,7 @@ EPGGameBoard >> initializePlanningAreas [
 			accepts: (Array with: (acceptedMorphs at: a)).
 			
 		area image center: area center.
+		area game: self game.
 		self planningArea addMorph: area].
 ]
 
@@ -765,11 +784,12 @@ EPGGameBoard >> unavailableStorypointArea [
 
 {
 	#category : #areas,
-	#'squeak_changestamp' : 'jmetrikat 6/23/2024 12:48'
+	#'squeak_changestamp' : 'HCH 6/23/2024 15:50'
 }
 EPGGameBoard >> unfreezeDnD [
 
 	| DnDAreas |
 	DnDAreas := (self planningAreas), (self availableStorypointAreas).
+	DnDAreas remove: self eventArea.
 	DnDAreas do: [:area | area unfreeze.].
 ]

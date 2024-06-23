@@ -195,7 +195,7 @@ EPGDnDArea >> dropEnabled: aBool [
 
 {
 	#category : #'dragging/dropping',
-	#'squeak_changestamp' : 'HCH 5/27/2024 18:33'
+	#'squeak_changestamp' : 'HCH 6/23/2024 14:53'
 }
 EPGDnDArea >> dropInMorph: aMorph [
 

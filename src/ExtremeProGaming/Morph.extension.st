@@ -29,11 +29,20 @@ Morph >> isEPGDnDArea [
 
 {
 	#category : #'*ExtremeProGaming',
-	#'squeak_changestamp' : 'HCH 6/15/2024 22:46'
+	#'squeak_changestamp' : 'HCH 6/23/2024 14:22'
 }
 Morph >> isEPGDnDMorph [
 
-	^false.
+	^ false.
+]
+
+{
+	#category : #'*ExtremeProGaming',
+	#'squeak_changestamp' : 'HCH 6/23/2024 14:22'
+}
+Morph >> isEPGEventCard [
+
+	^ false.
 ]
 
 {

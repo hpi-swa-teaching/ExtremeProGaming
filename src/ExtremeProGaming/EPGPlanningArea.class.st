@@ -8,6 +8,27 @@ Class {
 }
 
 {
+	#category : #'events-processing',
+	#'squeak_changestamp' : 'HCH 6/23/2024 16:38'
+}
+EPGPlanningArea >> doubleClick: anEvent [
+
+	self pickUpEnabled: true.
+	(self pickUpMorph: self dropped first) toggleFocusCard.
+	self pickUpEnabled: false.
+	self game startOfRound: false.
+]
+
+{
+	#category : #'events-processing',
+	#'squeak_changestamp' : 'HCH 6/23/2024 15:14'
+}
+EPGPlanningArea >> handlesMouseDown: anEvent [
+
+	^ self dropped size > 0 and: [self dropped first isEPGEventCard].
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'Philipp 6/16/2024 18:17'
 }
@@ -38,6 +59,18 @@ EPGPlanningArea >> initialize [
 		initializeVisibleArea.
 		
 	self area color: Color transparent.
+]
+
+{
+	#category : #'events-processing',
+	#'squeak_changestamp' : 'HCH 6/23/2024 16:38'
+}
+EPGPlanningArea >> mouseDown: anEvent [ 
+
+	self game startOfRound
+		ifTrue: [anEvent hand waitForClicksOrDrag: self event: anEvent].
+	anEvent wasHandled: false.
+	super mouseDown: anEvent.
 ]
 
 {

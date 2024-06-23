@@ -5,13 +5,14 @@ Class {
 		'jsonContent',
 		'assetPath',
 		'bugCards',
-		'featureCards'
+		'featureCards',
+		'eventCards'
 	],
 	#category : #'ExtremeProGaming-Core'
 }
 
 {
-	#category : #accessors,
+	#category : #accessing,
 	#'squeak_changestamp' : 'sv 6/8/2024 19:28'
 }
 EPGJSONParser >> assetPath [
@@ -20,7 +21,7 @@ EPGJSONParser >> assetPath [
 ]
 
 {
-	#category : #accessors,
+	#category : #accessing,
 	#'squeak_changestamp' : 'sv 6/8/2024 19:28'
 }
 EPGJSONParser >> assetPath: aString [
@@ -29,7 +30,7 @@ EPGJSONParser >> assetPath: aString [
 ]
 
 {
-	#category : #accessors,
+	#category : #accessing,
 	#'squeak_changestamp' : 'sv 6/9/2024 12:19'
 }
 EPGJSONParser >> bugCards [
@@ -38,7 +39,7 @@ EPGJSONParser >> bugCards [
 ]
 
 {
-	#category : #accessors,
+	#category : #accessing,
 	#'squeak_changestamp' : 'sv 6/9/2024 12:19'
 }
 EPGJSONParser >> bugCards: aBugCardCollection [
@@ -89,18 +90,19 @@ EPGJSONParser >> createBugFrontendCard: aCardJsonFormatted [
 
 {
 	#category : #'card creation',
-	#'squeak_changestamp' : 'HCH 6/19/2024 22:06'
+	#'squeak_changestamp' : 'HCH 6/23/2024 14:13'
 }
 EPGJSONParser >> createCard: aCardJsonFormatted [
 
 	| cardType effect card |
 	cardType := aCardJsonFormatted at: 'type'.
 	effect := self createEffect: aCardJsonFormatted.
-	cardType = 'Feature'
-    		ifTrue: [card := self createFeatureCard: aCardJsonFormatted]
-   	 	ifFalse: [cardType = 'Bug'
-        		ifTrue: [card := self createBugCard: aCardJsonFormatted]
-        		ifFalse: [Error new: 'Unkown card type: ', cardType, '. Please check JSON file for card creation'; signal]].
+	cardType caseOf: {
+		['Feature'] -> [card := self createFeatureCard: aCardJsonFormatted].
+		['Bug'] -> [card := self createBugCard: aCardJsonFormatted].
+		['Event'] -> [card := self createEventCard: aCardJsonFormatted]}
+	 otherwise: [
+		Error new: 'Unkown card type: ', cardType, '. Please check JSON file for card creation'; 		signal].
 	card effect: effect.
 	^ card.
 
@@ -108,15 +110,17 @@ EPGJSONParser >> createCard: aCardJsonFormatted [
 
 {
 	#category : #'card creation',
-	#'squeak_changestamp' : 'sv 6/9/2024 15:38'
+	#'squeak_changestamp' : 'jmetrikat 6/23/2024 16:13'
 }
 EPGJSONParser >> createCards [
 
 	| cards |
-	cards := (self jsonContent collect: [:card |
-		self createCard: card]).
-	self featureCards: (cards select: [:card | card isEPGFeatureCard]).
-	self bugCards: (cards select: [:card | card isEPGBugCard]).
+	cards := (self jsonContent collect: [:card | self createCard: card]).
+	
+	self
+		featureCards: (cards select: [:card | card isEPGFeatureCard]);
+		bugCards: (cards select: [:card | card isEPGBugCard]);
+		eventCards: (cards select: [:card | card isEPGEventCard]).
 ]
 
 {
@@ -136,6 +140,18 @@ EPGJSONParser >> createEffect: aJSONCardFormatted [
 	otherwise: [self error: 'Unknown effect type'].
 	
 	^ effectClass newFromJSON: aJSONCardFormatted.
+]
+
+{
+	#category : #'card creation',
+	#'squeak_changestamp' : 'HCH 6/23/2024 14:20'
+}
+EPGJSONParser >> createEventCard: aCardJsonFormatted [
+
+	^ EPGEventCard newWithTitle: (aCardJsonFormatted at: 'title') 
+					    description: (aCardJsonFormatted at: 'description') 
+					    effectText: (aCardJsonFormatted at: 'effect')
+					    iterationNumber: (aCardJsonFormatted at: 'number').
 ]
 
 {
@@ -191,7 +207,26 @@ EPGJSONParser >> decodeJson [
 ]
 
 {
-	#category : #accessors,
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/23/2024 14:46'
+}
+EPGJSONParser >> eventCards [
+
+	^ (eventCards sort: [:cardA :cardB | cardA iterationNumber >= cardB iterationNumber]).
+	
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/23/2024 14:24'
+}
+EPGJSONParser >> eventCards: anEventCardCollection [
+
+	eventCards := anEventCardCollection.
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'sv 6/9/2024 12:20'
 }
 EPGJSONParser >> featureCards [
@@ -200,7 +235,7 @@ EPGJSONParser >> featureCards [
 ]
 
 {
-	#category : #accessors,
+	#category : #accessing,
 	#'squeak_changestamp' : 'sv 6/9/2024 12:20'
 }
 EPGJSONParser >> featureCards: aFeatureCardCollection [
@@ -222,7 +257,7 @@ EPGJSONParser >> initialize [
 ]
 
 {
-	#category : #accessors,
+	#category : #accessing,
 	#'squeak_changestamp' : 'sv 6/8/2024 18:50'
 }
 EPGJSONParser >> jsonContent [
@@ -231,7 +266,7 @@ EPGJSONParser >> jsonContent [
 ]
 
 {
-	#category : #accessors,
+	#category : #accessing,
 	#'squeak_changestamp' : 'sv 6/8/2024 18:51'
 }
 EPGJSONParser >> jsonContent: aString [

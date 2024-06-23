@@ -59,6 +59,24 @@ EPGCard class >> colorBarHeight [
 
 {
 	#category : #constants,
+	#'squeak_changestamp' : 'HCH 6/23/2024 13:45'
+}
+EPGCard class >> eventColor [
+
+	^ Color fromString: '#e6bf7c'.
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'HCH 6/23/2024 13:31'
+}
+EPGCard class >> eventLayout [
+
+	^ #full.
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'sv 6/18/2024 13:05'
 }
 EPGCard class >> focusSclaeFactor [
@@ -392,6 +410,18 @@ EPGCard >> displayEffectText: aText [
 	textMorph := self formatBackTask: aText.
 	self backBody addMorph: textMorph.
 	textMorph position: textMorph position + (0 @ self height * 3 / 2).
+]
+
+{
+	#category : #body,
+	#'squeak_changestamp' : 'HCH 6/23/2024 13:30'
+}
+EPGCard >> displayTask: aText [
+
+	| textMorph |
+	textMorph := self formatFrontTask: aText.
+	textMorph position: (0 @ (self height - textMorph height - self bodyOrigin y)).
+	self frontBody addMorph: textMorph.
 ]
 
 {
@@ -812,18 +842,6 @@ EPGCard >> revertFocusSize [
 EPGCard >> subHeaderOrigin [
 
 	^ self header bounds origin + (0 @ self header height).
-]
-
-{
-	#category : #body,
-	#'squeak_changestamp' : 'sv 6/22/2024 14:46'
-}
-EPGCard >> task: aText [
-
-	| textMorph |
-	textMorph := self formatFrontTask: aText.
-	textMorph position: (0 @ (self height - textMorph height - self bodyOrigin y)).
-	self frontBody addMorph: textMorph.
 ]
 
 {
