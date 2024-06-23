@@ -156,18 +156,3 @@ EPGBacklogArea >> resetAccepts [
 
 	self accepts: #(#EPGBugCard #EPGFeatureCard).
 ]
-
-{
-	#category : #'events-processing',
-	#'squeak_changestamp' : 'sv 6/22/2024 20:36'
-}
-EPGBacklogArea >> returnStorypoints [
-	
-	self dropped select: [:morph | morph isEPGStorypoint] 
-	thenDo: [:morph | 
-		|storypoint|
-		storypoint := self pickUpMorph: morph.
-		(storypoint hasProperty: #temporaryAdditional)
-			ifTrue: [self game gameBoard temporaryStorypointArea dropInMorph: storypoint]
-			ifFalse: [self game gameBoard regularStorypointArea dropInMorph: storypoint]].
-]

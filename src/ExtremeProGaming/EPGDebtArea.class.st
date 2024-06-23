@@ -99,11 +99,20 @@ EPGDebtArea >> initialize [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/20/2024 01:23'
+	#'squeak_changestamp' : 'HCH 6/23/2024 11:55'
 }
 EPGDebtArea >> isBlocking [
 
-	^ self submorphs anySatisfy: [:debt | debt checkForStorypoint].
+	^ self submorphs anySatisfy: [:debt | debt canBeProcessed].
+]
+
+{
+	#category : #features,
+	#'squeak_changestamp' : 'HCH 6/23/2024 11:56'
+}
+EPGDebtArea >> processDebt [
+
+	self submorphsDo: [:debt | debt process.].
 ]
 
 {
