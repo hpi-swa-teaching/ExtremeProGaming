@@ -415,6 +415,21 @@ EPGDnDArea >> removeBorder [
 ]
 
 {
+	#category : #'events-processing',
+	#'squeak_changestamp' : 'HCH 6/23/2024 12:08'
+}
+EPGDnDArea >> returnStorypoints [
+	
+	self dropped select: [:morph | morph isEPGStorypoint] 
+	thenDo: [:morph | 
+		|storypoint|
+		storypoint := self pickUpMorph: morph.
+		(storypoint hasProperty: #temporaryAdditional)
+			ifTrue: [self game gameBoard temporaryStorypointArea dropInMorph: storypoint]
+			ifFalse: [self game gameBoard regularStorypointArea dropInMorph: storypoint]].
+]
+
+{
 	#category : #border,
 	#'squeak_changestamp' : 'HCH 5/27/2024 17:14'
 }
