@@ -8,7 +8,8 @@ Class {
 		'numOfBugCards',
 		'sprintEffects',
 		'focusedCards',
-		'startOfRound'
+		'startOfRound',
+		'currentRound'
 	],
 	#classVars : [
 		'HighScore'
@@ -167,6 +168,33 @@ EPGGame >> cardSource: aCardSource [
 ]
 
 {
+	#category : #sprints,
+	#'squeak_changestamp' : 'Philipp 6/23/2024 18:24'
+}
+EPGGame >> checkForGameEnd [
+
+	 ((self currentRound = 9) or: (self freeBacklogAreas isEmpty)) ifTrue: [self endGame].
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Philipp 6/23/2024 18:15'
+}
+EPGGame >> currentRound [
+
+	^ currentRound.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Philipp 6/23/2024 18:15'
+}
+EPGGame >> currentRound: aNumber [
+
+	currentRound := aNumber.
+]
+
+{
 	#category : #'game logic',
 	#'squeak_changestamp' : 'Philipp 6/21/2024 02:48'
 }
@@ -309,7 +337,7 @@ EPGGame >> generateFeatureCards [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'HCH 6/23/2024 16:39'
+	#'squeak_changestamp' : 'Philipp 6/23/2024 18:16'
 }
 EPGGame >> initialize [
 
@@ -321,6 +349,7 @@ EPGGame >> initialize [
 	self 
 		sprintEffects: OrderedCollection new;
 		focusedCards: OrderedCollection new;
+		currentRound: 1;
 		startOfRound: true.
 	^ self gameBoard.
 ]
@@ -629,7 +658,7 @@ EPGGame >> sprintEffects: aCollection [
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'HCH 6/23/2024 15:48'
+	#'squeak_changestamp' : 'Philipp 6/23/2024 18:20'
 }
 EPGGame >> startNewRound [
 
@@ -637,6 +666,8 @@ EPGGame >> startNewRound [
 		processCards;
 		processDebtAreas;
 		processBacklogAreaStorypoints;
+		checkForGameEnd;
+		currentRound: self currentRound + 1;
 		changed: #newRound.
 	self gameBoard freezeDnD.
 ]
