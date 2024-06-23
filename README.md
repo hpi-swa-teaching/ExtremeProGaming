@@ -51,7 +51,7 @@ To start the game, open a workspace and run `EPGGame open`.
 
 The game ends in one of two ways:
 
-1. If after an iteration there are one or more tickets left in the Backlog, the project has failed. You score zero points.
-2. If all nine iterations are completed without the project failing, you win. You score one point for each completed Feature and none for fixed Bugs.
+1. If after any iteration, there are nine or more tickets remaining in the Backlog, the project has failed, and you score zero points.
+2. If you successfully complete all nine iterations without the project failing, you win. You earn one point for each completed Feature, while fixed Bugs do not score any points.
 
 ## Screenshots 🖼️
