@@ -129,15 +129,6 @@ EPGGame >> backendIsBlocked [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:46'
-}
-EPGGame >> backendIsBlocked: aBoolean [
-
-	backendIsBlocked := aBoolean.
-]
-
-{
-	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 6/20/2024 19:56'
 }
 EPGGame >> backlogAreasWithBugCards [
@@ -236,15 +227,6 @@ EPGGame >> freeBacklogAreas [
 EPGGame >> frontendIsBlocked [
 
 	^ self gameBoard frontendDebtArea isBlocking.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:47'
-}
-EPGGame >> frontendIsBlocked: aBoolean [
-
-	frontendIsBlocked := aBoolean.
 ]
 
 {
