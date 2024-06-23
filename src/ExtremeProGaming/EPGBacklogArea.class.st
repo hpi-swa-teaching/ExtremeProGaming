@@ -140,16 +140,6 @@ EPGBacklogArea >> pickUpMorph: aMorph [
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'sv 6/22/2024 20:44'
-}
-EPGBacklogArea >> processBacklogAreaStorypoints [
-	
-	self
-		returnStorypoints.
-]
-
-{
-	#category : #'events-processing',
 	#'squeak_changestamp' : 'HCH 6/15/2024 22:41'
 }
 EPGBacklogArea >> resetAccepts [

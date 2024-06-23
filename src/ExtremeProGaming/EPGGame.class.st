@@ -467,11 +467,11 @@ EPGGame >> occupiedAreas [
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'sv 6/22/2024 20:44'
+	#'squeak_changestamp' : 'jmetrikat 6/23/2024 12:26'
 }
 EPGGame >> processBacklogAreaStorypoints [
 
-	self occupiedAreas do: [:area | area processBacklogAreaStorypoints].
+	self occupiedAreas do: [:area | area returnStorypoints].
 ]
 
 {
