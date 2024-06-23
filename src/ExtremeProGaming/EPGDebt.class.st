@@ -9,25 +9,12 @@ Class {
 }
 
 {
-	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:21'
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/23/2024 11:55'
 }
-EPGDebt >> checkForStorypoint [
+EPGDebt >> canBeProcessed [
 
 	^ self dropped size == 1.
-]
-
-{
-	#category : #initialization,
-	#'squeak_changestamp' : 'Philipp 6/16/2024 18:13'
-}
-EPGDebt >> checkIfProcessed [
-
-	(self checkForStorypoint)
-		ifTrue: [
-			self area decrementDebt.
-			self game removeDependent: self.
-			self abandon].
 ]
 
 {
@@ -66,11 +53,24 @@ EPGDebt >> initialize [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/30/2024 22:09'
+	#'squeak_changestamp' : 'HCH 6/23/2024 11:55'
 }
 EPGDebt >> mouseEnterDragging: evt [
 
-	(self dropEnabled and: [self checkForStorypoint not]) ifTrue: [self addBorder].
+	(self dropEnabled and: [self canBeProcessed not]) ifTrue: [self addBorder].
+]
+
+{
+	#category : #'event-processing',
+	#'squeak_changestamp' : 'HCH 6/23/2024 11:55'
+}
+EPGDebt >> process [
+	
+	self canBeProcessed ifTrue:[
+		self area decrementDebt.
+		self returnStorypoints.
+		self abandon.].
+	
 ]
 
 {
@@ -115,24 +115,14 @@ EPGDebt >> type: aType [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/30/2024 22:12'
-}
-EPGDebt >> update: anAspectSymbol [
-
-	anAspectSymbol = #newRound
-		ifTrue: [self checkIfProcessed].
-]
-
-{
-	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/30/2024 22:08'
+	#'squeak_changestamp' : 'HCH 6/23/2024 11:55'
 }
 EPGDebt >> wantsDroppedMorph: aMorph event: evt [
 
 	(self dropEnabled 
 		and: [aMorph isEPGDnDMorph] 
 		and: [self acceptsMorph: aMorph]
-		and: [self checkForStorypoint not])
+		and: [self canBeProcessed not])
 		ifFalse: [^ self rejectMorph].
 	^ true.
 ]

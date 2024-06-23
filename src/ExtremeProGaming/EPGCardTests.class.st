@@ -3,20 +3,20 @@ Class {
 	#superclass : #TestCase,
 	#instVars : [
 		'game',
+		'parser',
 		'card'
 	],
-	#category : 'ExtremeProGaming-Tests'
+	#category : #'ExtremeProGaming-Tests'
 }
 
 {
 	#category : #assist,
-	#'squeak_changestamp' : 'sv 6/22/2024 14:43'
+	#'squeak_changestamp' : 'sv 6/23/2024 12:41'
 }
 EPGCardTests >> blockFrontend [
 
 	game gameBoard frontendDebtArea incrementDebt.
 	game gameBoard frontendDebtArea submorphsDo: [:debt | debt dropped add: EPGStorypoint new.].
-	game checkBlockingDebt.
 ]
 
 {
@@ -34,39 +34,28 @@ EPGCardTests >> processCards [
 
 {
 	#category : #initialize,
-	#'squeak_changestamp' : 'sv 6/22/2024 13:59'
+	#'squeak_changestamp' : 'sv 6/23/2024 12:40'
 }
 EPGCardTests >> setUp [
 
 	game := EPGGame newWithoutReturn.
+	
+	parser := game cardSource.
+
+	"reseting the jsonContent for a indicidual testing file"
+	parser
+		jsonContent: '';
+		assetPath: '/assets/cardsTesting.json';
+		decodeJson.
+		
 	card := game cardSource featureCards first.
 ]
 
 {
 	#category : #tests,
-	#'squeak_changestamp' : 'sv 6/22/2024 14:25'
+	#'squeak_changestamp' : 'sv 6/23/2024 12:41'
 }
-EPGCardTests >> testBlockedness01 [
-
-	game frontendIsBlocked: true.
-	self assert: true equals: card isBlocked.
-]
-
-{
-	#category : #tests,
-	#'squeak_changestamp' : 'sv 6/22/2024 14:42'
-}
-EPGCardTests >> testBlockedness02 [
-
-	self blockFrontend.
-	self assert: true equals: game frontendIsBlocked.
-]
-
-{
-	#category : #tests,
-	#'squeak_changestamp' : 'sv 6/22/2024 14:43'
-}
-EPGCardTests >> testBlockedness03 [
+EPGCardTests >> testBlockedness [
 
 	self blockFrontend.
 	self assert: true equals: card isBlocked.

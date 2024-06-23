@@ -646,11 +646,13 @@ EPGGameBoard >> initializeStorypointAreas [
 
 {
 	#category : #layouting,
-	#'squeak_changestamp' : 'HCH 6/15/2024 22:31'
+	#'squeak_changestamp' : 'jmetrikat 6/23/2024 12:37'
 }
 EPGGameBoard >> newDoneAreaAccepting: aSelector [
 	
 	^ EPGDnDArea new accepts: {aSelector asSymbol};
+		dropEnabled: false;
+		pickUpEnabled: false;
 		initializeVisibleArea.
 
 ]
@@ -773,12 +775,12 @@ EPGGameBoard >> unavailableStorypointArea [
 
 {
 	#category : #areas,
-	#'squeak_changestamp' : 'HCH 6/23/2024 14:49'
+	#'squeak_changestamp' : 'HCH 6/23/2024 15:50'
 }
 EPGGameBoard >> unfreezeDnD [
 
 	| DnDAreas |
-	DnDAreas := (self planningAreas), (self availableStorypointAreas), (self doneAreas).
+	DnDAreas := (self planningAreas), (self availableStorypointAreas).
 	DnDAreas remove: self eventArea.
 	DnDAreas do: [:area | area unfreeze.].
 ]

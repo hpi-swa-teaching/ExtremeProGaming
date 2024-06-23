@@ -99,11 +99,20 @@ EPGDebtArea >> initialize [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/20/2024 01:23'
+	#'squeak_changestamp' : 'HCH 6/23/2024 11:55'
 }
 EPGDebtArea >> isBlocking [
 
-	^ self submorphs anySatisfy: [:debt | debt checkForStorypoint].
+	^ self submorphs anySatisfy: [:debt | debt canBeProcessed].
+]
+
+{
+	#category : #features,
+	#'squeak_changestamp' : 'HCH 6/23/2024 11:56'
+}
+EPGDebtArea >> processDebt [
+
+	self submorphsDo: [:debt | debt process.].
 ]
 
 {
@@ -115,6 +124,15 @@ EPGDebtArea >> randomPositionFor: aMorph [
 	| range |
 	range := self extent - aMorph extent.
 	^ self position + ((0 to: range x) atRandom @ (0 to: range y) atRandom).
+]
+
+{
+	#category : #features,
+	#'squeak_changestamp' : 'sv 6/22/2024 20:50'
+}
+EPGDebtArea >> returnStorypoints [
+
+	self submorphs do: [:debt | debt returnStorypoints.].
 ]
 
 {

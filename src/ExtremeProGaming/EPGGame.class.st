@@ -6,8 +6,6 @@ Class {
 		'cardSource',
 		'numOfFeatureCards',
 		'numOfBugCards',
-		'frontendIsBlocked',
-		'backendIsBlocked',
 		'sprintEffects',
 		'focusedCards'
 	],
@@ -122,20 +120,11 @@ EPGGame >> applySprintEffects [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:46'
+	#'squeak_changestamp' : 'sv 6/22/2024 20:39'
 }
 EPGGame >> backendIsBlocked [
 
-	^ backendIsBlocked.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:46'
-}
-EPGGame >> backendIsBlocked: aBoolean [
-
-	backendIsBlocked := aBoolean.
+	^ self gameBoard backendDebtArea isBlocking.
 ]
 
 {
@@ -174,16 +163,6 @@ EPGGame >> cardSource [
 EPGGame >> cardSource: aCardSource [
 
 	cardSource := aCardSource.
-]
-
-{
-	#category : #sprints,
-	#'squeak_changestamp' : 'HCH 6/20/2024 01:22'
-}
-EPGGame >> checkBlockingDebt [
-
-	self frontendIsBlocked: self gameBoard frontendDebtArea isBlocking.
-	self backendIsBlocked: self gameBoard backendDebtArea isBlocking.
 ]
 
 {
@@ -243,20 +222,11 @@ EPGGame >> freeBacklogAreas [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:47'
+	#'squeak_changestamp' : 'sv 6/22/2024 20:39'
 }
 EPGGame >> frontendIsBlocked [
 
-	^ frontendIsBlocked.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:47'
-}
-EPGGame >> frontendIsBlocked: aBoolean [
-
-	frontendIsBlocked := aBoolean.
+	^ self gameBoard frontendDebtArea isBlocking.
 ]
 
 {
@@ -338,19 +308,18 @@ EPGGame >> generateFeatureCards [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'HCH 6/23/2024 14:51'
+	#'squeak_changestamp' : 'HCH 6/23/2024 11:59'
 }
 EPGGame >> initialize [
 
 	super initialize.
 	self 
 		gameBoard: (EPGGameBoard newWithGame: self);
-		cardSource: EPGJSONParser new;
-		sprintEffects: OrderedCollection new;
-		focusedCards: OrderedCollection new;
-		frontendIsBlocked: false;
-		backendIsBlocked: false.	
+		cardSource: EPGJSONParser new.	
 	self initializeDefaultGameState.
+	self 
+		sprintEffects: OrderedCollection new;
+		focusedCards: OrderedCollection new.
 	^ self gameBoard.
 ]
 
@@ -494,7 +463,16 @@ EPGGame >> occupiedAreas [
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'HCH 6/23/2024 15:43'
+	#'squeak_changestamp' : 'jmetrikat 6/23/2024 12:26'
+}
+EPGGame >> processBacklogAreaStorypoints [
+
+	self occupiedAreas do: [:area | area returnStorypoints].
+]
+
+{
+	#category : #sprints,
+	#'squeak_changestamp' : 'HCH 6/23/2024 15:48'
 }
 EPGGame >> processCards [
 
@@ -506,14 +484,24 @@ EPGGame >> processCards [
 			processedCards add: card].
 	processedCards size = 0 ifTrue: [self gameBoard eventArea startOfRound: true].
 	processedCards do: [:card | card prepareMoveToDone].
-	self processDebt: processedCards.
+	self processDebtToAdd: processedCards.
 ]
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'HCH 6/20/2024 19:55'
+	#'squeak_changestamp' : 'HCH 6/23/2024 11:51'
 }
-EPGGame >> processDebt: aCardCollection [
+EPGGame >> processDebtAreas [
+
+	self gameBoard frontendDebtArea processDebt.
+	self gameBoard backendDebtArea processDebt.
+]
+
+{
+	#category : #sprints,
+	#'squeak_changestamp' : 'sv 6/22/2024 20:43'
+}
+EPGGame >> processDebtToAdd: aCardCollection [
 
 	| featureCards |
 	featureCards := aCardCollection select: [:card | card isEPGFeatureCard].
@@ -533,15 +521,6 @@ EPGGame >> processEventCard: anEventCard [
 	anEventCard effect apply.
 	anEventCard abandon.
 
-]
-
-{
-	#category : #sprints,
-	#'squeak_changestamp' : 'HCH 6/20/2024 19:55'
-}
-EPGGame >> processStorypoints [
-
-	self occupiedAreas do: [:area | area processStorypoints].
 ]
 
 {
@@ -629,17 +608,6 @@ EPGGame >> removeTemporary: aNumber [
 ]
 
 {
-	#category : #'game logic',
-	#'squeak_changestamp' : 'jmetrikat 6/19/2024 23:48'
-}
-EPGGame >> resetBlockedValues [
-
-	self
-		frontendIsBlocked: false;
-		backendIsBlocked: false.
-]
-
-{
 	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 6/19/2024 22:09'
 }
@@ -659,15 +627,14 @@ EPGGame >> sprintEffects: aCollection [
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'HCH 6/23/2024 15:42'
+	#'squeak_changestamp' : 'HCH 6/23/2024 15:48'
 }
 EPGGame >> startNewRound [
 
 	self 
-		checkBlockingDebt;
 		processCards;
-		processStorypoints;
-		resetBlockedValues;
+		processDebtAreas;
+		processBacklogAreaStorypoints;
 		changed: #newRound.
 	self gameBoard freezeDnD.
 ]
