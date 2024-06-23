@@ -2,22 +2,21 @@ Class {
 	#name : #EPGPlanningArea,
 	#superclass : #EPGDnDArea,
 	#instVars : [
-		'image',
-		'startOfRound'
+		'image'
 	],
 	#category : #'ExtremeProGaming-UI'
 }
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'HCH 6/23/2024 15:23'
+	#'squeak_changestamp' : 'HCH 6/23/2024 16:38'
 }
 EPGPlanningArea >> doubleClick: anEvent [
 
 	self pickUpEnabled: true.
 	(self pickUpMorph: self dropped first) toggleFocusCard.
 	self pickUpEnabled: false.
-	self startOfRound: false.
+	self game startOfRound: false.
 ]
 
 {
@@ -64,11 +63,11 @@ EPGPlanningArea >> initialize [
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'HCH 6/23/2024 15:11'
+	#'squeak_changestamp' : 'HCH 6/23/2024 16:38'
 }
 EPGPlanningArea >> mouseDown: anEvent [ 
 
-	self startOfRound
+	self game startOfRound
 		ifTrue: [anEvent hand waitForClicksOrDrag: self event: anEvent].
 	anEvent wasHandled: false.
 	super mouseDown: anEvent.
@@ -83,22 +82,4 @@ EPGPlanningArea >> pickUpTopCard [
 	(self dropped size = 0) ifTrue: [self error: 'Calling Top on empty Card Stack'].
 	self dropped first isEPGBacklogCard ifFalse: [self error: 'Top was not a Card'].
 	^ self pickUpMorph: self dropped first.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/23/2024 15:12'
-}
-EPGPlanningArea >> startOfRound [
-
-	^ startOfRound.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/23/2024 15:37'
-}
-EPGPlanningArea >> startOfRound: aBoolean [
-
-	startOfRound := aBoolean.
 ]
