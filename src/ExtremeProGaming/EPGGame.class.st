@@ -7,7 +7,8 @@ Class {
 		'numOfFeatureCards',
 		'numOfBugCards',
 		'sprintEffects',
-		'focusedCards'
+		'focusedCards',
+		'startOfRound'
 	],
 	#classVars : [
 		'HighScore'
@@ -308,7 +309,7 @@ EPGGame >> generateFeatureCards [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'HCH 6/23/2024 11:59'
+	#'squeak_changestamp' : 'HCH 6/23/2024 16:39'
 }
 EPGGame >> initialize [
 
@@ -319,7 +320,8 @@ EPGGame >> initialize [
 	self initializeDefaultGameState.
 	self 
 		sprintEffects: OrderedCollection new;
-		focusedCards: OrderedCollection new.
+		focusedCards: OrderedCollection new;
+		startOfRound: true.
 	^ self gameBoard.
 ]
 
@@ -472,7 +474,7 @@ EPGGame >> processBacklogAreaStorypoints [
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'HCH 6/23/2024 15:48'
+	#'squeak_changestamp' : 'HCH 6/23/2024 16:36'
 }
 EPGGame >> processCards [
 
@@ -482,7 +484,7 @@ EPGGame >> processCards [
 			self sprintEffects add: card effect. 
 			card process.
 			processedCards add: card].
-	processedCards size = 0 ifTrue: [self gameBoard eventArea startOfRound: true].
+	processedCards size = 0 ifTrue: [self startOfRound: true].
 	processedCards do: [:card | card prepareMoveToDone].
 	self processDebtToAdd: processedCards.
 ]
@@ -640,8 +642,26 @@ EPGGame >> startNewRound [
 ]
 
 {
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/23/2024 16:36'
+}
+EPGGame >> startOfRound [
+
+	^ startOfRound.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/23/2024 16:36'
+}
+EPGGame >> startOfRound: aBoolean [
+
+	startOfRound := aBoolean.
+]
+
+{
 	#category : #cards,
-	#'squeak_changestamp' : 'HCH 6/23/2024 15:38'
+	#'squeak_changestamp' : 'HCH 6/23/2024 16:37'
 }
 EPGGame >> unfocusCard: anEPGCard [
 
@@ -649,7 +669,7 @@ EPGGame >> unfocusCard: anEPGCard [
 	anEPGCard isEPGFeatureCard ifTrue: [self updateFeatureScore].
 	anEPGCard isEPGEventCard  ifTrue: [^ self].
 	self focusedCards size = 0
-		ifTrue: [self applySprintEffects. self gameBoard eventArea startOfRound: true].
+		ifTrue: [self applySprintEffects. self startOfRound: true].
 	
 ]
 

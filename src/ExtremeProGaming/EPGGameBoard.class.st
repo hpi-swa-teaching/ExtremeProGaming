@@ -576,7 +576,7 @@ EPGGameBoard >> initializeFeatureScore [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'HCH 6/23/2024 15:31'
+	#'squeak_changestamp' : 'HCH 6/23/2024 16:40'
 }
 EPGGameBoard >> initializePlanningAreas [
 
@@ -590,10 +590,10 @@ EPGGameBoard >> initializePlanningAreas [
 		area
 			image: (ImageMorph new image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: ('/assets/PlanningAreas/PlanningArea', a,'.png')) scaledToSize: EPGCard cardExtent));
 	 		addMorph: area image;
-			accepts: (Array with: (acceptedMorphs at: a));
-			startOfRound: true.
+			accepts: (Array with: (acceptedMorphs at: a)).
 			
 		area image center: area center.
+		area game: self game.
 		self planningArea addMorph: area].
 ]
 
