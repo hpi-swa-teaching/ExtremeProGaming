@@ -293,7 +293,7 @@ EPGGame >> generateBugCards [
 
 {
 	#category : #'card generation',
-	#'squeak_changestamp' : 'Philipp 6/16/2024 16:51'
+	#'squeak_changestamp' : 'HCH 6/23/2024 14:37'
 }
 EPGGame >> generateCards [
 
@@ -305,7 +305,21 @@ EPGGame >> generateCards [
 		numOfFeatureCards: parser featureCards size;
 		numOfBugCards: parser bugCards size;
 		generateFeatureCards;
-		generateBugCards.
+		generateBugCards;
+		generateEventCards.
+]
+
+{
+	#category : #'card generation',
+	#'squeak_changestamp' : 'HCH 6/23/2024 14:37'
+}
+EPGGame >> generateEventCards [
+
+	self cardSource eventCards do: [:card |
+		card gameBoard: self gameBoard.
+		card game: self.
+		card effect game: self.
+		(self gameBoard eventArea) dropInMorph: card].
 ]
 
 {
@@ -324,7 +338,7 @@ EPGGame >> generateFeatureCards [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'HCH 6/20/2024 01:04'
+	#'squeak_changestamp' : 'HCH 6/23/2024 14:51'
 }
 EPGGame >> initialize [
 
@@ -332,12 +346,11 @@ EPGGame >> initialize [
 	self 
 		gameBoard: (EPGGameBoard newWithGame: self);
 		cardSource: EPGJSONParser new;
-		frontendIsBlocked: false;
-		backendIsBlocked: false.		
-	self initializeDefaultGameState.
-	self 
 		sprintEffects: OrderedCollection new;
-		focusedCards: OrderedCollection new.
+		focusedCards: OrderedCollection new;
+		frontendIsBlocked: false;
+		backendIsBlocked: false.	
+	self initializeDefaultGameState.
 	^ self gameBoard.
 ]
 
@@ -481,7 +494,7 @@ EPGGame >> occupiedAreas [
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'HCH 6/20/2024 19:54'
+	#'squeak_changestamp' : 'HCH 6/23/2024 15:43'
 }
 EPGGame >> processCards [
 
@@ -491,6 +504,7 @@ EPGGame >> processCards [
 			self sprintEffects add: card effect. 
 			card process.
 			processedCards add: card].
+	processedCards size = 0 ifTrue: [self gameBoard eventArea startOfRound: true].
 	processedCards do: [:card | card prepareMoveToDone].
 	self processDebt: processedCards.
 ]
@@ -507,6 +521,18 @@ EPGGame >> processDebt: aCardCollection [
 		ifTrue: [self gameBoard frontendDebtArea addTechnicalDebt].
 	(featureCards anySatisfy: [:card | card isBackend]) 
 		ifTrue: [self gameBoard backendDebtArea addTechnicalDebt].
+]
+
+{
+	#category : #sprints,
+	#'squeak_changestamp' : 'HCH 6/23/2024 15:30'
+}
+EPGGame >> processEventCard: anEventCard [
+
+	self gameBoard unfreezeDnD.
+	anEventCard effect apply.
+	anEventCard abandon.
+
 ]
 
 {
@@ -633,7 +659,7 @@ EPGGame >> sprintEffects: aCollection [
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'HCH 6/20/2024 20:04'
+	#'squeak_changestamp' : 'HCH 6/23/2024 15:42'
 }
 EPGGame >> startNewRound [
 
@@ -643,18 +669,20 @@ EPGGame >> startNewRound [
 		processStorypoints;
 		resetBlockedValues;
 		changed: #newRound.
+	self gameBoard freezeDnD.
 ]
 
 {
 	#category : #cards,
-	#'squeak_changestamp' : 'HCH 6/20/2024 01:33'
+	#'squeak_changestamp' : 'HCH 6/23/2024 15:38'
 }
 EPGGame >> unfocusCard: anEPGCard [
 
 	self focusedCards remove: anEPGCard.
 	anEPGCard isEPGFeatureCard ifTrue: [self updateFeatureScore].
+	anEPGCard isEPGEventCard  ifTrue: [^ self].
 	self focusedCards size = 0
-		ifTrue: [self gameBoard unfreezeDnD. self applySprintEffects.].
+		ifTrue: [self applySprintEffects. self gameBoard eventArea startOfRound: true].
 	
 ]
 

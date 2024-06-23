@@ -201,5 +201,23 @@
         "positive": true,
         "effectType": "addTemporary",
         "effectAmount": 1
-    }
+    },
+	{
+	"type": "Event",
+	"number": 1,
+	"title": "Startschwierigkeiten",
+	"description": "Irgendwas schlechtes",
+	"effect": "auch irgendwas schlechtes",
+	"effectType": "newBug",
+	"effectAmount": 1
+	},
+	{
+	"type": "Event",
+	"number": 2,
+	"title": "Läuft langsam an",
+	"description": "Irgendwas gutes",
+	"effect": "diesmal was besseres",
+	"effectType": "addPermanent",
+	"effectAmount": 2
+	}
 ]

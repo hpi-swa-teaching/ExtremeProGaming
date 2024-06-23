@@ -114,11 +114,11 @@ EPGGameBoard class >> newWithGame: aGame [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'sv 6/9/2024 16:34'
+	#'squeak_changestamp' : 'HCH 6/23/2024 14:32'
 }
 EPGGameBoard class >> planningAreasAcceptance [
 
-	^ #(#EPGIterationCard #EPGFeatureCard #EPGBugCard).
+	^ #(#EPGEventCard #EPGFeatureCard #EPGBugCard).
 ]
 
 {
@@ -362,6 +362,15 @@ EPGGameBoard >> doneAreas: aCollection [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'HCH 6/23/2024 14:33'
+}
+EPGGameBoard >> eventArea [
+
+	^ self planningAreas at: (self class planningAreasAcceptance indexOf: #EPGEventCard).
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'JP 6/17/2024 14:33'
 }
 EPGGameBoard >> extent: aPoint [
@@ -457,7 +466,7 @@ EPGGameBoard >> game: aGame [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'Philipp 6/21/2024 02:44'
+	#'squeak_changestamp' : 'HCH 6/23/2024 14:54'
 }
 EPGGameBoard >> initialize [
 
@@ -567,7 +576,7 @@ EPGGameBoard >> initializeFeatureScore [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 6/17/2024 15:06'
+	#'squeak_changestamp' : 'HCH 6/23/2024 15:31'
 }
 EPGGameBoard >> initializePlanningAreas [
 
@@ -581,7 +590,8 @@ EPGGameBoard >> initializePlanningAreas [
 		area
 			image: (ImageMorph new image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: ('/assets/PlanningAreas/PlanningArea', a,'.png')) scaledToSize: EPGCard cardExtent));
 	 		addMorph: area image;
-			accepts: (Array with: (acceptedMorphs at: a)).
+			accepts: (Array with: (acceptedMorphs at: a));
+			startOfRound: true.
 			
 		area image center: area center.
 		self planningArea addMorph: area].
@@ -763,11 +773,12 @@ EPGGameBoard >> unavailableStorypointArea [
 
 {
 	#category : #areas,
-	#'squeak_changestamp' : 'HCH 6/20/2024 01:07'
+	#'squeak_changestamp' : 'HCH 6/23/2024 14:49'
 }
 EPGGameBoard >> unfreezeDnD [
 
 	| DnDAreas |
 	DnDAreas := (self planningAreas), (self availableStorypointAreas), (self doneAreas).
+	DnDAreas remove: self eventArea.
 	DnDAreas do: [:area | area unfreeze.].
 ]
