@@ -110,16 +110,17 @@ EPGJSONParser >> createCard: aCardJsonFormatted [
 
 {
 	#category : #'card creation',
-	#'squeak_changestamp' : 'HCH 6/23/2024 14:42'
+	#'squeak_changestamp' : 'jmetrikat 6/23/2024 16:13'
 }
 EPGJSONParser >> createCards [
 
 	| cards |
-	cards := (self jsonContent collect: [:card |
-		self createCard: card]).
-	self featureCards: (cards select: [:card | card isEPGFeatureCard]).
-	self bugCards: (cards select: [:card | card isEPGBugCard]).
-	self eventCards: (cards select: [:card | card isEPGEventCard]).
+	cards := (self jsonContent collect: [:card | self createCard: card]).
+	
+	self
+		featureCards: (cards select: [:card | card isEPGFeatureCard]);
+		bugCards: (cards select: [:card | card isEPGBugCard]);
+		eventCards: (cards select: [:card | card isEPGEventCard]).
 ]
 
 {

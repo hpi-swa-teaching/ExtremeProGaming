@@ -18,6 +18,15 @@ EPGOverlay class >> buttonExtent [
 ]
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'jmetrikat 6/23/2024 16:35'
+}
+EPGOverlay class >> defaultFont [
+
+	^ StrikeFont familyName: 'Bitmap DejaVu Sans' size: 30.
+]
+
+{
 	#category : #'class initialization',
 	#'squeak_changestamp' : 'jmetrikat 6/21/2024 09:31'
 }
@@ -80,33 +89,33 @@ EPGOverlay >> initialize [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 6/21/2024 09:23'
+	#'squeak_changestamp' : 'jmetrikat 6/23/2024 16:35'
 }
 EPGOverlay >> initializeScoreDisplay: label [
 	
 	self addMorph: (TextMorph new
 		position: self center - (250 @ 200);
-		useRoundedCorners;
-		contents: label , (self score ifNil:['---']);
+		backgroundColor: self class overlayColor lighter;
+		contents: ((label , (self score ifNil:['---'])) asText addAttribute: (TextFontReference toFont: self class defaultFont));
 		vResizing: #shrinkWrap;
 		hResizing: #spaceFill;
 		margins: 10 @ 10;
 		extent: self class buttonExtent;
+		useRoundedCorners;
 		centered;
-		backgroundColor: self class overlayColor lighter;
 		lock).
 	
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'Philipp 6/21/2024 02:11'
+	#'squeak_changestamp' : 'jmetrikat 6/23/2024 16:28'
 }
 EPGOverlay >> initializeStartButton: label [
 
 	self addMorph: (SimpleButtonMorph new
 		useRoundedCorners;
-		label: label;
+		label: label font: self class defaultFont;
 		extent: self class buttonExtent;
 		center: self center;
 		color: self class overlayColor lighter;
@@ -136,14 +145,15 @@ EPGOverlay >> score: aNumber [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/23/2024 14:56'
+	#'squeak_changestamp' : 'jmetrikat 6/23/2024 16:09'
 }
 EPGOverlay >> startGame [
 	
-	| game |
-	game := EPGGame new center: self center.
-	game freezeDnD.
-	game openInWorld.
+	EPGGame new
+		center: self center;
+		freezeDnD;
+		openInWorld.
+
 	self abandon.
 	
 ]

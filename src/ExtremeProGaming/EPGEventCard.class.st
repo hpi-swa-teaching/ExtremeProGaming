@@ -22,11 +22,11 @@ EPGEventCard class >> headerSymbol [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'HCH 6/23/2024 14:04'
+	#'squeak_changestamp' : 'jmetrikat 6/23/2024 16:37'
 }
 EPGEventCard class >> iterationNumberFont [
 
- 	^ TextFontReference  toFont: (StrikeFont familyName: 'Bitmap DejaVu Sans' size: 33).
+ 	^ TextFontReference toFont: (StrikeFont familyName: 'Bitmap DejaVu Sans' size: 33).
 
 	
 ]

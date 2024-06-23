@@ -94,6 +94,15 @@ EPGGameBoard class >> defaultColor [
 
 {
 	#category : #constants,
+	#'squeak_changestamp' : 'jmetrikat 6/23/2024 16:19'
+}
+EPGGameBoard class >> defaultFont [
+
+	^ StrikeFont familyName: 'Bitmap DejaVu Sans' size: 30.
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'jmetrikat 6/9/2024 18:24'
 }
 EPGGameBoard class >> doneAreaTypes [
@@ -508,14 +517,14 @@ EPGGameBoard >> initializeBacklogAreas [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 6/17/2024 15:17'
+	#'squeak_changestamp' : 'jmetrikat 6/23/2024 16:18'
 }
 EPGGameBoard >> initializeButton [
 
 	| button |
 	button := SimpleButtonMorph new
 			useRoundedCorners;
-			label: 'next round';
+			label: 'Next Round' font: self class defaultFont;
 			extent: self class buttonExtent;
 			color: self class defaultColor;
 			target: [self game startNewRound];
