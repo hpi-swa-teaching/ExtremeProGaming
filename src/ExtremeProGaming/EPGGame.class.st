@@ -55,11 +55,11 @@ EPGGame class >> open [
 
 {
 	#category : #cards,
-	#'squeak_changestamp' : 'HCH 6/19/2024 19:53'
+	#'squeak_changestamp' : 'sv 6/24/2024 01:31'
 }
 EPGGame >> addBugCard [
 
-	self addCard: self gameBoard bugArea pickUpTopCard.
+	self addCard: self gameBoard bugArea forcePickUpTopCard.
 ]
 
 {
@@ -74,11 +74,11 @@ EPGGame >> addCard: aBacklogCard [
 
 {
 	#category : #cards,
-	#'squeak_changestamp' : 'HCH 6/19/2024 19:54'
+	#'squeak_changestamp' : 'sv 6/24/2024 01:39'
 }
 EPGGame >> addFeatureCard [
 
-	self addCard: self gameBoard featureArea pickUpTopCard.
+	self addCard: self gameBoard featureArea forcePickUpTopCard.
 ]
 
 {
