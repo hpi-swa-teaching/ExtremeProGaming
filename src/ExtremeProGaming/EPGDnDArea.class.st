@@ -235,7 +235,7 @@ EPGDnDArea >> dropped: aCollection [
 
 {
 	#category : #'dragging/dropping',
-	#'squeak_changestamp' : 'sv 6/24/2024 01:30'
+	#'squeak_changestamp' : 'jmetrikat 6/24/2024 09:22'
 }
 EPGDnDArea >> forcePickUpMorph: aMorph [
 

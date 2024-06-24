@@ -21,7 +21,7 @@ EPGPlanningArea >> doubleClick: anEvent [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'sv 6/24/2024 01:31'
+	#'squeak_changestamp' : 'jmetrikat 6/24/2024 09:21'
 }
 EPGPlanningArea >> forcePickUpTopCard [
 
