@@ -292,7 +292,7 @@
         "number": 1,
         "title": "Neustart",
         "description": "Das Team ist hochmotiviert, ein neues Projekt zu starten, um die Welt ein Stückchen zu verbessern.",
-        "effect": "Aufgrund eurer sprühenden Motivation habt ihr für den nächsten Sprint 2 Storypoints",
+        "effect": "Aufgrund eurer sprühenden Motivation habt ihr für den nächsten Sprint 2 Storypoints mehr.",
         "effectType": "addTemporary",
         "effectAmount": 2
     },
@@ -309,7 +309,7 @@
         "type": "Event",
         "number": 3,
         "title": "Die Vergangenheit holt euch ein!",
-        "description": "Jetzt ist euer Projekt endlich in Fahrt gekommen, nur was ist das? Die Library auf der ihr aufbaut scheint sich mit der aktuellsten Version eurer Programmiersprache nicht vereinbaren.",
+        "description": "Jetzt ist euer Projekt endlich in Fahrt gekommen, nur was ist das? Die Library auf der ihr aufbaut scheint sich mit der aktuellsten Version eurer Programmiersprache nicht zu vereinbaren.",
         "effect": "Ihr müsst Gesicht voran in den Legacy Code diven und den Bug schleunigst beheben.",
         "effectType": "newBug",
         "effectAmount": 1
@@ -345,7 +345,7 @@
         "type": "Event",
         "number": 7,
         "title": "In the Summertime!",
-        "description": "Kommen die Interns!",
+        "description": "Es kommen die Interns!",
         "effect": "Ein überambitionierter Intern zerschießt euch Production!",
         "effectType": "newBug",
         "effectAmount": 1
@@ -353,7 +353,7 @@
     {
         "type": "Event",
         "number": 8,
-        "title": "Entsprint!",
+        "title": "Endsprint!",
         "description": "Euer Budget wird noch einmal erhöht, damit ihr schneller fertig werdet.",
         "effect": "Für das restliche Projekt habt ihr 4 Storypoints mehr.",
         "effectType": "addPermanent",
