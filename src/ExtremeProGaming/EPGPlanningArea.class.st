@@ -20,6 +20,17 @@ EPGPlanningArea >> doubleClick: anEvent [
 ]
 
 {
+	#category : #accessing,
+	#'squeak_changestamp' : 'jmetrikat 6/24/2024 09:21'
+}
+EPGPlanningArea >> forcePickUpTopCard [
+
+	(self dropped size = 0) ifTrue: [self error: 'Calling Top on empty Card Stack'].
+	self dropped first isEPGBacklogCard ifFalse: [self error: 'Top was not a Card'].
+	^ self forcePickUpMorph: self dropped first.
+]
+
+{
 	#category : #'events-processing',
 	#'squeak_changestamp' : 'HCH 6/23/2024 15:14'
 }
