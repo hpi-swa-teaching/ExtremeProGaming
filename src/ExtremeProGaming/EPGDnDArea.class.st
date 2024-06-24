@@ -235,19 +235,6 @@ EPGDnDArea >> dropped: aCollection [
 
 {
 	#category : #'dragging/dropping',
-	#'squeak_changestamp' : 'jmetrikat 6/24/2024 09:22'
-}
-EPGDnDArea >> forcePickUpMorph: aMorph [
-
-	aMorph formerOwner: self.
-	aMorph formerPosition: aMorph position.
-	self dropped remove: aMorph.
-	^ aMorph.
-
-]
-
-{
-	#category : #'dragging/dropping',
 	#'squeak_changestamp' : 'sv 6/18/2024 13:31'
 }
 EPGDnDArea >> freeze [

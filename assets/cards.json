@@ -16,7 +16,7 @@
         "frontend": true,
         "task": "Entwicklung einer Gamification Funktion in eurem UI, um die Kunden mehr zu binden.",
         "consequence": "Ihr hättet die Gamification nicht auf Zufall basieren lassen sollen, jetzt habt ihr Stress mit der Polizei wegen illegalem Glückspiel. (Vielleicht solltet ihr nach Schleswig Holstein ziehen?)",
-        "effect": "Das Verfahren bindet wichtige Ressourcen des Teams. Ihr habt 2 Storypoints weniger in der nächsten Runde.",
+        "effect": "Das Gerichtsverfahren bindet wichtige Ressourcen des Teams. Ihr habt 2 Storypoints weniger in der nächsten Runde.",
         "cost": 1,
         "techDebt": 0,
         "positive": false,
@@ -40,12 +40,12 @@
         "frontend": true,
         "task": "David der Designer hat eine neue UI entworfen, um eure Revenue zu boosten. Implementiert die neue UI.",
         "consequence": "Das neue UI zieht zahlreiche Kund:innen an, umso mehr Personen denen Bugs auffallen.",
-        "effect": "Bei 2 Bugs seid ihr euch sehr sicher, dass es nicht ERROR-40 ist und solltet diese schleunigst beheben.",
+        "effect": "Bei einem Bug seid ihr euch sehr sicher, dass es nicht ERROR-40 ist und solltet diesen schleunigst beheben.",
         "cost": 2,
         "techDebt": 0,
         "positive": false,
         "effectType": "newBug",
-        "effectAmount": 2
+        "effectAmount": 1
     },
     {
         "type": "Feature",
@@ -57,7 +57,7 @@
         "techDebt": 0,
         "positive": false,
         "effectType": "newBug",
-        "effectAmount": 2
+        "effectAmount": 1
     },
     {
         "type": "Feature",
@@ -129,7 +129,7 @@
         "techDebt": 1,
         "positive": false,
         "effectType": "newBug",
-        "effectAmount": 3
+        "effectAmount": 1
     },
     {
         "type": "Feature",
@@ -219,13 +219,13 @@
         "type": "Bug",
         "frontend": true,
         "task": "Beim Login können Nutzende den Beispielnamen ,Christoph Meinel´ nicht ändern. Es gibt viele verwirrte Beschwerden.",
-        "consequence": "Das Team ist peinlich berührt, dass niemand diesen Fehler übersehen hat. Das Beispiel-Passwort ,Design Sinking` bringt euch alle zum Lachen.",
+        "consequence": "Das Team ist peinlich berührt, dass niemand diesen Fehler gesehen hat. Das Beispiel-Passwort ,Design Sinking` bringt euch alle zum Lachen.",
         "effect": "Zum Glück ist der Bug nicht schwierig zu fixen, aber dabei findet ihr leider noch weitere Bugs.",
         "cost": 1,
         "techDebt": 1,
         "positive": false,
         "effectType": "newBug",
-        "effectAmount": 2
+        "effectAmount": 1
     },
     {
         "type": "Bug",
@@ -292,7 +292,7 @@
         "number": 1,
         "title": "Neustart",
         "description": "Das Team ist hochmotiviert, ein neues Projekt zu starten, um die Welt ein Stückchen zu verbessern.",
-        "effect": "Aufgrund eurer sprühenden Motivation habt ihr für den nächsten Sprint 2 Storypoints",
+        "effect": "Aufgrund eurer sprühenden Motivation habt ihr für den nächsten Sprint 2 Storypoints mehr.",
         "effectType": "addTemporary",
         "effectAmount": 2
     },
@@ -309,7 +309,7 @@
         "type": "Event",
         "number": 3,
         "title": "Die Vergangenheit holt euch ein!",
-        "description": "Jetzt ist euer Projekt endlich in Fahrt gekommen, nur was ist das? Die Library auf der ihr aufbaut scheint sich mit der aktuellsten Version eurer Programmiersprache nicht vereinbaren.",
+        "description": "Jetzt ist euer Projekt endlich in Fahrt gekommen, nur was ist das? Die Library auf der ihr aufbaut scheint sich mit der aktuellsten Version eurer Programmiersprache nicht zu vereinbaren.",
         "effect": "Ihr müsst Gesicht voran in den Legacy Code diven und den Bug schleunigst beheben.",
         "effectType": "newBug",
         "effectAmount": 1
@@ -345,7 +345,7 @@
         "type": "Event",
         "number": 7,
         "title": "In the Summertime!",
-        "description": "Kommen die Interns!",
+        "description": "Es kommen die Interns!",
         "effect": "Ein überambitionierter Intern zerschießt euch Production!",
         "effectType": "newBug",
         "effectAmount": 1
@@ -353,7 +353,7 @@
     {
         "type": "Event",
         "number": 8,
-        "title": "Entsprint!",
+        "title": "Endsprint!",
         "description": "Euer Budget wird noch einmal erhöht, damit ihr schneller fertig werdet.",
         "effect": "Für das restliche Projekt habt ihr 4 Storypoints mehr.",
         "effectType": "addPermanent",

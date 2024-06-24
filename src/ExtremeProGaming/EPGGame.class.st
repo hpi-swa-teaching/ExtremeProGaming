@@ -55,11 +55,11 @@ EPGGame class >> open [
 
 {
 	#category : #cards,
-	#'squeak_changestamp' : 'sv 6/24/2024 01:31'
+	#'squeak_changestamp' : 'sv 6/24/2024 10:09'
 }
 EPGGame >> addBugCard [
 
-	self addCard: self gameBoard bugArea forcePickUpTopCard.
+	self addCard: self gameBoard bugArea pickUpTopCard.
 ]
 
 {
@@ -74,11 +74,11 @@ EPGGame >> addCard: aBacklogCard [
 
 {
 	#category : #cards,
-	#'squeak_changestamp' : 'sv 6/24/2024 01:39'
+	#'squeak_changestamp' : 'sv 6/24/2024 10:09'
 }
 EPGGame >> addFeatureCard [
 
-	self addCard: self gameBoard featureArea forcePickUpTopCard.
+	self addCard: self gameBoard featureArea pickUpTopCard.
 ]
 
 {
@@ -112,12 +112,14 @@ EPGGame >> addUnavailable: aNumber [
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'HCH 6/20/2024 01:16'
+	#'squeak_changestamp' : 'sv 6/24/2024 10:07'
 }
 EPGGame >> applySprintEffects [
-
+	
+	self gameBoard unfreezeDnD.
 	self sprintEffects do: [:effect | effect apply].
 	self sprintEffects removeAll.
+	self gameBoard freezeDnD.
 ]
 
 {
@@ -169,11 +171,11 @@ EPGGame >> cardSource: aCardSource [
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'Philipp 6/23/2024 18:24'
+	#'squeak_changestamp' : 'sv 6/24/2024 10:17'
 }
 EPGGame >> checkForGameEnd [
 
-	 ((self currentRound = 9) or: (self freeBacklogAreas isEmpty)) ifTrue: [self endGame].
+	 ((self currentRound = 10) or: (self freeBacklogAreas isEmpty)) ifTrue: [self endGame].
 ]
 
 {
@@ -605,13 +607,14 @@ EPGGame >> removeAllUnavailableStorypoints [
 
 {
 	#category : #storypoints,
-	#'squeak_changestamp' : 'HCH 6/19/2024 17:40'
+	#'squeak_changestamp' : 'sv 6/24/2024 09:34'
 }
 EPGGame >> removePermanent: aNumber [
-
+	| regularStorypoints |
+	regularStorypoints := self gameBoard regularStorypointArea dropped.
 	(aNumber min: self numOfAvailableStorypoints)
-		timesRepeat: [self removeStorypoint: 
-			self gameBoard regularStorypointArea dropped first].
+		timesRepeat: [regularStorypoints ifNotEmpty: 
+			[self removeStorypoint: regularStorypoints first]].
 ]
 
 {
