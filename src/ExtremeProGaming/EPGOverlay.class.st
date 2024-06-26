@@ -149,7 +149,7 @@ EPGOverlay >> initializeMountAgility [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'Philipp 6/26/2024 16:01'
+	#'squeak_changestamp' : 'Philipp 6/26/2024 16:23'
 }
 EPGOverlay >> initializeScoreDisplay: label [
 	
@@ -157,12 +157,12 @@ EPGOverlay >> initializeScoreDisplay: label [
 		position: self center + self class scoreOffset;
 		backgroundColor: self class overlayColor lighter;
 		contents: ((label , (self score ifNil:['---'])) asText addAttribute: (TextFontReference toFont: self class defaultFont));
+		centered;
 		vResizing: #spaceFill;
 		hResizing: #spaceFill;
-		margins: 10 @ 10;
+		margins: 10 @ 35;
 		useRoundedCorners;
 		extent: self class buttonExtent;
-		centered;
 		lock).
 	
 ]
