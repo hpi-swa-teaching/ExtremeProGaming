@@ -53,12 +53,12 @@ EPGCardTests >> setUp [
 
 {
 	#category : #tests,
-	#'squeak_changestamp' : 'sv 6/23/2024 12:41'
+	#'squeak_changestamp' : 'sv 7/7/2024 19:37'
 }
 EPGCardTests >> testBlockedness [
 
 	self blockFrontend.
-	self assert: true equals: card isBlocked.
+	self assert: true equals: game cardSource featureCards first isBlocked.
 ]
 
 {
