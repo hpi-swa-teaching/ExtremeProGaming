@@ -227,15 +227,20 @@ EPGGameBoard >> addReviewArea [
 
 {
 	#category : #layouting,
-	#'squeak_changestamp' : 'JA 7/7/2024 19:54'
+	#'squeak_changestamp' : 'JA 7/8/2024 00:28'
 }
 EPGGameBoard >> addSprintingArea [
-    | sprintingAreaFrame |
+    | sprintingAreaFrame parentHeight offset height |
+    parentHeight := self height.
+    offset := 10.
+    height := 200.
+
     sprintingAreaFrame := LayoutFrame
-        fractions: (0 @ 0.8 corner: 1 @ 1)
-        offsets: (0 @ 0 corner: 0 @ 0).
+        fractions: (0 @ 1 corner: 1 @ 1)
+        offsets: (0 @ offset corner: 0 @ (offset + height)).
 
     self addMorph: self sprintingArea fullFrame: sprintingAreaFrame.
+
 ]
 
 {
