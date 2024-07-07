@@ -6,6 +6,7 @@ Class {
 		'planningArea',
 		'backlogArea',
 		'reviewArea',
+		'sprintingArea',
 		'frontendDebtArea',
 		'backendDebtArea',
 		'storyPointAreas',
@@ -225,6 +226,19 @@ EPGGameBoard >> addReviewArea [
 ]
 
 {
+	#category : #layouting,
+	#'squeak_changestamp' : 'JA 7/7/2024 19:54'
+}
+EPGGameBoard >> addSprintingArea [
+    | sprintingAreaFrame |
+    sprintingAreaFrame := LayoutFrame
+        fractions: (0 @ 0.8 corner: 1 @ 1)
+        offsets: (0 @ 0 corner: 0 @ 0).
+
+    self addMorph: self sprintingArea fullFrame: sprintingAreaFrame.
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 6/20/2024 19:51'
 }
@@ -352,6 +366,27 @@ EPGGameBoard >> createSectionMorphFor: aName [
 ]
 
 {
+	#category : #layouting,
+	#'squeak_changestamp' : 'JA 7/7/2024 19:24'
+}
+EPGGameBoard >> createSprintingArea [
+
+	| darkRed lane1 lane2 lane3 sprintingArea |
+	darkRed := Color r: 0.5 g: 0 b: 0.
+	sprintingArea := Morph new extent: 2000@200; color: darkRed.
+
+	lane1 := Morph new extent: 2000@10; color: Color paleRed; position: 0@45.
+	lane2 := Morph new extent: 2000@10; color: Color paleRed; position: 0@95.
+	lane3 := Morph new extent: 2000@10; color: Color paleRed; position: 0@145.
+
+	sprintingArea addMorph: lane1;
+		addMorph: lane2;
+		addMorph: lane3.
+
+	^ sprintingArea.
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'jmetrikat 6/8/2024 18:00'
 }
@@ -475,7 +510,7 @@ EPGGameBoard >> game: aGame [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'HCH 6/23/2024 14:54'
+	#'squeak_changestamp' : 'JA 7/7/2024 19:56'
 }
 EPGGameBoard >> initialize [
 
@@ -486,6 +521,7 @@ EPGGameBoard >> initialize [
 		color: self class defaultColor;
 		layoutPolicy: ProportionalLayout new;
 		initializeSectionMorphs;
+		initializeSprintingArea;
 		initializeStorypointAreas;
 		initializePlanningAreas;
 		initializeBacklogAreas;
@@ -623,6 +659,15 @@ EPGGameBoard >> initializeSectionMorphs [
 
 {
 	#category : #initialization,
+	#'squeak_changestamp' : 'JA 7/7/2024 19:55'
+}
+EPGGameBoard >> initializeSprintingArea [
+
+	self sprintingArea: self createSprintingArea; addSprintingArea.
+]
+
+{
+	#category : #initialization,
 	#'squeak_changestamp' : 'Philipp 6/21/2024 02:37'
 }
 EPGGameBoard >> initializeStartScreen [
@@ -742,6 +787,22 @@ EPGGameBoard >> reviewArea [
 EPGGameBoard >> reviewArea: aMorph [
 
 	reviewArea := aMorph.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'JA 7/7/2024 19:48'
+}
+EPGGameBoard >> sprintingArea [
+	^ sprintingArea.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'JA 7/7/2024 19:48'
+}
+EPGGameBoard >> sprintingArea: anObject [
+	sprintingArea := anObject.
 ]
 
 {
