@@ -11,6 +11,16 @@ Class {
 
 {
 	#category : #assist,
+	#'squeak_changestamp' : 'sv 7/7/2024 20:20'
+}
+EPGCardTests >> blockBackend [
+
+	game gameBoard backendDebtArea incrementDebt.
+	game gameBoard backendDebtArea submorphsDo: [:debt | debt dropped add: EPGStorypoint new.].
+]
+
+{
+	#category : #assist,
 	#'squeak_changestamp' : 'sv 6/23/2024 12:41'
 }
 EPGCardTests >> blockFrontend [
@@ -53,11 +63,12 @@ EPGCardTests >> setUp [
 
 {
 	#category : #tests,
-	#'squeak_changestamp' : 'sv 7/7/2024 19:37'
+	#'squeak_changestamp' : 'sv 7/7/2024 20:19'
 }
 EPGCardTests >> testBlockedness [
 
 	self blockFrontend.
+	self blockBackend.
 	self assert: true equals: game cardSource featureCards first isBlocked.
 ]
 
