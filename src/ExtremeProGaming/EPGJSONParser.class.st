@@ -1,3 +1,6 @@
+"
+A JSON-to-EPGCard-converter that creates card morphs according to the given content in the cards.json file which can be found in the GitAssetLoader.
+"
 Class {
 	#name : #EPGJSONParser,
 	#superclass : #Object,
@@ -8,7 +11,8 @@ Class {
 		'featureCards',
 		'eventCards'
 	],
-	#category : #'ExtremeProGaming-Core'
+	#category : #'ExtremeProGaming-Core',
+	#'squeak_changestamp' : 'sv 7/7/2024 20:14'
 }
 
 {
