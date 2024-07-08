@@ -136,12 +136,12 @@ EPGOverlay >> initialize [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'Philipp 6/26/2024 15:51'
+	#'squeak_changestamp' : 'jmetrikat 7/8/2024 10:18'
 }
 EPGOverlay >> initializeMountAgility [
 
 	self addMorph: (ImageMorph new
-		image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: ('/assets/mount_agility.png')) scaledToSize: self class mountAgilityExtent);
+		image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: ('/assets/mount_agility.jpg')) scaledToSize: self class mountAgilityExtent);
 		center: self center;
 		yourself).
 	
