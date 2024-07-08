@@ -1,7 +1,11 @@
+"
+Concrete backlog card which represents a feature. Processing rewards a point and may add technical debt.
+"
 Class {
 	#name : #EPGFeatureCard,
 	#superclass : #EPGBacklogCard,
-	#category : #'ExtremeProGaming-UI'
+	#category : #'ExtremeProGaming-UI',
+	#'squeak_changestamp' : 'JP 7/8/2024 12:59'
 }
 
 {

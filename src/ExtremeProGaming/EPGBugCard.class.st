@@ -1,7 +1,11 @@
+"
+Concrete backlog card which represents a bug. Processing rewards no points and adds no technical debt.
+"
 Class {
 	#name : #EPGBugCard,
 	#superclass : #EPGBacklogCard,
-	#category : #'ExtremeProGaming-UI'
+	#category : #'ExtremeProGaming-UI',
+	#'squeak_changestamp' : 'JP 7/8/2024 12:59'
 }
 
 {

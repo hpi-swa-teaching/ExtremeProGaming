@@ -1,3 +1,6 @@
+"
+Provides abstractclass for concrete effects. It should not be instantiated.
+"
 Class {
 	#name : #EPGEffect,
 	#superclass : #Object,
@@ -5,7 +8,8 @@ Class {
 		'game',
 		'amount'
 	],
-	#category : #'ExtremeProGaming-Core'
+	#category : #'ExtremeProGaming-Core',
+	#'squeak_changestamp' : 'JP 7/8/2024 10:39'
 }
 
 {

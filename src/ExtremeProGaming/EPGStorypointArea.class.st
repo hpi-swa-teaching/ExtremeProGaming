@@ -1,7 +1,11 @@
+"
+Concrete DnD area to store and pick up available storypoints.
+"
 Class {
 	#name : #EPGStorypointArea,
 	#superclass : #EPGDnDArea,
-	#category : #'ExtremeProGaming-UI'
+	#category : #'ExtremeProGaming-UI',
+	#'squeak_changestamp' : 'JP 7/8/2024 12:55'
 }
 
 {

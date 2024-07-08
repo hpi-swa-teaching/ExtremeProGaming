@@ -1,7 +1,11 @@
+"
+This provides a framework for concrete backlog cards. It should not be instantiated.
+"
 Class {
 	#name : #EPGBacklogCard,
 	#superclass : #EPGCard,
-	#category : #'ExtremeProGaming-UI'
+	#category : #'ExtremeProGaming-UI',
+	#'squeak_changestamp' : 'JP 7/8/2024 12:58'
 }
 
 {

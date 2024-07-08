@@ -1,3 +1,6 @@
+"
+Provides interface to create EPGCards from json files.
+"
 Class {
 	#name : #EPGJSONParser,
 	#superclass : #Object,
@@ -8,7 +11,8 @@ Class {
 		'featureCards',
 		'eventCards'
 	],
-	#category : #'ExtremeProGaming-Core'
+	#category : #'ExtremeProGaming-Core',
+	#'squeak_changestamp' : 'JP 7/8/2024 10:48'
 }
 
 {
@@ -63,15 +67,15 @@ EPGJSONParser >> createBugBackendCard: aCardJsonFormatted [
 
 {
 	#category : #'card creation',
-	#'squeak_changestamp' : 'sv 6/8/2024 19:52'
+	#'squeak_changestamp' : 'JP 7/8/2024 13:25'
 }
 EPGJSONParser >> createBugCard: aCardJsonFormatted [
 
 	| cardCategory |
 	cardCategory := aCardJsonFormatted at: 'frontend'.
 	cardCategory
-    		ifTrue: [^ self createBugFrontendCard: aCardJsonFormatted]
-   	 	ifFalse: [^ self createBugBackendCard: aCardJsonFormatted].
+    		ifTrue: [^ self createBugFrontendCard: aCardJsonFormatted.]
+   	 	ifFalse: [^ self createBugBackendCard: aCardJsonFormatted.].
 ]
 
 {
@@ -170,15 +174,15 @@ EPGJSONParser >> createFeatureBackendCard: aCardJsonFormatted [
 
 {
 	#category : #'card creation',
-	#'squeak_changestamp' : 'sv 6/8/2024 19:52'
+	#'squeak_changestamp' : 'JP 7/8/2024 13:25'
 }
 EPGJSONParser >> createFeatureCard: aCardJsonFormatted [
 
 	| cardCategory |
 	cardCategory := aCardJsonFormatted at: 'frontend'.
 	cardCategory
-    		ifTrue: [^ self createFeatureFrontendCard: aCardJsonFormatted]
-   	 	ifFalse: [^ self createFeatureBackendCard: aCardJsonFormatted].
+    		ifTrue: [^ self createFeatureFrontendCard: aCardJsonFormatted.]
+   	 	ifFalse: [^ self createFeatureBackendCard: aCardJsonFormatted.].
 ]
 
 {
