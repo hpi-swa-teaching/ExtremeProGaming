@@ -1,3 +1,6 @@
+"
+Defines gamelogic and provides interfaces for interaction with game components.
+"
 Class {
 	#name : #EPGGame,
 	#superclass : #Object,
@@ -14,7 +17,8 @@ Class {
 	#classVars : [
 		'HighScore'
 	],
-	#category : #'ExtremeProGaming-Core'
+	#category : #'ExtremeProGaming-Core',
+	#'squeak_changestamp' : 'JP 7/8/2024 10:47'
 }
 
 {

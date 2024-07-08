@@ -1,7 +1,11 @@
+"
+End screen which shows your accomplished score and provides the ability to restart the game.
+"
 Class {
 	#name : #EPGEndScreen,
 	#superclass : #EPGOverlay,
-	#category : #'ExtremeProGaming-UI'
+	#category : #'ExtremeProGaming-UI',
+	#'squeak_changestamp' : 'JP 7/8/2024 13:12'
 }
 
 {
