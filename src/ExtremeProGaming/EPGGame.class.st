@@ -171,11 +171,11 @@ EPGGame >> cardSource: aCardSource [
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'sv 6/24/2024 10:17'
+	#'squeak_changestamp' : 'HCH 7/8/2024 21:10'
 }
 EPGGame >> checkForGameEnd [
 
-	 ((self currentRound = 10) or: (self freeBacklogAreas isEmpty)) ifTrue: [self endGame].
+	 ((self currentRound >= 10) or: (self freeBacklogAreas isEmpty)) ifTrue: [self endGame.].
 ]
 
 {
@@ -208,6 +208,22 @@ EPGGame >> endGame [
 	self class highScore: (score max: (self class highScore ifNil: [0])).
 	self gameBoard abandon.
 	
+]
+
+{
+	#category : #sprints,
+	#'squeak_changestamp' : 'HCH 7/8/2024 21:07'
+}
+EPGGame >> finishSprint [
+
+	self startOfRound ifTrue: [^ self.].
+	self 
+		processCards;
+		processDebtAreas;
+		processBacklogAreaStorypoints;
+		currentRound: self currentRound + 1;
+		changed: #newRound.
+	self gameBoard freezeDnD.
 ]
 
 {
@@ -505,7 +521,7 @@ EPGGame >> processBacklogAreaStorypoints [
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'HCH 6/23/2024 16:36'
+	#'squeak_changestamp' : 'HCH 7/8/2024 20:56'
 }
 EPGGame >> processCards [
 
@@ -515,7 +531,7 @@ EPGGame >> processCards [
 			self sprintEffects add: card effect. 
 			card process.
 			processedCards add: card].
-	processedCards size = 0 ifTrue: [self startOfRound: true].
+	processedCards size = 0 ifTrue: [self startNewRound.].
 	processedCards do: [:card | card prepareMoveToDone].
 	self processDebtToAdd: processedCards.
 ]
@@ -661,18 +677,14 @@ EPGGame >> sprintEffects: aCollection [
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'Philipp 6/23/2024 18:20'
+	#'squeak_changestamp' : 'HCH 7/8/2024 20:56'
 }
 EPGGame >> startNewRound [
 
 	self 
-		processCards;
-		processDebtAreas;
-		processBacklogAreaStorypoints;
-		checkForGameEnd;
-		currentRound: self currentRound + 1;
-		changed: #newRound.
-	self gameBoard freezeDnD.
+		applySprintEffects;
+		startOfRound: true;
+		checkForGameEnd.
 ]
 
 {
@@ -695,7 +707,7 @@ EPGGame >> startOfRound: aBoolean [
 
 {
 	#category : #cards,
-	#'squeak_changestamp' : 'HCH 6/23/2024 16:37'
+	#'squeak_changestamp' : 'HCH 7/8/2024 21:10'
 }
 EPGGame >> unfocusCard: anEPGCard [
 
@@ -703,7 +715,7 @@ EPGGame >> unfocusCard: anEPGCard [
 	anEPGCard isEPGFeatureCard ifTrue: [self updateFeatureScore].
 	anEPGCard isEPGEventCard  ifTrue: [^ self].
 	self focusedCards size = 0
-		ifTrue: [self applySprintEffects. self startOfRound: true].
+		ifTrue: [self startNewRound.].
 	
 ]
 

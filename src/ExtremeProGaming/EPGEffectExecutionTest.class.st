@@ -47,7 +47,7 @@ EPGEffectExecutionTest >> testFeatureAddition [
 
 {
 	#category : #tests,
-	#'squeak_changestamp' : 'HCH 6/18/2024 23:32'
+	#'squeak_changestamp' : 'HCH 7/8/2024 20:55'
 }
 EPGEffectExecutionTest >> testPermanentAddition [
 
@@ -57,13 +57,13 @@ EPGEffectExecutionTest >> testPermanentAddition [
 	effect apply.
 	
 	self assert: oldCount + 3 equals: game numOfAvailableStorypoints.
-	game startNewRound.
+	game finishSprint.
 	self assert: oldCount + 3 equals: game numOfAvailableStorypoints.
 ]
 
 {
 	#category : #tests,
-	#'squeak_changestamp' : 'HCH 6/18/2024 23:39'
+	#'squeak_changestamp' : 'HCH 7/8/2024 20:55'
 }
 EPGEffectExecutionTest >> testPermanentRemovalSufficient [
 
@@ -74,13 +74,13 @@ EPGEffectExecutionTest >> testPermanentRemovalSufficient [
 	effect apply.
 	
 	self assert: oldCount - 1 equals: game numOfAvailableStorypoints.
-	game startNewRound.
+	game finishSprint.
 	self assert: oldCount - 1 equals: game numOfAvailableStorypoints.
 ]
 
 {
 	#category : #tests,
-	#'squeak_changestamp' : 'HCH 6/18/2024 23:32'
+	#'squeak_changestamp' : 'HCH 7/8/2024 20:55'
 }
 EPGEffectExecutionTest >> testTemporaryAddition [
 
@@ -90,13 +90,13 @@ EPGEffectExecutionTest >> testTemporaryAddition [
 	effect apply.
 	
 	self assert: oldCount + 3 equals: game numOfTemporaryStorypoints.
-	game startNewRound.
+	game finishSprint.
 	self assert: oldCount equals: game numOfTemporaryStorypoints.
 ]
 
 {
 	#category : #tests,
-	#'squeak_changestamp' : 'HCH 6/19/2024 17:31'
+	#'squeak_changestamp' : 'HCH 7/8/2024 20:55'
 }
 EPGEffectExecutionTest >> testTemporaryRemoval [
 
@@ -109,7 +109,7 @@ EPGEffectExecutionTest >> testTemporaryRemoval [
 	
 	self assert: oldCountAvailable - 1 equals: game numOfAvailableStorypoints.
 	self assert: oldCountUnavailable + 1 equals: game numOfUnavailableStorypoints.
-	game startNewRound.
+	game finishSprint.
 	self assert: oldCountAvailable equals: game numOfAvailableStorypoints.
 	self assert: oldCountUnavailable equals: game numOfUnavailableStorypoints.
 ]
