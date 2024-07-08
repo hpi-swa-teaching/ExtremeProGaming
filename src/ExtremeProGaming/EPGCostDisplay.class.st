@@ -78,7 +78,7 @@ EPGCostDisplay class >> newFrontendWithCost: aCost perTechnicalDebt: aNumber [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'HCH 6/12/2024 14:12'
+	#'squeak_changestamp' : 'JP 7/8/2024 13:24'
 }
 EPGCostDisplay class >> positionOffsets [
 
@@ -90,7 +90,7 @@ EPGCostDisplay class >> positionOffsets [
 		4 -> {-20 @ -20 . 20 @ -20 . -20 @ 20 . 20 @ 20}.
 		5 -> {-20 @ -20 . 20 @ -20 . -20 @ 20 . 20 @ 20 . 0 @ 0}.
 		6 -> {-20 @ -20 . -20 @ 0 . -20 @ 20 . 20 @ -20 . 20 @ 0 . 20 @ 20}.
-	}
+	}.
 ]
 
 {

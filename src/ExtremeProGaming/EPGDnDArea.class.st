@@ -36,13 +36,13 @@ EPGDnDArea >> aboutToBeGrabbedBy: aHand [
 
 {
 	#category : #'dragging/dropping',
-	#'squeak_changestamp' : 'HCH 5/27/2024 17:55'
+	#'squeak_changestamp' : 'JP 7/8/2024 13:24'
 }
 EPGDnDArea >> acceptDroppingMorph: aMorph event: evt [
 
 	| layout |
 	layout := self layoutPolicy.
-	layout ifNil:[^self dropInMorph: aMorph].
+	layout ifNil:[^self dropInMorph: aMorph.].
 	self privateAddMorph: aMorph 
 		atIndex: (layout indexForInserting: aMorph at: evt position in: self).
 ]
