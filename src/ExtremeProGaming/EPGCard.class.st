@@ -1,3 +1,6 @@
+"
+This provides a framework for concrete playing cards It should not be instantiated.
+"
 Class {
 	#name : #EPGCard,
 	#superclass : #EPGDnDMorph,
@@ -18,7 +21,8 @@ Class {
 		'effectText',
 		'effect'
 	],
-	#category : #'ExtremeProGaming-UI'
+	#category : #'ExtremeProGaming-UI',
+	#'squeak_changestamp' : 'JP 7/8/2024 12:56'
 }
 
 {
@@ -864,12 +868,12 @@ EPGCard >> toggleFocusCard [
 
 {
 	#category : #body,
-	#'squeak_changestamp' : 'sv 6/18/2024 11:07'
+	#'squeak_changestamp' : 'JP 7/8/2024 13:25'
 }
 EPGCard >> turn [
 
 	self facing = #front
-		ifTrue: [self facing: #back. self changeBody: self backBody. ^ self].
+		ifTrue: [self facing: #back. self changeBody: self backBody. ^ self.].
 	self facing = #back
-		ifTrue: [self facing: #front. self changeBody: self frontBody. ^ self].
+		ifTrue: [self facing: #front. self changeBody: self frontBody. ^ self.].
 ]

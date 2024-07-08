@@ -1,3 +1,6 @@
+"
+Tests the functionalitys of EPGCards.
+"
 Class {
 	#name : #EPGCardTests,
 	#superclass : #TestCase,
@@ -6,7 +9,8 @@ Class {
 		'parser',
 		'card'
 	],
-	#category : #'ExtremeProGaming-Tests'
+	#category : #'ExtremeProGaming-Tests',
+	#'squeak_changestamp' : 'JP 7/8/2024 13:17'
 }
 
 {

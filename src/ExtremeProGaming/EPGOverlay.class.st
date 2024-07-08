@@ -1,3 +1,6 @@
+"
+Blueprint for start- and endscreen, with common design components.
+"
 Class {
 	#name : #EPGOverlay,
 	#superclass : #Morph,
@@ -5,16 +8,26 @@ Class {
 		'score',
 		'game'
 	],
-	#category : #'ExtremeProGaming-UI'
+	#category : #'ExtremeProGaming-UI',
+	#'squeak_changestamp' : 'JP 7/8/2024 13:09'
 }
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'Philipp 6/21/2024 02:18'
+	#'squeak_changestamp' : 'Philipp 6/26/2024 15:55'
 }
 EPGOverlay class >> buttonExtent [
 
-	^ 500 @ 200.
+	^ 450 @ 100.
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'Philipp 6/26/2024 16:03'
+}
+EPGOverlay class >> buttonOffset [
+
+	^ -475 @ 518.
 ]
 
 {
@@ -24,6 +37,15 @@ EPGOverlay class >> buttonExtent [
 EPGOverlay class >> defaultFont [
 
 	^ StrikeFont familyName: 'Bitmap DejaVu Sans' size: 30.
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'Philipp 6/26/2024 15:50'
+}
+EPGOverlay class >> mountAgilityExtent [
+
+	^   1000 @ 986.
 ]
 
 {
@@ -40,20 +62,47 @@ EPGOverlay class >> newWithScore: aNumber [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'Philipp 6/21/2024 01:29'
+	#'squeak_changestamp' : 'Philipp 6/26/2024 15:27'
 }
 EPGOverlay class >> overlayColor [
 
-	^ Color gray.
+	^ Color darkGray.
 ]
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'Philipp 6/21/2024 01:26'
+	#'squeak_changestamp' : 'Philipp 6/26/2024 16:03'
 }
 EPGOverlay class >> overlayExtent [
 
-	^ 2000 @ 1310.
+	^ 1000 @ 1286.
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'Philipp 6/26/2024 15:58'
+}
+EPGOverlay class >> scoreOffset [
+
+	^ 25 @ 518.
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'Philipp 6/26/2024 15:50'
+}
+EPGOverlay class >> titleExtent [
+
+	^  1000 @ 100.
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'Philipp 6/26/2024 15:51'
+}
+EPGOverlay class >> titlePosition [
+
+	^ 0 @ 35.
 ]
 
 {
@@ -76,7 +125,7 @@ EPGOverlay >> game: aGame [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 6/21/2024 09:22'
+	#'squeak_changestamp' : 'Philipp 6/26/2024 15:35'
 }
 EPGOverlay >> initialize [
 
@@ -84,32 +133,47 @@ EPGOverlay >> initialize [
 	
 	self
 		extent: self class overlayExtent;
-		color: self class overlayColor.
+		color: self class overlayColor;
+		initializeTitle;
+		initializeMountAgility.
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 6/23/2024 16:35'
+	#'squeak_changestamp' : 'jmetrikat 7/8/2024 10:18'
+}
+EPGOverlay >> initializeMountAgility [
+
+	self addMorph: (ImageMorph new
+		image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: ('/assets/mount_agility.jpg')) scaledToSize: self class mountAgilityExtent);
+		center: self center;
+		yourself).
+	
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'Philipp 6/26/2024 16:23'
 }
 EPGOverlay >> initializeScoreDisplay: label [
 	
 	self addMorph: (TextMorph new
-		position: self center - (250 @ 200);
+		position: self center + self class scoreOffset;
 		backgroundColor: self class overlayColor lighter;
 		contents: ((label , (self score ifNil:['---'])) asText addAttribute: (TextFontReference toFont: self class defaultFont));
-		vResizing: #shrinkWrap;
-		hResizing: #spaceFill;
-		margins: 10 @ 10;
-		extent: self class buttonExtent;
-		useRoundedCorners;
 		centered;
+		vResizing: #spaceFill;
+		hResizing: #spaceFill;
+		margins: 10 @ 35;
+		useRoundedCorners;
+		extent: self class buttonExtent;
 		lock).
 	
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 6/23/2024 16:28'
+	#'squeak_changestamp' : 'Philipp 6/26/2024 15:55'
 }
 EPGOverlay >> initializeStartButton: label [
 
@@ -117,10 +181,23 @@ EPGOverlay >> initializeStartButton: label [
 		useRoundedCorners;
 		label: label font: self class defaultFont;
 		extent: self class buttonExtent;
-		center: self center;
+		position: self center + self class buttonOffset;
 		color: self class overlayColor lighter;
 		target: [self startGame];
 		actionSelector: #value;
+		yourself).
+	
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'Philipp 6/26/2024 15:50'
+}
+EPGOverlay >> initializeTitle [
+
+	self addMorph: (ImageMorph new
+		image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: ('/assets/title.png')) scaledToSize: self class titleExtent);
+		position: self class titlePosition;
 		yourself).
 	
 ]

@@ -1,3 +1,6 @@
+"
+Concrete DnD morph which represent storypoints and are used for processing cards and technical debt.
+"
 Class {
 	#name : #EPGStorypoint,
 	#superclass : #EPGDnDMorph,
@@ -8,7 +11,8 @@ Class {
 		'imageBag',
 		'available'
 	],
-	#category : #'ExtremeProGaming-UI'
+	#category : #'ExtremeProGaming-UI',
+	#'squeak_changestamp' : 'JP 7/8/2024 12:57'
 }
 
 {

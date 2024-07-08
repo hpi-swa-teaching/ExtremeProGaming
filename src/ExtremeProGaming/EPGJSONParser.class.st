@@ -12,7 +12,7 @@ Class {
 		'eventCards'
 	],
 	#category : #'ExtremeProGaming-Core',
-	#'squeak_changestamp' : 'sv 7/7/2024 20:14'
+	#'squeak_changestamp' : 'JP 7/8/2024 10:48'
 }
 
 {
@@ -83,7 +83,7 @@ EPGJSONParser >> createBugBackendCard: aCardJsonFormatted [
 
 {
 	#category : #'card creation',
-	#'squeak_changestamp' : 'sv 7/7/2024 19:40'
+	#'squeak_changestamp' : 'JP 7/8/2024 13:25'
 }
 EPGJSONParser >> createBugCard: aCardJsonFormatted [
 
@@ -182,15 +182,15 @@ EPGJSONParser >> createFeatureBackendCard: aCardJsonFormatted [
 
 {
 	#category : #'card creation',
-	#'squeak_changestamp' : 'sv 6/8/2024 19:52'
+	#'squeak_changestamp' : 'JP 7/8/2024 13:25'
 }
 EPGJSONParser >> createFeatureCard: aCardJsonFormatted [
 
 	| cardCategory |
 	cardCategory := aCardJsonFormatted at: 'frontend'.
 	cardCategory
-    		ifTrue: [^ self createFeatureFrontendCard: aCardJsonFormatted]
-   	 	ifFalse: [^ self createFeatureBackendCard: aCardJsonFormatted].
+    		ifTrue: [^ self createFeatureFrontendCard: aCardJsonFormatted.]
+   	 	ifFalse: [^ self createFeatureBackendCard: aCardJsonFormatted.].
 ]
 
 {

@@ -17,6 +17,13 @@
 	SquotImageMapper {
 		#path : FSAbsolutePath [
 			'assets',
+			'mount_agility.jpg'
+		],
+		#encoding : Class [ #JPEGReadWriter2 ]
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
 			'ArrowDown.png'
 		],
 		#encoding : @4
@@ -69,8 +76,7 @@
 	SquotImageMapper {
 		#path : FSAbsolutePath [
 			'assets',
-			'BacklogAreas',
-			'BacklogArea2.png'
+			'title.png'
 		],
 		#encoding : @4
 	},
@@ -87,6 +93,14 @@
 			'assets',
 			'Storypoints',
 			'Storypoint_Green.png'
+		],
+		#encoding : @4
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'BacklogAreas',
+			'BacklogArea2.png'
 		],
 		#encoding : @4
 	},
