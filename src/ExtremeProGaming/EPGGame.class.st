@@ -112,7 +112,7 @@ EPGGame >> addUnavailable: aNumber [
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'sv 6/24/2024 10:07'
+	#'squeak_changestamp' : 'JA 7/8/2024 22:34'
 }
 EPGGame >> applySprintEffects [
 	
@@ -661,10 +661,11 @@ EPGGame >> sprintEffects: aCollection [
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'Philipp 6/23/2024 18:20'
+	#'squeak_changestamp' : 'JA 7/8/2024 22:58'
 }
 EPGGame >> startNewRound [
 
+	self gameBoard sprinter show.
 	self 
 		processCards;
 		processDebtAreas;

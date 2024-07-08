@@ -12,7 +12,8 @@ Class {
 		'storyPointAreas',
 		'planningAreas',
 		'featureScore',
-		'doneAreas'
+		'doneAreas',
+		'sprinter'
 	],
 	#category : #'ExtremeProGaming-UI'
 }
@@ -227,10 +228,23 @@ EPGGameBoard >> addReviewArea [
 
 {
 	#category : #layouting,
-	#'squeak_changestamp' : 'JA 7/8/2024 00:28'
+	#'squeak_changestamp' : 'JA 7/8/2024 21:16'
+}
+EPGGameBoard >> addSprinter [
+	
+	self sprinter hide.
+	self sprintingArea addMorph: sprinter.
+
+]
+
+{
+	#category : #layouting,
+	#'squeak_changestamp' : 'JA 7/8/2024 00:31'
 }
 EPGGameBoard >> addSprintingArea [
+
     | sprintingAreaFrame parentHeight offset height |
+
     parentHeight := self height.
     offset := 10.
     height := 200.
@@ -372,7 +386,31 @@ EPGGameBoard >> createSectionMorphFor: aName [
 
 {
 	#category : #layouting,
-	#'squeak_changestamp' : 'JA 7/7/2024 19:24'
+	#'squeak_changestamp' : 'JA 7/9/2024 00:32'
+}
+EPGGameBoard >> createSprinter [
+
+    | animatedImageMorph |
+
+    animatedImageMorph := (GitAssetLoader for: 'ExtremeProGaming') loadAnimatedImageMorph: 'assets/running_man_correct_direction.gif'.
+    animatedImageMorph ifNil: [ 
+        Error new: 'Failed to load animated sprinter'; signal.
+    ].
+	animatedImageMorph := (EPGSprinter newFrom: animatedImageMorph)
+		initialize;
+		yourself.
+	
+	"TODO: very hacky. Otherwise cryptic image appears at position 1"
+	animatedImageMorph image: (animatedImageMorph images at: 1).
+	animatedImageMorph images removeAt: 1.
+	
+	animatedImageMorph extent: (animatedImageMorph extent: 100 @ 100).
+     ^ animatedImageMorph.
+]
+
+{
+	#category : #layouting,
+	#'squeak_changestamp' : 'JA 7/9/2024 00:30'
 }
 EPGGameBoard >> createSprintingArea [
 
@@ -384,9 +422,11 @@ EPGGameBoard >> createSprintingArea [
 	lane2 := Morph new extent: 2000@10; color: Color paleRed; position: 0@95.
 	lane3 := Morph new extent: 2000@10; color: Color paleRed; position: 0@145.
 
-	sprintingArea addMorph: lane1;
+	sprintingArea 
+		addMorph: lane1;
 		addMorph: lane2;
-		addMorph: lane3.
+		addMorph: lane3;
+		clipSubmorphs: true.
 
 	^ sprintingArea.
 ]
@@ -515,7 +555,7 @@ EPGGameBoard >> game: aGame [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JA 7/7/2024 19:56'
+	#'squeak_changestamp' : 'JA 7/8/2024 21:16'
 }
 EPGGameBoard >> initialize [
 
@@ -526,7 +566,7 @@ EPGGameBoard >> initialize [
 		color: self class defaultColor;
 		layoutPolicy: ProportionalLayout new;
 		initializeSectionMorphs;
-		initializeSprintingArea;
+		initializeSprinting;
 		initializeStorypointAreas;
 		initializePlanningAreas;
 		initializeBacklogAreas;
@@ -664,11 +704,12 @@ EPGGameBoard >> initializeSectionMorphs [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JA 7/7/2024 19:55'
+	#'squeak_changestamp' : 'JA 7/8/2024 21:16'
 }
-EPGGameBoard >> initializeSprintingArea [
+EPGGameBoard >> initializeSprinting [
 
 	self sprintingArea: self createSprintingArea; addSprintingArea.
+	self sprinter: self createSprinter; addSprinter.
 ]
 
 {
@@ -796,17 +837,37 @@ EPGGameBoard >> reviewArea: aMorph [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JA 7/7/2024 19:48'
+	#'squeak_changestamp' : 'JA 7/8/2024 21:09'
+}
+EPGGameBoard >> sprinter [
+
+	^ sprinter.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'JA 7/8/2024 21:09'
+}
+EPGGameBoard >> sprinter: anObject [
+
+	sprinter := anObject.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'JA 7/8/2024 21:09'
 }
 EPGGameBoard >> sprintingArea [
+
 	^ sprintingArea.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JA 7/7/2024 19:48'
+	#'squeak_changestamp' : 'JA 7/8/2024 21:09'
 }
 EPGGameBoard >> sprintingArea: anObject [
+
 	sprintingArea := anObject.
 ]
 

@@ -2,24 +2,17 @@
 	SquotImageMapper {
 		#path : FSAbsolutePath [
 			'assets',
-			'Storypoints',
-			'Storypoint_Red.png'
+			'BacklogAreas',
+			'BacklogArea7.png'
 		],
 		#encoding : Class [ #PNGReadWriter ]
 	},
-	SquotImageMapper {
+	SquotPlaintextMapper {
 		#path : FSAbsolutePath [
 			'assets',
-			'ArrowUp.png'
+			'cards.json'
 		],
-		#encoding : @4
-	},
-	SquotImageMapper {
-		#path : FSAbsolutePath [
-			'assets',
-			'ArrowDown.png'
-		],
-		#encoding : @4
+		#encoding : 'TXT'
 	},
 	SquotImageMapper {
 		#path : FSAbsolutePath [
@@ -31,38 +24,7 @@
 	SquotImageMapper {
 		#path : FSAbsolutePath [
 			'assets',
-			'BacklogAreas',
-			'BacklogArea5.png'
-		],
-		#encoding : @4
-	},
-	SquotImageMapper {
-		#path : FSAbsolutePath [
-			'assets',
-			'BacklogAreas',
-			'BacklogArea1.png'
-		],
-		#encoding : @4
-	},
-	SquotImageMapper {
-		#path : FSAbsolutePath [
-			'assets',
-			'TechnicalDebt_Frontend.png'
-		],
-		#encoding : @4
-	},
-	SquotImageMapper {
-		#path : FSAbsolutePath [
-			'assets',
-			'BacklogAreas',
-			'BacklogArea7.png'
-		],
-		#encoding : @4
-	},
-	SquotImageMapper {
-		#path : FSAbsolutePath [
-			'assets',
-			'Event.png'
+			'ArrowDown.png'
 		],
 		#encoding : @4
 	},
@@ -77,25 +39,16 @@
 	SquotImageMapper {
 		#path : FSAbsolutePath [
 			'assets',
-			'BacklogAreas',
-			'BacklogArea9.png'
+			'Event.png'
 		],
 		#encoding : @4
 	},
-	SquotImageMapper {
+	SquotAnimationMapper {
 		#path : FSAbsolutePath [
 			'assets',
-			'Storypoints',
-			'Storypoint_Green.png'
+			'running_man_correct_direction.gif'
 		],
-		#encoding : @4
-	},
-	SquotImageMapper {
-		#path : FSAbsolutePath [
-			'assets',
-			'Feature.png'
-		],
-		#encoding : @4
+		#encoding : Class [ #GIFReadWriter ]
 	},
 	SquotImageMapper {
 		#path : FSAbsolutePath [
@@ -108,15 +61,24 @@
 	SquotImageMapper {
 		#path : FSAbsolutePath [
 			'assets',
-			'BacklogAreas',
-			'BacklogArea4.png'
+			'Storypoints',
+			'Storypoint_Red.png'
 		],
 		#encoding : @4
 	},
 	SquotImageMapper {
 		#path : FSAbsolutePath [
 			'assets',
-			'TechnicalDebt_Backend.png'
+			'Storypoints',
+			'Storypoint_Orange.png'
+		],
+		#encoding : @4
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'BacklogAreas',
+			'BacklogArea6.png'
 		],
 		#encoding : @4
 	},
@@ -139,8 +101,31 @@
 	SquotImageMapper {
 		#path : FSAbsolutePath [
 			'assets',
-			'BacklogAreas',
-			'BacklogArea3.png'
+			'PlanningAreas',
+			'PlanningArea2.png'
+		],
+		#encoding : @4
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'Storypoints',
+			'Storypoint_Green.png'
+		],
+		#encoding : @4
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'Feature.png'
+		],
+		#encoding : @4
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'Storypoints',
+			'Storypoint_White.png'
 		],
 		#encoding : @4
 	},
@@ -155,24 +140,53 @@
 	SquotImageMapper {
 		#path : FSAbsolutePath [
 			'assets',
+			'BacklogAreas',
+			'BacklogArea4.png'
+		],
+		#encoding : @4
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'TechnicalDebt_Frontend.png'
+		],
+		#encoding : @4
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'BacklogAreas',
+			'BacklogArea5.png'
+		],
+		#encoding : @4
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'ArrowUp.png'
+		],
+		#encoding : @4
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'BacklogAreas',
+			'BacklogArea3.png'
+		],
+		#encoding : @4
+	},
+	SquotPlaintextMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'cardsTesting.json'
+		],
+		#encoding : 'TXT'
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
 			'PlanningAreas',
 			'PlanningArea1.png'
-		],
-		#encoding : @4
-	},
-	SquotImageMapper {
-		#path : FSAbsolutePath [
-			'assets',
-			'PlanningAreas',
-			'PlanningArea2.png'
-		],
-		#encoding : @4
-	},
-	SquotImageMapper {
-		#path : FSAbsolutePath [
-			'assets',
-			'Storypoints',
-			'Storypoint_Orange.png'
 		],
 		#encoding : @4
 	},
@@ -187,30 +201,23 @@
 	SquotImageMapper {
 		#path : FSAbsolutePath [
 			'assets',
-			'BacklogAreas',
-			'BacklogArea6.png'
+			'TechnicalDebt_Backend.png'
 		],
 		#encoding : @4
-	},
-	SquotPlaintextMapper {
-		#path : FSAbsolutePath [
-			'assets',
-			'cardsTesting.json'
-		],
-		#encoding : 'TXT'
-	},
-	SquotPlaintextMapper {
-		#path : FSAbsolutePath [
-			'assets',
-			'cards.json'
-		],
-		#encoding : 'TXT'
 	},
 	SquotImageMapper {
 		#path : FSAbsolutePath [
 			'assets',
-			'Storypoints',
-			'Storypoint_White.png'
+			'BacklogAreas',
+			'BacklogArea9.png'
+		],
+		#encoding : @4
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'BacklogAreas',
+			'BacklogArea1.png'
 		],
 		#encoding : @4
 	}
