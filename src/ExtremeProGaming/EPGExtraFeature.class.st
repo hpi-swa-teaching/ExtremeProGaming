@@ -1,7 +1,11 @@
+"
+EPGEffect which adds new feature to the backlog.
+"
 Class {
 	#name : #EPGExtraFeature,
 	#superclass : #EPGEffect,
-	#category : #'ExtremeProGaming-Core'
+	#category : #'ExtremeProGaming-Core',
+	#'squeak_changestamp' : 'JP 7/8/2024 10:44'
 }
 
 {

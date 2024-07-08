@@ -1,10 +1,14 @@
+"
+This provides a framework for concrete DnD Morphs. It should not be instantiated.
+"
 Class {
 	#name : #EPGDnDMorph,
 	#superclass : #Morph,
 	#instVars : [
 		'droppable'
 	],
-	#category : #'ExtremeProGaming-UI'
+	#category : #'ExtremeProGaming-UI',
+	#'squeak_changestamp' : 'JP 7/8/2024 12:56'
 }
 
 {
@@ -46,7 +50,7 @@ EPGDnDMorph >> shouldDropOnMouseUp: aBoolean [
 
 {
 	#category : #'dragging/dropping',
-	#'squeak_changestamp' : 'HCH 5/27/2024 18:38'
+	#'squeak_changestamp' : 'JP 7/8/2024 13:25'
 }
 EPGDnDMorph >> slideBackToFormerSituation: evt [ 
 	"A drop of the receiver having been rejected, slide it back to where it came from, if possible."
@@ -54,7 +58,7 @@ EPGDnDMorph >> slideBackToFormerSituation: evt [
 	| slideForm formerOwner formerPosition aWorld startPoint endPoint trans |
 	formerOwner := self formerOwner.
 	formerPosition := self formerPosition.
-	(aWorld := evt hand world) ifNil: [^ self delete]. "Likely a moribund hand from an EventRecorder playback."
+	(aWorld := evt hand world) ifNil: [^ self delete.]. "Likely a moribund hand from an EventRecorder playback."
 
 	trans := formerOwner transformFromWorld.
 	slideForm := trans isPureTranslation 
@@ -77,7 +81,7 @@ EPGDnDMorph >> slideBackToFormerSituation: evt [
 		ifTrue: [formerOwner dropInMorph: self]
 		ifFalse: [formerOwner addMorph: self].
 	self position: formerPosition.
-	self justDroppedInto: formerOwner event: evt
+	self justDroppedInto: formerOwner event: evt.
 ]
 
 {

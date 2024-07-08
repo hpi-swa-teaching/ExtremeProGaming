@@ -1,10 +1,14 @@
+"
+Displays the current score which is the amount of processed feature cards.
+"
 Class {
 	#name : #EPGFeatureScore,
 	#superclass : #TextMorph,
 	#instVars : [
 		'score'
 	],
-	#category : #'ExtremeProGaming-UI'
+	#category : #'ExtremeProGaming-UI',
+	#'squeak_changestamp' : 'JP 7/8/2024 13:03'
 }
 
 {

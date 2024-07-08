@@ -1,7 +1,11 @@
+"
+Tests if the gameboard and its components have the right extents after resizing.
+"
 Class {
 	#name : #EPGGameBoardResizingTests,
 	#superclass : #MorphTest,
-	#category : #'ExtremeProGaming-Tests'
+	#category : #'ExtremeProGaming-Tests',
+	#'squeak_changestamp' : 'JP 7/8/2024 13:14'
 }
 
 {

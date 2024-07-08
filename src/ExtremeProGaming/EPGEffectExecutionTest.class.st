@@ -1,3 +1,6 @@
+"
+Tests if the executed effects have the expected impact.
+"
 Class {
 	#name : #EPGEffectExecutionTest,
 	#superclass : #TestCase,
@@ -5,7 +8,8 @@ Class {
 		'effect',
 		'game'
 	],
-	#category : #'ExtremeProGaming-Tests'
+	#category : #'ExtremeProGaming-Tests',
+	#'squeak_changestamp' : 'JP 7/8/2024 13:15'
 }
 
 {

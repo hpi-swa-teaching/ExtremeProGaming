@@ -1,3 +1,6 @@
+"
+Blueprint for start- and endscreen, with common design components.
+"
 Class {
 	#name : #EPGOverlay,
 	#superclass : #Morph,
@@ -5,7 +8,8 @@ Class {
 		'score',
 		'game'
 	],
-	#category : #'ExtremeProGaming-UI'
+	#category : #'ExtremeProGaming-UI',
+	#'squeak_changestamp' : 'JP 7/8/2024 13:09'
 }
 
 {

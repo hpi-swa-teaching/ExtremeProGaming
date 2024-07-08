@@ -1,10 +1,14 @@
+"
+Concrete DnD area to store and pick up event, feature or bug cards.
+"
 Class {
 	#name : #EPGPlanningArea,
 	#superclass : #EPGDnDArea,
 	#instVars : [
 		'image'
 	],
-	#category : #'ExtremeProGaming-UI'
+	#category : #'ExtremeProGaming-UI',
+	#'squeak_changestamp' : 'JP 7/8/2024 12:52'
 }
 
 {
