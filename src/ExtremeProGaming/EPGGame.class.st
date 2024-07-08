@@ -64,11 +64,11 @@ EPGGame >> addBugCard [
 
 {
 	#category : #cards,
-	#'squeak_changestamp' : 'HCH 6/20/2024 19:54'
+	#'squeak_changestamp' : 'HCH 7/8/2024 21:13'
 }
 EPGGame >> addCard: aBacklogCard [
 
-	(self freeBacklogAreas size = 0) ifTrue: [self error: 'Cannot place more cards on board'].
+	(self freeBacklogAreas size = 0) ifTrue: [self endGame.].
 	self freeBacklogAreas first dropInCard: aBacklogCard.
 ]
 
