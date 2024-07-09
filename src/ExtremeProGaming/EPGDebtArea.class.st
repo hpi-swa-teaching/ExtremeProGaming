@@ -1,3 +1,6 @@
+"
+Defines area to display EPGTechnicalDebt in.
+"
 Class {
 	#name : #EPGDebtArea,
 	#superclass : #Morph,
@@ -6,7 +9,8 @@ Class {
 		'type',
 		'currentDebt'
 	],
-	#category : #'ExtremeProGaming-UI'
+	#category : #'ExtremeProGaming-UI',
+	#'squeak_changestamp' : 'JP 7/8/2024 10:54'
 }
 
 {

@@ -1,3 +1,6 @@
+"
+Provides interface to create EPGCards from json files.
+"
 Class {
 	#name : #EPGJSONParser,
 	#superclass : #Object,
@@ -8,7 +11,8 @@ Class {
 		'featureCards',
 		'eventCards'
 	],
-	#category : #'ExtremeProGaming-Core'
+	#category : #'ExtremeProGaming-Core',
+	#'squeak_changestamp' : 'JP 7/8/2024 10:48'
 }
 
 {

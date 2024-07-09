@@ -1,3 +1,6 @@
+"
+Concrete DnD area to drop and pick up current feature or bug cards, as well as storypoints to process dropped cards.
+"
 Class {
 	#name : #EPGBacklogArea,
 	#superclass : #EPGDnDArea,
@@ -5,7 +8,8 @@ Class {
 		'image',
 		'amountOfStorypoints'
 	],
-	#category : #'ExtremeProGaming-UI'
+	#category : #'ExtremeProGaming-UI',
+	#'squeak_changestamp' : 'JP 7/8/2024 12:54'
 }
 
 {

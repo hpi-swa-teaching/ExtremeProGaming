@@ -1,10 +1,14 @@
+"
+Concrete card which marks the start of a new sprint and may add an effect.
+"
 Class {
 	#name : #EPGEventCard,
 	#superclass : #EPGCard,
 	#instVars : [
 		'iterationNumber'
 	],
-	#category : #'ExtremeProGaming-UI'
+	#category : #'ExtremeProGaming-UI',
+	#'squeak_changestamp' : 'JP 7/8/2024 13:02'
 }
 
 {

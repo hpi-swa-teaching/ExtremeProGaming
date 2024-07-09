@@ -1,3 +1,6 @@
+"
+This provides a framework for concrete playing cards It should not be instantiated.
+"
 Class {
 	#name : #EPGCard,
 	#superclass : #EPGDnDMorph,
@@ -18,7 +21,8 @@ Class {
 		'effectText',
 		'effect'
 	],
-	#category : #'ExtremeProGaming-UI'
+	#category : #'ExtremeProGaming-UI',
+	#'squeak_changestamp' : 'JP 7/8/2024 12:56'
 }
 
 {

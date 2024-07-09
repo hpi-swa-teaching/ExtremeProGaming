@@ -1,3 +1,6 @@
+"
+Tests the correct parsing from an json file to EPGCards.
+"
 Class {
 	#name : #EPGJSONParserTests,
 	#superclass : #TestCase,
@@ -5,7 +8,8 @@ Class {
 		'parser',
 		'board'
 	],
-	#category : #'ExtremeProGaming-Tests'
+	#category : #'ExtremeProGaming-Tests',
+	#'squeak_changestamp' : 'JP 7/8/2024 13:13'
 }
 
 {

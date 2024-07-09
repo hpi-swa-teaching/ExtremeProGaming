@@ -1,3 +1,6 @@
+"
+Dynamically displays the costs of a card.
+"
 Class {
 	#name : #EPGCostDisplay,
 	#superclass : #Morph,
@@ -7,7 +10,8 @@ Class {
 		'perTechnicalDebt',
 		'storypoint'
 	],
-	#category : #'ExtremeProGaming-UI'
+	#category : #'ExtremeProGaming-UI',
+	#'squeak_changestamp' : 'JP 7/8/2024 10:52'
 }
 
 {

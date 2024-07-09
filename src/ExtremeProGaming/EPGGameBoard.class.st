@@ -1,3 +1,6 @@
+"
+Basic game background which contains specific user interface components.
+"
 Class {
 	#name : #EPGGameBoard,
 	#superclass : #Morph,
@@ -13,7 +16,8 @@ Class {
 		'featureScore',
 		'doneAreas'
 	],
-	#category : #'ExtremeProGaming-UI'
+	#category : #'ExtremeProGaming-UI',
+	#'squeak_changestamp' : 'JP 7/8/2024 13:08'
 }
 
 {

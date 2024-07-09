@@ -1,10 +1,14 @@
+"
+This provides a framework for concrete DnD Morphs. It should not be instantiated.
+"
 Class {
 	#name : #EPGDnDMorph,
 	#superclass : #Morph,
 	#instVars : [
 		'droppable'
 	],
-	#category : #'ExtremeProGaming-UI'
+	#category : #'ExtremeProGaming-UI',
+	#'squeak_changestamp' : 'JP 7/8/2024 12:56'
 }
 
 {

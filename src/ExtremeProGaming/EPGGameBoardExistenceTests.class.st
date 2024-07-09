@@ -1,7 +1,11 @@
+"
+Tests if the game is correctly initialized.
+"
 Class {
 	#name : #EPGGameBoardExistenceTests,
 	#superclass : #MorphTest,
-	#category : #'ExtremeProGaming-Tests'
+	#category : #'ExtremeProGaming-Tests',
+	#'squeak_changestamp' : 'JP 7/8/2024 13:15'
 }
 
 {
