@@ -106,15 +106,6 @@ EPGGame >> addTemporary: aNumber [
 ]
 
 {
-	#category : #storypoints,
-	#'squeak_changestamp' : 'HCH 6/19/2024 00:07'
-}
-EPGGame >> addUnavailable: aNumber [
-
-	self gameBoard unavailableStorypointArea addStorypoints: aNumber.
-]
-
-{
 	#category : #sprints,
 	#'squeak_changestamp' : 'sv 6/24/2024 10:07'
 }
@@ -451,15 +442,6 @@ EPGGame >> numOfFeatureCardsInGame [
 
 {
 	#category : #storypoints,
-	#'squeak_changestamp' : 'HCH 6/18/2024 23:43'
-}
-EPGGame >> numOfPermanentStorypoints [
-
-	^ self numOfAvailableStorypoints - self numOfTemporaryStorypoints.
-]
-
-{
-	#category : #storypoints,
 	#'squeak_changestamp' : 'HCH 6/18/2024 22:45'
 }
 EPGGame >> numOfStorypoints [
@@ -509,7 +491,7 @@ EPGGame >> processBacklogAreaStorypoints [
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'HCH 6/23/2024 16:36'
+	#'squeak_changestamp' : 'sv 7/9/2024 18:29'
 }
 EPGGame >> processCards [
 
@@ -518,9 +500,9 @@ EPGGame >> processCards [
 	self processableCards do: [:card | 
 			self sprintEffects add: card effect. 
 			card process.
-			processedCards add: card].
-	processedCards size = 0 ifTrue: [self startOfRound: true].
-	processedCards do: [:card | card prepareMoveToDone].
+			processedCards add: card.].
+	processedCards size = 0 ifTrue: [self startOfRound: true.].
+	processedCards do: [:card | card toggleFocusCard.].
 	self processDebtToAdd: processedCards.
 ]
 
@@ -567,46 +549,6 @@ EPGGame >> processEventCard: anEventCard [
 EPGGame >> processableCards [
 
 	^ self occupiedAreas collect: [:area | area card] thenSelect: [:card | card canBeProcessed].
-]
-
-{
-	#category : #storypoints,
-	#'squeak_changestamp' : 'HCH 6/20/2024 20:10'
-}
-EPGGame >> removeAllAvailableStorypoints [
-
-	self gameBoard availableStorypointAreas do: [:area | area clearArea].
-]
-
-{
-	#category : #storypoints,
-	#'squeak_changestamp' : 'HCH 6/18/2024 22:45'
-}
-EPGGame >> removeAllStorypoints [
-
-	self gameBoard storyPointAreas do: [:area | area clearArea].
-]
-
-{
-	#category : #storypoints,
-	#'squeak_changestamp' : 'HCH 6/18/2024 22:56'
-}
-EPGGame >> removeAllTemporaryStorypoints [
-
-	| temporaryArea |
-	temporaryArea := self gameBoard temporaryStorypointArea.
- 	temporaryArea clearArea.
-]
-
-{
-	#category : #storypoints,
-	#'squeak_changestamp' : 'HCH 6/18/2024 22:56'
-}
-EPGGame >> removeAllUnavailableStorypoints [
-
-	| temporaryArea |
-	temporaryArea := self gameBoard unavailableStorypointArea.
- 	temporaryArea clearArea.
 ]
 
 {

@@ -56,15 +56,6 @@ EPGBacklogCard >> moveToDone [
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'HCH 6/20/2024 01:04'
-}
-EPGBacklogCard >> prepareMoveToDone [
-
-	self toggleFocusCard.
-]
-
-{
-	#category : #'events-processing',
 	#'squeak_changestamp' : 'HCH 6/20/2024 00:50'
 }
 EPGBacklogCard >> process [

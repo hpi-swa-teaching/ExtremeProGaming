@@ -487,24 +487,6 @@ EPGCard >> effectSize [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/19/2024 22:03'
-}
-EPGCard >> effectText [
-
-	^ effectText.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/20/2024 01:05'
-}
-EPGCard >> effectText: aText [
-
-	effectText := aText.
-]
-
-{
-	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 5/29/2024 20:46'
 }
 EPGCard >> facing [
