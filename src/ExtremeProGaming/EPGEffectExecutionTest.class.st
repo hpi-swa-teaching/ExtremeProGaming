@@ -10,11 +10,12 @@ Class {
 
 {
 	#category : #'initialize-release',
-	#'squeak_changestamp' : 'HCH 6/18/2024 22:43'
+	#'squeak_changestamp' : 'HCH 7/9/2024 11:18'
 }
 EPGEffectExecutionTest >> setUp [
 	
 	game := EPGGame newWithoutReturn.
+	game startOfRound: false.
 ]
 
 {
@@ -80,7 +81,7 @@ EPGEffectExecutionTest >> testPermanentRemovalSufficient [
 
 {
 	#category : #tests,
-	#'squeak_changestamp' : 'HCH 7/8/2024 20:55'
+	#'squeak_changestamp' : 'HCH 7/9/2024 11:17'
 }
 EPGEffectExecutionTest >> testTemporaryAddition [
 
