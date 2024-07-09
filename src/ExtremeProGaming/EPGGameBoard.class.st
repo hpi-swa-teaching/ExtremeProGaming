@@ -1,3 +1,6 @@
+"
+Basic game background which contains specific user interface components.
+"
 Class {
 	#name : #EPGGameBoard,
 	#superclass : #Morph,
@@ -13,7 +16,8 @@ Class {
 		'featureScore',
 		'doneAreas'
 	],
-	#category : #'ExtremeProGaming-UI'
+	#category : #'ExtremeProGaming-UI',
+	#'squeak_changestamp' : 'JP 7/8/2024 13:08'
 }
 
 {
@@ -702,10 +706,11 @@ EPGGameBoard >> planningArea: aMorph [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'jmetrikat 6/8/2024 17:04'
+	#'squeak_changestamp' : 'JP 7/8/2024 13:25'
 }
 EPGGameBoard >> planningAreas [
-	^ planningAreas
+
+	^ planningAreas.
 ]
 
 {

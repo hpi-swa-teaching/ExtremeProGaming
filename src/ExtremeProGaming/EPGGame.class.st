@@ -1,3 +1,6 @@
+"
+Defines gamelogic and provides interfaces for interaction with game components.
+"
 Class {
 	#name : #EPGGame,
 	#superclass : #Object,
@@ -14,7 +17,8 @@ Class {
 	#classVars : [
 		'HighScore'
 	],
-	#category : #'ExtremeProGaming-Core'
+	#category : #'ExtremeProGaming-Core',
+	#'squeak_changestamp' : 'JP 7/8/2024 10:47'
 }
 
 {
@@ -502,12 +506,12 @@ EPGGame >> numOfUnavailableStorypoints [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/20/2024 00:36'
+	#'squeak_changestamp' : 'JP 7/8/2024 13:25'
 }
 EPGGame >> occupiedAreas [
  
 	^ self gameBoard backlogDnDAreas 
-			select: [:area | area isFree not.]
+			select: [:area | area isFree not.].
 ]
 
 {
@@ -713,7 +717,7 @@ EPGGame >> unfocusCard: anEPGCard [
 
 	self focusedCards remove: anEPGCard.
 	anEPGCard isEPGFeatureCard ifTrue: [self updateFeatureScore].
-	anEPGCard isEPGEventCard  ifTrue: [^ self].
+	anEPGCard isEPGEventCard  ifTrue: [^ self.].
 	self focusedCards size = 0
 		ifTrue: [self startNewRound.].
 	

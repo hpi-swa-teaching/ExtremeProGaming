@@ -1,3 +1,6 @@
+"
+Concrete DnD area to represent technical debt. To reduce technical debt drop storypoint into area.
+"
 Class {
 	#name : #EPGDebt,
 	#superclass : #EPGDnDArea,
@@ -5,7 +8,8 @@ Class {
 		'image',
 		'type'
 	],
-	#category : #'ExtremeProGaming-UI'
+	#category : #'ExtremeProGaming-UI',
+	#'squeak_changestamp' : 'JP 7/8/2024 12:50'
 }
 
 {

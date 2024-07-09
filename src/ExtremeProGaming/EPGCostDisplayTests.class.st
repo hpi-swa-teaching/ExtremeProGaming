@@ -1,3 +1,6 @@
+"
+Tests if the costdisplay shows the right costs.
+"
 Class {
 	#name : #EPGCostDisplayTests,
 	#superclass : #MorphTest,
@@ -5,7 +8,8 @@ Class {
 		'morphFront',
 		'morphBack'
 	],
-	#category : #'ExtremeProGaming-Tests'
+	#category : #'ExtremeProGaming-Tests',
+	#'squeak_changestamp' : 'JP 7/8/2024 13:16'
 }
 
 {
