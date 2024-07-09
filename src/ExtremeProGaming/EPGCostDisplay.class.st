@@ -136,37 +136,35 @@ EPGCostDisplay class >> nonDebtCenterOffset [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'sv 7/9/2024 23:28'
+	#'squeak_changestamp' : 'sv 7/10/2024 00:21'
 }
 EPGCostDisplay class >> plusUtil [
 
-	^ self defaultExtent y / 7.
+	^ self defaultExtent y / 14.
 ]
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'JP 7/8/2024 13:24'
+	#'squeak_changestamp' : 'sv 7/10/2024 00:23'
 }
 EPGCostDisplay class >> positionOffsets [
 
 	^ Dictionary newFrom:
-	{
-		1 -> {0 @ 0}.
+		{1 -> {0 @ 0}.
 		2 -> {15 @ -15 . -15 @ 15}.
 		3 -> {15 @ 15 . -15 @ 15 . 0 @ -15}.
 		4 -> {-20 @ -20 . 20 @ -20 . -20 @ 20 . 20 @ 20}.
 		5 -> {-20 @ -20 . 20 @ -20 . -20 @ 20 . 20 @ 20 . 0 @ 0}.
-		6 -> {-20 @ -20 . -20 @ 0 . -20 @ 20 . 20 @ -20 . 20 @ 0 . 20 @ 20}.
-	}.
+		6 -> {-20 @ -20 . -20 @ 0 . -20 @ 20 . 20 @ -20 . 20 @ 0 . 20 @ 20}.}.
 ]
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'sv 7/9/2024 23:27'
+	#'squeak_changestamp' : 'sv 7/10/2024 00:22'
 }
 EPGCostDisplay class >> slashUtil [
 
-	^ self defaultExtent y / 5.
+	^ self defaultExtent y / 10.
 ]
 
 {
@@ -339,41 +337,41 @@ EPGCostDisplay >> initialize [
 
 {
 	#category : #symbols,
-	#'squeak_changestamp' : 'sv 7/9/2024 23:30'
+	#'squeak_changestamp' : 'sv 7/10/2024 00:21'
 }
 EPGCostDisplay >> initializePlus [
 "Using plusUtil as a number dependent on the height of the costDisplay for calculating the position of the '+' symbol."
 	| plusUtil vertices |
 	plusUtil := self class plusUtil.
 	vertices := {
-		(plusUtil / 2) negated @ 0 . 
-		plusUtil / 2 @ 0 . 
+		plusUtil negated @ 0 . 
+		plusUtil @ 0 . 
 		0 @ 0 . 
-		0 @ (plusUtil / 2) negated . 
-		0 @ (plusUtil / 2) . 0 @ 0}.
+		0 @ plusUtil negated . 
+		0 @ plusUtil  . 0 @ 0}.
 	^ PolygonMorph
 		 	vertices: vertices 
 			color: Color black 
-			borderWidth: (plusUtil / 4 max: 3) 
+			borderWidth: (plusUtil / 2 max: 3) 
 			borderColor: Color black.
 ]
 
 {
 	#category : #symbols,
-	#'squeak_changestamp' : 'sv 7/9/2024 23:26'
+	#'squeak_changestamp' : 'sv 7/10/2024 00:22'
 }
 EPGCostDisplay >> initializeSlash [
 "Using slashUtil as a number dependent on the height of the costDisplay for calculating the position of the '/' symbol for storypoints per TechnicalDebt."
 	| slashUtil vertices |
 	slashUtil := self class slashUtil.
 	vertices := {
-		(slashUtil / 2) negated @ (slashUtil / 2) . 
-		(slashUtil / 2) @ (slashUtil / 2) negated . 
+		slashUtil negated @ slashUtil. 
+		slashUtil @ slashUtil negated . 
 		0 @ 0}.
 	^ PolygonMorph
 		 	vertices: vertices 
 			color: Color black 
-			borderWidth: (slashUtil / 6 max: 4) 
+			borderWidth: (slashUtil / 3 max: 4) 
 			borderColor: Color black.
 ]
 
