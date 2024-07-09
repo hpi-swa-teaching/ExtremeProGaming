@@ -1,28 +1,34 @@
+"
+Tests the programmatical interaction functionality of the abstract DnD Area.
+"
 Class {
 	#name : #EPGDnDAreaTests,
 	#superclass : #MorphTest,
-	#category : #'ExtremeProGaming-Tests'
+	#instVars : [
+		'dropMorph'
+	],
+	#category : #'ExtremeProGaming-Tests',
+	#'squeak_changestamp' : 'HCH 7/9/2024 11:08'
 }
 
 {
 	#category : #'initialize-release',
-	#'squeak_changestamp' : 'HCH 7/8/2024 22:11'
+	#'squeak_changestamp' : 'HCH 7/9/2024 11:02'
 }
 EPGDnDAreaTests >> setUp [
 
 	morph := EPGDnDArea new.
 	morph accepts: #(#testMorph).
+	dropMorph := EPGDnDMorph new.
+	dropMorph setProperty: #testMorph toValue: true.
 ]
 
 {
 	#category : #tests,
-	#'squeak_changestamp' : 'HCH 7/8/2024 22:22'
+	#'squeak_changestamp' : 'HCH 7/9/2024 11:02'
 }
 EPGDnDAreaTests >> testAccept [
 
-	| dropMorph |
-	dropMorph := Morph new.
-	dropMorph setProperty: #testMorph toValue: true.
 	self assert: true equals: (morph acceptsMorph: dropMorph).
 	
 	
@@ -31,27 +37,21 @@ EPGDnDAreaTests >> testAccept [
 
 {
 	#category : #tests,
-	#'squeak_changestamp' : 'HCH 7/8/2024 22:36'
+	#'squeak_changestamp' : 'HCH 7/9/2024 11:03'
 }
 EPGDnDAreaTests >> testDisabledDrop [
 
-	| dropMorph |
 	morph dropEnabled: false.
-	dropMorph := EPGDnDMorph new.
-	dropMorph setProperty: #testMorph toValue: true.
 	self assert: false equals: (morph wantsDroppedMorph: dropMorph event: DropEvent new).
 	
 ]
 
 {
 	#category : #tests,
-	#'squeak_changestamp' : 'HCH 7/8/2024 22:19'
+	#'squeak_changestamp' : 'HCH 7/9/2024 11:03'
 }
 EPGDnDAreaTests >> testDropIn [
 
-	| dropMorph |
-	dropMorph := Morph new.
-	dropMorph setProperty: #testMorph toValue: true.
 	morph dropInMorph: dropMorph.
 	self assert: 1 equals: morph dropped size.
 	self assert: dropMorph equals: morph dropped first.
@@ -60,28 +60,22 @@ EPGDnDAreaTests >> testDropIn [
 
 {
 	#category : #tests,
-	#'squeak_changestamp' : 'HCH 7/8/2024 22:36'
+	#'squeak_changestamp' : 'HCH 7/9/2024 11:03'
 }
 EPGDnDAreaTests >> testEnabledDrop [
 
-	| dropMorph |
 	morph dropEnabled: true.
-	dropMorph := EPGDnDMorph new.
-	dropMorph setProperty: #testMorph toValue: true.
 	self assert: true equals: (morph wantsDroppedMorph: dropMorph event: DropEvent new).
 	
 ]
 
 {
 	#category : #tests,
-	#'squeak_changestamp' : 'HCH 7/8/2024 22:31'
+	#'squeak_changestamp' : 'HCH 7/9/2024 11:03'
 }
 EPGDnDAreaTests >> testFreeze [
 
-	| dropMorph |
 	morph freeze.
-	dropMorph := EPGDnDMorph new.
-	dropMorph setProperty: #testMorph toValue: true.
 	morph dropInMorph: dropMorph.
 	self assert: nil equals: (morph pickUpMorph: dropMorph).
 	morph unfreeze.
@@ -91,13 +85,11 @@ EPGDnDAreaTests >> testFreeze [
 
 {
 	#category : #tests,
-	#'squeak_changestamp' : 'HCH 7/8/2024 22:19'
+	#'squeak_changestamp' : 'HCH 7/9/2024 11:03'
 }
 EPGDnDAreaTests >> testPickUp [
 
-	| dropMorph pickUpMorph |
-	dropMorph := Morph new.
-	dropMorph setProperty: #testMorph toValue: true.
+	| pickUpMorph |
 	morph dropInMorph: dropMorph.
 	pickUpMorph := morph pickUpMorph: dropMorph.
 	self assert: dropMorph equals: pickUpMorph.
@@ -109,14 +101,14 @@ EPGDnDAreaTests >> testPickUp [
 
 {
 	#category : #tests,
-	#'squeak_changestamp' : 'HCH 7/8/2024 22:22'
+	#'squeak_changestamp' : 'HCH 7/9/2024 11:04'
 }
 EPGDnDAreaTests >> testReject [
 
-	| dropMorph |
-	dropMorph := Morph new.
-	dropMorph setProperty: #notTestMorph toValue: true.
-	self assert: false equals: (morph acceptsMorph: dropMorph).
+	| rejectMorph |
+	rejectMorph := Morph new.
+	rejectMorph setProperty: #notTestMorph toValue: true.
+	self assert: false equals: (morph acceptsMorph: rejectMorph).
 	
 	
 	
