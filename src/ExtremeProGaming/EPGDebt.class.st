@@ -13,6 +13,15 @@ Class {
 }
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'sv 7/9/2024 23:40'
+}
+EPGDebt class >> defaultExtent [
+
+	^ 100 @ 100.
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 6/23/2024 11:55'
 }
@@ -41,14 +50,14 @@ EPGDebt >> image: anImage [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/30/2024 21:59'
+	#'squeak_changestamp' : 'sv 7/9/2024 23:40'
 }
 EPGDebt >> initialize [
 
 	super initialize.
 	
 	self
-		extent: 100 @ 100;
+		extent: self class defaultExtent;
 		accepts: #(#EPGStorypoint);
 		initializeVisibleArea.
 		
@@ -79,7 +88,7 @@ EPGDebt >> process [
 
 {
 	#category : #typesetting,
-	#'squeak_changestamp' : 'JP 6/19/2024 19:34'
+	#'squeak_changestamp' : 'sv 7/9/2024 23:43'
 }
 EPGDebt >> setType: aType [
 
@@ -92,7 +101,7 @@ EPGDebt >> setType: aType [
 		ifFalse: ['/assets/TechnicalDebt_Backend.png'].
 
 	self
-		image: (ImageMorph new image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: path) scaledToSize: (self backgroundExtent - self backgroundMargin)));
+		image: (ImageMorph new image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: path) scaledToSize: (self backgroundExtent - self class backgroundMargin)));
 		addMorph: self image.
 
 	self image center: self center.

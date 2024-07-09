@@ -54,6 +54,16 @@ EPGEventCard class >> iterationNumberFont [
 ]
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'sv 7/9/2024 23:47'
+}
+EPGEventCard class >> iterationNumberOffset [
+
+ 	^  0 @ 50.
+	
+]
+
+{
 	#category : #'instance creation',
 	#'squeak_changestamp' : 'sv 7/9/2024 23:06'
 }
@@ -75,13 +85,13 @@ EPGEventCard class >> newWithTitle: aTitle description: aDescription effectText:
 
 {
 	#category : #body,
-	#'squeak_changestamp' : 'HCH 6/23/2024 14:02'
+	#'squeak_changestamp' : 'sv 7/9/2024 23:48'
 }
 EPGEventCard >> displayIterationNumber: aNumber [
 
 	| textMorph |
 	textMorph := self formatIterationNumber: aNumber asString.
-	textMorph center: self center - (0 @ 50).
+	textMorph center: self center - self class iterationNumberOffset.
 	self frontBody addMorph: textMorph.
 ]
 

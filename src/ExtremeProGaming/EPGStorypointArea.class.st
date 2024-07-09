@@ -9,6 +9,15 @@ Class {
 }
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'sv 7/10/2024 00:17'
+}
+EPGStorypointArea class >> defaultExtent [
+
+	^ 150 @ 200.
+]
+
+{
 	#category : #features,
 	#'squeak_changestamp' : 'HCH 6/18/2024 23:27'
 }
@@ -48,13 +57,13 @@ EPGStorypointArea >> dropInMorph: aMorph [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 6/8/2024 17:45'
+	#'squeak_changestamp' : 'sv 7/10/2024 00:17'
 }
 EPGStorypointArea >> initialize [
 
 	super initialize.
 	
 	self
-		extent: 150 @ 200;
+		extent: self class defaultExtent;
 		initializeVisibleArea.
 ]
