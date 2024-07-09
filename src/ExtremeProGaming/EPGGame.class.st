@@ -661,11 +661,11 @@ EPGGame >> sprintEffects: aCollection [
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'JA 7/8/2024 22:58'
+	#'squeak_changestamp' : 'JA 7/9/2024 11:25'
 }
 EPGGame >> startNewRound [
 
-	self gameBoard sprinter show.
+	self gameBoard sprinter startSprinting.
 	self 
 		processCards;
 		processDebtAreas;

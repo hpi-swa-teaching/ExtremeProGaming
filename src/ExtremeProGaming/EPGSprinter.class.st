@@ -1,19 +1,23 @@
+"
+Implementation for the sprinter (visualizing the end of an iteration)
+"
 Class {
 	#name : #EPGSprinter,
 	#superclass : #AnimatedImageMorph,
 	#instVars : [
 		'finishedSprinting'
 	],
-	#category : #'ExtremeProGaming-UI'
+	#category : #'ExtremeProGaming-UI',
+	#'squeak_changestamp' : 'JA 7/9/2024 11:28'
 }
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JA 7/8/2024 23:21'
+	#'squeak_changestamp' : 'JA 7/9/2024 11:37'
 }
 EPGSprinter >> finishedSprinting [
 
-	^ finishedSprinting
+	^ finishedSprinting.
 ]
 
 {
@@ -27,14 +31,11 @@ EPGSprinter >> finishedSprinting: anObject [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JA 7/8/2024 23:36'
+	#'squeak_changestamp' : 'JA 7/9/2024 11:29'
 }
 EPGSprinter >> initialize [
 
-	super initialize.
-
-	self 
-		finishedSprinting: true.
+	self finishedSprinting: true.
 ]
 
 {
@@ -50,14 +51,13 @@ EPGSprinter >> startSprinting [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JA 7/9/2024 00:01'
+	#'squeak_changestamp' : 'JA 7/9/2024 11:36'
 }
 EPGSprinter >> step [
 
 	super step.
 
 	self finishedSprinting ifTrue: [^ nil].
-	
 	self position: (self position + (10 @ 0)).
 	
 	(self position x >=(self owner position x + self owner width)) ifTrue: [
@@ -67,9 +67,9 @@ EPGSprinter >> step [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JA 7/9/2024 00:26'
+	#'squeak_changestamp' : 'JA 7/9/2024 11:35'
 }
 EPGSprinter >> stepTime [
 
-	^ 10
+	^ 10.
 ]

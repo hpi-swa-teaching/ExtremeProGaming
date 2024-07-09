@@ -386,31 +386,25 @@ EPGGameBoard >> createSectionMorphFor: aName [
 
 {
 	#category : #layouting,
-	#'squeak_changestamp' : 'JA 7/9/2024 00:32'
+	#'squeak_changestamp' : 'JA 7/9/2024 11:38'
 }
 EPGGameBoard >> createSprinter [
 
-    | animatedImageMorph |
+	| animatedImageMorph |
+	animatedImageMorph := (GitAssetLoader for: 'ExtremeProGaming') loadAnimatedImageMorph: 'assets/running_man_correct_direction.gif'.
+	animatedImageMorph ifNil: [ 
+        Error new: 'Failed to load animated sprinter'; signal. ].
 
-    animatedImageMorph := (GitAssetLoader for: 'ExtremeProGaming') loadAnimatedImageMorph: 'assets/running_man_correct_direction.gif'.
-    animatedImageMorph ifNil: [ 
-        Error new: 'Failed to load animated sprinter'; signal.
-    ].
 	animatedImageMorph := (EPGSprinter newFrom: animatedImageMorph)
 		initialize;
 		yourself.
-	
-	"TODO: very hacky. Otherwise cryptic image appears at position 1"
-	animatedImageMorph image: (animatedImageMorph images at: 1).
-	animatedImageMorph images removeAt: 1.
-	
-	animatedImageMorph extent: (animatedImageMorph extent: 100 @ 100).
-     ^ animatedImageMorph.
+     
+	^ animatedImageMorph.
 ]
 
 {
 	#category : #layouting,
-	#'squeak_changestamp' : 'JA 7/9/2024 00:30'
+	#'squeak_changestamp' : 'JA 7/9/2024 11:37'
 }
 EPGGameBoard >> createSprintingArea [
 
