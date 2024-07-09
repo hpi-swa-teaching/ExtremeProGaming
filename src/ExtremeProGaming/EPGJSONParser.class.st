@@ -1,5 +1,5 @@
 "
-Provides interface to create EPGCards from json files.
+A JSON-to-EPGCard-converter that creates card morphs according to the given content in the cards.json file which can be found in the GitAssetLoader.
 "
 Class {
 	#name : #EPGJSONParser,
@@ -53,6 +53,22 @@ EPGJSONParser >> bugCards: aBugCardCollection [
 
 {
 	#category : #'card creation',
+	#'squeak_changestamp' : 'sv 7/7/2024 19:48'
+}
+EPGJSONParser >> configureCardType: aCardJsonFormatted [
+
+	| cardType |
+	cardType := aCardJsonFormatted at: 'type'.
+	cardType caseOf: {
+		['Feature'] -> [	^ self createFeatureCard: aCardJsonFormatted].
+		['Bug'] -> [^ self createBugCard: aCardJsonFormatted].
+		['Event'] -> [^ self createEventCard: aCardJsonFormatted]}
+	 otherwise: [
+		Error new: 'Unkown card type: ', cardType, '. Please check JSON file for card creation'; 		signal].
+]
+
+{
+	#category : #'card creation',
 	#'squeak_changestamp' : 'sv 6/8/2024 20:29'
 }
 EPGJSONParser >> createBugBackendCard: aCardJsonFormatted [
@@ -67,15 +83,15 @@ EPGJSONParser >> createBugBackendCard: aCardJsonFormatted [
 
 {
 	#category : #'card creation',
-	#'squeak_changestamp' : 'sv 6/8/2024 19:52'
+	#'squeak_changestamp' : 'JP 7/8/2024 13:25'
 }
 EPGJSONParser >> createBugCard: aCardJsonFormatted [
 
 	| cardCategory |
 	cardCategory := aCardJsonFormatted at: 'frontend'.
 	cardCategory
-    		ifTrue: [^ self createBugFrontendCard: aCardJsonFormatted]
-   	 	ifFalse: [^ self createBugBackendCard: aCardJsonFormatted].
+    		ifTrue: [^ self createBugFrontendCard: aCardJsonFormatted.]
+   	 	ifFalse: [^ self createBugBackendCard: aCardJsonFormatted.].
 ]
 
 {
@@ -94,42 +110,34 @@ EPGJSONParser >> createBugFrontendCard: aCardJsonFormatted [
 
 {
 	#category : #'card creation',
-	#'squeak_changestamp' : 'HCH 6/23/2024 14:13'
+	#'squeak_changestamp' : 'sv 7/7/2024 19:51'
 }
 EPGJSONParser >> createCard: aCardJsonFormatted [
 
-	| cardType effect card |
-	cardType := aCardJsonFormatted at: 'type'.
-	effect := self createEffect: aCardJsonFormatted.
-	cardType caseOf: {
-		['Feature'] -> [card := self createFeatureCard: aCardJsonFormatted].
-		['Bug'] -> [card := self createBugCard: aCardJsonFormatted].
-		['Event'] -> [card := self createEventCard: aCardJsonFormatted]}
-	 otherwise: [
-		Error new: 'Unkown card type: ', cardType, '. Please check JSON file for card creation'; 		signal].
-	card effect: effect.
+	| card |
+	card := self configureCardType: aCardJsonFormatted.
+	card effect: (self createEffect: aCardJsonFormatted).
 	^ card.
 
 ]
 
 {
 	#category : #'card creation',
-	#'squeak_changestamp' : 'jmetrikat 6/23/2024 16:13'
+	#'squeak_changestamp' : 'sv 7/7/2024 20:01'
 }
 EPGJSONParser >> createCards [
 
 	| cards |
 	cards := (self jsonContent collect: [:card | self createCard: card]).
-	
 	self
-		featureCards: (cards select: [:card | card isEPGFeatureCard]);
-		bugCards: (cards select: [:card | card isEPGBugCard]);
+		featureCards: (cards select: [:card | card isEPGFeatureCard]) shuffled;
+		bugCards: (cards select: [:card | card isEPGBugCard]) shuffled;
 		eventCards: (cards select: [:card | card isEPGEventCard]).
 ]
 
 {
 	#category : #'card creation',
-	#'squeak_changestamp' : 'HCH 6/19/2024 22:05'
+	#'squeak_changestamp' : 'sv 7/7/2024 19:52'
 }
 EPGJSONParser >> createEffect: aJSONCardFormatted [
 
@@ -174,15 +182,15 @@ EPGJSONParser >> createFeatureBackendCard: aCardJsonFormatted [
 
 {
 	#category : #'card creation',
-	#'squeak_changestamp' : 'sv 6/8/2024 19:52'
+	#'squeak_changestamp' : 'JP 7/8/2024 13:25'
 }
 EPGJSONParser >> createFeatureCard: aCardJsonFormatted [
 
 	| cardCategory |
 	cardCategory := aCardJsonFormatted at: 'frontend'.
 	cardCategory
-    		ifTrue: [^ self createFeatureFrontendCard: aCardJsonFormatted]
-   	 	ifFalse: [^ self createFeatureBackendCard: aCardJsonFormatted].
+    		ifTrue: [^ self createFeatureFrontendCard: aCardJsonFormatted.]
+   	 	ifFalse: [^ self createFeatureBackendCard: aCardJsonFormatted.].
 ]
 
 {
@@ -201,13 +209,16 @@ EPGJSONParser >> createFeatureFrontendCard: aCardJsonFormatted [
 
 {
 	#category : #'initialize-release',
-	#'squeak_changestamp' : 'sv 6/8/2024 19:29'
+	#'squeak_changestamp' : 'sv 7/7/2024 20:02'
 }
 EPGJSONParser >> decodeJson [
 
 	| readStream |
-	readStream := ReadStream on: ((GitAssetLoader for: 'ExtremeProGaming') loadString: assetPath).
-	self jsonContent: (WebUtils jsonDecode: readStream).
+	readStream := ReadStream
+				on: ((GitAssetLoader for: 'ExtremeProGaming')
+						loadString: self assetPath).
+	self
+		jsonContent: (WebUtils jsonDecode: readStream).
 ]
 
 {
