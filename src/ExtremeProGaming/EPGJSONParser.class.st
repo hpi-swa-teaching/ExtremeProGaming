@@ -156,14 +156,14 @@ EPGJSONParser >> createEffect: aJSONCardFormatted [
 
 {
 	#category : #'card creation',
-	#'squeak_changestamp' : 'HCH 6/23/2024 14:20'
+	#'squeak_changestamp' : 'sv 7/9/2024 20:22'
 }
 EPGJSONParser >> createEventCard: aCardJsonFormatted [
 
 	^ EPGEventCard newWithTitle: (aCardJsonFormatted at: 'title') 
-					    description: (aCardJsonFormatted at: 'description') 
-					    effectText: (aCardJsonFormatted at: 'effect')
-					    iterationNumber: (aCardJsonFormatted at: 'number').
+		    description: (aCardJsonFormatted at: 'description') 
+		    effectText: (aCardJsonFormatted at: 'effect')
+		    iterationNumber: (aCardJsonFormatted at: 'number').
 ]
 
 {
@@ -223,11 +223,11 @@ EPGJSONParser >> decodeJson [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/23/2024 14:46'
+	#'squeak_changestamp' : 'sv 7/9/2024 20:21'
 }
 EPGJSONParser >> eventCards [
 
-	^ (eventCards sort: [:cardA :cardB | cardA iterationNumber >= cardB iterationNumber]).
+	^ eventCards sort: [:cardA :cardB | cardA iterationNumber >= cardB iterationNumber].
 	
 ]
 

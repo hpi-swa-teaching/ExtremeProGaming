@@ -312,11 +312,11 @@ EPGCostDisplay >> isFrontend [
 
 {
 	#category : #positioning,
-	#'squeak_changestamp' : 'HCH 5/29/2024 21:43'
+	#'squeak_changestamp' : 'sv 7/9/2024 20:35'
 }
 EPGCostDisplay >> nonDebtCenter [
 
-	perTechnicalDebt = 0
+	self perTechnicalDebt = 0
 		ifTrue: [^ self center].
 	^ self debtCenter - (self width / 2@ 0).
 ]
