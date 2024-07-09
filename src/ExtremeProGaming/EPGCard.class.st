@@ -795,6 +795,15 @@ EPGCard >> mouseDown: anEvent [
 ]
 
 {
+	#category : #'mouse events',
+	#'squeak_changestamp' : 'sv 7/9/2024 19:10'
+}
+EPGCard >> moveToDone [
+
+	^ self subclassResponsibility.
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 6/3/2024 09:49'
 }
