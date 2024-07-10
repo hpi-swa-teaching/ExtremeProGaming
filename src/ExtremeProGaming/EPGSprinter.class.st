@@ -5,11 +5,23 @@ Class {
 	#name : #EPGSprinter,
 	#superclass : #AnimatedImageMorph,
 	#instVars : [
-		'finishedSprinting'
+		'finishedSprinting',
+		'sprintingArea'
 	],
 	#category : #'ExtremeProGaming-UI',
 	#'squeak_changestamp' : 'JA 7/9/2024 11:28'
 }
+
+{
+	#category : #'instance creation',
+	#'squeak_changestamp' : 'JA 7/11/2024 01:15'
+}
+EPGSprinter class >> newFrom: anAnimatedImageMorph with: aSprintingArea [
+	
+	^ (self newFrom: anAnimatedImageMorph) 
+		sprintingArea: aSprintingArea;
+		yourself.
+]
 
 {
 	#category : #accessing,
@@ -22,11 +34,11 @@ EPGSprinter >> finishedSprinting [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JA 7/8/2024 23:21'
+	#'squeak_changestamp' : 'JA 7/11/2024 00:57'
 }
-EPGSprinter >> finishedSprinting: anObject [
+EPGSprinter >> finishedSprinting: aBoolean [
 
-	finishedSprinting := anObject.
+	finishedSprinting := aBoolean.
 ]
 
 {
@@ -40,18 +52,37 @@ EPGSprinter >> initialize [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JA 7/8/2024 23:26'
+	#'squeak_changestamp' : 'JA 7/11/2024 00:59'
 }
-EPGSprinter >> startSprinting [
+EPGSprinter >> sprintingArea [
 
-	self show.	
-	self position: (self owner position - (self width @ 0)).
-	self finishedSprinting: false.
+	^ sprintingArea.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JA 7/9/2024 11:36'
+	#'squeak_changestamp' : 'JA 7/11/2024 01:00'
+}
+EPGSprinter >> sprintingArea: aMorph [
+
+	sprintingArea := aMorph.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'JA 7/11/2024 01:42'
+}
+EPGSprinter >> startSprinting [
+
+	self 
+		show;
+		position: (self sprintingArea position - (self width @ 0));
+		finishedSprinting: false.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'JA 7/11/2024 01:18'
 }
 EPGSprinter >> step [
 
@@ -60,7 +91,7 @@ EPGSprinter >> step [
 	self finishedSprinting ifTrue: [^ nil].
 	self position: (self position + (10 @ 0)).
 	
-	(self position x >=(self owner position x + self owner width)) ifTrue: [
+	(self position x >=(self sprintingArea position x + self sprintingArea width)) ifTrue: [
 		self finishedSprinting: true.
 		self hide].
 ]
