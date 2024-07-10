@@ -54,6 +54,15 @@ EPGCostDisplay class >> debtOffset [
 
 {
 	#category : #constants,
+	#'squeak_changestamp' : 'jmetrikat 7/10/2024 09:19'
+}
+EPGCostDisplay class >> defaultBorderWitdth [
+
+	^ 3.
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'sv 7/9/2024 23:17'
 }
 EPGCostDisplay class >> defaultExtent [
@@ -320,7 +329,7 @@ EPGCostDisplay >> frontend: aBoolean [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'sv 7/9/2024 23:17'
+	#'squeak_changestamp' : 'jmetrikat 7/10/2024 09:19'
 }
 EPGCostDisplay >> initialize [
 
@@ -329,7 +338,7 @@ EPGCostDisplay >> initialize [
 	self 
 		extent: self class defaultExtent;
 		color: Color white;
-		borderWidth: 3;
+		borderWidth: self class defaultBorderWitdth;
 		borderColor: Color gray;
 		storypoint: self class storypoint;
 		display.

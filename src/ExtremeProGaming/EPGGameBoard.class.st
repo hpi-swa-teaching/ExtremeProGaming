@@ -766,11 +766,11 @@ EPGGameBoard >> planningAreas: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'sv 7/10/2024 00:12'
+	#'squeak_changestamp' : 'jmetrikat 7/10/2024 09:21'
 }
 EPGGameBoard >> planningImageFor: aNumber [
 
-	^ (ImageMorph new image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: ('/assets/PlanningAreas/PlanningArea', aNumber,'.png')) scaledToSize: EPGCard cardExtent))
+	^ (ImageMorph new image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: ('/assets/PlanningAreas/PlanningArea', aNumber,'.png')) scaledToSize: EPGCard cardExtent)).
 ]
 
 {
