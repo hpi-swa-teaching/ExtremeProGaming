@@ -18,7 +18,7 @@ Class {
 		'frontend',
 		'gameBoard',
 		'focus',
-		'effectText',
+		'effectSelector',
 		'effect'
 	],
 	#category : #'ExtremeProGaming-UI',
@@ -59,6 +59,51 @@ EPGCard class >> cardExtent [
 EPGCard class >> colorBarHeight [
 
 	^ 22.
+]
+
+{
+	#category : #'text constants',
+	#'squeak_changestamp' : 'sv 7/9/2024 23:07'
+}
+EPGCard class >> defaultTextMargins [
+
+	^ 10 @ 10.
+]
+
+{
+	#category : #'appereance constants',
+	#'squeak_changestamp' : 'sv 7/9/2024 22:51'
+}
+EPGCard class >> displayCostOffset [
+
+	^ (self cardExtent x / 2) @ 5.
+]
+
+{
+	#category : #'appereance constants',
+	#'squeak_changestamp' : 'sv 7/9/2024 23:00'
+}
+EPGCard class >> displayEffectSymbolOffset [
+
+	^ (self cardExtent x / 2) @ 50.
+]
+
+{
+	#category : #'appereance constants',
+	#'squeak_changestamp' : 'sv 7/9/2024 23:00'
+}
+EPGCard class >> displayEffectTextOffset [
+
+	^ 0 @ self cardExtent y * 3 / 2.
+]
+
+{
+	#category : #'appereance constants',
+	#'squeak_changestamp' : 'sv 7/9/2024 22:55'
+}
+EPGCard class >> effectSize [
+
+	^ self cardExtent x / 6. 
 ]
 
 {
@@ -107,7 +152,7 @@ EPGCard class >> frontendLayout [
 ]
 
 {
-	#category : #constants,
+	#category : #'text constants',
 	#'squeak_changestamp' : 'HCH 6/12/2024 14:36'
 }
 EPGCard class >> headerFont [
@@ -115,6 +160,24 @@ EPGCard class >> headerFont [
  	^ TextFontReference  toFont: (StrikeFont familyName: 'Bitmap DejaVu Sans' size: 28).
 
 	
+]
+
+{
+	#category : #'text constants',
+	#'squeak_changestamp' : 'sv 7/9/2024 23:03'
+}
+EPGCard class >> headerMorphHeight [
+
+	^ 50.
+]
+
+{
+	#category : #'appereance constants',
+	#'squeak_changestamp' : 'sv 7/9/2024 23:09'
+}
+EPGCard class >> headerSize [
+
+	^ self cardExtent x @ 50.
 ]
 
 {
@@ -127,7 +190,27 @@ EPGCard class >> headerSymbol [
 ]
 
 {
-	#category : #constants,
+	#category : #'appereance constants',
+	#'squeak_changestamp' : 'sv 7/9/2024 22:57'
+}
+EPGCard class >> negativeEffectImage [
+
+	^ ((GitAssetLoader for: 'ExtremeProGaming') loadAsset: '/assets/ArrowDown.png')
+			scaledToSize: self effectSize.
+]
+
+{
+	#category : #'appereance constants',
+	#'squeak_changestamp' : 'sv 7/9/2024 22:54'
+}
+EPGCard class >> positiveEffectImage [
+
+	^ ((GitAssetLoader for: 'ExtremeProGaming') loadAsset: '/assets/ArrowUp.png')
+			scaledToSize: self effectSize.
+]
+
+{
+	#category : #'text constants',
 	#'squeak_changestamp' : 'sv 6/18/2024 10:15'
 }
 EPGCard class >> taskBackFont [
@@ -138,14 +221,12 @@ EPGCard class >> taskBackFont [
 ]
 
 {
-	#category : #constants,
-	#'squeak_changestamp' : 'JP 6/19/2024 22:19'
+	#category : #'text constants',
+	#'squeak_changestamp' : 'sv 7/9/2024 23:03'
 }
 EPGCard class >> taskFrontFont [
 
  	^ TextFontReference toFont: (StrikeFont familyName: 'Bitmap DejaVu Sans' size: 15).
-
-	
 ]
 
 {
@@ -202,11 +283,11 @@ EPGCard >> beBackend [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'sv 6/16/2024 08:37'
+	#'squeak_changestamp' : 'sv 7/9/2024 20:30'
 }
 EPGCard >> beFocus [
 
-	focus := true.
+	self focus: true.
 ]
 
 {
@@ -238,11 +319,11 @@ EPGCard >> bePositive [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'sv 6/16/2024 08:37'
+	#'squeak_changestamp' : 'sv 7/9/2024 20:31'
 }
 EPGCard >> beUnfocus [
 
-	focus := false.
+	self focus: false.
 ]
 
 {
@@ -376,7 +457,7 @@ EPGCard >> displayConsequenceText: aText [
 
 {
 	#category : #body,
-	#'squeak_changestamp' : 'HCH 6/12/2024 14:44'
+	#'squeak_changestamp' : 'sv 7/9/2024 22:51'
 }
 EPGCard >> displayCost [
 
@@ -384,43 +465,42 @@ EPGCard >> displayCost [
 	self isFrontend
 		ifTrue: [display := EPGCostDisplay newFrontendWithCost: self cost perTechnicalDebt: self perTechnicalDebt]
 		ifFalse: [display := EPGCostDisplay newBackendWithCost: self cost perTechnicalDebt: self perTechnicalDebt].
-	display center: ((self width / 2)@ 5)+ self subHeaderOrigin.
+	display center: self class displayCostOffset + self subHeaderOrigin.
 	self frontBody addMorph: display.
 ]
 
 {
 	#category : #body,
-	#'squeak_changestamp' : 'sv 6/22/2024 14:46'
+	#'squeak_changestamp' : 'sv 7/10/2024 09:44'
 }
 EPGCard >> displayEffect [
 
 	| arrow |
 	arrow := ImageMorph new.
 	self effectSelector = #positive
-		ifTrue: [arrow image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: '/assets/ArrowUp.png') scaledToSize: self effectSize)].
-	self effectSelector = #negative
-		ifTrue: [arrow image:( ((GitAssetLoader for: 'ExtremeProGaming') loadAsset: '/assets/ArrowDown.png') scaledToSize: self effectSize)].
-	arrow center: self bodyOrigin + (self width / 2 @ 50).
-	self frontBody addMorph: arrow.
+		ifTrue: [arrow image: self class positiveEffectImage.]
+		ifFalse: [arrow image: self class negativeEffectImage.].
+	arrow center: self class displayEffectSymbolOffset + self bodyOrigin.
+	self frontBody addMorph: arrow
 ]
 
 {
 	#category : #body,
-	#'squeak_changestamp' : 'sv 6/22/2024 20:16'
+	#'squeak_changestamp' : 'sv 7/9/2024 23:01'
 }
 EPGCard >> displayEffectText: aText [
 
 | textMorph |
 	textMorph := self formatBackTask: aText.
 	self backBody addMorph: textMorph.
-	textMorph position: textMorph position + (0 @ self height * 3 / 2).
+	textMorph position: textMorph position + self class displayEffectTextOffset.
 ]
 
 {
 	#category : #body,
-	#'squeak_changestamp' : 'HCH 6/23/2024 13:30'
+	#'squeak_changestamp' : 'sv 7/9/2024 23:06'
 }
-EPGCard >> displayTask: aText [
+EPGCard >> displayTaskText: aText [
 
 	| textMorph |
 	textMorph := self formatFrontTask: aText.
@@ -460,47 +540,20 @@ EPGCard >> effect: anEPGEffect [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/19/2024 22:03'
+	#'squeak_changestamp' : 'sv 7/9/2024 20:34'
 }
 EPGCard >> effectSelector [
 
-	^ effectText.
+	^ effectSelector.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/19/2024 22:03'
+	#'squeak_changestamp' : 'sv 7/9/2024 20:34'
 }
 EPGCard >> effectSelector: aSelector [
 
-	effectText := aSelector.
-]
-
-{
-	#category : #body,
-	#'squeak_changestamp' : 'HCH 6/12/2024 14:21'
-}
-EPGCard >> effectSize [
-
-	^ self width / 6. 
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/19/2024 22:03'
-}
-EPGCard >> effectText [
-
-	^ effectText.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/20/2024 01:05'
-}
-EPGCard >> effectText: aText [
-
-	effectText := aText.
+	effectSelector := aSelector.
 ]
 
 {
@@ -522,8 +575,26 @@ EPGCard >> facing: aSelector [
 ]
 
 {
+	#category : #accessing,
+	#'squeak_changestamp' : 'sv 7/9/2024 20:29'
+}
+EPGCard >> focus [
+
+	^ focus.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'sv 7/9/2024 20:29'
+}
+EPGCard >> focus: aBoolean [
+
+	focus := aBoolean.
+]
+
+{
 	#category : #header,
-	#'squeak_changestamp' : 'HCH 6/3/2024 16:32'
+	#'squeak_changestamp' : 'sv 7/9/2024 23:03'
 }
 EPGCard >> formatAsTextMorph: aText [
 
@@ -534,14 +605,14 @@ EPGCard >> formatAsTextMorph: aText [
 		vResizing: #rigid;
 		hResizing: #shrinkWrap;
 		width: self width;
-		height: 50;
-		center: self headerTextCenter;
+		height: self class headerMorphHeight;
+		center: self  class headerTextCenter;
 		yourself.
 ]
 
 {
 	#category : #body,
-	#'squeak_changestamp' : 'sv 6/18/2024 10:19'
+	#'squeak_changestamp' : 'sv 7/9/2024 23:08'
 }
 EPGCard >> formatBackTask: aText [
 
@@ -552,14 +623,14 @@ EPGCard >> formatBackTask: aText [
 		hResizing: #rigid;
 		vResizing: #shrinkWrap;
 		width: self width;
-		margins: 10 @ 10;
+		margins: self class defaultTextMargins;
 		lock;
 		yourself.
 ]
 
 {
 	#category : #body,
-	#'squeak_changestamp' : 'sv 6/18/2024 10:19'
+	#'squeak_changestamp' : 'sv 7/9/2024 23:08'
 }
 EPGCard >> formatFrontTask: aText [
 
@@ -570,7 +641,7 @@ EPGCard >> formatFrontTask: aText [
 		hResizing: #rigid;
 		vResizing: #shrinkWrap;
 		width: self width;
-		margins: 10 @ 10;
+		margins: self class defaultTextMargins;
 		lock;
 		yourself.
 ]
@@ -676,22 +747,11 @@ EPGCard >> header: aMorph [
 
 {
 	#category : #header,
-	#'squeak_changestamp' : 'HCH 6/3/2024 16:36'
+	#'squeak_changestamp' : 'sv 7/9/2024 22:35'
 }
 EPGCard >> headerSymbol: aMorph [
 
-	self header addMorph: (aMorph center: self headerSymbolCenter).
-
-	
-]
-
-{
-	#category : #header,
-	#'squeak_changestamp' : 'HCH 6/3/2024 16:36'
-}
-EPGCard >> headerSymbolCenter [
-
-	^ self subclassResponsibility.
+	self header addMorph: (aMorph center: self header center + self class headerSymbolOffset).
 
 	
 ]
@@ -710,17 +770,8 @@ EPGCard >> headerText: aText [
 ]
 
 {
-	#category : #header,
-	#'squeak_changestamp' : 'HCH 6/3/2024 16:33'
-}
-EPGCard >> headerTextCenter [
-
-	^ self subclassResponsibility.
-]
-
-{
 	#category : #initialization,
-	#'squeak_changestamp' : 'sv 6/18/2024 11:36'
+	#'squeak_changestamp' : 'sv 7/9/2024 22:44'
 }
 EPGCard >> initialize [
 
@@ -728,7 +779,7 @@ EPGCard >> initialize [
 	
 	self
 		color: Color white;
-		extent: EPGCard cardExtent;
+		extent: self class cardExtent;
 		frontBody: (Morph new color: Color transparent);
 		backBody: (Morph new color: Color transparent);
 		facing: #front;
@@ -737,15 +788,14 @@ EPGCard >> initialize [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'HCH 6/6/2024 20:03'
+	#'squeak_changestamp' : 'sv 7/9/2024 23:09'
 }
 EPGCard >> initializeHeader: aText [
 
 	| header |
 	header := Morph new
-		extent: self extent x @ 50;
-		color: Color transparent;
-		position:  0 @ 0.
+		extent: self class headerSize;
+		color: Color transparent.
 	self
 		addMorph: header;
 	 	header: header;
@@ -773,11 +823,11 @@ EPGCard >> isEPGStorypoint [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'sv 6/16/2024 08:37'
+	#'squeak_changestamp' : 'sv 7/9/2024 20:32'
 }
 EPGCard >> isFocus [
 
-	^ focus.
+	^ self focus.
 ]
 
 {
@@ -810,6 +860,15 @@ EPGCard >> mouseDown: anEvent [
 		ifTrue: [anEvent hand waitForClicksOrDrag: self event: anEvent].
 	anEvent wasHandled: false.
 	super mouseDown: anEvent.
+]
+
+{
+	#category : #'mouse events',
+	#'squeak_changestamp' : 'sv 7/9/2024 19:10'
+}
+EPGCard >> moveToDone [
+
+	^ self subclassResponsibility.
 ]
 
 {

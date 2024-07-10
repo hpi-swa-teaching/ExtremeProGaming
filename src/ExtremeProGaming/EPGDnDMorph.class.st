@@ -12,7 +12,25 @@ Class {
 }
 
 {
-	#category : #'dragging/dropping',
+	#category : #accessing,
+	#'squeak_changestamp' : 'sv 7/9/2024 20:38'
+}
+EPGDnDMorph >> droppable [
+
+	^ droppable.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'sv 7/9/2024 20:38'
+}
+EPGDnDMorph >> droppable: aBoolean [
+
+	droppable := aBoolean.
+]
+
+{
+	#category : #initialization,
 	#'squeak_changestamp' : 'sv 6/17/2024 14:59'
 }
 EPGDnDMorph >> initialize [
@@ -32,20 +50,20 @@ EPGDnDMorph >> isEPGDnDMorph [
 
 {
 	#category : #'dragging/dropping',
-	#'squeak_changestamp' : 'JP 6/19/2024 21:35'
+	#'squeak_changestamp' : 'sv 7/9/2024 20:41'
 }
 EPGDnDMorph >> shouldDropOnMouseUp [
 
-	^ droppable.
+	^ self droppable.
 ]
 
 {
 	#category : #'dragging/dropping',
-	#'squeak_changestamp' : 'JP 6/19/2024 21:35'
+	#'squeak_changestamp' : 'sv 7/9/2024 20:41'
 }
 EPGDnDMorph >> shouldDropOnMouseUp: aBoolean [
 
-	droppable := aBoolean.
+	self droppable: aBoolean.
 ]
 
 {

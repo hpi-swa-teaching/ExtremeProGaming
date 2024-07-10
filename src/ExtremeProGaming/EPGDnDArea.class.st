@@ -13,12 +13,20 @@ Class {
 		'dropEnabled',
 		'pickUpEnabled',
 		'accepts',
-		'backgroundMargin',
 		'draggable'
 	],
 	#category : #'ExtremeProGaming-UI',
 	#'squeak_changestamp' : 'HCH 5/29/2024 00:29'
 }
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'sv 7/9/2024 23:42'
+}
+EPGDnDArea class >> backgroundMargin [
+
+	^ 15 @ 15.
+]
 
 {
 	#category : #'dragging/dropping',
@@ -104,29 +112,11 @@ EPGDnDArea >> area: aMorph [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'JP 6/14/2024 00:33'
+	#'squeak_changestamp' : 'sv 7/9/2024 23:43'
 }
 EPGDnDArea >> backgroundExtent [
 
-	^ self extent - self backgroundMargin.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 5/29/2024 00:20'
-}
-EPGDnDArea >> backgroundMargin [
-
-	^ backgroundMargin.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 5/29/2024 00:21'
-}
-EPGDnDArea >> backgroundMargin: aPoint [
-
-	backgroundMargin := aPoint.
+	^ self extent - self class backgroundMargin.
 ]
 
 {
@@ -291,7 +281,7 @@ EPGDnDArea >> highlightColor: aColor [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'sv 6/18/2024 13:28'
+	#'squeak_changestamp' : 'sv 7/9/2024 23:44'
 }
 EPGDnDArea >> initialize [
 
@@ -306,8 +296,7 @@ EPGDnDArea >> initialize [
 		borderVisible: false;
 		dropped: OrderedCollection new;
 		accepts: #();
-		backgroundMargin: 15 @ 15;
-		extent: EPGCard cardExtent + self backgroundMargin.
+		extent: EPGCard cardExtent + self class backgroundMargin.
 		
 
 ]
@@ -324,15 +313,6 @@ EPGDnDArea >> initializeVisibleArea [
 		extent: self backgroundExtent;
 		center: self center.
 	self addMorph: self area.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'jmetrikat 6/9/2024 17:54'
-}
-EPGDnDArea >> isEPGBacklogArea [
-
-	^ false.
 ]
 
 {
@@ -427,17 +407,6 @@ EPGDnDArea >> returnStorypoints [
 		(storypoint hasProperty: #temporaryAdditional)
 			ifTrue: [self game gameBoard temporaryStorypointArea dropInMorph: storypoint]
 			ifFalse: [self game gameBoard regularStorypointArea dropInMorph: storypoint]].
-]
-
-{
-	#category : #border,
-	#'squeak_changestamp' : 'HCH 5/27/2024 17:14'
-}
-EPGDnDArea >> toggleBorder [
-
-	self borderVisible
-		ifTrue: [self removeBorder. ]
-		ifFalse: [self addBorder. ]
 ]
 
 {

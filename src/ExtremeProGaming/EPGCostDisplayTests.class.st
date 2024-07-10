@@ -46,7 +46,7 @@ EPGCostDisplayTests class >> storypointExtent [
 ]
 
 {
-	#category : #initializing,
+	#category : #'initialize-release',
 	#'squeak_changestamp' : 'JA 6/8/2024 18:51'
 }
 EPGCostDisplayTests >> setUp [
@@ -57,7 +57,7 @@ EPGCostDisplayTests >> setUp [
 ]
 
 {
-	#category : #displaying,
+	#category : #'test displaying',
 	#'squeak_changestamp' : 'JA 6/8/2024 17:36'
 }
 EPGCostDisplayTests >> testDisplayLargeCostError [
@@ -67,7 +67,7 @@ EPGCostDisplayTests >> testDisplayLargeCostError [
 ]
 
 {
-	#category : #displaying,
+	#category : #'test displaying',
 	#'squeak_changestamp' : 'jmetrikat 6/16/2024 23:25'
 }
 EPGCostDisplayTests >> testDisplayStorypoints [
@@ -83,7 +83,7 @@ EPGCostDisplayTests >> testDisplayStorypoints [
 ]
 
 {
-	#category : #displaying,
+	#category : #'test displaying',
 	#'squeak_changestamp' : 'JA 6/8/2024 18:11'
 }
 EPGCostDisplayTests >> testDisplayZeroCostError [
@@ -93,7 +93,7 @@ EPGCostDisplayTests >> testDisplayZeroCostError [
 ]
 
 {
-	#category : #initializing,
+	#category : #'test initialization',
 	#'squeak_changestamp' : 'jmetrikat 6/16/2024 23:26'
 }
 EPGCostDisplayTests >> testInitializeCostDisplayBackend [
@@ -117,7 +117,7 @@ EPGCostDisplayTests >> testInitializeCostDisplayBackend [
 ]
 
 {
-	#category : #initializing,
+	#category : #'test initialization',
 	#'squeak_changestamp' : 'jmetrikat 6/16/2024 23:26'
 }
 EPGCostDisplayTests >> testInitializeCostDisplayFrontend [

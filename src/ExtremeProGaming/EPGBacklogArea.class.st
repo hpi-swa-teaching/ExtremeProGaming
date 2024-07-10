@@ -63,15 +63,11 @@ EPGBacklogArea >> dropInMorph: aMorph [
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'HCH 6/19/2024 23:24'
+	#'squeak_changestamp' : 'sv 7/9/2024 22:28'
 }
 EPGBacklogArea >> dropInStorypoint: aMorph [
 	
-	| randomPosition |
-	randomPosition := 
-		(self width / 2 - 10 to: self width / 2 + 10) atRandom @ 
-		((self height / 2 - 10 to: self height / 2 + 10) atRandom).
-	super dropInMorph: aMorph at: randomPosition.
+	super dropInMorph: aMorph at: self randomPosition.
 	self amountOfStorypoints: self amountOfStorypoints + 1.
 ]
 
@@ -110,16 +106,7 @@ EPGBacklogArea >> initialize [
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'jmetrikat 6/9/2024 17:55'
-}
-EPGBacklogArea >> isEPGBacklogArea [
-
-	^ true.
-]
-
-{
-	#category : #testing,
+	#category : #'events-processing',
 	#'squeak_changestamp' : 'HCH 6/19/2024 19:55'
 }
 EPGBacklogArea >> isFree [
@@ -140,6 +127,16 @@ EPGBacklogArea >> pickUpMorph: aMorph [
 		formerPosition: aMorph position.
 	self dropped remove: aMorph.
 	^ aMorph.
+]
+
+{
+	#category : #'events-processing',
+	#'squeak_changestamp' : 'sv 7/9/2024 22:27'
+}
+EPGBacklogArea >> randomPosition [
+
+	^ (self width / 2 - 10 to: self width / 2 + 10) atRandom @ 
+		((self height / 2 - 10 to: self height / 2 + 10) atRandom).
 ]
 
 {

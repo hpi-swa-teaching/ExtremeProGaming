@@ -25,6 +25,26 @@ EPGCostDisplay class >> backendColor [
 
 {
 	#category : #constants,
+	#'squeak_changestamp' : 'sv 7/9/2024 23:12'
+}
+EPGCostDisplay class >> backendSymbol [
+
+	^ ImageMorph new image: 
+		(((GitAssetLoader for: 'ExtremeProGaming') 
+		loadAsset: '/assets/TechnicalDebt_Backend.png' ) scaledToSize: 25@25).
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'sv 7/9/2024 23:18'
+}
+EPGCostDisplay class >> debtCenterOffset [
+
+	^ (self defaultExtent x / 4) @ 0.
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'HCH 6/12/2024 14:15'
 }
 EPGCostDisplay class >> debtOffset [
@@ -34,11 +54,29 @@ EPGCostDisplay class >> debtOffset [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'HCH 5/29/2024 22:52'
+	#'squeak_changestamp' : 'jmetrikat 7/10/2024 09:19'
+}
+EPGCostDisplay class >> defaultBorderWitdth [
+
+	^ 3.
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'sv 7/9/2024 23:17'
+}
+EPGCostDisplay class >> defaultExtent [
+
+	^ 180 @ 70.
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'sv 7/9/2024 23:34'
 }
 EPGCostDisplay class >> font [
 
- 	^ StrikeFont familyName: 'DejaVu' size: 69.0.
+ 	^ TextFontReference toFont: ((StrikeFont familyName: 'DejaVu' size: 69.0) asPointSize: self defaultExtent y / 7).
 ]
 
 {
@@ -48,6 +86,26 @@ EPGCostDisplay class >> font [
 EPGCostDisplay class >> frontendColor [
 
 	^ Color red.
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'sv 7/9/2024 23:35'
+}
+EPGCostDisplay class >> frontendSymbol [
+
+	^ ImageMorph new image: 
+		(((GitAssetLoader for: 'ExtremeProGaming') 
+		loadAsset: '/assets/TechnicalDebt_Frontend.png' ) scaledToSize: 25@25).
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'sv 7/9/2024 23:37'
+}
+EPGCostDisplay class >> maxStorypoints [
+
+	^ 6.
 ]
 
 {
@@ -78,19 +136,44 @@ EPGCostDisplay class >> newFrontendWithCost: aCost perTechnicalDebt: aNumber [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'JP 7/8/2024 13:24'
+	#'squeak_changestamp' : 'sv 7/9/2024 23:20'
+}
+EPGCostDisplay class >> nonDebtCenterOffset [
+
+	^ self defaultExtent x / 2 @ 0.
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'sv 7/10/2024 00:21'
+}
+EPGCostDisplay class >> plusUtil [
+
+	^ self defaultExtent y / 14.
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'sv 7/10/2024 00:23'
 }
 EPGCostDisplay class >> positionOffsets [
 
 	^ Dictionary newFrom:
-	{
-		1 -> {0 @ 0}.
+		{1 -> {0 @ 0}.
 		2 -> {15 @ -15 . -15 @ 15}.
 		3 -> {15 @ 15 . -15 @ 15 . 0 @ -15}.
 		4 -> {-20 @ -20 . 20 @ -20 . -20 @ 20 . 20 @ 20}.
 		5 -> {-20 @ -20 . 20 @ -20 . -20 @ 20 . 20 @ 20 . 0 @ 0}.
-		6 -> {-20 @ -20 . -20 @ 0 . -20 @ 20 . 20 @ -20 . 20 @ 0 . 20 @ 20}.
-	}.
+		6 -> {-20 @ -20 . -20 @ 0 . -20 @ 20 . 20 @ -20 . 20 @ 0 . 20 @ 20}.}.
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'sv 7/10/2024 00:22'
+}
+EPGCostDisplay class >> slashUtil [
+
+	^ self defaultExtent y / 10.
 ]
 
 {
@@ -109,17 +192,6 @@ EPGCostDisplay class >> storypoint [
 EPGCostDisplay class >> storypointOffset [
 
 	^ -15 @ -15.
-]
-
-{
-	#category : #display,
-	#'squeak_changestamp' : 'HCH 6/1/2024 15:11'
-}
-EPGCostDisplay >> backendSymbol [
-
-	^ ImageMorph new image: 
-		(((GitAssetLoader for: 'ExtremeProGaming') 
-		loadAsset: '/assets/TechnicalDebt_Backend.png' ) scaledToSize: 25@25).
 ]
 
 {
@@ -160,11 +232,11 @@ EPGCostDisplay >> cost: aNumber [
 
 {
 	#category : #positioning,
-	#'squeak_changestamp' : 'HCH 5/29/2024 21:38'
+	#'squeak_changestamp' : 'sv 7/9/2024 23:19'
 }
 EPGCostDisplay >> debtCenter [
 
-	^ self center + ((self width / 4) @ 0).
+	^ self center + self class debtCenterOffset.
 ]
 
 {
@@ -183,7 +255,7 @@ EPGCostDisplay >> display [
 
 {
 	#category : #display,
-	#'squeak_changestamp' : 'HCH 6/12/2024 14:14'
+	#'squeak_changestamp' : 'sv 7/9/2024 23:35'
 }
 EPGCostDisplay >> displayPerTechnicalDebt [
 
@@ -191,21 +263,21 @@ EPGCostDisplay >> displayPerTechnicalDebt [
 	storypointOffset := self class storypointOffset.
 	debtOffset  := self class debtOffset.
 	self isFrontend 
-		ifTrue: [debtMorph := self frontendSymbol center: self debtCenter + debtOffset]
-		ifFalse: [debtMorph := self  backendSymbol center: self debtCenter + debtOffset].
+		ifTrue: [debtMorph := self class frontendSymbol center: self debtCenter + debtOffset]
+		ifFalse: [debtMorph := self class backendSymbol center: self debtCenter + debtOffset].
 	self addMorph: (self formatTechnicalDebtCost center: (self debtCenter + storypointOffset)).
-	self addMorph: ((self slash: self height / 5) center: self debtCenter).
+	self addMorph: (self initializeSlash center: self debtCenter).
 	self addMorph: debtMorph.
 	
 ]
 
 {
 	#category : #display,
-	#'squeak_changestamp' : 'HCH 6/12/2024 14:38'
+	#'squeak_changestamp' : 'sv 7/9/2024 23:29'
 }
 EPGCostDisplay >> displayPlus [
 
-	self addMorph: ((self plus: self height / 7) center: self center).
+	self addMorph: (self initializePlus center: self center).
 	
 	
 	
@@ -228,21 +300,12 @@ EPGCostDisplay >> displayStorypoints [
 
 {
 	#category : #symbols,
-	#'squeak_changestamp' : 'HCH 5/29/2024 22:58'
-}
-EPGCostDisplay >> font [
-
-	^ TextFontReference toFont: (self class font asPointSize: (self height / 7)).
-]
-
-{
-	#category : #symbols,
-	#'squeak_changestamp' : 'HCH 5/29/2024 22:55'
+	#'squeak_changestamp' : 'sv 7/9/2024 23:34'
 }
 EPGCostDisplay >> formatTechnicalDebtCost [
 
 	^ TextMorph new
-		contents: (self perTechnicalDebt asString asText addAttribute: (self font)).
+		contents: (self perTechnicalDebt asString asText addAttribute: (self class font)).
 		
 ]
 
@@ -265,31 +328,60 @@ EPGCostDisplay >> frontend: aBoolean [
 ]
 
 {
-	#category : #display,
-	#'squeak_changestamp' : 'HCH 6/1/2024 15:11'
-}
-EPGCostDisplay >> frontendSymbol [
-
-	^ ImageMorph new image: 
-		(((GitAssetLoader for: 'ExtremeProGaming') 
-		loadAsset: '/assets/TechnicalDebt_Frontend.png' ) scaledToSize: 25@25).
-]
-
-{
 	#category : #initialization,
-	#'squeak_changestamp' : 'HCH 6/12/2024 14:38'
+	#'squeak_changestamp' : 'jmetrikat 7/10/2024 09:19'
 }
 EPGCostDisplay >> initialize [
 
 	super initialize.
 	
 	self 
-		extent: 180 @ 70;
+		extent: self class defaultExtent;
 		color: Color white;
-		borderWidth: 3;
+		borderWidth: self class defaultBorderWitdth;
 		borderColor: Color gray;
 		storypoint: self class storypoint;
 		display.
+]
+
+{
+	#category : #symbols,
+	#'squeak_changestamp' : 'sv 7/10/2024 00:21'
+}
+EPGCostDisplay >> initializePlus [
+"Using plusUtil as a number dependent on the height of the costDisplay for calculating the position of the '+' symbol."
+	| plusUtil vertices |
+	plusUtil := self class plusUtil.
+	vertices := {
+		plusUtil negated @ 0 . 
+		plusUtil @ 0 . 
+		0 @ 0 . 
+		0 @ plusUtil negated . 
+		0 @ plusUtil  . 0 @ 0}.
+	^ PolygonMorph
+		 	vertices: vertices 
+			color: Color black 
+			borderWidth: (plusUtil / 2 max: 3) 
+			borderColor: Color black.
+]
+
+{
+	#category : #symbols,
+	#'squeak_changestamp' : 'sv 7/10/2024 00:22'
+}
+EPGCostDisplay >> initializeSlash [
+"Using slashUtil as a number dependent on the height of the costDisplay for calculating the position of the '/' symbol for storypoints per TechnicalDebt."
+	| slashUtil vertices |
+	slashUtil := self class slashUtil.
+	vertices := {
+		slashUtil negated @ slashUtil. 
+		slashUtil @ slashUtil negated . 
+		0 @ 0}.
+	^ PolygonMorph
+		 	vertices: vertices 
+			color: Color black 
+			borderWidth: (slashUtil / 3 max: 4) 
+			borderColor: Color black.
 ]
 
 {
@@ -312,13 +404,13 @@ EPGCostDisplay >> isFrontend [
 
 {
 	#category : #positioning,
-	#'squeak_changestamp' : 'HCH 5/29/2024 21:43'
+	#'squeak_changestamp' : 'sv 7/10/2024 09:33'
 }
 EPGCostDisplay >> nonDebtCenter [
 
-	perTechnicalDebt = 0
+	self perTechnicalDebt = 0
 		ifTrue: [^ self center].
-	^ self debtCenter - (self width / 2@ 0).
+	^ self debtCenter - self class nonDebtCenterOffset.
 ]
 
 {
@@ -340,55 +432,17 @@ EPGCostDisplay >> perTechnicalDebt: aNumber [
 ]
 
 {
-	#category : #symbols,
-	#'squeak_changestamp' : 'HCH 6/12/2024 14:39'
-}
-EPGCostDisplay >> plus: aNumber [
-
-	|vertices|
-	vertices := {
-		(aNumber / 2) negated @ 0 . 
-		aNumber / 2 @ 0 . 
-		0 @ 0 . 
-		0 @ (aNumber / 2) negated . 
-		0 @ (aNumber / 2) . 0 @ 0}.
-	^ PolygonMorph
-		 	vertices: vertices 
-			color: Color black 
-			borderWidth: (aNumber / 4 max: 3) 
-			borderColor: Color black.
-]
-
-{
 	#category : #positioning,
-	#'squeak_changestamp' : 'HCH 5/29/2024 21:56'
+	#'squeak_changestamp' : 'sv 7/9/2024 23:38'
 }
 EPGCostDisplay >> positionOffsetsFor: aNumber [
 
-	(1 <= aNumber and: [aNumber <= 6]) 
-		ifFalse: [self error: 'Number of Storypoints cannot be outside [1,6]'].
+	(1 <= aNumber and: [aNumber <= self class maxStorypoints]) 
+		ifFalse: [self error: 'Number of Storypoints cannot be outside [1,' + self class maxStorypoints + ']'].
 	^ self class positionOffsets at: aNumber.
 	
 	
 	
-]
-
-{
-	#category : #symbols,
-	#'squeak_changestamp' : 'HCH 6/6/2024 20:00'
-}
-EPGCostDisplay >> slash: aNumber [
-
-	|vertices|
-	vertices := {
-		(aNumber / 2) negated @ (aNumber / 2) . 
-		(aNumber / 2) @ (aNumber / 2) negated . 
-		0 @ 0}.
-	^ PolygonMorph
-		 	vertices: vertices 
-			color: Color black 
-			borderWidth: (aNumber / 6 max: 4) 
-			borderColor: Color black.
 ]
 
 {

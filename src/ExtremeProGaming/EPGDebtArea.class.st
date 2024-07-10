@@ -14,6 +14,15 @@ Class {
 }
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'sv 7/9/2024 23:41'
+}
+EPGDebtArea class >> defaultExtent [
+
+	^ 375 @ 225.
+]
+
+{
 	#category : #features,
 	#'squeak_changestamp' : 'JP 6/19/2024 19:51'
 }
@@ -89,7 +98,7 @@ EPGDebtArea >> incrementDebt [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 6/17/2024 15:31'
+	#'squeak_changestamp' : 'sv 7/9/2024 23:41'
 }
 EPGDebtArea >> initialize [ 
 
@@ -98,7 +107,7 @@ EPGDebtArea >> initialize [
 	self 
 		currentDebt: 0;
 		color: EPGGameBoard defaultColor;
-		extent: 375 @ 225.
+		extent: self class defaultExtent.
 ]
 
 {
