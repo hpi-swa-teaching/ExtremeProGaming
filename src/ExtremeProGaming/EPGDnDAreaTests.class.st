@@ -24,6 +24,16 @@ EPGDnDAreaTests >> setUp [
 ]
 
 {
+	#category : #'initialize-release',
+	#'squeak_changestamp' : 'HCH 7/10/2024 14:14'
+}
+EPGDnDAreaTests >> tearDown [
+	
+	morph abandon.
+	dropMorph abandon.
+]
+
+{
 	#category : #tests,
 	#'squeak_changestamp' : 'HCH 7/9/2024 11:27'
 }

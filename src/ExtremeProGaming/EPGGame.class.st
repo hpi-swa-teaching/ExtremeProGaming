@@ -507,7 +507,7 @@ EPGGame >> processBacklogAreaStorypoints [
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'HCH 7/8/2024 20:56'
+	#'squeak_changestamp' : 'HCH 7/10/2024 14:02'
 }
 EPGGame >> processCards [
 
@@ -518,7 +518,7 @@ EPGGame >> processCards [
 			card process.
 			processedCards add: card].
 	processedCards size = 0 ifTrue: [self startNewRound.].
-	processedCards do: [:card | card prepareMoveToDone].
+	processedCards do: [:card | card toggleFocusCard].
 	self processDebtToAdd: processedCards.
 ]
 

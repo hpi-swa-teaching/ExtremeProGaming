@@ -57,6 +57,17 @@ EPGCostDisplayTests >> setUp [
 ]
 
 {
+	#category : #'initialize-release',
+	#'squeak_changestamp' : 'HCH 7/10/2024 14:05'
+}
+EPGCostDisplayTests >> tearDown [
+
+	morph abandon.
+	morphFront abandon.
+	morphBack abandon.
+]
+
+{
 	#category : #'test displaying',
 	#'squeak_changestamp' : 'JA 6/8/2024 17:36'
 }

@@ -66,6 +66,15 @@ EPGCardTests >> setUp [
 ]
 
 {
+	#category : #'initialize-release',
+	#'squeak_changestamp' : 'HCH 7/10/2024 14:09'
+}
+EPGCardTests >> tearDown [
+
+	card abandon.
+]
+
+{
 	#category : #tests,
 	#'squeak_changestamp' : 'sv 7/7/2024 20:19'
 }
