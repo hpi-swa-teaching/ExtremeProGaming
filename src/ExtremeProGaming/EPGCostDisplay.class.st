@@ -404,7 +404,7 @@ EPGCostDisplay >> isFrontend [
 
 {
 	#category : #positioning,
-	#'squeak_changestamp' : 'sv 7/9/2024 23:20'
+	#'squeak_changestamp' : 'sv 7/10/2024 09:33'
 }
 EPGCostDisplay >> nonDebtCenter [
 
