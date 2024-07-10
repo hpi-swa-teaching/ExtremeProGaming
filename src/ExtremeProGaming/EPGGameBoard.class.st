@@ -571,7 +571,7 @@ EPGGameBoard >> initializeBacklogAreas [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 6/23/2024 16:18'
+	#'squeak_changestamp' : 'HCH 7/8/2024 21:10'
 }
 EPGGameBoard >> initializeButton [
 
@@ -581,7 +581,7 @@ EPGGameBoard >> initializeButton [
 			label: 'Next Round' font: self class defaultFont;
 			extent: self class buttonExtent;
 			color: self class defaultColor;
-			target: [self game startNewRound];
+			target: [self game finishSprint.];
 			actionSelector: #value;
 			yourself.
 	

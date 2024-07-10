@@ -68,11 +68,11 @@ EPGGame >> addBugCard [
 
 {
 	#category : #cards,
-	#'squeak_changestamp' : 'HCH 6/20/2024 19:54'
+	#'squeak_changestamp' : 'HCH 7/8/2024 21:13'
 }
 EPGGame >> addCard: aBacklogCard [
 
-	(self freeBacklogAreas size = 0) ifTrue: [self error: 'Cannot place more cards on board'].
+	(self freeBacklogAreas size = 0) ifTrue: [self endGame.].
 	self freeBacklogAreas first dropInCard: aBacklogCard.
 ]
 
@@ -166,11 +166,11 @@ EPGGame >> cardSource: aCardSource [
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'sv 6/24/2024 10:17'
+	#'squeak_changestamp' : 'HCH 7/8/2024 21:10'
 }
 EPGGame >> checkForGameEnd [
 
-	 ((self currentRound = 10) or: (self freeBacklogAreas isEmpty)) ifTrue: [self endGame].
+	 ((self currentRound >= 10) or: (self freeBacklogAreas isEmpty)) ifTrue: [self endGame.].
 ]
 
 {
@@ -203,6 +203,22 @@ EPGGame >> endGame [
 	self class highScore: (score max: (self class highScore ifNil: [0])).
 	self gameBoard abandon.
 	
+]
+
+{
+	#category : #sprints,
+	#'squeak_changestamp' : 'HCH 7/8/2024 21:07'
+}
+EPGGame >> finishSprint [
+
+	self startOfRound ifTrue: [^ self.].
+	self 
+		processCards;
+		processDebtAreas;
+		processBacklogAreaStorypoints;
+		currentRound: self currentRound + 1;
+		changed: #newRound.
+	self gameBoard freezeDnD.
 ]
 
 {
@@ -491,7 +507,7 @@ EPGGame >> processBacklogAreaStorypoints [
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'sv 7/9/2024 18:29'
+	#'squeak_changestamp' : 'HCH 7/10/2024 14:02'
 }
 EPGGame >> processCards [
 
@@ -500,9 +516,9 @@ EPGGame >> processCards [
 	self processableCards do: [:card | 
 			self sprintEffects add: card effect. 
 			card process.
-			processedCards add: card.].
-	processedCards size = 0 ifTrue: [self startOfRound: true.].
-	processedCards do: [:card | card toggleFocusCard.].
+			processedCards add: card].
+	processedCards size = 0 ifTrue: [self startNewRound.].
+	processedCards do: [:card | card toggleFocusCard].
 	self processDebtToAdd: processedCards.
 ]
 
@@ -607,18 +623,14 @@ EPGGame >> sprintEffects: aCollection [
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'Philipp 6/23/2024 18:20'
+	#'squeak_changestamp' : 'HCH 7/8/2024 20:56'
 }
 EPGGame >> startNewRound [
 
 	self 
-		processCards;
-		processDebtAreas;
-		processBacklogAreaStorypoints;
-		checkForGameEnd;
-		currentRound: self currentRound + 1;
-		changed: #newRound.
-	self gameBoard freezeDnD.
+		applySprintEffects;
+		startOfRound: true;
+		checkForGameEnd.
 ]
 
 {
@@ -641,7 +653,7 @@ EPGGame >> startOfRound: aBoolean [
 
 {
 	#category : #cards,
-	#'squeak_changestamp' : 'JP 7/8/2024 13:25'
+	#'squeak_changestamp' : 'HCH 7/8/2024 21:10'
 }
 EPGGame >> unfocusCard: anEPGCard [
 
@@ -649,7 +661,7 @@ EPGGame >> unfocusCard: anEPGCard [
 	anEPGCard isEPGFeatureCard ifTrue: [self updateFeatureScore].
 	anEPGCard isEPGEventCard  ifTrue: [^ self.].
 	self focusedCards size = 0
-		ifTrue: [self applySprintEffects. self startOfRound: true].
+		ifTrue: [self startNewRound.].
 	
 ]
 

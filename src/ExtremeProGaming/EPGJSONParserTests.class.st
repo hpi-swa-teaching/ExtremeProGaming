@@ -29,6 +29,15 @@ EPGJSONParserTests >> setUp [
 ]
 
 {
+	#category : #'initialize-release',
+	#'squeak_changestamp' : 'HCH 7/10/2024 14:07'
+}
+EPGJSONParserTests >> tearDown [
+
+	board abandon.
+]
+
+{
 	#category : #'test parsing functionality',
 	#'squeak_changestamp' : 'HCH 6/19/2024 21:18'
 }
