@@ -471,14 +471,14 @@ EPGCard >> displayCost [
 
 {
 	#category : #body,
-	#'squeak_changestamp' : 'sv 7/9/2024 23:00'
+	#'squeak_changestamp' : 'sv 7/10/2024 09:44'
 }
 EPGCard >> displayEffect [
 
 	| arrow |
 	arrow := ImageMorph new.
 	self effectSelector = #positive
-		ifTrue: [arrow image: self class positiveEffectImage]
+		ifTrue: [arrow image: self class positiveEffectImage.]
 		ifFalse: [arrow image: self class negativeEffectImage.].
 	arrow center: self class displayEffectSymbolOffset + self bodyOrigin.
 	self frontBody addMorph: arrow

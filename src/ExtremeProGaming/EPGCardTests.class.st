@@ -47,7 +47,7 @@ EPGCardTests >> processCards [
 ]
 
 {
-	#category : #initialize,
+	#category : #'initialize-release',
 	#'squeak_changestamp' : 'sv 6/23/2024 12:40'
 }
 EPGCardTests >> setUp [

@@ -30,7 +30,7 @@ EPGDnDMorph >> droppable: aBoolean [
 ]
 
 {
-	#category : #'dragging/dropping',
+	#category : #initialization,
 	#'squeak_changestamp' : 'sv 6/17/2024 14:59'
 }
 EPGDnDMorph >> initialize [
