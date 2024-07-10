@@ -110,16 +110,7 @@ EPGBacklogArea >> initialize [
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'jmetrikat 6/9/2024 17:55'
-}
-EPGBacklogArea >> isEPGBacklogArea [
-
-	^ true.
-]
-
-{
-	#category : #testing,
+	#category : #'events-processing',
 	#'squeak_changestamp' : 'HCH 6/19/2024 19:55'
 }
 EPGBacklogArea >> isFree [

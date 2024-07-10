@@ -328,15 +328,6 @@ EPGDnDArea >> initializeVisibleArea [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'jmetrikat 6/9/2024 17:54'
-}
-EPGDnDArea >> isEPGBacklogArea [
-
-	^ false.
-]
-
-{
-	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 5/27/2024 17:57'
 }
 EPGDnDArea >> isEPGDnDArea [
@@ -427,17 +418,6 @@ EPGDnDArea >> returnStorypoints [
 		(storypoint hasProperty: #temporaryAdditional)
 			ifTrue: [self game gameBoard temporaryStorypointArea dropInMorph: storypoint]
 			ifFalse: [self game gameBoard regularStorypointArea dropInMorph: storypoint]].
-]
-
-{
-	#category : #border,
-	#'squeak_changestamp' : 'HCH 5/27/2024 17:14'
-}
-EPGDnDArea >> toggleBorder [
-
-	self borderVisible
-		ifTrue: [self removeBorder. ]
-		ifFalse: [self addBorder. ]
 ]
 
 {

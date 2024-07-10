@@ -18,7 +18,7 @@ Class {
 		'frontend',
 		'gameBoard',
 		'focus',
-		'effectText',
+		'effectSelector',
 		'effect'
 	],
 	#category : #'ExtremeProGaming-UI',
@@ -202,11 +202,11 @@ EPGCard >> beBackend [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'sv 6/16/2024 08:37'
+	#'squeak_changestamp' : 'sv 7/9/2024 20:30'
 }
 EPGCard >> beFocus [
 
-	focus := true.
+	self focus: true.
 ]
 
 {
@@ -238,11 +238,11 @@ EPGCard >> bePositive [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'sv 6/16/2024 08:37'
+	#'squeak_changestamp' : 'sv 7/9/2024 20:31'
 }
 EPGCard >> beUnfocus [
 
-	focus := false.
+	self focus: false.
 ]
 
 {
@@ -460,20 +460,20 @@ EPGCard >> effect: anEPGEffect [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/19/2024 22:03'
+	#'squeak_changestamp' : 'sv 7/9/2024 20:34'
 }
 EPGCard >> effectSelector [
 
-	^ effectText.
+	^ effectSelector.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/19/2024 22:03'
+	#'squeak_changestamp' : 'sv 7/9/2024 20:34'
 }
 EPGCard >> effectSelector: aSelector [
 
-	effectText := aSelector.
+	effectSelector := aSelector.
 ]
 
 {
@@ -483,24 +483,6 @@ EPGCard >> effectSelector: aSelector [
 EPGCard >> effectSize [
 
 	^ self width / 6. 
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/19/2024 22:03'
-}
-EPGCard >> effectText [
-
-	^ effectText.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/20/2024 01:05'
-}
-EPGCard >> effectText: aText [
-
-	effectText := aText.
 ]
 
 {
@@ -519,6 +501,24 @@ EPGCard >> facing [
 EPGCard >> facing: aSelector [
 
 	facing := aSelector.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'sv 7/9/2024 20:29'
+}
+EPGCard >> focus [
+
+	^ focus.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'sv 7/9/2024 20:29'
+}
+EPGCard >> focus: aBoolean [
+
+	focus := aBoolean.
 ]
 
 {
@@ -773,11 +773,11 @@ EPGCard >> isEPGStorypoint [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'sv 6/16/2024 08:37'
+	#'squeak_changestamp' : 'sv 7/9/2024 20:32'
 }
 EPGCard >> isFocus [
 
-	^ focus.
+	^ self focus.
 ]
 
 {
@@ -810,6 +810,15 @@ EPGCard >> mouseDown: anEvent [
 		ifTrue: [anEvent hand waitForClicksOrDrag: self event: anEvent].
 	anEvent wasHandled: false.
 	super mouseDown: anEvent.
+]
+
+{
+	#category : #'mouse events',
+	#'squeak_changestamp' : 'sv 7/9/2024 19:10'
+}
+EPGCard >> moveToDone [
+
+	^ self subclassResponsibility.
 ]
 
 {

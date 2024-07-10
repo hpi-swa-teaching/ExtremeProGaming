@@ -627,15 +627,6 @@ EPGGameBoard >> initializeSectionMorphs [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'Philipp 6/21/2024 02:37'
-}
-EPGGameBoard >> initializeStartScreen [
-	
-	self addMorph: (EPGStartScreen newWithScore: self game class highScore)
-]
-
-{
-	#category : #initialization,
 	#'squeak_changestamp' : 'JP 6/19/2024 22:43'
 }
 EPGGameBoard >> initializeStorypointAreas [
