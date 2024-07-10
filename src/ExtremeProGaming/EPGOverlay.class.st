@@ -41,6 +41,15 @@ EPGOverlay class >> defaultFont [
 
 {
 	#category : #constants,
+	#'squeak_changestamp' : 'sv 7/10/2024 00:14'
+}
+EPGOverlay class >> defaultMargins [
+
+ 	^ 10 @ 35.
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'Philipp 6/26/2024 15:50'
 }
 EPGOverlay class >> mountAgilityExtent [
@@ -153,7 +162,7 @@ EPGOverlay >> initializeMountAgility [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'Philipp 6/26/2024 16:23'
+	#'squeak_changestamp' : 'sv 7/10/2024 00:14'
 }
 EPGOverlay >> initializeScoreDisplay: label [
 	
@@ -164,7 +173,7 @@ EPGOverlay >> initializeScoreDisplay: label [
 		centered;
 		vResizing: #spaceFill;
 		hResizing: #spaceFill;
-		margins: 10 @ 35;
+		margins: self class defaultMargins;
 		useRoundedCorners;
 		extent: self class buttonExtent;
 		lock).

@@ -26,6 +26,24 @@ EPGEventCard class >> headerSymbol [
 
 {
 	#category : #constants,
+	#'squeak_changestamp' : 'sv 7/9/2024 22:34'
+}
+EPGEventCard class >> headerSymbolOffset [
+
+	^ 40 @ 0.
+]
+
+{
+	#category : #'instance creation',
+	#'squeak_changestamp' : 'sv 7/9/2024 22:42'
+}
+EPGEventCard class >> headerTextCenter [
+
+	^ 80 @ 25.
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'jmetrikat 6/23/2024 16:37'
 }
 EPGEventCard class >> iterationNumberFont [
@@ -36,8 +54,18 @@ EPGEventCard class >> iterationNumberFont [
 ]
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'sv 7/9/2024 23:47'
+}
+EPGEventCard class >> iterationNumberOffset [
+
+ 	^  0 @ 50.
+	
+]
+
+{
 	#category : #'instance creation',
-	#'squeak_changestamp' : 'HCH 6/23/2024 14:22'
+	#'squeak_changestamp' : 'sv 7/9/2024 23:06'
 }
 EPGEventCard class >> newWithTitle: aTitle description: aDescription effectText: anEffectText iterationNumber: aNumber [
 
@@ -45,7 +73,7 @@ EPGEventCard class >> newWithTitle: aTitle description: aDescription effectText:
 	card := self new
 				initializeHeader: 'Event';
 				colorBar: self eventColor withLayout: self eventLayout;
-				displayTask: aTitle;
+				displayTaskText: aTitle;
 				displayConsequenceText: aDescription;
 				displayEffectText: anEffectText;
 				displayIterationNumber: aNumber.
@@ -57,21 +85,21 @@ EPGEventCard class >> newWithTitle: aTitle description: aDescription effectText:
 
 {
 	#category : #body,
-	#'squeak_changestamp' : 'HCH 6/23/2024 14:02'
+	#'squeak_changestamp' : 'sv 7/9/2024 23:48'
 }
 EPGEventCard >> displayIterationNumber: aNumber [
 
 	| textMorph |
 	textMorph := self formatIterationNumber: aNumber asString.
-	textMorph center: self center - (0 @ 50).
+	textMorph center: self center - self class iterationNumberOffset.
 	self frontBody addMorph: textMorph.
 ]
 
 {
 	#category : #body,
-	#'squeak_changestamp' : 'HCH 6/23/2024 13:56'
+	#'squeak_changestamp' : 'sv 7/9/2024 23:06'
 }
-EPGEventCard >> displayTask: aText [
+EPGEventCard >> displayTaskText: aText [
 
 	| textMorph |
 	textMorph := self formatFrontTask: aText.
@@ -98,24 +126,6 @@ EPGEventCard >> formatIterationNumber: aText [
 		yourself.
 
 	
-]
-
-{
-	#category : #header,
-	#'squeak_changestamp' : 'HCH 6/23/2024 13:45'
-}
-EPGEventCard >> headerSymbolCenter [
-
-	^ self header center + (40 @ 0).
-]
-
-{
-	#category : #header,
-	#'squeak_changestamp' : 'HCH 6/23/2024 13:46'
-}
-EPGEventCard >> headerTextCenter [
-
-	^ self header center - (20 @ 0).
 ]
 
 {

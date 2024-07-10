@@ -22,8 +22,26 @@ EPGFeatureCard class >> headerSymbol [
 ]
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'sv 7/9/2024 22:33'
+}
+EPGFeatureCard class >> headerSymbolOffset [
+
+	^ 45 @ 0.
+]
+
+{
 	#category : #'instance creation',
-	#'squeak_changestamp' : 'HCH 6/23/2024 13:30'
+	#'squeak_changestamp' : 'sv 7/9/2024 22:42'
+}
+EPGFeatureCard class >> headerTextCenter [
+
+	^ 75 @ 25.
+]
+
+{
+	#category : #'instance creation',
+	#'squeak_changestamp' : 'sv 7/9/2024 23:06'
 }
 EPGFeatureCard class >> newBackendWithTask: aTask consequence: aConsequence effect: anEffect cost: aCost perTechnicalDebt: aNumber positive: aBoolean [
 	
@@ -32,7 +50,7 @@ EPGFeatureCard class >> newBackendWithTask: aTask consequence: aConsequence effe
 					beBackend;
 					initializeHeader: 'Feature';
 					colorBar: self backendColor withLayout: self backendLayout;
-					displayTask: aTask;
+					displayTaskText: aTask;
 					displayConsequenceText: aConsequence;
 					displayEffectText: anEffect;
 					cost: aCost perTechnicalDebt: aNumber.
@@ -48,7 +66,7 @@ EPGFeatureCard class >> newBackendWithTask: aTask consequence: aConsequence effe
 
 {
 	#category : #'instance creation',
-	#'squeak_changestamp' : 'HCH 6/23/2024 13:30'
+	#'squeak_changestamp' : 'sv 7/9/2024 23:06'
 }
 EPGFeatureCard class >> newFrontendWithTask: aTask consequence: aConsequence effect: anEffect cost: aCost perTechnicalDebt: aNumber positive: aBoolean [
 	
@@ -57,7 +75,7 @@ EPGFeatureCard class >> newFrontendWithTask: aTask consequence: aConsequence eff
 					beFrontend;
 					initializeHeader: 'Feature';
 					colorBar: self frontendColor withLayout: self frontendLayout;
-					displayTask: aTask;
+					displayTaskText: aTask;
 					displayConsequenceText: aConsequence;
 					displayEffectText: anEffect;
 					cost: aCost perTechnicalDebt: aNumber.
@@ -69,24 +87,6 @@ EPGFeatureCard class >> newFrontendWithTask: aTask consequence: aConsequence eff
 		changeBody: instance frontBody.
 	^ instance.
 	
-]
-
-{
-	#category : #header,
-	#'squeak_changestamp' : 'HCH 6/12/2024 14:37'
-}
-EPGFeatureCard >> headerSymbolCenter [
-
-	^ self header center + (45 @ 0).
-]
-
-{
-	#category : #header,
-	#'squeak_changestamp' : 'HCH 6/12/2024 14:19'
-}
-EPGFeatureCard >> headerTextCenter [
-
-	^ 75 @ 25.
 ]
 
 {

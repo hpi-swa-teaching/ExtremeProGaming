@@ -53,18 +53,18 @@ EPGJSONParser >> bugCards: aBugCardCollection [
 
 {
 	#category : #'card creation',
-	#'squeak_changestamp' : 'sv 7/7/2024 19:48'
+	#'squeak_changestamp' : 'jmetrikat 7/10/2024 09:21'
 }
 EPGJSONParser >> configureCardType: aCardJsonFormatted [
 
 	| cardType |
 	cardType := aCardJsonFormatted at: 'type'.
 	cardType caseOf: {
-		['Feature'] -> [	^ self createFeatureCard: aCardJsonFormatted].
-		['Bug'] -> [^ self createBugCard: aCardJsonFormatted].
-		['Event'] -> [^ self createEventCard: aCardJsonFormatted]}
+		['Feature'] -> [	^ self createFeatureCard: aCardJsonFormatted.].
+		['Bug'] -> [^ self createBugCard: aCardJsonFormatted.].
+		['Event'] -> [^ self createEventCard: aCardJsonFormatted.]}
 	 otherwise: [
-		Error new: 'Unkown card type: ', cardType, '. Please check JSON file for card creation'; 		signal].
+		Error new: 'Unkown card type: ', cardType, '. Please check JSON file for card creation'; signal].
 ]
 
 {
