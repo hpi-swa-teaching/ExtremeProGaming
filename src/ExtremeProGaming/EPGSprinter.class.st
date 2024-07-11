@@ -14,12 +14,13 @@ Class {
 
 {
 	#category : #'instance creation',
-	#'squeak_changestamp' : 'JA 7/11/2024 01:15'
+	#'squeak_changestamp' : 'JA 7/11/2024 18:02'
 }
 EPGSprinter class >> newFrom: anAnimatedImageMorph with: aSprintingArea [
 	
 	^ (self newFrom: anAnimatedImageMorph) 
 		sprintingArea: aSprintingArea;
+		finishedSprinting: true;
 		yourself.
 ]
 
