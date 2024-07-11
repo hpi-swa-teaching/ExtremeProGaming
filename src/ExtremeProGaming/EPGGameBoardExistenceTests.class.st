@@ -77,6 +77,19 @@ EPGGameBoardExistenceTests >> testCalculateAreaPosition [
 
 {
 	#category : #'tests - initialization',
+	#'squeak_changestamp' : 'JA 7/7/2024 19:44'
+}
+EPGGameBoardExistenceTests >> testCreationSprintingArea [
+
+	|sprintingArea|
+	sprintingArea := morph createSprintingArea.
+	
+	self assert: sprintingArea extent equals: 2000@200.
+	self assert: sprintingArea submorphs size equals: 3.
+]
+
+{
+	#category : #'tests - initialization',
 	#'squeak_changestamp' : 'jmetrikat 6/17/2024 23:10'
 }
 EPGGameBoardExistenceTests >> testSectionMorphsExistence [

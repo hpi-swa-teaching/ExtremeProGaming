@@ -107,7 +107,7 @@ EPGGame >> addTemporary: aNumber [
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'sv 6/24/2024 10:07'
+	#'squeak_changestamp' : 'JA 7/8/2024 22:34'
 }
 EPGGame >> applySprintEffects [
 	
@@ -623,10 +623,11 @@ EPGGame >> sprintEffects: aCollection [
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'HCH 7/8/2024 20:56'
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 21:35'
 }
 EPGGame >> startNewRound [
 
+	self gameBoard sprinter startSprinting.
 	self 
 		applySprintEffects;
 		startOfRound: true;

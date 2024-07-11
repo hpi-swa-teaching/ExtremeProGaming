@@ -119,6 +119,13 @@
 		],
 		#encoding : @4
 	},
+	SquotAnimationMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'running_man_correct_direction.gif'
+		],
+		#encoding : Class [ #GIFReadWriter ]
+	},
 	SquotImageMapper {
 		#path : FSAbsolutePath [
 			'assets',
