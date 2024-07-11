@@ -1,3 +1,6 @@
+"
+Tests the correct parsing from an json file to EPGCards.
+"
 Class {
 	#name : #EPGJSONParserTests,
 	#superclass : #TestCase,
@@ -5,7 +8,8 @@ Class {
 		'parser',
 		'board'
 	],
-	#category : #'ExtremeProGaming-Tests'
+	#category : #'ExtremeProGaming-Tests',
+	#'squeak_changestamp' : 'JP 7/8/2024 13:13'
 }
 
 {
@@ -25,7 +29,16 @@ EPGJSONParserTests >> setUp [
 ]
 
 {
-	#category : #'parsing functionality',
+	#category : #'initialize-release',
+	#'squeak_changestamp' : 'HCH 7/10/2024 14:07'
+}
+EPGJSONParserTests >> tearDown [
+
+	board abandon.
+]
+
+{
+	#category : #'test parsing functionality',
 	#'squeak_changestamp' : 'HCH 6/19/2024 21:18'
 }
 EPGJSONParserTests >> testBugBackendCardCreation [
@@ -37,7 +50,7 @@ EPGJSONParserTests >> testBugBackendCardCreation [
 ]
 
 {
-	#category : #'parsing functionality',
+	#category : #'test parsing functionality',
 	#'squeak_changestamp' : 'HCH 6/19/2024 21:18'
 }
 EPGJSONParserTests >> testBugFrontendCardCreation [
@@ -49,7 +62,7 @@ EPGJSONParserTests >> testBugFrontendCardCreation [
 ]
 
 {
-	#category : #'card generation',
+	#category : #'test card generation',
 	#'squeak_changestamp' : 'jmetrikat 6/17/2024 23:12'
 }
 EPGJSONParserTests >> testCardAmountSetting [
@@ -62,7 +75,7 @@ EPGJSONParserTests >> testCardAmountSetting [
 ]
 
 {
-	#category : #'card generation',
+	#category : #'test card generation',
 	#'squeak_changestamp' : 'jmetrikat 6/17/2024 23:11'
 }
 EPGJSONParserTests >> testCardAmountSettingReal [
@@ -74,7 +87,7 @@ EPGJSONParserTests >> testCardAmountSettingReal [
 ]
 
 {
-	#category : #'parsing functionality',
+	#category : #'test parsing functionality',
 	#'squeak_changestamp' : 'sv 6/9/2024 15:38'
 }
 EPGJSONParserTests >> testCardCollection [
@@ -85,7 +98,7 @@ EPGJSONParserTests >> testCardCollection [
 ]
 
 {
-	#category : #'parsing functionality',
+	#category : #'test parsing functionality',
 	#'squeak_changestamp' : 'sv 6/9/2024 15:38'
 }
 EPGJSONParserTests >> testCardCollectionElement [
@@ -96,7 +109,7 @@ EPGJSONParserTests >> testCardCollectionElement [
 ]
 
 {
-	#category : #'parsing functionality',
+	#category : #'test parsing functionality',
 	#'squeak_changestamp' : 'HCH 6/19/2024 21:18'
 }
 EPGJSONParserTests >> testFeatureBackendCardCreation [
@@ -108,7 +121,7 @@ EPGJSONParserTests >> testFeatureBackendCardCreation [
 ]
 
 {
-	#category : #'parsing functionality',
+	#category : #'test parsing functionality',
 	#'squeak_changestamp' : 'HCH 6/19/2024 21:18'
 }
 EPGJSONParserTests >> testFeatureFrontendCardCreation [
@@ -120,7 +133,7 @@ EPGJSONParserTests >> testFeatureFrontendCardCreation [
 ]
 
 {
-	#category : #'card generation',
+	#category : #'test card generation',
 	#'squeak_changestamp' : 'jmetrikat 6/17/2024 23:11'
 }
 EPGJSONParserTests >> testGenerateCardsSuccessful [
@@ -130,7 +143,7 @@ EPGJSONParserTests >> testGenerateCardsSuccessful [
 ]
 
 {
-	#category : #'parsing functionality',
+	#category : #'test parsing functionality',
 	#'squeak_changestamp' : 'sv 6/8/2024 19:27'
 }
 EPGJSONParserTests >> testJsonContentNotEmpty [
@@ -139,7 +152,7 @@ EPGJSONParserTests >> testJsonContentNotEmpty [
 ]
 
 {
-	#category : #'card generation',
+	#category : #'test card generation',
 	#'squeak_changestamp' : 'jmetrikat 6/16/2024 23:21'
 }
 EPGJSONParserTests >> testParserForGameExistence [
@@ -148,7 +161,7 @@ EPGJSONParserTests >> testParserForGameExistence [
 ]
 
 {
-	#category : #'parsing functionality',
+	#category : #'test parsing functionality',
 	#'squeak_changestamp' : 'HCH 6/19/2024 21:19'
 }
 EPGJSONParserTests >> testTechDebtExistence [

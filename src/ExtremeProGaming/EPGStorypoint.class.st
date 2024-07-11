@@ -1,3 +1,6 @@
+"
+Concrete DnD morph which represent storypoints and are used for processing cards and technical debt.
+"
 Class {
 	#name : #EPGStorypoint,
 	#superclass : #EPGDnDMorph,
@@ -8,8 +11,18 @@ Class {
 		'imageBag',
 		'available'
 	],
-	#category : #'ExtremeProGaming-UI'
+	#category : #'ExtremeProGaming-UI',
+	#'squeak_changestamp' : 'JP 7/8/2024 12:57'
 }
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'sv 7/10/2024 00:15'
+}
+EPGStorypoint class >> defaultExtent [ 
+
+	^ 100 @ 100.
+]
 
 {
 	#category : #'instance creation',
@@ -127,7 +140,7 @@ EPGStorypoint >> imageBag: aCollection [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'HCH 6/19/2024 00:01'
+	#'squeak_changestamp' : 'sv 7/10/2024 00:15'
 }
 EPGStorypoint >> initialize [
 
@@ -135,7 +148,7 @@ EPGStorypoint >> initialize [
 	
 	self
 		color: Color transparent;
-		extent: 100 @ 100;
+		extent: self class defaultExtent;
 		initializeImageBag;
 		image: self newStorypointMorph;
 		addMorph: self image;

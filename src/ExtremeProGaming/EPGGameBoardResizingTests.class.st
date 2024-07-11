@@ -1,11 +1,15 @@
+"
+Tests if the gameboard and its components have the right extents after resizing.
+"
 Class {
 	#name : #EPGGameBoardResizingTests,
 	#superclass : #MorphTest,
-	#category : #'ExtremeProGaming-Tests'
+	#category : #'ExtremeProGaming-Tests',
+	#'squeak_changestamp' : 'JP 7/8/2024 13:14'
 }
 
 {
-	#category : #'as yet unclassified',
+	#category : #'initialize-release',
 	#'squeak_changestamp' : 'JP 6/17/2024 19:06'
 }
 EPGGameBoardResizingTests >> setUp [
@@ -14,7 +18,7 @@ EPGGameBoardResizingTests >> setUp [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #tests,
 	#'squeak_changestamp' : 'JP 6/17/2024 19:11'
 }
 EPGGameBoardResizingTests >> testInitialExtent [
@@ -26,7 +30,7 @@ EPGGameBoardResizingTests >> testInitialExtent [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #tests,
 	#'squeak_changestamp' : 'JP 6/17/2024 19:21'
 }
 EPGGameBoardResizingTests >> testInitialPosition [
@@ -38,7 +42,7 @@ EPGGameBoardResizingTests >> testInitialPosition [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #tests,
 	#'squeak_changestamp' : 'JP 6/17/2024 19:20'
 }
 EPGGameBoardResizingTests >> testResizedExtent [
@@ -53,7 +57,7 @@ EPGGameBoardResizingTests >> testResizedExtent [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #tests,
 	#'squeak_changestamp' : 'JP 6/17/2024 19:22'
 }
 EPGGameBoardResizingTests >> testResizedPosition [

@@ -1,7 +1,11 @@
+"
+EPGEffect which removes permanent storypoint from storypoint areas.
+"
 Class {
 	#name : #EPGPermanentRemoval,
 	#superclass : #EPGEffect,
-	#category : #'ExtremeProGaming-Core'
+	#category : #'ExtremeProGaming-Core',
+	#'squeak_changestamp' : 'JP 7/8/2024 10:45'
 }
 
 {

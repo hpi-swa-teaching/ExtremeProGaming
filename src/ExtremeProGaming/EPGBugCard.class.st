@@ -1,7 +1,11 @@
+"
+Concrete backlog card which represents a bug. Processing rewards no points and adds no technical debt.
+"
 Class {
 	#name : #EPGBugCard,
 	#superclass : #EPGBacklogCard,
-	#category : #'ExtremeProGaming-UI'
+	#category : #'ExtremeProGaming-UI',
+	#'squeak_changestamp' : 'JP 7/8/2024 12:59'
 }
 
 {
@@ -18,8 +22,26 @@ EPGBugCard class >> headerSymbol [
 ]
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'sv 7/9/2024 22:30'
+}
+EPGBugCard class >> headerSymbolOffset [
+
+	^ 30 @ 0.
+]
+
+{
 	#category : #'instance creation',
-	#'squeak_changestamp' : 'HCH 6/23/2024 13:30'
+	#'squeak_changestamp' : 'sv 7/9/2024 22:42'
+}
+EPGBugCard class >> headerTextCenter [
+
+	^ 70 @ 25.
+]
+
+{
+	#category : #'instance creation',
+	#'squeak_changestamp' : 'sv 7/9/2024 23:06'
 }
 EPGBugCard class >> newBackendWithTask: aTask consequence: aConsequence effect: anEffect cost: aCost perTechnicalDebt: aNumber positive: aBoolean [
 	
@@ -28,7 +50,7 @@ EPGBugCard class >> newBackendWithTask: aTask consequence: aConsequence effect: 
 					beBackend;
 					initializeHeader: 'Bug';
 					colorBar: self backendColor withLayout: self backendLayout;
-					displayTask: aTask;
+					displayTaskText: aTask;
 					displayConsequenceText: aConsequence;
 					displayEffectText: anEffect;
 					cost: aCost perTechnicalDebt: aNumber.
@@ -44,7 +66,7 @@ EPGBugCard class >> newBackendWithTask: aTask consequence: aConsequence effect: 
 
 {
 	#category : #'instance creation',
-	#'squeak_changestamp' : 'HCH 6/23/2024 13:30'
+	#'squeak_changestamp' : 'sv 7/9/2024 23:06'
 }
 EPGBugCard class >> newFrontendWithTask: aTask consequence: aConsequence effect: anEffect cost: aCost perTechnicalDebt: aNumber positive: aBoolean [
 	
@@ -53,7 +75,7 @@ EPGBugCard class >> newFrontendWithTask: aTask consequence: aConsequence effect:
 					beFrontend;
 					initializeHeader: 'Bug';
 					colorBar: self frontendColor withLayout: self frontendLayout;
-					displayTask: aTask;
+					displayTaskText: aTask;
 					displayConsequenceText: aConsequence;
 					displayEffectText: anEffect;
 					cost: aCost perTechnicalDebt: aNumber.
@@ -65,24 +87,6 @@ EPGBugCard class >> newFrontendWithTask: aTask consequence: aConsequence effect:
 		changeBody: instance frontBody.
 	^ instance.
 	
-]
-
-{
-	#category : #header,
-	#'squeak_changestamp' : 'HCH 6/12/2024 14:37'
-}
-EPGBugCard >> headerSymbolCenter [
-
-	^ self header center + (30 @ 0).
-]
-
-{
-	#category : #header,
-	#'squeak_changestamp' : 'HCH 6/12/2024 14:17'
-}
-EPGBugCard >> headerTextCenter [
-
-	^ 70 @ 25.
 ]
 
 {

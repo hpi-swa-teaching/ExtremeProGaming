@@ -1,7 +1,11 @@
+"
+EPGEffect which removes temporary storypoint from storypoint areas.
+"
 Class {
 	#name : #EPGTemporaryRemoval,
 	#superclass : #EPGEffect,
-	#category : #'ExtremeProGaming-Core'
+	#category : #'ExtremeProGaming-Core',
+	#'squeak_changestamp' : 'JP 7/8/2024 10:45'
 }
 
 {

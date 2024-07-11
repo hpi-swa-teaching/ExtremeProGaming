@@ -1,10 +1,14 @@
+"
+Displays the current score which is the amount of processed feature cards.
+"
 Class {
 	#name : #EPGFeatureScore,
 	#superclass : #TextMorph,
 	#instVars : [
 		'score'
 	],
-	#category : #'ExtremeProGaming-UI'
+	#category : #'ExtremeProGaming-UI',
+	#'squeak_changestamp' : 'JP 7/8/2024 13:03'
 }
 
 {
@@ -17,8 +21,17 @@ EPGFeatureScore class >> defaultFont [
 ]
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'sv 7/9/2024 23:48'
+}
+EPGFeatureScore class >> defaultMargins [
+
+	^ 10 @ 10.
+]
+
+{
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 6/19/2024 22:32'
+	#'squeak_changestamp' : 'sv 7/9/2024 23:49'
 }
 EPGFeatureScore >> initialize [
 
@@ -29,7 +42,7 @@ EPGFeatureScore >> initialize [
 		setTextWithScore: self score;
 		vResizing: #shrinkWrap;
 		hResizing: #spaceFill;
-		margins: 10 @ 10;
+		margins: self class defaultMargins;
 		centered;
 		backgroundColor: Color gray;
 		lock.

@@ -1,3 +1,6 @@
+"
+Defines gamelogic and provides interfaces for interaction with game components.
+"
 Class {
 	#name : #EPGGame,
 	#superclass : #Object,
@@ -14,7 +17,8 @@ Class {
 	#classVars : [
 		'HighScore'
 	],
-	#category : #'ExtremeProGaming-Core'
+	#category : #'ExtremeProGaming-Core',
+	#'squeak_changestamp' : 'JP 7/8/2024 10:47'
 }
 
 {
@@ -64,11 +68,11 @@ EPGGame >> addBugCard [
 
 {
 	#category : #cards,
-	#'squeak_changestamp' : 'HCH 6/20/2024 19:54'
+	#'squeak_changestamp' : 'HCH 7/8/2024 21:13'
 }
 EPGGame >> addCard: aBacklogCard [
 
-	(self freeBacklogAreas size = 0) ifTrue: [self error: 'Cannot place more cards on board'].
+	(self freeBacklogAreas size = 0) ifTrue: [self endGame.].
 	self freeBacklogAreas first dropInCard: aBacklogCard.
 ]
 
@@ -99,15 +103,6 @@ EPGGame >> addTemporary: aNumber [
 	| area |
 	area := self gameBoard temporaryStorypointArea.
 	aNumber timesRepeat: [area addCustomStorypoint: EPGStorypoint newTemporary].
-]
-
-{
-	#category : #storypoints,
-	#'squeak_changestamp' : 'HCH 6/19/2024 00:07'
-}
-EPGGame >> addUnavailable: aNumber [
-
-	self gameBoard unavailableStorypointArea addStorypoints: aNumber.
 ]
 
 {
@@ -171,11 +166,11 @@ EPGGame >> cardSource: aCardSource [
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'sv 6/24/2024 10:17'
+	#'squeak_changestamp' : 'HCH 7/8/2024 21:10'
 }
 EPGGame >> checkForGameEnd [
 
-	 ((self currentRound = 10) or: (self freeBacklogAreas isEmpty)) ifTrue: [self endGame].
+	 ((self currentRound >= 10) or: (self freeBacklogAreas isEmpty)) ifTrue: [self endGame.].
 ]
 
 {
@@ -208,6 +203,22 @@ EPGGame >> endGame [
 	self class highScore: (score max: (self class highScore ifNil: [0])).
 	self gameBoard abandon.
 	
+]
+
+{
+	#category : #sprints,
+	#'squeak_changestamp' : 'HCH 7/8/2024 21:07'
+}
+EPGGame >> finishSprint [
+
+	self startOfRound ifTrue: [^ self.].
+	self 
+		processCards;
+		processDebtAreas;
+		processBacklogAreaStorypoints;
+		currentRound: self currentRound + 1;
+		changed: #newRound.
+	self gameBoard freezeDnD.
 ]
 
 {
@@ -447,15 +458,6 @@ EPGGame >> numOfFeatureCardsInGame [
 
 {
 	#category : #storypoints,
-	#'squeak_changestamp' : 'HCH 6/18/2024 23:43'
-}
-EPGGame >> numOfPermanentStorypoints [
-
-	^ self numOfAvailableStorypoints - self numOfTemporaryStorypoints.
-]
-
-{
-	#category : #storypoints,
 	#'squeak_changestamp' : 'HCH 6/18/2024 22:45'
 }
 EPGGame >> numOfStorypoints [
@@ -486,12 +488,12 @@ EPGGame >> numOfUnavailableStorypoints [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/20/2024 00:36'
+	#'squeak_changestamp' : 'JP 7/8/2024 13:25'
 }
 EPGGame >> occupiedAreas [
  
 	^ self gameBoard backlogDnDAreas 
-			select: [:area | area isFree not.]
+			select: [:area | area isFree not.].
 ]
 
 {
@@ -505,7 +507,7 @@ EPGGame >> processBacklogAreaStorypoints [
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'HCH 6/23/2024 16:36'
+	#'squeak_changestamp' : 'HCH 7/10/2024 14:02'
 }
 EPGGame >> processCards [
 
@@ -515,8 +517,8 @@ EPGGame >> processCards [
 			self sprintEffects add: card effect. 
 			card process.
 			processedCards add: card].
-	processedCards size = 0 ifTrue: [self startOfRound: true].
-	processedCards do: [:card | card prepareMoveToDone].
+	processedCards size = 0 ifTrue: [self startNewRound.].
+	processedCards do: [:card | card toggleFocusCard].
 	self processDebtToAdd: processedCards.
 ]
 
@@ -563,46 +565,6 @@ EPGGame >> processEventCard: anEventCard [
 EPGGame >> processableCards [
 
 	^ self occupiedAreas collect: [:area | area card] thenSelect: [:card | card canBeProcessed].
-]
-
-{
-	#category : #storypoints,
-	#'squeak_changestamp' : 'HCH 6/20/2024 20:10'
-}
-EPGGame >> removeAllAvailableStorypoints [
-
-	self gameBoard availableStorypointAreas do: [:area | area clearArea].
-]
-
-{
-	#category : #storypoints,
-	#'squeak_changestamp' : 'HCH 6/18/2024 22:45'
-}
-EPGGame >> removeAllStorypoints [
-
-	self gameBoard storyPointAreas do: [:area | area clearArea].
-]
-
-{
-	#category : #storypoints,
-	#'squeak_changestamp' : 'HCH 6/18/2024 22:56'
-}
-EPGGame >> removeAllTemporaryStorypoints [
-
-	| temporaryArea |
-	temporaryArea := self gameBoard temporaryStorypointArea.
- 	temporaryArea clearArea.
-]
-
-{
-	#category : #storypoints,
-	#'squeak_changestamp' : 'HCH 6/18/2024 22:56'
-}
-EPGGame >> removeAllUnavailableStorypoints [
-
-	| temporaryArea |
-	temporaryArea := self gameBoard unavailableStorypointArea.
- 	temporaryArea clearArea.
 ]
 
 {
@@ -661,19 +623,15 @@ EPGGame >> sprintEffects: aCollection [
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'JA 7/9/2024 11:25'
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 21:35'
 }
 EPGGame >> startNewRound [
 
 	self gameBoard sprinter startSprinting.
 	self 
-		processCards;
-		processDebtAreas;
-		processBacklogAreaStorypoints;
-		checkForGameEnd;
-		currentRound: self currentRound + 1;
-		changed: #newRound.
-	self gameBoard freezeDnD.
+		applySprintEffects;
+		startOfRound: true;
+		checkForGameEnd.
 ]
 
 {
@@ -696,15 +654,15 @@ EPGGame >> startOfRound: aBoolean [
 
 {
 	#category : #cards,
-	#'squeak_changestamp' : 'HCH 6/23/2024 16:37'
+	#'squeak_changestamp' : 'HCH 7/8/2024 21:10'
 }
 EPGGame >> unfocusCard: anEPGCard [
 
 	self focusedCards remove: anEPGCard.
 	anEPGCard isEPGFeatureCard ifTrue: [self updateFeatureScore].
-	anEPGCard isEPGEventCard  ifTrue: [^ self].
+	anEPGCard isEPGEventCard  ifTrue: [^ self.].
 	self focusedCards size = 0
-		ifTrue: [self applySprintEffects. self startOfRound: true].
+		ifTrue: [self startNewRound.].
 	
 ]
 

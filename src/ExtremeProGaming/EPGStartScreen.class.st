@@ -1,7 +1,11 @@
+"
+End screen which shows the highscore and provides the ability to start the game.
+"
 Class {
 	#name : #EPGStartScreen,
 	#superclass : #EPGOverlay,
-	#category : #'ExtremeProGaming-UI'
+	#category : #'ExtremeProGaming-UI',
+	#'squeak_changestamp' : 'JP 7/8/2024 13:12'
 }
 
 {

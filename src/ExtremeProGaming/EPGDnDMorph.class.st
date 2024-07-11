@@ -1,14 +1,36 @@
+"
+This provides a framework for concrete DnD Morphs. It should not be instantiated.
+"
 Class {
 	#name : #EPGDnDMorph,
 	#superclass : #Morph,
 	#instVars : [
 		'droppable'
 	],
-	#category : #'ExtremeProGaming-UI'
+	#category : #'ExtremeProGaming-UI',
+	#'squeak_changestamp' : 'JP 7/8/2024 12:56'
 }
 
 {
-	#category : #'dragging/dropping',
+	#category : #accessing,
+	#'squeak_changestamp' : 'sv 7/9/2024 20:38'
+}
+EPGDnDMorph >> droppable [
+
+	^ droppable.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'sv 7/9/2024 20:38'
+}
+EPGDnDMorph >> droppable: aBoolean [
+
+	droppable := aBoolean.
+]
+
+{
+	#category : #initialization,
 	#'squeak_changestamp' : 'sv 6/17/2024 14:59'
 }
 EPGDnDMorph >> initialize [
@@ -28,25 +50,25 @@ EPGDnDMorph >> isEPGDnDMorph [
 
 {
 	#category : #'dragging/dropping',
-	#'squeak_changestamp' : 'JP 6/19/2024 21:35'
+	#'squeak_changestamp' : 'sv 7/9/2024 20:41'
 }
 EPGDnDMorph >> shouldDropOnMouseUp [
 
-	^ droppable.
+	^ self droppable.
 ]
 
 {
 	#category : #'dragging/dropping',
-	#'squeak_changestamp' : 'JP 6/19/2024 21:35'
+	#'squeak_changestamp' : 'sv 7/9/2024 20:41'
 }
 EPGDnDMorph >> shouldDropOnMouseUp: aBoolean [
 
-	droppable := aBoolean.
+	self droppable: aBoolean.
 ]
 
 {
 	#category : #'dragging/dropping',
-	#'squeak_changestamp' : 'HCH 5/27/2024 18:38'
+	#'squeak_changestamp' : 'JP 7/8/2024 13:25'
 }
 EPGDnDMorph >> slideBackToFormerSituation: evt [ 
 	"A drop of the receiver having been rejected, slide it back to where it came from, if possible."
@@ -54,7 +76,7 @@ EPGDnDMorph >> slideBackToFormerSituation: evt [
 	| slideForm formerOwner formerPosition aWorld startPoint endPoint trans |
 	formerOwner := self formerOwner.
 	formerPosition := self formerPosition.
-	(aWorld := evt hand world) ifNil: [^ self delete]. "Likely a moribund hand from an EventRecorder playback."
+	(aWorld := evt hand world) ifNil: [^ self delete.]. "Likely a moribund hand from an EventRecorder playback."
 
 	trans := formerOwner transformFromWorld.
 	slideForm := trans isPureTranslation 
@@ -77,7 +99,7 @@ EPGDnDMorph >> slideBackToFormerSituation: evt [
 		ifTrue: [formerOwner dropInMorph: self]
 		ifFalse: [formerOwner addMorph: self].
 	self position: formerPosition.
-	self justDroppedInto: formerOwner event: evt
+	self justDroppedInto: formerOwner event: evt.
 ]
 
 {

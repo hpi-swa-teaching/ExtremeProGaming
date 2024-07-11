@@ -1,3 +1,6 @@
+"
+Tests if the costdisplay shows the right costs.
+"
 Class {
 	#name : #EPGCostDisplayTests,
 	#superclass : #MorphTest,
@@ -5,7 +8,8 @@ Class {
 		'morphFront',
 		'morphBack'
 	],
-	#category : #'ExtremeProGaming-Tests'
+	#category : #'ExtremeProGaming-Tests',
+	#'squeak_changestamp' : 'JP 7/8/2024 13:16'
 }
 
 {
@@ -42,7 +46,7 @@ EPGCostDisplayTests class >> storypointExtent [
 ]
 
 {
-	#category : #initializing,
+	#category : #'initialize-release',
 	#'squeak_changestamp' : 'JA 6/8/2024 18:51'
 }
 EPGCostDisplayTests >> setUp [
@@ -53,7 +57,18 @@ EPGCostDisplayTests >> setUp [
 ]
 
 {
-	#category : #displaying,
+	#category : #'initialize-release',
+	#'squeak_changestamp' : 'HCH 7/10/2024 14:05'
+}
+EPGCostDisplayTests >> tearDown [
+
+	morph abandon.
+	morphFront abandon.
+	morphBack abandon.
+]
+
+{
+	#category : #'test displaying',
 	#'squeak_changestamp' : 'JA 6/8/2024 17:36'
 }
 EPGCostDisplayTests >> testDisplayLargeCostError [
@@ -63,7 +78,7 @@ EPGCostDisplayTests >> testDisplayLargeCostError [
 ]
 
 {
-	#category : #displaying,
+	#category : #'test displaying',
 	#'squeak_changestamp' : 'jmetrikat 6/16/2024 23:25'
 }
 EPGCostDisplayTests >> testDisplayStorypoints [
@@ -79,7 +94,7 @@ EPGCostDisplayTests >> testDisplayStorypoints [
 ]
 
 {
-	#category : #displaying,
+	#category : #'test displaying',
 	#'squeak_changestamp' : 'JA 6/8/2024 18:11'
 }
 EPGCostDisplayTests >> testDisplayZeroCostError [
@@ -89,7 +104,7 @@ EPGCostDisplayTests >> testDisplayZeroCostError [
 ]
 
 {
-	#category : #initializing,
+	#category : #'test initialization',
 	#'squeak_changestamp' : 'jmetrikat 6/16/2024 23:26'
 }
 EPGCostDisplayTests >> testInitializeCostDisplayBackend [
@@ -113,7 +128,7 @@ EPGCostDisplayTests >> testInitializeCostDisplayBackend [
 ]
 
 {
-	#category : #initializing,
+	#category : #'test initialization',
 	#'squeak_changestamp' : 'jmetrikat 6/16/2024 23:26'
 }
 EPGCostDisplayTests >> testInitializeCostDisplayFrontend [

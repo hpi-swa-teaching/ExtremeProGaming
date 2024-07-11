@@ -1,7 +1,11 @@
+"
+This provides a framework for concrete backlog cards. It should not be instantiated.
+"
 Class {
 	#name : #EPGBacklogCard,
 	#superclass : #EPGCard,
-	#category : #'ExtremeProGaming-UI'
+	#category : #'ExtremeProGaming-UI',
+	#'squeak_changestamp' : 'JP 7/8/2024 12:58'
 }
 
 {
@@ -48,15 +52,6 @@ EPGBacklogCard >> isEPGBacklogCard [
 EPGBacklogCard >> moveToDone [
 
 	^ self subclassResponsibility.
-]
-
-{
-	#category : #'events-processing',
-	#'squeak_changestamp' : 'HCH 6/20/2024 01:04'
-}
-EPGBacklogCard >> prepareMoveToDone [
-
-	self toggleFocusCard.
 ]
 
 {

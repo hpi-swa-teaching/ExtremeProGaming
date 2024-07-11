@@ -1,3 +1,6 @@
+"
+Tests the functionalitys of EPGCards.
+"
 Class {
 	#name : #EPGCardTests,
 	#superclass : #TestCase,
@@ -6,8 +9,19 @@ Class {
 		'parser',
 		'card'
 	],
-	#category : #'ExtremeProGaming-Tests'
+	#category : #'ExtremeProGaming-Tests',
+	#'squeak_changestamp' : 'JP 7/8/2024 13:17'
 }
+
+{
+	#category : #assist,
+	#'squeak_changestamp' : 'sv 7/7/2024 20:20'
+}
+EPGCardTests >> blockBackend [
+
+	game gameBoard backendDebtArea incrementDebt.
+	game gameBoard backendDebtArea submorphsDo: [:debt | debt dropped add: EPGStorypoint new.].
+]
 
 {
 	#category : #assist,
@@ -33,7 +47,7 @@ EPGCardTests >> processCards [
 ]
 
 {
-	#category : #initialize,
+	#category : #'initialize-release',
 	#'squeak_changestamp' : 'sv 6/23/2024 12:40'
 }
 EPGCardTests >> setUp [
@@ -52,13 +66,23 @@ EPGCardTests >> setUp [
 ]
 
 {
+	#category : #'initialize-release',
+	#'squeak_changestamp' : 'HCH 7/10/2024 14:09'
+}
+EPGCardTests >> tearDown [
+
+	card abandon.
+]
+
+{
 	#category : #tests,
-	#'squeak_changestamp' : 'sv 6/23/2024 12:41'
+	#'squeak_changestamp' : 'sv 7/7/2024 20:19'
 }
 EPGCardTests >> testBlockedness [
 
 	self blockFrontend.
-	self assert: true equals: card isBlocked.
+	self blockBackend.
+	self assert: true equals: game cardSource featureCards first isBlocked.
 ]
 
 {
