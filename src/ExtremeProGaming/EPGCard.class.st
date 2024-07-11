@@ -211,11 +211,11 @@ EPGCard class >> positiveEffectImage [
 
 {
 	#category : #'text constants',
-	#'squeak_changestamp' : 'sv 6/18/2024 10:15'
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 12:08'
 }
 EPGCard class >> taskBackFont [
 
- 	^ TextFontReference  toFont: (StrikeFont familyName: 'Bitmap DejaVu Sans' size: 45).
+ 	^ TextFontReference toFont: (StrikeFont familyName: 'Bitmap DejaVu Sans' size: 45).
 
 	
 ]

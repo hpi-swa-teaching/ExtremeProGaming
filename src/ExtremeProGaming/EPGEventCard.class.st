@@ -97,7 +97,7 @@ EPGEventCard >> displayIterationNumber: aNumber [
 
 {
 	#category : #body,
-	#'squeak_changestamp' : 'sv 7/9/2024 23:06'
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 21:14'
 }
 EPGEventCard >> displayTaskText: aText [
 
@@ -110,7 +110,7 @@ EPGEventCard >> displayTaskText: aText [
 
 {
 	#category : #body,
-	#'squeak_changestamp' : 'HCH 6/23/2024 14:01'
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 12:02'
 }
 EPGEventCard >> formatIterationNumber: aText [
 
@@ -121,7 +121,7 @@ EPGEventCard >> formatIterationNumber: aText [
 		vResizing: #rigid;
 		hResizing: #shrinkWrap;
 		width: self width;
-		height: self height;
+		margins: self class defaultTextMargins;
 		lock;
 		yourself.
 

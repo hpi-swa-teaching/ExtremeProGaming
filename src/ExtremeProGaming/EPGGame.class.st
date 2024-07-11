@@ -50,11 +50,11 @@ EPGGame class >> newWithoutReturn [
 
 {
 	#category : #'instance creation',
-	#'squeak_changestamp' : 'jmetrikat 7/11/2024 11:05'
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 20:42'
 }
 EPGGame class >> open [
 
-	EPGStartScreen new openInWindow.
+	EPGStartScreen new openInWorld.
 ]
 
 {

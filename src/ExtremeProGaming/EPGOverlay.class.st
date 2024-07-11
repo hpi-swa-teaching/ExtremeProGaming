@@ -235,14 +235,14 @@ EPGOverlay >> score: aNumber [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'jmetrikat 7/11/2024 11:05'
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 12:11'
 }
 EPGOverlay >> startGame [
 	
 	EPGGame new 
 		center: self center;
 		freezeDnD;
-		openInWindow.
+		openInWorld.
 	self abandon.
 	
 ]
