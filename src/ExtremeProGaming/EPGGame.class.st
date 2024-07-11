@@ -40,6 +40,15 @@ EPGGame class >> highScore: aNumber [
 ]
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 22:32'
+}
+EPGGame class >> maxAmountOfRounds [
+
+	^ 10.
+]
+
+{
 	#category : #'instance creation',
 	#'squeak_changestamp' : 'HCH 6/18/2024 22:44'
 }
@@ -68,11 +77,11 @@ EPGGame >> addBugCard [
 
 {
 	#category : #cards,
-	#'squeak_changestamp' : 'HCH 7/8/2024 21:13'
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 22:27'
 }
 EPGGame >> addCard: aBacklogCard [
 
-	(self freeBacklogAreas size = 0) ifTrue: [self endGame.].
+	(self freeBacklogAreas isEmpty) ifTrue: [self endGame.].
 	self freeBacklogAreas first dropInCard: aBacklogCard.
 ]
 
@@ -166,11 +175,12 @@ EPGGame >> cardSource: aCardSource [
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'HCH 7/8/2024 21:10'
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 22:33'
 }
 EPGGame >> checkForGameEnd [
 
-	 ((self currentRound >= 10) or: (self freeBacklogAreas isEmpty)) ifTrue: [self endGame.].
+	((self currentRound >= self class maxAmountOfRounds) or: (self freeBacklogAreas isEmpty))
+		ifTrue: [self endGame.].
 ]
 
 {
@@ -507,17 +517,15 @@ EPGGame >> processBacklogAreaStorypoints [
 
 {
 	#category : #sprints,
-	#'squeak_changestamp' : 'HCH 7/10/2024 14:02'
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 22:27'
 }
 EPGGame >> processCards [
 
 	| processedCards |
-	processedCards := OrderedCollection new.
-	self processableCards do: [:card | 
-			self sprintEffects add: card effect. 
-			card process.
-			processedCards add: card].
-	processedCards size = 0 ifTrue: [self startNewRound.].
+	processedCards := self processableCards collect: [:card | 
+		self sprintEffects add: card effect. 
+		card process].
+	processedCards isEmpty ifTrue: [self startNewRound.].
 	processedCards do: [:card | card toggleFocusCard].
 	self processDebtToAdd: processedCards.
 ]
@@ -569,9 +577,10 @@ EPGGame >> processableCards [
 
 {
 	#category : #storypoints,
-	#'squeak_changestamp' : 'sv 6/24/2024 09:34'
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 22:36'
 }
 EPGGame >> removePermanent: aNumber [
+
 	| regularStorypoints |
 	regularStorypoints := self gameBoard regularStorypointArea dropped.
 	(aNumber min: self numOfAvailableStorypoints)
@@ -653,14 +662,14 @@ EPGGame >> startOfRound: aBoolean [
 
 {
 	#category : #cards,
-	#'squeak_changestamp' : 'HCH 7/8/2024 21:10'
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 22:27'
 }
 EPGGame >> unfocusCard: anEPGCard [
 
 	self focusedCards remove: anEPGCard.
 	anEPGCard isEPGFeatureCard ifTrue: [self updateFeatureScore].
 	anEPGCard isEPGEventCard  ifTrue: [^ self.].
-	self focusedCards size = 0
+	self focusedCards isEmpty
 		ifTrue: [self startNewRound.].
 	
 ]

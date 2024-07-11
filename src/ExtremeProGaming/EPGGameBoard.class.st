@@ -97,6 +97,15 @@ EPGGameBoard class >> defaultAmountStorypointAreas [
 
 {
 	#category : #constants,
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 22:20'
+}
+EPGGameBoard class >> defaultBorderWidth [
+
+	^ 5.
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'Philipp 6/16/2024 17:05'
 }
 EPGGameBoard class >> defaultColor [
@@ -396,13 +405,13 @@ EPGGameBoard >> createReviewArea [
 
 {
 	#category : #layouting,
-	#'squeak_changestamp' : 'JP 6/17/2024 15:21'
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 22:20'
 }
 EPGGameBoard >> createSectionMorphFor: aName [
 
 	^ Morph new
 		color: self class sectionColor;
-		borderWidth: 5;
+		borderWidth: self class defaultBorderWidth;
 		borderColor: self class defaultColor;
 		layoutPolicy: TableLayout new.
 ]
@@ -484,13 +493,13 @@ EPGGameBoard >> fixLayout [
 
 {
 	#category : #areas,
-	#'squeak_changestamp' : 'sv 6/18/2024 11:21'
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 22:36'
 }
 EPGGameBoard >> freezeDnD [
 
-	| DnDAreas |
-	DnDAreas := (self planningAreas), (self storyPointAreas), (self doneAreas).
-	DnDAreas do: [:area | area freeze.].
+	| dndAreas |
+	dndAreas := (self planningAreas), (self storyPointAreas), (self doneAreas).
+	dndAreas do: [:area | area freeze.].
 ]
 
 {

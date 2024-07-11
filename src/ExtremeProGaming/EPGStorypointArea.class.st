@@ -30,15 +30,14 @@ EPGStorypointArea >> addCustomStorypoint: aStorypoint [
 
 {
 	#category : #features,
-	#'squeak_changestamp' : 'HCH 6/18/2024 23:27'
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 22:37'
 }
 EPGStorypointArea >> addStorypoints: aNumber [
 
 	| newStorypoint |
 	aNumber timesRepeat: [
-		newStorypoint := EPGStorypoint new.
+		newStorypoint := EPGStorypoint new game: self game.
 		self game addDependent: newStorypoint.
-		newStorypoint game: self game.
 		self dropInMorph: newStorypoint].
 ]
 

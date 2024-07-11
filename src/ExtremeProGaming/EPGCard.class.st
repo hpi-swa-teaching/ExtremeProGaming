@@ -1,5 +1,5 @@
 "
-This provides a framework for concrete playing cards It should not be instantiated.
+This provides a framework for concrete playing cards. It should not be instantiated.
 "
 Class {
 	#name : #EPGCard,
@@ -22,7 +22,7 @@ Class {
 		'effect'
 	],
 	#category : #'ExtremeProGaming-UI',
-	#'squeak_changestamp' : 'JP 7/8/2024 12:56'
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 22:26'
 }
 
 {
@@ -231,27 +231,24 @@ EPGCard class >> taskFrontFont [
 
 {
 	#category : #bar,
-	#'squeak_changestamp' : 'HCH 6/12/2024 14:42'
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 22:34'
 }
 EPGCard >> addColorBar: aColor [
 
 	| bar |
-	bar := Morph new
-		color: aColor.
-	 (self colorBarSelector == #full)
-		ifTrue: [bar 
-					extent: self extent x @ self class colorBarHeight;
-					position: self subHeaderOrigin.].
-	(self colorBarSelector == #left)
-		ifTrue: [bar
-					extent: (self extent x / 2) @ self class colorBarHeight;
-					position: self subHeaderOrigin].
-	(self colorBarSelector == #right)
-		ifTrue: [bar
-					extent: (self extent x / 2) @ self class colorBarHeight;
-					position: self subHeaderOrigin + (bar width @ 0)].
-	self addMorph: bar.
-	self colorBar: bar.
+	bar := Morph new color: aColor.
+	self colorBarSelector == #full
+		ifTrue: [bar extent: self extent x @ self class colorBarHeight;
+				 position: self subHeaderOrigin].
+	self colorBarSelector == #left
+		ifTrue: [bar extent: self extent x / 2 @ self class colorBarHeight;
+				 position: self subHeaderOrigin].
+	self colorBarSelector == #right
+		ifTrue: [bar extent: self extent x / 2 @ self class colorBarHeight;
+				 position: self subHeaderOrigin + (bar width @ 0)].
+	self
+		addMorph: bar;
+		 colorBar: bar.
 ]
 
 {
@@ -788,17 +785,17 @@ EPGCard >> initialize [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'sv 7/9/2024 23:09'
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 22:35'
 }
 EPGCard >> initializeHeader: aText [
 
-	| header |
-	header := Morph new
+	| newHeader |
+	newHeader := Morph new
 		extent: self class headerSize;
 		color: Color transparent.
 	self
-		addMorph: header;
-	 	header: header;
+		addMorph: newHeader;
+	 	header: newHeader;
 	 	headerText: aText;
 		headerSymbol: self class headerSymbol.
 ]
