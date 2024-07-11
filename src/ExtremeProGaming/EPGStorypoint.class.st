@@ -243,24 +243,25 @@ EPGStorypoint >> timeToLive: aTime [
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:58'
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 23:34'
 }
 EPGStorypoint >> update: anAspectSymbol [
 
-	anAspectSymbol = #newRound
+	(anAspectSymbol = #newRound and: self timeToLive notNil)
 		ifTrue: [self updateTimeToLive].
 ]
 
 {
 	#category : #'events-processing',
-	#'squeak_changestamp' : 'HCH 6/19/2024 22:55'
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 23:35'
 }
 EPGStorypoint >> updateTimeToLive [
-
-	self timeToLive ifNotNil: [
-		self timeToLive: self timeToLive - 1.
-		(self timeToLive = 0) ifTrue: [
-			self game removeStorypoint: self.
+	
+	self timeToLive: self timeToLive - 1.
+	self timeToLive = 0
+		ifTrue: [
 			self isUnavailable ifTrue: [self game addPermanent: 1].
-			self abandon.]].
+			self game removeStorypoint: self.
+			self removeDependent: self.
+			self abandon.].
 ]

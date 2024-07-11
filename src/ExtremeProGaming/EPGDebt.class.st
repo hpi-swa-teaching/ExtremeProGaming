@@ -56,14 +56,16 @@ EPGDebt >> mouseEnterDragging: evt [
 
 {
 	#category : #'event-processing',
-	#'squeak_changestamp' : 'HCH 6/23/2024 11:55'
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 23:35'
 }
 EPGDebt >> process [
 	
-	self canBeProcessed ifTrue:[
-		self area decrementDebt.
-		self returnStorypoints.
-		self abandon.].
+	self canBeProcessed
+		ifTrue: [
+			self area decrementDebt.
+			self returnStorypoints.
+			self game removeDependent: self.
+			self abandon.].
 	
 ]
 
