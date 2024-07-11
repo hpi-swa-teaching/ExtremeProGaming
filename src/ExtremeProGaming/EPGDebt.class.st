@@ -5,7 +5,6 @@ Class {
 	#name : #EPGDebt,
 	#superclass : #EPGDnDArea,
 	#instVars : [
-		'image',
 		'type'
 	],
 	#category : #'ExtremeProGaming-UI',
@@ -28,24 +27,6 @@ EPGDebt class >> defaultExtent [
 EPGDebt >> canBeProcessed [
 
 	^ self dropped size == 1.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:22'
-}
-EPGDebt >> image [
-
-	^ image.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:22'
-}
-EPGDebt >> image: anImage [
-
-	image := anImage.
 ]
 
 {
@@ -88,24 +69,23 @@ EPGDebt >> process [
 
 {
 	#category : #typesetting,
-	#'squeak_changestamp' : 'sv 7/9/2024 23:43'
+	#'squeak_changestamp' : 'jmetrikat 7/10/2024 19:44'
 }
 EPGDebt >> setType: aType [
 
-	| path |
-	(aType = #frontend or: [aType = #backend])
-		ifFalse: [self error: 'Non valid debt type'].
-
+	| path imageMorph |
 	path := (aType = #frontend)
 		ifTrue: ['/assets/TechnicalDebt_Frontend.png']
 		ifFalse: ['/assets/TechnicalDebt_Backend.png'].
-
+	
+	imageMorph := (ImageMorph new
+			image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: path)
+			scaledToSize: (self backgroundExtent - self class backgroundMargin)))
+			center: self center.
+						
 	self
-		image: (ImageMorph new image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: path) scaledToSize: (self backgroundExtent - self class backgroundMargin)));
-		addMorph: self image.
-
-	self image center: self center.
-	self type: aType.
+		addMorph: imageMorph;
+		type: aType.
 ]
 
 {

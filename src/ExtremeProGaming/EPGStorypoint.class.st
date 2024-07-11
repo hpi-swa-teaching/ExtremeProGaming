@@ -214,11 +214,13 @@ EPGStorypoint >> makeUnavailable [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/28/2024 12:05'
+	#'squeak_changestamp' : 'jmetrikat 7/10/2024 19:47'
 }
 EPGStorypoint >> newStorypointMorph [
 
-	 ^ ImageMorph new image:(((GitAssetLoader for: 'ExtremeProGaming') loadAsset: (self imageBag at: ((1 to: 6) atRandom))) scaledToSize: 50 @ 50).
+	 ^ ImageMorph new
+		image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: (self imageBag at: ((1 to: 6) atRandom)))
+		scaledToSize: self class defaultExtent / 2).
 ]
 
 {

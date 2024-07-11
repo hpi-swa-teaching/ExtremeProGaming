@@ -255,7 +255,7 @@ EPGCostDisplay >> display [
 
 {
 	#category : #display,
-	#'squeak_changestamp' : 'sv 7/9/2024 23:35'
+	#'squeak_changestamp' : 'jmetrikat 7/10/2024 19:53'
 }
 EPGCostDisplay >> displayPerTechnicalDebt [
 
@@ -265,9 +265,10 @@ EPGCostDisplay >> displayPerTechnicalDebt [
 	self isFrontend 
 		ifTrue: [debtMorph := self class frontendSymbol center: self debtCenter + debtOffset]
 		ifFalse: [debtMorph := self class backendSymbol center: self debtCenter + debtOffset].
-	self addMorph: (self formatTechnicalDebtCost center: (self debtCenter + storypointOffset)).
-	self addMorph: (self initializeSlash center: self debtCenter).
-	self addMorph: debtMorph.
+	self
+		addMorph: (self formatTechnicalDebtCost center: (self debtCenter + storypointOffset));
+		addMorph: (self initializeSlash center: self debtCenter);
+		addMorph: debtMorph.
 	
 ]
 
@@ -346,10 +347,11 @@ EPGCostDisplay >> initialize [
 
 {
 	#category : #symbols,
-	#'squeak_changestamp' : 'sv 7/10/2024 00:21'
+	#'squeak_changestamp' : 'jmetrikat 7/10/2024 19:54'
 }
 EPGCostDisplay >> initializePlus [
-"Using plusUtil as a number dependent on the height of the costDisplay for calculating the position of the '+' symbol."
+	"Using plusUtil as a number dependent on the height of the costDisplay for calculating the position of the '+' symbol."
+	
 	| plusUtil vertices |
 	plusUtil := self class plusUtil.
 	vertices := {
@@ -357,7 +359,8 @@ EPGCostDisplay >> initializePlus [
 		plusUtil @ 0 . 
 		0 @ 0 . 
 		0 @ plusUtil negated . 
-		0 @ plusUtil  . 0 @ 0}.
+		0 @ plusUtil . 
+		0 @ 0}.
 	^ PolygonMorph
 		 	vertices: vertices 
 			color: Color black 
@@ -367,10 +370,11 @@ EPGCostDisplay >> initializePlus [
 
 {
 	#category : #symbols,
-	#'squeak_changestamp' : 'sv 7/10/2024 00:22'
+	#'squeak_changestamp' : 'jmetrikat 7/10/2024 19:55'
 }
 EPGCostDisplay >> initializeSlash [
-"Using slashUtil as a number dependent on the height of the costDisplay for calculating the position of the '/' symbol for storypoints per TechnicalDebt."
+	"Using slashUtil as a number dependent on the height of the costDisplay for calculating the position of the '/' symbol for storypoints per TechnicalDebt."
+	
 	| slashUtil vertices |
 	slashUtil := self class slashUtil.
 	vertices := {

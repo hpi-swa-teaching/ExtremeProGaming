@@ -149,24 +149,26 @@ EPGOverlay >> initialize [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 7/8/2024 10:18'
+	#'squeak_changestamp' : 'jmetrikat 7/10/2024 19:46'
 }
 EPGOverlay >> initializeMountAgility [
 
-	self addMorph: (ImageMorph new
-		image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: ('/assets/mount_agility.jpg')) scaledToSize: self class mountAgilityExtent);
+	self
+		addMorph: (ImageMorph new
+			image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: ('/assets/mount_agility.jpg'))
+			scaledToSize: self class mountAgilityExtent);
 		center: self center;
 		yourself).
-	
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'sv 7/10/2024 00:14'
+	#'squeak_changestamp' : 'jmetrikat 7/10/2024 19:50'
 }
 EPGOverlay >> initializeScoreDisplay: label [
 	
-	self addMorph: (TextMorph new
+	self
+		addMorph: (TextMorph new
 		position: self center + self class scoreOffset;
 		backgroundColor: self class overlayColor lighter;
 		contents: ((label , (self score ifNil:['---'])) asText addAttribute: (TextFontReference toFont: self class defaultFont));
@@ -200,12 +202,14 @@ EPGOverlay >> initializeStartButton: label [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'Philipp 6/26/2024 15:50'
+	#'squeak_changestamp' : 'jmetrikat 7/10/2024 19:46'
 }
 EPGOverlay >> initializeTitle [
 
-	self addMorph: (ImageMorph new
-		image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: ('/assets/title.png')) scaledToSize: self class titleExtent);
+	self 
+		addMorph: (ImageMorph new
+			image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: ('/assets/title.png'))
+			scaledToSize: self class titleExtent);
 		position: self class titlePosition;
 		yourself).
 	
@@ -231,14 +235,14 @@ EPGOverlay >> score: aNumber [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/23/2024 16:41'
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 11:05'
 }
 EPGOverlay >> startGame [
 	
 	EPGGame new 
 		center: self center;
 		freezeDnD;
-		openInWorld.
+		openInWindow.
 	self abandon.
 	
 ]

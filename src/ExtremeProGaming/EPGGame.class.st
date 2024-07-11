@@ -50,11 +50,11 @@ EPGGame class >> newWithoutReturn [
 
 {
 	#category : #'instance creation',
-	#'squeak_changestamp' : 'jmetrikat 6/21/2024 09:24'
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 11:05'
 }
 EPGGame class >> open [
 
-	EPGStartScreen new openInWorld.
+	EPGStartScreen new openInWindow.
 ]
 
 {
@@ -350,20 +350,20 @@ EPGGame >> generateFeatureCards [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'Philipp 6/23/2024 18:16'
+	#'squeak_changestamp' : 'jmetrikat 7/10/2024 19:57'
 }
 EPGGame >> initialize [
 
 	super initialize.
+	
 	self 
 		gameBoard: (EPGGameBoard newWithGame: self);
-		cardSource: EPGJSONParser new.	
-	self initializeDefaultGameState.
-	self 
+		cardSource: EPGJSONParser new;
 		sprintEffects: OrderedCollection new;
 		focusedCards: OrderedCollection new;
 		currentRound: 1;
-		startOfRound: true.
+		startOfRound: true;
+		initializeDefaultGameState.
 	^ self gameBoard.
 ]
 
