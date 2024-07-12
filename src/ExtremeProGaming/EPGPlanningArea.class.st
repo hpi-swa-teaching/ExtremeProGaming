@@ -25,11 +25,11 @@ EPGPlanningArea >> doubleClick: anEvent [
 
 {
 	#category : #'event handling',
-	#'squeak_changestamp' : 'HCH 6/23/2024 15:14'
+	#'squeak_changestamp' : 'HCH 7/12/2024 21:08'
 }
 EPGPlanningArea >> handlesMouseDown: anEvent [
 
-	^ self dropped size > 0 and: [self dropped first isEPGEventCard].
+	^ self dropped isEmpty not and: [self dropped first isEPGEventCard].
 ]
 
 {

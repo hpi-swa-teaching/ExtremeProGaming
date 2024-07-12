@@ -253,7 +253,7 @@ EPGStorypoint >> update: anAspectSymbol [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'jmetrikat 7/11/2024 23:35'
+	#'squeak_changestamp' : 'HCH 7/12/2024 21:02'
 }
 EPGStorypoint >> updateTimeToLive [
 	
@@ -262,6 +262,5 @@ EPGStorypoint >> updateTimeToLive [
 		ifTrue: [
 			self isUnavailable ifTrue: [self game addPermanent: 1].
 			self game removeStorypoint: self.
-			self removeDependent: self.
 			self abandon.].
 ]
