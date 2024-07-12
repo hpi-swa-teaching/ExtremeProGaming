@@ -40,7 +40,7 @@ EPGBacklogArea >> card [
 ]
 
 {
-	#category : #'events-processing',
+	#category : #'event handling',
 	#'squeak_changestamp' : 'HCH 6/15/2024 21:53'
 }
 EPGBacklogArea >> dropInCard: aMorph [
@@ -50,7 +50,7 @@ EPGBacklogArea >> dropInCard: aMorph [
 ]
 
 {
-	#category : #'events-processing',
+	#category : #'dropping/grabbing',
 	#'squeak_changestamp' : 'HCH 6/15/2024 21:56'
 }
 EPGBacklogArea >> dropInMorph: aMorph [
@@ -62,7 +62,7 @@ EPGBacklogArea >> dropInMorph: aMorph [
 ]
 
 {
-	#category : #'events-processing',
+	#category : #'event handling',
 	#'squeak_changestamp' : 'sv 7/9/2024 22:28'
 }
 EPGBacklogArea >> dropInStorypoint: aMorph [
@@ -106,7 +106,7 @@ EPGBacklogArea >> initialize [
 ]
 
 {
-	#category : #'events-processing',
+	#category : #'event handling',
 	#'squeak_changestamp' : 'HCH 6/19/2024 19:55'
 }
 EPGBacklogArea >> isFree [
@@ -115,7 +115,7 @@ EPGBacklogArea >> isFree [
 ]
 
 {
-	#category : #'events-processing',
+	#category : #'dropping/grabbing',
 	#'squeak_changestamp' : 'HCH 6/19/2024 23:24'
 }
 EPGBacklogArea >> pickUpMorph: aMorph [
@@ -130,7 +130,7 @@ EPGBacklogArea >> pickUpMorph: aMorph [
 ]
 
 {
-	#category : #'events-processing',
+	#category : #'event handling',
 	#'squeak_changestamp' : 'sv 7/9/2024 22:27'
 }
 EPGBacklogArea >> randomPosition [
@@ -140,7 +140,7 @@ EPGBacklogArea >> randomPosition [
 ]
 
 {
-	#category : #'events-processing',
+	#category : #'event handling',
 	#'squeak_changestamp' : 'HCH 6/15/2024 22:41'
 }
 EPGBacklogArea >> resetAccepts [

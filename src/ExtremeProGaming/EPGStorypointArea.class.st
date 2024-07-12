@@ -43,7 +43,7 @@ EPGStorypointArea >> addStorypoints: aNumber [
 ]
 
 {
-	#category : #features,
+	#category : #'dropping/grabbing',
 	#'squeak_changestamp' : 'jmetrikat 6/6/2024 22:31'
 }
 EPGStorypointArea >> dropInMorph: aMorph [

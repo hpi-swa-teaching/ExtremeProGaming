@@ -101,7 +101,7 @@ EPGFeatureCard >> initialize [
 ]
 
 {
-	#category : #'events-processing',
+	#category : #'event handling',
 	#'squeak_changestamp' : 'sv 6/9/2024 15:30'
 }
 EPGFeatureCard >> isEPGBugCard [
@@ -110,7 +110,7 @@ EPGFeatureCard >> isEPGBugCard [
 ]
 
 {
-	#category : #'events-processing',
+	#category : #'event handling',
 	#'squeak_changestamp' : 'sv 6/9/2024 15:30'
 }
 EPGFeatureCard >> isEPGFeatureCard [
@@ -119,7 +119,7 @@ EPGFeatureCard >> isEPGFeatureCard [
 ]
 
 {
-	#category : #'events-processing',
+	#category : #'event handling',
 	#'squeak_changestamp' : 'jmetrikat 6/23/2024 12:34'
 }
 EPGFeatureCard >> moveToDone [

@@ -203,7 +203,7 @@ EPGStorypoint >> isUnavailable [
 ]
 
 {
-	#category : #'events-processing',
+	#category : #updating,
 	#'squeak_changestamp' : 'HCH 6/18/2024 23:54'
 }
 EPGStorypoint >> makeUnavailable [
@@ -242,7 +242,7 @@ EPGStorypoint >> timeToLive: aTime [
 ]
 
 {
-	#category : #'events-processing',
+	#category : #updating,
 	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:58'
 }
 EPGStorypoint >> update: anAspectSymbol [
@@ -252,7 +252,7 @@ EPGStorypoint >> update: anAspectSymbol [
 ]
 
 {
-	#category : #'events-processing',
+	#category : #updating,
 	#'squeak_changestamp' : 'HCH 6/19/2024 22:55'
 }
 EPGStorypoint >> updateTimeToLive [

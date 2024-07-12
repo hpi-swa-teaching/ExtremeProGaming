@@ -12,7 +12,7 @@ Class {
 }
 
 {
-	#category : #'events-processing',
+	#category : #'event handling',
 	#'squeak_changestamp' : 'HCH 6/23/2024 16:38'
 }
 EPGPlanningArea >> doubleClick: anEvent [
@@ -24,7 +24,7 @@ EPGPlanningArea >> doubleClick: anEvent [
 ]
 
 {
-	#category : #'events-processing',
+	#category : #'event handling',
 	#'squeak_changestamp' : 'HCH 6/23/2024 15:14'
 }
 EPGPlanningArea >> handlesMouseDown: anEvent [
@@ -66,7 +66,7 @@ EPGPlanningArea >> initialize [
 ]
 
 {
-	#category : #'events-processing',
+	#category : #'event handling',
 	#'squeak_changestamp' : 'HCH 6/23/2024 16:38'
 }
 EPGPlanningArea >> mouseDown: anEvent [ 

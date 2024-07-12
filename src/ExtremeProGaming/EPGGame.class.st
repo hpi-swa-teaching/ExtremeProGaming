@@ -349,7 +349,7 @@ EPGGame >> generateFeatureCards [
 ]
 
 {
-	#category : #initialization,
+	#category : #'initialize-release',
 	#'squeak_changestamp' : 'jmetrikat 7/10/2024 19:57'
 }
 EPGGame >> initialize [

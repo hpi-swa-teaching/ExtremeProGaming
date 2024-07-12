@@ -167,7 +167,7 @@ EPGEventCard >> iterationNumber: aNumber [
 ]
 
 {
-	#category : #'events-processing',
+	#category : #'event handling',
 	#'squeak_changestamp' : 'HCH 6/23/2024 15:29'
 }
 EPGEventCard >> moveToDone [

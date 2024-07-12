@@ -46,7 +46,7 @@ EPGDebt >> initialize [
 ]
 
 {
-	#category : #initialization,
+	#category : #'event handling',
 	#'squeak_changestamp' : 'HCH 6/23/2024 11:55'
 }
 EPGDebt >> mouseEnterDragging: evt [
@@ -55,7 +55,7 @@ EPGDebt >> mouseEnterDragging: evt [
 ]
 
 {
-	#category : #'event-processing',
+	#category : #'event handling',
 	#'squeak_changestamp' : 'HCH 6/23/2024 11:55'
 }
 EPGDebt >> process [
@@ -107,7 +107,7 @@ EPGDebt >> type: aType [
 ]
 
 {
-	#category : #initialization,
+	#category : #'dropping/grabbing',
 	#'squeak_changestamp' : 'HCH 6/23/2024 11:55'
 }
 EPGDebt >> wantsDroppedMorph: aMorph event: evt [

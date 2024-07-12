@@ -509,7 +509,7 @@ EPGCard >> displayTaskText: aText [
 ]
 
 {
-	#category : #'mouse events',
+	#category : #'event handling',
 	#'squeak_changestamp' : 'HCH 6/19/2024 22:43'
 }
 EPGCard >> doubleClick: anEvent [
@@ -719,7 +719,7 @@ EPGCard >> gameBoard: aGameBoard [
 ]
 
 {
-	#category : #'mouse events',
+	#category : #'event handling',
 	#'squeak_changestamp' : 'sv 6/18/2024 11:14'
 }
 EPGCard >> handlesMouseDown: anEvent [
@@ -851,7 +851,7 @@ EPGCard >> makeFocusSize [
 ]
 
 {
-	#category : #'mouse events',
+	#category : #'event handling',
 	#'squeak_changestamp' : 'sv 6/18/2024 13:05'
 }
 EPGCard >> mouseDown: anEvent [ 
@@ -863,7 +863,7 @@ EPGCard >> mouseDown: anEvent [
 ]
 
 {
-	#category : #'mouse events',
+	#category : #'event handling',
 	#'squeak_changestamp' : 'sv 7/9/2024 19:10'
 }
 EPGCard >> moveToDone [

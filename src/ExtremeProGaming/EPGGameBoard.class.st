@@ -215,7 +215,7 @@ EPGGameBoard class >> yOffset [
 ]
 
 {
-	#category : #accessing,
+	#category : #'dropping/grabbing',
 	#'squeak_changestamp' : 'HCH 6/14/2024 00:18'
 }
 EPGGameBoard >> aboutToBeGrabbedBy: aHand [
@@ -435,7 +435,7 @@ EPGGameBoard >> eventArea [
 ]
 
 {
-	#category : #accessing,
+	#category : #geometry,
 	#'squeak_changestamp' : 'JP 6/17/2024 14:33'
 }
 EPGGameBoard >> extent: aPoint [

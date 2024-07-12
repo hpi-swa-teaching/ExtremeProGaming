@@ -60,7 +60,7 @@ EPGEffect >> amount: aNumber [
 ]
 
 {
-	#category : #'events-processing',
+	#category : #effect,
 	#'squeak_changestamp' : 'HCH 6/18/2024 22:24'
 }
 EPGEffect >> apply [
