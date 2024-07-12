@@ -152,11 +152,11 @@ EPGGameBoard class >> laneGroundColor [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'HCH 7/12/2024 21:24'
+	#'squeak_changestamp' : 'HCH 7/12/2024 21:30'
 }
 EPGGameBoard class >> laneSeperatorColor [
 
-	^ Color laneSeperatorColor.
+	^ Color paleRed.
 ]
 
 {
