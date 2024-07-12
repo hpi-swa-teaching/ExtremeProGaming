@@ -9,6 +9,23 @@ Class {
 }
 
 {
+	#category : #'instance creation',
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 22:08'
+}
+EPGBacklogCard class >> applyEffectsFor: anInstance with: aBoolean [
+
+	aBoolean
+		ifTrue: [anInstance bePositive]
+		ifFalse: [anInstance beNegative].
+		
+	anInstance 
+		displayEffect;
+		changeBody: anInstance frontBody.
+		
+	^ anInstance.
+]
+
+{
 	#category : #'event handling',
 	#'squeak_changestamp' : 'HCH 6/20/2024 19:50'
 }

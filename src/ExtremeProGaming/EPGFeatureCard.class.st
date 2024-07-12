@@ -41,51 +41,41 @@ EPGFeatureCard class >> headerTextCenter [
 
 {
 	#category : #'instance creation',
-	#'squeak_changestamp' : 'sv 7/9/2024 23:06'
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 22:08'
 }
 EPGFeatureCard class >> newBackendWithTask: aTask consequence: aConsequence effect: anEffect cost: aCost perTechnicalDebt: aNumber positive: aBoolean [
 	
 	| instance |
 	instance := self new
-					beBackend;
-					initializeHeader: 'Feature';
-					colorBar: self backendColor withLayout: self backendLayout;
-					displayTaskText: aTask;
-					displayConsequenceText: aConsequence;
-					displayEffectText: anEffect;
-					cost: aCost perTechnicalDebt: aNumber.
-	aBoolean 
-		ifTrue: [instance bePositive]
-		ifFalse: [instance beNegative].
-	instance 
-		displayEffect;
-		changeBody: instance frontBody.
-	^ instance.
+		beBackend;
+		initializeHeader: 'Feature';
+		colorBar: self backendColor withLayout: self backendLayout;
+		displayTaskText: aTask;
+		displayConsequenceText: aConsequence;
+		displayEffectText: anEffect;
+		cost: aCost perTechnicalDebt: aNumber.
+		
+	^ self applyEffectsFor: instance with: aBoolean.
 	
 ]
 
 {
 	#category : #'instance creation',
-	#'squeak_changestamp' : 'sv 7/9/2024 23:06'
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 22:09'
 }
 EPGFeatureCard class >> newFrontendWithTask: aTask consequence: aConsequence effect: anEffect cost: aCost perTechnicalDebt: aNumber positive: aBoolean [
 	
 	| instance |
 	instance := self new
-					beFrontend;
-					initializeHeader: 'Feature';
-					colorBar: self frontendColor withLayout: self frontendLayout;
-					displayTaskText: aTask;
-					displayConsequenceText: aConsequence;
-					displayEffectText: anEffect;
-					cost: aCost perTechnicalDebt: aNumber.
-	aBoolean 
-		ifTrue: [instance bePositive]
-		ifFalse: [instance beNegative].
-	instance 
-		displayEffect;
-		changeBody: instance frontBody.
-	^ instance.
+		beFrontend;
+		initializeHeader: 'Feature';
+		colorBar: self frontendColor withLayout: self frontendLayout;
+		displayTaskText: aTask;
+		displayConsequenceText: aConsequence;
+		displayEffectText: anEffect;
+		cost: aCost perTechnicalDebt: aNumber.
+					
+	^ self applyEffectsFor: instance with: aBoolean.
 	
 ]
 
