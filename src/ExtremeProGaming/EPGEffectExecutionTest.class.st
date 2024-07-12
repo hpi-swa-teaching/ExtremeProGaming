@@ -13,7 +13,7 @@ Class {
 }
 
 {
-	#category : #'initialize-release',
+	#category : #running,
 	#'squeak_changestamp' : 'HCH 7/9/2024 11:18'
 }
 EPGEffectExecutionTest >> setUp [

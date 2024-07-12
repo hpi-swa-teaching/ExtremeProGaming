@@ -12,7 +12,7 @@ Class {
 }
 
 {
-	#category : #'events-processing',
+	#category : #'event handling',
 	#'squeak_changestamp' : 'HCH 6/23/2024 16:38'
 }
 EPGPlanningArea >> doubleClick: anEvent [
@@ -24,12 +24,12 @@ EPGPlanningArea >> doubleClick: anEvent [
 ]
 
 {
-	#category : #'events-processing',
-	#'squeak_changestamp' : 'HCH 6/23/2024 15:14'
+	#category : #'event handling',
+	#'squeak_changestamp' : 'HCH 7/12/2024 21:08'
 }
 EPGPlanningArea >> handlesMouseDown: anEvent [
 
-	^ self dropped size > 0 and: [self dropped first isEPGEventCard].
+	^ self dropped isEmpty not and: [self dropped first isEPGEventCard].
 ]
 
 {
@@ -66,7 +66,7 @@ EPGPlanningArea >> initialize [
 ]
 
 {
-	#category : #'events-processing',
+	#category : #'event handling',
 	#'squeak_changestamp' : 'HCH 6/23/2024 16:38'
 }
 EPGPlanningArea >> mouseDown: anEvent [ 
@@ -79,11 +79,11 @@ EPGPlanningArea >> mouseDown: anEvent [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/19/2024 19:55'
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 22:28'
 }
 EPGPlanningArea >> pickUpTopCard [
 
-	(self dropped size = 0) ifTrue: [self error: 'Calling Top on empty Card Stack'].
+	(self dropped isEmpty) ifTrue: [self error: 'Calling Top on empty Card Stack'].
 	self dropped first isEPGBacklogCard ifFalse: [self error: 'Top was not a Card'].
 	^ self pickUpMorph: self dropped first.
 ]

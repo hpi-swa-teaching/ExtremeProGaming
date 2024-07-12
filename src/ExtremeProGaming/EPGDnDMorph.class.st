@@ -40,7 +40,7 @@ EPGDnDMorph >> initialize [
 ]
 
 {
-	#category : #'dragging/dropping',
+	#category : #'dropping/grabbing',
 	#'squeak_changestamp' : 'HCH 5/27/2024 18:05'
 }
 EPGDnDMorph >> isEPGDnDMorph [
@@ -49,7 +49,7 @@ EPGDnDMorph >> isEPGDnDMorph [
 ]
 
 {
-	#category : #'dragging/dropping',
+	#category : #testing,
 	#'squeak_changestamp' : 'sv 7/9/2024 20:41'
 }
 EPGDnDMorph >> shouldDropOnMouseUp [
@@ -58,7 +58,7 @@ EPGDnDMorph >> shouldDropOnMouseUp [
 ]
 
 {
-	#category : #'dragging/dropping',
+	#category : #'dropping/grabbing',
 	#'squeak_changestamp' : 'sv 7/9/2024 20:41'
 }
 EPGDnDMorph >> shouldDropOnMouseUp: aBoolean [
@@ -67,7 +67,7 @@ EPGDnDMorph >> shouldDropOnMouseUp: aBoolean [
 ]
 
 {
-	#category : #'dragging/dropping',
+	#category : #'dropping/grabbing',
 	#'squeak_changestamp' : 'JP 7/8/2024 13:25'
 }
 EPGDnDMorph >> slideBackToFormerSituation: evt [ 
@@ -103,7 +103,7 @@ EPGDnDMorph >> slideBackToFormerSituation: evt [
 ]
 
 {
-	#category : #'dragging/dropping',
+	#category : #'dropping/grabbing',
 	#'squeak_changestamp' : 'HCH 5/27/2024 17:57'
 }
 EPGDnDMorph >> wantsToBeDroppedInto: aMorph [

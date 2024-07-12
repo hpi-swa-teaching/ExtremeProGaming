@@ -13,7 +13,7 @@ Class {
 }
 
 {
-	#category : #'initialize-release',
+	#category : #running,
 	#'squeak_changestamp' : 'jmetrikat 6/16/2024 23:23'
 }
 EPGJSONParserTests >> setUp [
@@ -29,7 +29,7 @@ EPGJSONParserTests >> setUp [
 ]
 
 {
-	#category : #'initialize-release',
+	#category : #running,
 	#'squeak_changestamp' : 'HCH 7/10/2024 14:07'
 }
 EPGJSONParserTests >> tearDown [
@@ -63,10 +63,11 @@ EPGJSONParserTests >> testBugFrontendCardCreation [
 
 {
 	#category : #'test card generation',
-	#'squeak_changestamp' : 'jmetrikat 6/17/2024 23:12'
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 22:16'
 }
 EPGJSONParserTests >> testCardAmountSetting [
 	"manually set the parser of the board to testing parser"
+	
 	board game cardSource: parser.
 	board game generateCards.
 

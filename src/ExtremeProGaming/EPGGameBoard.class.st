@@ -107,6 +107,15 @@ EPGGameBoard class >> defaultAmountStorypointAreas [
 
 {
 	#category : #constants,
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 22:20'
+}
+EPGGameBoard class >> defaultBorderWidth [
+
+	^ 5.
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'Philipp 6/16/2024 17:05'
 }
 EPGGameBoard class >> defaultColor [
@@ -234,7 +243,7 @@ EPGGameBoard class >> yOffset [
 ]
 
 {
-	#category : #accessing,
+	#category : #'dropping/grabbing',
 	#'squeak_changestamp' : 'HCH 6/14/2024 00:18'
 }
 EPGGameBoard >> aboutToBeGrabbedBy: aHand [
@@ -248,44 +257,44 @@ EPGGameBoard >> aboutToBeGrabbedBy: aHand [
 
 {
 	#category : #layouting,
-	#'squeak_changestamp' : 'sv 7/10/2024 00:03'
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 11:03'
 }
 EPGGameBoard >> addBacklogArea [
 
-	self addMorph: self backlogArea fullFrame: 
-		(LayoutFrame fractions: 
-			((self class areaExtentRatio at: #backlogBeginn) 
-				corner: (self class areaExtentRatio at: #backlogEnd)) 
-			offsets: (self class defaultOffsets 
-				corner: self class defaultOffsets)).
+	self
+		addMorph: self backlogArea
+		fullFrame: (LayoutFrame
+				fractions: ((self class areaExtentRatio at: #backlogBeginn)
+						corner: (self class areaExtentRatio at: #backlogEnd))
+				offsets: (self class defaultOffsets corner: self class defaultOffsets))
 ]
 
 {
 	#category : #layouting,
-	#'squeak_changestamp' : 'sv 7/10/2024 00:03'
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 11:02'
 }
 EPGGameBoard >> addPlanningArea [
 
-	self addMorph: self planningArea fullFrame: 
-		(LayoutFrame fractions: 
-			((self class areaExtentRatio at: #planningBeginn) 
-				corner: (self class areaExtentRatio at: #planningEnd)) 
-			offsets: (self class defaultOffsets 
-				corner: self class defaultOffsets)).
+	self
+		addMorph: self planningArea
+		fullFrame: (LayoutFrame
+				fractions: ((self class areaExtentRatio at: #planningBeginn)
+						corner: (self class areaExtentRatio at: #planningEnd))
+				offsets: (self class defaultOffsets corner: self class defaultOffsets)).
 ]
 
 {
 	#category : #layouting,
-	#'squeak_changestamp' : 'sv 7/10/2024 00:01'
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 11:03'
 }
 EPGGameBoard >> addReviewArea [
 
-	self addMorph: self reviewArea fullFrame: 
-		(LayoutFrame fractions: 
-			((self class areaExtentRatio at: #reviewBeginn) 
-				corner: (self class areaExtentRatio at: #reviewEnd)) 
-			offsets: (self class defaultOffsets 
-				corner: self class defaultOffsets)).
+	self
+		addMorph: self reviewArea
+		fullFrame: (LayoutFrame
+				fractions: ((self class areaExtentRatio at: #reviewBeginn)
+						corner: (self class areaExtentRatio at: #reviewEnd))
+				offsets: (self class defaultOffsets corner: self class defaultOffsets)).
 ]
 
 {
@@ -318,11 +327,11 @@ EPGGameBoard >> addSprintingArea [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'HCH 6/20/2024 19:51'
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 11:04'
 }
 EPGGameBoard >> availableStorypointAreas [
 
-	^ { self regularStorypointArea . self temporaryStorypointArea }.
+	^ {self regularStorypointArea. self temporaryStorypointArea}.
 ]
 
 {
@@ -372,11 +381,13 @@ EPGGameBoard >> backlogDnDAreas [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'sv 7/10/2024 00:09'
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 11:04'
 }
 EPGGameBoard >> backlogImageFor: aNumber [
 
-	^ (ImageMorph new image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: ('/assets/BacklogAreas/BacklogArea', aNumber, '.png')) scaledToSize: EPGCard cardExtent)).
+	^ ImageMorph new
+		image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: ('/assets/BacklogAreas/BacklogArea', aNumber, '.png'))
+		scaledToSize: EPGCard cardExtent).
 ]
 
 {
@@ -441,13 +452,13 @@ EPGGameBoard >> createReviewArea [
 
 {
 	#category : #layouting,
-	#'squeak_changestamp' : 'JP 6/17/2024 15:21'
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 22:20'
 }
 EPGGameBoard >> createSectionMorphFor: aName [
 
 	^ Morph new
 		color: self class sectionColor;
-		borderWidth: 5;
+		borderWidth: self class defaultBorderWidth;
 		borderColor: self class defaultColor;
 		layoutPolicy: TableLayout new.
 ]
@@ -525,7 +536,7 @@ EPGGameBoard >> eventArea [
 ]
 
 {
-	#category : #accessing,
+	#category : #geometry,
 	#'squeak_changestamp' : 'JP 6/17/2024 14:33'
 }
 EPGGameBoard >> extent: aPoint [
@@ -574,13 +585,13 @@ EPGGameBoard >> fixLayout [
 
 {
 	#category : #areas,
-	#'squeak_changestamp' : 'sv 6/18/2024 11:21'
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 22:36'
 }
 EPGGameBoard >> freezeDnD [
 
-	| DnDAreas |
-	DnDAreas := (self planningAreas), (self storyPointAreas), (self doneAreas).
-	DnDAreas do: [:area | area freeze.].
+	| dndAreas |
+	dndAreas := (self planningAreas), (self storyPointAreas), (self doneAreas).
+	dndAreas do: [:area | area freeze.].
 ]
 
 {
@@ -872,11 +883,13 @@ EPGGameBoard >> planningAreas: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'jmetrikat 7/10/2024 09:21'
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 11:08'
 }
 EPGGameBoard >> planningImageFor: aNumber [
 
-	^ (ImageMorph new image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: ('/assets/PlanningAreas/PlanningArea', aNumber,'.png')) scaledToSize: EPGCard cardExtent)).
+	^ ImageMorph new
+		image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: ('/assets/PlanningAreas/PlanningArea', aNumber,'.png'))
+		scaledToSize: EPGCard cardExtent).
 ]
 
 {

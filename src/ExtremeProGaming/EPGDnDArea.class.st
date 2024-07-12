@@ -29,7 +29,7 @@ EPGDnDArea class >> backgroundMargin [
 ]
 
 {
-	#category : #'dragging/dropping',
+	#category : #'dropping/grabbing',
 	#'squeak_changestamp' : 'HCH 5/29/2024 00:50'
 }
 EPGDnDArea >> aboutToBeGrabbedBy: aHand [
@@ -43,14 +43,14 @@ EPGDnDArea >> aboutToBeGrabbedBy: aHand [
 ]
 
 {
-	#category : #'dragging/dropping',
-	#'squeak_changestamp' : 'JP 7/8/2024 13:24'
+	#category : #'dropping/grabbing',
+	#'squeak_changestamp' : 'jmetrikat 7/10/2024 19:51'
 }
 EPGDnDArea >> acceptDroppingMorph: aMorph event: evt [
 
 	| layout |
 	layout := self layoutPolicy.
-	layout ifNil:[^self dropInMorph: aMorph.].
+	layout ifNil: [^ self dropInMorph: aMorph.].
 	self privateAddMorph: aMorph 
 		atIndex: (layout indexForInserting: aMorph at: evt position in: self).
 ]
@@ -74,7 +74,7 @@ EPGDnDArea >> accepts: aCollection [
 ]
 
 {
-	#category : #'dragging/dropping',
+	#category : #'dropping/grabbing',
 	#'squeak_changestamp' : 'jmetrikat 6/6/2024 22:28'
 }
 EPGDnDArea >> acceptsMorph: aMorph [
@@ -138,7 +138,7 @@ EPGDnDArea >> borderVisible: aBoolean [
 ]
 
 {
-	#category : #'dragging/dropping',
+	#category : #accessing,
 	#'squeak_changestamp' : 'HCH 6/20/2024 19:51'
 }
 EPGDnDArea >> clearArea [
@@ -166,7 +166,7 @@ EPGDnDArea >> draggable: aBoolean [
 ]
 
 {
-	#category : #accessing,
+	#category : #'dropping/grabbing',
 	#'squeak_changestamp' : 'JP 5/28/2024 11:43'
 }
 EPGDnDArea >> dropEnabled [
@@ -175,7 +175,7 @@ EPGDnDArea >> dropEnabled [
 ]
 
 {
-	#category : #accessing,
+	#category : #'dropping/grabbing',
 	#'squeak_changestamp' : 'JP 5/28/2024 11:34'
 }
 EPGDnDArea >> dropEnabled: aBool [
@@ -184,7 +184,7 @@ EPGDnDArea >> dropEnabled: aBool [
 ]
 
 {
-	#category : #'dragging/dropping',
+	#category : #'dropping/grabbing',
 	#'squeak_changestamp' : 'HCH 6/23/2024 14:53'
 }
 EPGDnDArea >> dropInMorph: aMorph [
@@ -195,7 +195,7 @@ EPGDnDArea >> dropInMorph: aMorph [
 ]
 
 {
-	#category : #'dragging/dropping',
+	#category : #'dropping/grabbing',
 	#'squeak_changestamp' : 'jmetrikat 6/16/2024 12:40'
 }
 EPGDnDArea >> dropInMorph: aMorph at: aPosition [
@@ -224,7 +224,7 @@ EPGDnDArea >> dropped: aCollection [
 ]
 
 {
-	#category : #'dragging/dropping',
+	#category : #'dropping/grabbing',
 	#'squeak_changestamp' : 'sv 6/18/2024 13:31'
 }
 EPGDnDArea >> freeze [
@@ -251,7 +251,7 @@ EPGDnDArea >> game: aGame [
 ]
 
 {
-	#category : #'dragging/dropping',
+	#category : #'event handling',
 	#'squeak_changestamp' : 'HCH 5/27/2024 18:03'
 }
 EPGDnDArea >> handlesMouseOverDragging: anEvent [
@@ -325,7 +325,7 @@ EPGDnDArea >> isEPGDnDArea [
 ]
 
 {
-	#category : #'dragging/dropping',
+	#category : #'event handling',
 	#'squeak_changestamp' : 'JP 5/28/2024 11:25'
 }
 EPGDnDArea >> mouseEnterDragging: evt [
@@ -334,7 +334,7 @@ EPGDnDArea >> mouseEnterDragging: evt [
 ]
 
 {
-	#category : #'dragging/dropping',
+	#category : #'event handling',
 	#'squeak_changestamp' : 'HCH 5/27/2024 17:44'
 }
 EPGDnDArea >> mouseLeaveDragging: evt [
@@ -361,7 +361,7 @@ EPGDnDArea >> pickUpEnabled: aBoolean [
 ]
 
 {
-	#category : #'dragging/dropping',
+	#category : #'dropping/grabbing',
 	#'squeak_changestamp' : 'sv 6/18/2024 13:28'
 }
 EPGDnDArea >> pickUpMorph: aMorph [
@@ -375,7 +375,7 @@ EPGDnDArea >> pickUpMorph: aMorph [
 ]
 
 {
-	#category : #'dragging/dropping',
+	#category : #'dropping/grabbing',
 	#'squeak_changestamp' : 'HCH 5/29/2024 01:01'
 }
 EPGDnDArea >> rejectMorph [
@@ -395,14 +395,14 @@ EPGDnDArea >> removeBorder [
 ]
 
 {
-	#category : #'events-processing',
-	#'squeak_changestamp' : 'HCH 6/23/2024 12:08'
+	#category : #'event handling',
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 22:36'
 }
 EPGDnDArea >> returnStorypoints [
 	
+	| storypoint |
 	self dropped select: [:morph | morph isEPGStorypoint] 
-	thenDo: [:morph | 
-		|storypoint|
+	thenDo: [:morph |
 		storypoint := self pickUpMorph: morph.
 		(storypoint hasProperty: #temporaryAdditional)
 			ifTrue: [self game gameBoard temporaryStorypointArea dropInMorph: storypoint]
@@ -410,7 +410,7 @@ EPGDnDArea >> returnStorypoints [
 ]
 
 {
-	#category : #'dragging/dropping',
+	#category : #'dropping/grabbing',
 	#'squeak_changestamp' : 'sv 6/18/2024 13:31'
 }
 EPGDnDArea >> unfreeze [
@@ -419,7 +419,7 @@ EPGDnDArea >> unfreeze [
 ]
 
 {
-	#category : #'dragging/dropping',
+	#category : #'dropping/grabbing',
 	#'squeak_changestamp' : 'HCH 6/15/2024 22:30'
 }
 EPGDnDArea >> wantsDroppedMorph: aMorph event: evt [

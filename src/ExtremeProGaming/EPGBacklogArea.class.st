@@ -40,17 +40,18 @@ EPGBacklogArea >> card [
 ]
 
 {
-	#category : #'events-processing',
-	#'squeak_changestamp' : 'HCH 6/15/2024 21:53'
+	#category : #'event handling',
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 22:35'
 }
 EPGBacklogArea >> dropInCard: aMorph [
 
 	super dropInMorph: aMorph.
+	
 	self accepts: #(#EPGStorypoint).
 ]
 
 {
-	#category : #'events-processing',
+	#category : #'dropping/grabbing',
 	#'squeak_changestamp' : 'HCH 6/15/2024 21:56'
 }
 EPGBacklogArea >> dropInMorph: aMorph [
@@ -62,12 +63,13 @@ EPGBacklogArea >> dropInMorph: aMorph [
 ]
 
 {
-	#category : #'events-processing',
-	#'squeak_changestamp' : 'sv 7/9/2024 22:28'
+	#category : #'event handling',
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 22:35'
 }
 EPGBacklogArea >> dropInStorypoint: aMorph [
 	
 	super dropInMorph: aMorph at: self randomPosition.
+	
 	self amountOfStorypoints: self amountOfStorypoints + 1.
 ]
 
@@ -106,16 +108,16 @@ EPGBacklogArea >> initialize [
 ]
 
 {
-	#category : #'events-processing',
-	#'squeak_changestamp' : 'HCH 6/19/2024 19:55'
+	#category : #'event handling',
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 22:26'
 }
 EPGBacklogArea >> isFree [
 
-	^ self dropped size = 0.
+	^ self dropped isEmpty.
 ]
 
 {
-	#category : #'events-processing',
+	#category : #'dropping/grabbing',
 	#'squeak_changestamp' : 'HCH 6/19/2024 23:24'
 }
 EPGBacklogArea >> pickUpMorph: aMorph [
@@ -130,7 +132,7 @@ EPGBacklogArea >> pickUpMorph: aMorph [
 ]
 
 {
-	#category : #'events-processing',
+	#category : #'event handling',
 	#'squeak_changestamp' : 'sv 7/9/2024 22:27'
 }
 EPGBacklogArea >> randomPosition [
@@ -140,7 +142,7 @@ EPGBacklogArea >> randomPosition [
 ]
 
 {
-	#category : #'events-processing',
+	#category : #'event handling',
 	#'squeak_changestamp' : 'HCH 6/15/2024 22:41'
 }
 EPGBacklogArea >> resetAccepts [

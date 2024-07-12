@@ -203,7 +203,7 @@ EPGStorypoint >> isUnavailable [
 ]
 
 {
-	#category : #'events-processing',
+	#category : #updating,
 	#'squeak_changestamp' : 'HCH 6/18/2024 23:54'
 }
 EPGStorypoint >> makeUnavailable [
@@ -214,11 +214,13 @@ EPGStorypoint >> makeUnavailable [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'JP 5/28/2024 12:05'
+	#'squeak_changestamp' : 'jmetrikat 7/10/2024 19:47'
 }
 EPGStorypoint >> newStorypointMorph [
 
-	 ^ ImageMorph new image:(((GitAssetLoader for: 'ExtremeProGaming') loadAsset: (self imageBag at: ((1 to: 6) atRandom))) scaledToSize: 50 @ 50).
+	 ^ ImageMorph new
+		image: (((GitAssetLoader for: 'ExtremeProGaming') loadAsset: (self imageBag at: ((1 to: 6) atRandom)))
+		scaledToSize: self class defaultExtent / 2).
 ]
 
 {
@@ -240,25 +242,25 @@ EPGStorypoint >> timeToLive: aTime [
 ]
 
 {
-	#category : #'events-processing',
-	#'squeak_changestamp' : 'jmetrikat 5/30/2024 22:58'
+	#category : #updating,
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 23:34'
 }
 EPGStorypoint >> update: anAspectSymbol [
 
-	anAspectSymbol = #newRound
+	(anAspectSymbol = #newRound and: self timeToLive notNil)
 		ifTrue: [self updateTimeToLive].
 ]
 
 {
-	#category : #'events-processing',
-	#'squeak_changestamp' : 'HCH 6/19/2024 22:55'
+	#category : #updating,
+	#'squeak_changestamp' : 'HCH 7/12/2024 21:02'
 }
 EPGStorypoint >> updateTimeToLive [
-
-	self timeToLive ifNotNil: [
-		self timeToLive: self timeToLive - 1.
-		(self timeToLive = 0) ifTrue: [
-			self game removeStorypoint: self.
+	
+	self timeToLive: self timeToLive - 1.
+	self timeToLive = 0
+		ifTrue: [
 			self isUnavailable ifTrue: [self game addPermanent: 1].
-			self abandon.]].
+			self game removeStorypoint: self.
+			self abandon.].
 ]

@@ -9,7 +9,24 @@ Class {
 }
 
 {
-	#category : #'events-processing',
+	#category : #'instance creation',
+	#'squeak_changestamp' : 'jmetrikat 7/11/2024 22:08'
+}
+EPGBacklogCard class >> applyEffectsFor: anInstance with: aBoolean [
+
+	aBoolean
+		ifTrue: [anInstance bePositive]
+		ifFalse: [anInstance beNegative].
+		
+	anInstance 
+		displayEffect;
+		changeBody: anInstance frontBody.
+		
+	^ anInstance.
+]
+
+{
+	#category : #'event handling',
 	#'squeak_changestamp' : 'HCH 6/20/2024 19:50'
 }
 EPGBacklogCard >> canBeProcessed [
@@ -18,7 +35,7 @@ EPGBacklogCard >> canBeProcessed [
 ]
 
 {
-	#category : #'events-processing',
+	#category : #'event handling',
 	#'squeak_changestamp' : 'HCH 6/19/2024 23:21'
 }
 EPGBacklogCard >> checkCost: aStorypointAmount [
@@ -27,7 +44,7 @@ EPGBacklogCard >> checkCost: aStorypointAmount [
 ]
 
 {
-	#category : #'events-processing',
+	#category : #'event handling',
 	#'squeak_changestamp' : 'HCH 6/20/2024 01:27'
 }
 EPGBacklogCard >> isBlocked [
@@ -46,7 +63,7 @@ EPGBacklogCard >> isEPGBacklogCard [
 ]
 
 {
-	#category : #'events-processing',
+	#category : #'event handling',
 	#'squeak_changestamp' : 'HCH 6/15/2024 22:17'
 }
 EPGBacklogCard >> moveToDone [
@@ -55,7 +72,7 @@ EPGBacklogCard >> moveToDone [
 ]
 
 {
-	#category : #'events-processing',
+	#category : #'event handling',
 	#'squeak_changestamp' : 'HCH 6/20/2024 00:50'
 }
 EPGBacklogCard >> process [
@@ -65,7 +82,7 @@ EPGBacklogCard >> process [
 ]
 
 {
-	#category : #'events-processing',
+	#category : #'event handling',
 	#'squeak_changestamp' : 'HCH 6/19/2024 23:21'
 }
 EPGBacklogCard >> totalCost [

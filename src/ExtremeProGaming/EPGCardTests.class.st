@@ -47,13 +47,12 @@ EPGCardTests >> processCards [
 ]
 
 {
-	#category : #'initialize-release',
-	#'squeak_changestamp' : 'sv 6/23/2024 12:40'
+	#category : #running,
+	#'squeak_changestamp' : 'jmetrikat 7/10/2024 19:53'
 }
 EPGCardTests >> setUp [
 
 	game := EPGGame newWithoutReturn.
-	
 	parser := game cardSource.
 
 	"reseting the jsonContent for a indicidual testing file"
@@ -66,7 +65,7 @@ EPGCardTests >> setUp [
 ]
 
 {
-	#category : #'initialize-release',
+	#category : #running,
 	#'squeak_changestamp' : 'HCH 7/10/2024 14:09'
 }
 EPGCardTests >> tearDown [
