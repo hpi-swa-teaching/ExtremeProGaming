@@ -152,7 +152,7 @@ EPGGameBoard class >> laneGroundColor [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'HCH 7/12/2024 21:30'
+	#'squeak_changestamp' : 'HCH 7/12/2024 21:59'
 }
 EPGGameBoard class >> laneSeperatorColor [
 
@@ -501,7 +501,7 @@ EPGGameBoard >> createSprintingArea [
 
 {
 	#category : #layouting,
-	#'squeak_changestamp' : 'HCH 7/12/2024 21:24'
+	#'squeak_changestamp' : 'HCH 7/12/2024 21:59'
 }
 EPGGameBoard >> createSprintingLane: anOffset [
 
