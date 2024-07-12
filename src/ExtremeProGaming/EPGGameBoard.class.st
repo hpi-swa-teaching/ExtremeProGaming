@@ -62,15 +62,6 @@ EPGGameBoard class >> buttonExtent [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'JA 7/11/2024 01:25'
-}
-EPGGameBoard class >> darkRed [
-
-	^ Color r: 0.5 g: 0 b: 0.
-]
-
-{
-	#category : #constants,
 	#'squeak_changestamp' : 'sv 7/10/2024 00:08'
 }
 EPGGameBoard class >> defaultAmountBacklogAreas [
@@ -152,6 +143,24 @@ EPGGameBoard class >> doneAreaTypes [
 
 {
 	#category : #constants,
+	#'squeak_changestamp' : 'HCH 7/12/2024 21:24'
+}
+EPGGameBoard class >> laneGroundColor [
+
+	^ Color r: 0.5 g: 0 b: 0.
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'HCH 7/12/2024 21:24'
+}
+EPGGameBoard class >> laneSeperatorColor [
+
+	^ Color laneSeperatorColor.
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'sv 7/10/2024 00:06'
 }
 EPGGameBoard class >> middleInset [
@@ -177,15 +186,6 @@ EPGGameBoard class >> newWithGame: aGame [
 EPGGameBoard class >> outerInset [
 
 	^ 10.
-]
-
-{
-	#category : #constants,
-	#'squeak_changestamp' : 'JA 7/11/2024 01:26'
-}
-EPGGameBoard class >> paleRed [
-
-	^ Color paleRed.
 ]
 
 {
@@ -479,13 +479,13 @@ EPGGameBoard >> createSprinter [
 
 {
 	#category : #layouting,
-	#'squeak_changestamp' : 'JA 7/11/2024 01:43'
+	#'squeak_changestamp' : 'HCH 7/12/2024 21:25'
 }
 EPGGameBoard >> createSprintingArea [
 
 	| lane1 lane2 lane3 sprintingArea |
 	
-	sprintingArea := Morph new extent: 2000 @ 200; color: EPGGameBoard darkRed.
+	sprintingArea := Morph new extent: 2000 @ 200; color: self class laneGroundColor.
 
 	lane1 := self createSprintingLane: 45.
 	lane2 := self createSprintingLane: 95.
@@ -501,11 +501,11 @@ EPGGameBoard >> createSprintingArea [
 
 {
 	#category : #layouting,
-	#'squeak_changestamp' : 'JA 7/11/2024 01:43'
+	#'squeak_changestamp' : 'HCH 7/12/2024 21:24'
 }
 EPGGameBoard >> createSprintingLane: anOffset [
 
-	^ Morph new extent: 2000 @ 10; color: EPGGameBoard paleRed; position: 0 @ anOffset.
+	^ Morph new extent: 2000 @ 10; color: self class laneSeperatorColor; position: 0 @ anOffset.
 ]
 
 {
